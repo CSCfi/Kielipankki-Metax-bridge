@@ -8,7 +8,11 @@ from harvester.pmh_interface import PMH_API
 
 
 @click.command
-@click.argument('url')
+@click.option(
+    "--url", 
+    default="https://kielipankki.fi/md_api/que", 
+    help="URL of the OAI-PMH API"
+    )
 def retrieve_metadata_content(url):
     """
     Fetch all metadata records.
