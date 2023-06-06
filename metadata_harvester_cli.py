@@ -19,10 +19,8 @@ def retrieve_metadata_content(url):
     """
     api = PMH_API(url)
     metadata_contents_list = api.get_all_metadata_records()
-    record_count = len(metadata_contents_list)
     for metadata_content in metadata_contents_list:
         click.echo(metadata_content)
-    click.echo(f"\nTotal Records: {record_count}\n")
 
 if __name__ == "__main__":
     retrieve_metadata_content()
