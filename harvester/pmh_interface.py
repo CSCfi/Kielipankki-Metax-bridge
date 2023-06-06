@@ -3,7 +3,6 @@ Fetch data from an OAI-PMH API of Metashare
 """
 
 from sickle import Sickle
-import requests
 
 
 class PMH_API:
@@ -24,7 +23,7 @@ class PMH_API:
         records = self.sickle.ListRecords(metadataPrefix='info')
         metadata_records_list = []
         for record in records:
-            metadata_record = record.raw
+            metadata_record = record
             metadata_records_list.append(metadata_record)
         return metadata_records_list
 
