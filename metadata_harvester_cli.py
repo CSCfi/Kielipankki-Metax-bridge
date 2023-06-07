@@ -18,8 +18,8 @@ def retrieve_metadata_content(url):
     Fetch all metadata records.
     """
     api = PMH_API(url)
-    metadata_contents_list = api.get_all_metadata_records()
-    for metadata_content in metadata_contents_list:
+    metadata_contents = api.get_all_metadata_records()
+    for metadata_content in metadata_contents:
         click.echo(metadata_content)
 
 if __name__ == "__main__":
