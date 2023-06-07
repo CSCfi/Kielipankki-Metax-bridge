@@ -20,9 +20,7 @@ class PMH_API:
         """
         Get content for all records available from the API.
         """
-        records = self.sickle.ListRecords(metadataPrefix="info")
-        metadata_records_list = []
-        for record in records:
-            metadata_records_list.append(record)
-        return metadata_records_list
+        metadata_records = self.sickle.ListRecords(metadataPrefix="info")
+        for metadata_record in metadata_records:
+            yield metadata_record
 
