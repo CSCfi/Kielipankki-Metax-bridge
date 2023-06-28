@@ -54,3 +54,32 @@ class MSRecordParser:
 
         return result[0] if result else None
 
+    def get_metadata_creators(self):
+        metadata_creators = self.ms_record_tree.xpath("//info:metadataCreator", namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
+
+        actors = []
+        for metadata_creator in metadata_creators:
+            first_name = self.get_person(metadata_creator, "info:givenName")
+            surname = self.get_person(metadata_creator, "info:surname")
+            organization_name = self.get_content(metadata_creator, "organizationName")
+            code = self.get_content(metadata_creator, "code")
+            in_scheme = self.get_content(metadata_creator, "in_scheme")
+            pref_label = self.get_content(metadata_creator, "pref_label", "fi")
+
+            actor = {
+                "person": f"{first_name} {surname}",
+                "organization": {
+                    "code": code,
+                    "in_scheme": in_scheme,
+                    "pref_label": {
+                        "fi": pref_label
+                    }
+                }
+            }
+
+            actors.append({
+                "role": "creator",
+                "actor": actor
+            })
+
+        return {"actors": actors}
