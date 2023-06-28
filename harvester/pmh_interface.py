@@ -16,11 +16,11 @@ class PMH_API:
         """
         self.sickle = Sickle(url)
 
-    def get_all_metadata_records(self, limit=3):
+    def get_all_metadata_records(self, limit=None):
         """
         Get content for all records available from the API.
 
-        :param limit: Maximum number of records to retrieve. Pass `None` to retrieve all records. Default is 3.
+        :param limit: Maximum number of records to retrieve. Default None fetches all records.
         """
         metadata_records = self.sickle.ListRecords(metadataPrefix="info")
         if limit is None:
