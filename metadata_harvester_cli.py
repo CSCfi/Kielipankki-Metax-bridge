@@ -19,7 +19,7 @@ def retrieve_metadata_content(url):
     Fetch all metadata records.
     """
     api = PMH_API(url)
-    metadata_contents = api.get_all_metadata_records()
+    metadata_contents = api.get_all_metadata_records(limit=3)
     for metadata_content in metadata_contents:
         click.echo(metadata_content)
         metadata_record = MSRecordParser(metadata_content)
