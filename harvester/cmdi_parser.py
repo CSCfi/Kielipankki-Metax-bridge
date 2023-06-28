@@ -18,3 +18,30 @@ class MSRecordParser:
         """
         return self.ms_record_tree.xpath("//info:identificationInfo/info:identifier/text()", namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
 
+    def get_content(self, element, xpath, output_field=None):
+        """
+        Retrieve the content from the specified element and XPath expression for different language versions.
+
+        :param element: The XML element to extract content from.
+        :param xpath: The XPath expression to select the desired elements.
+        :param output_field: Optional output field name for the result.
+        :return: A dictionary of content for different language versions if output_field is provided,
+                    otherwise, a dictionary of content directly.
+                    Returns None if no content is found.
+            """
+        result = {}
+
+        languages = ["en", "fi", "und"]
+
+        for lang in languages:
+            query = element.xpath(f'{xpath}[@lang="{lang}"]/text()', namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
+            if query:
+                result[lang] = query[0].strip()
+
+        if result:
+            if output_field:
+                return {output_field: result}
+            else:
+                return result
+        else:
+            return None
