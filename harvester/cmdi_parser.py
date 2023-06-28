@@ -45,3 +45,12 @@ class MSRecordParser:
                 return result
         else:
             return None
+
+    def get_person(self, element, xpath, output_field=None):
+        query = element.xpath(xpath, namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
+
+        result = [node.text.strip() if node.text else "" for node in query]
+        result = [content for content in result if content]  # Remove empty strings
+
+        return result[0] if result else None
+
