@@ -83,3 +83,19 @@ class MSRecordParser:
             })
 
         return {"actors": actors}
+
+    def json_converter(self):
+        identifier = self.get_identifier()
+        description = self.get_content(self.ms_record_tree, "//info:description")
+        metadata_creators = self.get_metadata_creators()
+        title = self.get_content(self.ms_record_tree, '//info:resourceName')
+
+
+        output = {
+            "persistent_identifier": identifier[0],
+            "title": title,
+            "description": description,
+            "actors": metadata_creators["actors"],
+        }
+
+        return json.dumps(output)
