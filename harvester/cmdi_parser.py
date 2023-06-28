@@ -12,5 +12,9 @@ class MSRecordParser:
         ms_xml_string = etree.tostring(ms_record.xml)
         self.ms_record_tree = etree.fromstring(ms_xml_string)
 
-
+    def get_identifier(self):
+        """
+        Get the metadata identifier.
+        """
+        return self.ms_record_tree.xpath("//info:identificationInfo/info:identifier/text()", namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
 
