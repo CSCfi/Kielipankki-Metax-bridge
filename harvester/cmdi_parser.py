@@ -1,5 +1,6 @@
 import json
 from lxml import etree
+import requests
 
 
 class MSRecordParser:
@@ -53,6 +54,16 @@ class MSRecordParser:
         result = [content for content in result if content]  # Remove empty strings
 
         return result[0] if result else None
+    
+    def get_organization_info(self, org_name):
+        koodistot_url = "https://koodistot.suomi.fi/codelist-api/api/v1/coderegistries/fairdata/codeschemes/organization/codes"
+        r = requests.get(url = koodistot_url, params = {"prefLabel": org_name})
+        data = r.json()
+        result = {}
+        result["code"] = data["results"][0]["codeValue"]
+        result["in_scheme"] = data["results"][0]["codeScheme"]["uri"]
+        result["pref_label"] = data["results"][0]["prefLabel"]
+        return result
 
     def get_metadata_creators(self):
         metadata_creators = self.ms_record_tree.xpath("//info:metadataCreator", namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
@@ -89,6 +100,7 @@ class MSRecordParser:
         description = self.get_content(self.ms_record_tree, "//info:description")
         metadata_creators = self.get_metadata_creators()
         title = self.get_content(self.ms_record_tree, '//info:resourceName')
+        org = self.get_organization_info("CSC")
 
 
         output = {
@@ -96,6 +108,7 @@ class MSRecordParser:
             "title": title,
             "description": description,
             "actors": metadata_creators["actors"],
+            "org": org
         }
 
         return json.dumps(output)
