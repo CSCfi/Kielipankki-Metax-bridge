@@ -4,20 +4,20 @@ import requests
 
 
 class MSRecordParser:
-    def __init__(self, ms_record):
+    def __init__(self, record):
         """
         Create a Metashare record object.
 
-        :param ms_record: a Metashare record
+        :param record: a Metashare record
         """
-        ms_xml_string = etree.tostring(ms_record.xml)
-        self.ms_record_tree = etree.fromstring(ms_xml_string)
+        xml_string = etree.tostring(record.xml)
+        self.record_tree = etree.fromstring(xml_string)
 
     def get_identifier(self):
         """
         Get the metadata identifier.
         """
-        return self.ms_record_tree.xpath("//info:identificationInfo/info:identifier/text()", namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
+        return self.record_tree.xpath("//info:identificationInfo/info:identifier/text()", namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
 
     def get_language_contents(self, element, xpath, output_field=None):
         """
@@ -58,8 +58,8 @@ class MSRecordParser:
 
     def json_converter(self):
         identifier = self.get_identifier()
-        description = self.get_language_contents(self.ms_record_tree, "//info:description")
-        title = self.get_language_contents(self.ms_record_tree, '//info:resourceName')
+        description = self.get_language_contents(self.record_tree, "//info:description")
+        title = self.get_language_contents(self.record_tree, '//info:resourceName')
 
 
         output = {
