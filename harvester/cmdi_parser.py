@@ -43,15 +43,16 @@ class MSRecordParser:
         return self.record_tree.xpath(xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
 
     def json_converter(self):
-        identifier = self.get_identifier()
-        description = self.get_language_contents(self.record_tree, "//info:description")
-        title = self.get_language_contents(self.record_tree, '//info:resourceName')
-
+        """
+        Converts text and dictionaries to JSON.
+        """
 
         output = {
-            "persistent_identifier": identifier[0],
-            "title": title,
-            "description": description
+            "persistent_identifier": self._get_text_xpath("//info:identificationInfo/info:identifier/text()"),
+            "title": self._get_language_contents("//info:resourceName"),
+            "description": self._get_language_contents("//info:description"),
+            "modified": self._get_text_xpath("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
+            "issued": self._get_text_xpath("//info:metadataInfo/info:metadataCreationDate/text()")
         }
 
         return json.dumps(output)
