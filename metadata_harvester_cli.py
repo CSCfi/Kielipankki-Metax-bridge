@@ -16,7 +16,7 @@ from harvester.cmdi_parser import MSRecordParser
     )
 def retrieve_metadata_content(url):
     """
-    Fetch all metadata records.
+    Fetch metadata records and transform them to JSON.
     """
     api = PMH_API(url)
     metadata_contents = api.get_all_metadata_records(limit=3)
