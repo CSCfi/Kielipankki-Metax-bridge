@@ -48,7 +48,7 @@ class MSRecordParser:
         """
 
         output = {
-            "persistent_identifier": self._get_text_xpath("//info:identificationInfo/info:identifier/text()"),
+            "persistent_identifier": self._get_text_xpath("//info:identificationInfo/info:identifier/text()")[7:], #excluding http from urn
             "title": self._get_language_contents("//info:resourceName"),
             "description": self._get_language_contents("//info:description"),
             "modified": self._get_text_xpath("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
