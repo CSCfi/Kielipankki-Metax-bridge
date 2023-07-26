@@ -13,11 +13,6 @@ class MSRecordParser:
         xml_string = etree.tostring(record.xml)
         self.record_tree = etree.fromstring(xml_string)
 
-    def get_identifier(self):
-        """
-        Get the metadata identifier.
-        """
-        return self.record_tree.xpath("//info:identificationInfo/info:identifier/text()", namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
 
     def get_language_contents(self, element, xpath, output_field=None):
         """
@@ -47,14 +42,15 @@ class MSRecordParser:
         else:
             return None
 
-    def get_value(self, element, xpath, output_field=None):
-        query = element.xpath(xpath, namespaces={'info': 'http://www.ilsp.gr/META-XMLSchema'})
+    def _get_text_xpath(self, xpath):
+        """
+        Retrieves text content of the first element from given XPath expression.
 
-        result = [node.text.strip() if node.text else "" for node in query]
-        result = [content for content in result if content]
+        :param xpath: The XPath expression to select the desired trees.
+        :return: The text content of the selected element.
 
-        return result[0] if result else None
-    
+        """
+        return self.record_tree.xpath(xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
 
     def json_converter(self):
         identifier = self.get_identifier()
