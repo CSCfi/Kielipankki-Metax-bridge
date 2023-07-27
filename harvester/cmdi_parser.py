@@ -1,6 +1,7 @@
 import json
 from lxml import etree
 import requests
+from urllib.parse import urlparse 
 
 
 class MSRecordParser:
@@ -42,13 +43,21 @@ class MSRecordParser:
         """
         return self.record_tree.xpath(xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
 
+    def _get_identifier(self, xpath):
+        """
+        Retrieves the urn of the given XPath's url.
+        """
+        identifier_url = self._get_text_xpath(xpath)
+        netloc, path = urlparse(identifier_url).netloc, urlparse(identifier_url).path
+        return netloc + path
+
     def json_converter(self):
         """
         Converts text and dictionaries to JSON.
         """
 
         output = {
-            "persistent_identifier": self._get_text_xpath("//info:identificationInfo/info:identifier/text()")[7:], #excluding http from urn
+            "persistent_identifier": self._get_identifier("//info:identificationInfo/info:identifier/text()"),
             "title": self._get_language_contents("//info:resourceName"),
             "description": self._get_language_contents("//info:description"),
             "modified": self._get_text_xpath("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
