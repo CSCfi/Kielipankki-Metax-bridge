@@ -8,10 +8,9 @@ class MSRecordParser:
         """
         Create a Metashare record object.
 
-        :param xml: xml element (lxml)
+        :param xml: an lxml object, representing a CMDI record
         """
         self.xml = xml
-
 
     def _get_language_contents(self, xpath):
         """
