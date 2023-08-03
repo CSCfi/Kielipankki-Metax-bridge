@@ -1,18 +1,16 @@
 import json
 from lxml import etree
-import requests
 from urllib.parse import urlparse 
 
 
 class MSRecordParser:
-    def __init__(self, record):
+    def __init__(self, xml):
         """
         Create a Metashare record object.
 
-        :param record: a Metashare record
+        :param xml: xml element (lxml)
         """
-        xml_string = etree.tostring(record.xml)
-        self.record_tree = etree.fromstring(xml_string)
+        self.xml = xml
 
 
     def _get_language_contents(self, xpath):
@@ -27,7 +25,7 @@ class MSRecordParser:
         languages = ["en", "fi", "und"]
 
         for lang in languages:
-            query = self.record_tree.xpath(f"{xpath}[@lang='{lang}']/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+            query = self.xml.xpath(f"{xpath}[@xml:lang='{lang}']/text()", namespaces={"cmd": "http://www.clarin.eu/cmd/"})
             if query:
                 result[lang] = query[0].strip()
 
@@ -41,7 +39,7 @@ class MSRecordParser:
         :return: The text content of the selected element.
 
         """
-        return self.record_tree.xpath(xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
+        return self.xml.xpath(xpath, namespaces={"cmd": "http://www.clarin.eu/cmd/"})[0]
 
     def _get_identifier(self, xpath):
         """
@@ -57,11 +55,11 @@ class MSRecordParser:
         """
 
         output = {
-            "persistent_identifier": self._get_identifier("//info:identificationInfo/info:identifier/text()"),
-            "title": self._get_language_contents("//info:resourceName"),
-            "description": self._get_language_contents("//info:description"),
-            "modified": self._get_text_xpath("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
-            "issued": self._get_text_xpath("//info:metadataInfo/info:metadataCreationDate/text()")
+            "persistent_identifier": self._get_identifier("//cmd:identificationInfo/cmd:identifier/text()"),
+            "title": self._get_language_contents("//cmd:resourceName"),
+            "description": self._get_language_contents("//cmd:description"),
+            "modified": self._get_text_xpath("//cmd:metadataInfo/cmd:metadataLastDateUpdated/text()"),
+            "issued": self._get_text_xpath("//cmd:metadataInfo/cmd:metadataCreationDate/text()")
         }
 
         return json.dumps(output)
