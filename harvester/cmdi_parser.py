@@ -1,6 +1,7 @@
 import json
 from lxml import etree
 from urllib.parse import urlparse 
+from datetime import datetime
 
 
 class MSRecordParser:
@@ -47,6 +48,17 @@ class MSRecordParser:
         identifier_url = self._get_text_xpath(xpath)
         netloc, path = urlparse(identifier_url).netloc, urlparse(identifier_url).path
         return netloc + path
+    
+    def _get_date(self, xpath):
+        """
+        Retrieves the date of the given XPath and returns it  appropriate date-time format.
+       
+        """
+        date_str = self._get_text_xpath(xpath)
+        if date_str != "":
+            datetime_obj = datetime.strptime(date_str, "%Y-%m-%d")
+            formatted_date_str = datetime_obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+            return formatted_date_str
 
     def json_converter(self):
         """
@@ -57,8 +69,8 @@ class MSRecordParser:
             "persistent_identifier": self._get_identifier("//cmd:identificationInfo/cmd:identifier/text()"),
             "title": self._get_language_contents("//cmd:resourceName"),
             "description": self._get_language_contents("//cmd:description"),
-            "modified": self._get_text_xpath("//cmd:metadataInfo/cmd:metadataLastDateUpdated/text()"),
-            "issued": self._get_text_xpath("//cmd:metadataInfo/cmd:metadataCreationDate/text()")
+            "modified": self._get_date("//cmd:metadataInfo/cmd:metadataLastDateUpdated/text()"),
+            "issued": self._get_date("//cmd:metadataInfo/cmd:metadataCreationDate/text()")
         }
 
         return json.dumps(output)
