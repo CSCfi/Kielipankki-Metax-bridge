@@ -73,7 +73,6 @@ def test_defined_url(single_record_xml, single_record_response, kielipankki_api_
     #The last assert fails, probably an encoding problem
     # assert single_record_response["description"]["fi"] in result.output 
 
-#The default url doesn't work. I suspect there's a problem with the full url (here as kielipankki_api_url) versus the default in retrieve_metadata_content().
 def test_default_url(single_record_xml, single_record_response):
     """
     Test that the CLI can fetch records from the default URL
