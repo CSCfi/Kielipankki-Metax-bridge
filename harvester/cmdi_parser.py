@@ -60,7 +60,7 @@ class MSRecordParser:
             formatted_date_str = datetime_obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
             return formatted_date_str
         else:
-            return "No date found"
+            raise ValueError("No date found")
 
     def json_converter(self):
         """
