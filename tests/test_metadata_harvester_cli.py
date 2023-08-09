@@ -70,8 +70,7 @@ def test_defined_url(single_record_xml, single_record_response, kielipankki_api_
     assert single_record_response["modified"] in result.output
     assert single_record_response["issued"] in result.output
     assert single_record_response["description"]["en"] in result.output
-    #The last assert fails, probably an encoding problem
-    # assert single_record_response["description"]["fi"] in result.output 
+    assert single_record_response["description"]["fi"] in result.output 
 
 def test_default_url(single_record_xml, single_record_response):
     """
@@ -87,4 +86,4 @@ def test_default_url(single_record_xml, single_record_response):
     assert single_record_response["modified"] in result.output
     assert single_record_response["issued"] in result.output
     assert single_record_response["description"]["en"] in result.output
-    # assert single_record_response["description"]["fi"] in result.output
+    assert single_record_response["description"]["fi"] in result.output
