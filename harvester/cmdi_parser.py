@@ -55,7 +55,7 @@ class MSRecordParser:
        
         """
         date_str = self._get_text_xpath(xpath)
-        if date_str != "":
+        if date_str:
             datetime_obj = datetime.strptime(date_str, "%Y-%m-%d")
             formatted_date_str = datetime_obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
             return formatted_date_str
