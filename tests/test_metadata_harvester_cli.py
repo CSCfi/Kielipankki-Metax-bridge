@@ -26,7 +26,7 @@ def kielipankki_api_url():
     """
     The URL of the OAI-PMH API used in tests.
     """
-    return "https://kielipankki.fi/md_api/que&verb=ListRecords?metadataPrefix=cmdi0571"
+    return "https://kielipankki.fi/md_api/que?metadataPrefix=cmdi0571&verb=ListRecords"
 
 def _get_file_as_string(filename):
     with open(filename) as infile:
