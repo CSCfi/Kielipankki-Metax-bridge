@@ -22,7 +22,7 @@ class PMH_API:
 
         :param limit: Maximum number of records to retrieve. Default None fetches all records.
         """
-        metadata_records = self.sickle.ListRecords(metadataPrefix="cmdi0571")
+        metadata_records = self.sickle.ListRecords(metadataPrefix="info")
         if not limit:
             yield from metadata_records
         else:

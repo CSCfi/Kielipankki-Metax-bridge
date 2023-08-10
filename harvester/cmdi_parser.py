@@ -25,7 +25,7 @@ class MSRecordParser:
         languages = ["en", "fi", "und"]
 
         for lang in languages:
-            query = self.xml.xpath(f"{xpath}[@xml:lang='{lang}']/text()", namespaces={"cmd": "http://www.clarin.eu/cmd/"})
+            query = self.xml.xpath(f"{xpath}[@lang='{lang}']/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
             if query:
                 result[lang] = query[0].strip()
 
@@ -39,7 +39,7 @@ class MSRecordParser:
         :return: The text content of the selected element.
 
         """
-        return self.xml.xpath(xpath, namespaces={"cmd": "http://www.clarin.eu/cmd/"})[0]
+        return self.xml.xpath(xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
 
     def _get_identifier(self, xpath):
         """
@@ -68,11 +68,11 @@ class MSRecordParser:
         """
 
         output = {
-            "persistent_identifier": self._get_identifier("//cmd:identificationInfo/cmd:identifier/text()"),
-            "title": self._get_language_contents("//cmd:resourceName"),
-            "description": self._get_language_contents("//cmd:description"),
-            "modified": self._get_date("//cmd:metadataInfo/cmd:metadataLastDateUpdated/text()"),
-            "issued": self._get_date("//cmd:metadataInfo/cmd:metadataCreationDate/text()")
+            "persistent_identifier": self._get_identifier("//info:identificationInfo/info:identifier/text()"),
+            "title": self._get_language_contents("//info:resourceName"),
+            "description": self._get_language_contents("//info:description"),
+            "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
+            "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()")
         }
 
         return json.dumps(output)
