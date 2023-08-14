@@ -20,12 +20,13 @@ def retrieve_metadata_content(url):
     Fetch metadata records and transform them to JSON.
     """
     api = PMH_API(url)
-    metadata_contents = api.get_all_metadata_records(limit=3) #limit to only three for initial testing purposes
+    metadata_contents = api.get_all_metadata_records() #limit to only three for initial testing purposes
     for metadata_content in metadata_contents:
         # click.echo(metadata_content)
         lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
         metadata_record = MSRecordParser(lxml_record)
-        click.echo(metadata_record.json_converter())
+        if metadata_record.check_metadatainfo_exists() == True:
+            click.echo(metadata_record.json_converter())
 
 if __name__ == "__main__":
     retrieve_metadata_content()
