@@ -136,6 +136,21 @@ class MSRecordParser:
                 
         return license_dict
 
+    def _get_access_type(self):
+        """
+        Retrieves and maps access type to a dictionary.
+        """
+        access_type_dict = {}
+
+        availability = self.xml.xpath("//info:distributionInfo/info:availability/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
+        if availability == "available-unrestrictedUse":
+            access_type_dict["access_type"] = "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+
+        else:            
+            access_type_dict["url"] = "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
+        
+        return access_type_dict
+
 
     def json_converter(self):
         """
