@@ -74,6 +74,15 @@ class MSRecordParser:
         if not metadata:
             return False
         return True
+    
+    def _get_list_of_licenses(self):
+        """
+        Retrieves all licenseInfo elements.
+        """
+        license_elements_list = self.xml.xpath("//info:distributionInfo/info:licenceInfo", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+        if license_elements_list:
+            return license_elements_list
+
 
     def json_converter(self):
         """
