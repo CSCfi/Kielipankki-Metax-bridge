@@ -54,7 +54,18 @@ def single_record_response(kielipankki_api_url):
                    "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", 
                    "fi": "T\\u00e4m\\u00e4 suomen kielen ajanilmauksia k\\u00e4sitt\\u00e4v\\u00e4 aineisto on koottu kaunokirjallisten alkuper\\u00e4isteosten, k\\u00e4\\u00e4nn\\u00f6sten, murreaineistojen ja muiden tekstien pohjalta."}, 
                "modified": "2017-02-15T00:00:00.000000Z", 
-               "issued": "2017-02-15T00:00:00.000000Z"}
+               "issued": "2017-02-15T00:00:00.000000Z",
+               "access_rights": {
+        "license": [
+            {
+                "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
+            }
+        ],
+        "access_type": {
+            "access_type": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+        }
+    }
+               }
 
 def test_defined_url(single_record_xml, single_record_response, kielipankki_api_url):
     """
@@ -63,6 +74,7 @@ def test_defined_url(single_record_xml, single_record_response, kielipankki_api_
     runner = CliRunner()
 
     result = runner.invoke(retrieve_metadata_content, ["--url", kielipankki_api_url], input=single_record_xml)
+    print(result)
 
     assert single_record_response["persistent_identifier"] in result.output
     assert single_record_response["title"]["en"] in result.output
