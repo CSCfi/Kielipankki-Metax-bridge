@@ -151,6 +151,46 @@ class MSRecordParser:
         
         return access_type_dict
 
+    def _map_access_rights(self):
+        """
+        Retrieves and maps all license and access type information to a dictionary.
+        """
+        license_package = {}
+        license_mappings = {
+            "CLARIN_PUB": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinPUB-1.0",
+            "CLARIN_ACA": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinACA-1.0",
+            "CLARIN_ACA-NC": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinACA+NC-1.0",
+            "CLARIN_RES": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinRES-1.0",
+            "other": "http://uri.suomi.fi/codelist/fairdata/license/code/other",
+            "underNegotiation": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation",
+            "proprietary": "http://uri.suomi.fi/codelist/fairdata/license/code/proprietary",
+            "CC-BY": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-1.0",
+            "CC-BY-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-ND4.0",
+            "CC-BY-NC": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC2.0",
+            "CC-BY-SA": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-SA4.0",
+            "CC-BY-NC-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-ND4.0",
+            "CC-BY-NC-SA": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-SA4.0",
+            "CC-ZERO": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-ZERO"
+        }
+
+        license_elements_list = self._get_list_of_licenses()
+        license_list = []
+
+        if license_elements_list:
+            for license_element in license_elements_list:
+                license = self._get_license_information(license_element, license_mappings)
+                license_list.append(license)   
+        else:
+            license = {"url": license_mappings["other"]}
+            license_list.append(license)
+
+        access_type = self._get_access_type()
+
+        license_package["license"] = license_list
+        license_package["access_type"] = access_type
+
+        return license_package
+
 
     def json_converter(self):
         """
