@@ -195,7 +195,7 @@ def test_accesstype_open_record(accesstype_open_record):
             }
         ],
         "access_type": {
-            "access_type": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+            "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
         }
             }
     assert result == expected_result
