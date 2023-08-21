@@ -1,0 +1,271 @@
+<record xmlns="http://www.openarchives.org/OAI/2.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <identifier>oai:kielipankki.fi:sh07e7a0</identifier>
+        <datestamp>2023-06-07T03:37:03Z</datestamp>
+    </header>
+    <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+            <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <resourceName lang="fi">Lahjoita puhetta -aineisto, versio 1.0</resourceName>
+                <resourceName lang="en">Donate Speech Corpus, version 1.0</resourceName>
+                <description lang="fi">Tämä aineisto on saatavilla Kielipankin latauspalvelussa, ks. Access location.
+
+Lahjoita puhetta -aineisto (Puhelahjat) versio 1 on kokoelma puhenäytteitä, jotka kertyivät Lahjoita puhetta -kampanjassa aikavälillä 16.6.2020-14.9.2021. Aineisto on rajoitetusti saatavilla Kielipankin latauspalvelussa. Aineisto sisältää noin 3200 tuntia puheäänitteitä, joista noin 1600 tuntia on litteroitu. Aineistossa on mukana myös tiedot kampanjasovelluksessa kuhunkin puhenäytteeseen liittyneistä tehtävistä sekä puhettaan lahjoittaneiden ihmisten vapaaehtoisesti ilmoittamat taustatiedot. 
+
+Puhelahjat-aineistoa voidaan luovuttaa Kielipankista tarkoituksiin, jotka liittyvät kielentutkimukseen tai tekoälyn tutkimukseen ja kehittämiseen.
+
+Akateemisen tutkimuskäytön osalta aineiston käyttöehdot ja tietosuojaehdot löytyvät osoitteesta http://urn.fi/urn:nbn:fi:lb-2022020221. Tutkijoilla on mahdollisuus hakea lisenssin mukaisilla ehdoilla pääsyä aineistoon Kielipankin oikeudet -palvelun kautta.
+
+Yrityksissä tapahtuvaa käyttöä koskevat ehdot määritellään erillisillä lisenssisopimuksilla.
+                </description>
+                <description lang="en">This resource is available for download in Kielipankki - The Language Bank of Finland, see Access location.
+
+The Donate Speech Corpus (Puhelahjat) is a collection of speech recordings that accumulated during the Donate Speech campaign between 16.6.2020 and 14.9.2021. The resource is available via the download service of the Language Bank of Finland under restricted terms and conditions. The resource contains a total of about 3200 hours of speech recordings, out of which about 1600 hours have been transcribed. The resource also includes information about the elicitation tasks for which each of the speech samples was donated in the original campaign, and the background details that were voluntarily provided by speech donors. 
+
+Access to the resource may be granted for purposes related to language research or to the research and development of artificial intelligence.
+
+For academic research use, the license terms and conditions (including the data protection terms and conditions) can be found at http://urn.fi/urn:nbn:fi:lb-2022020223. Under this license, researchers may apply for access via the Language Bank Rights system.
+
+The license terms and conditions concerning the use by private companies will be defined in a separate license agreement.</description>
+                <resourceShortName lang="fi">puhelahjat</resourceShortName>
+                <url>http://urn.fi/urn:nbn:fi:lb-2022101721</url>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-2020090321</identifier>
+            </identificationInfo>
+            <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <availability>available-restrictedUse</availability>
+                <licenceInfo>
+                    <licence>CLARIN_RES</licence>
+                    <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+                    <restrictionsOfUse>attribution</restrictionsOfUse>
+                    <restrictionsOfUse>noRedistribution</restrictionsOfUse>
+                    <restrictionsOfUse>other</restrictionsOfUse>
+                    <restrictionsOfUse>redeposit</restrictionsOfUse>
+                    <distributionAccessMedium>downloadable</distributionAccessMedium>
+                    <licensor>
+                        <organizationInfo>
+                            <organizationName lang="en">University of Helsinki</organizationName>
+                            <organizationShortName lang="en">UHEL</organizationShortName>
+                            <communicationInfo>
+                                <email>firstname.surname@helsinki.fi</email>
+                            </communicationInfo>
+                        </organizationInfo>
+                    </licensor>
+                    <distributionRightsHolder>
+                        <organizationInfo>
+                            <organizationName lang="en">University of Helsinki</organizationName>
+                            <organizationShortName lang="en">UHEL</organizationShortName>
+                            <communicationInfo>
+                                <email>firstname.surname@helsinki.fi</email>
+                            </communicationInfo>
+                        </organizationInfo>
+                    </distributionRightsHolder>
+                    <userNature>academic</userNature>
+                </licenceInfo>
+                <licenceInfo>
+                    <licence>other</licence>
+                    <restrictionsOfUse>commercialUse</restrictionsOfUse>
+                    <restrictionsOfUse>noRedistribution</restrictionsOfUse>
+                    <restrictionsOfUse>other</restrictionsOfUse>
+                    <restrictionsOfUse>redeposit</restrictionsOfUse>
+                    <fee>According to license agreement for commercial use</fee>
+                    <licensor>
+                        <organizationInfo>
+                            <organizationName lang="en">University of Helsinki</organizationName>
+                            <organizationShortName lang="en">UHEL</organizationShortName>
+                            <communicationInfo>
+                                <email>firstname.surname@helsinki.fi</email>
+                            </communicationInfo>
+                        </organizationInfo>
+                    </licensor>
+                    <distributionRightsHolder>
+                        <organizationInfo>
+                            <organizationName lang="en">University of Helsinki</organizationName>
+                            <organizationShortName lang="en">UHEL</organizationShortName>
+                            <communicationInfo>
+                                <email>firstname.surname@helsinki.fi</email>
+                            </communicationInfo>
+                        </organizationInfo>
+                    </distributionRightsHolder>
+                    <userNature>commercial</userNature>
+                </licenceInfo>
+                <availabilityStartDate>2022-10-27</availabilityStartDate>
+            </distributionInfo>
+            <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <surname lang="fi">Kielipankki</surname>
+                <givenName lang="fi">Lahjoita puhetta</givenName>
+                <communicationInfo>
+                    <email>lahjoita-puhetta@kielipankki.fi</email>
+                    <url>https://www.kielipankki.fi/lahjoita-puhetta/</url>
+                    <country>Finland</country>
+                </communicationInfo>
+                <affiliation>
+                    <organizationName lang="en">University of Helsinki</organizationName>
+                    <organizationShortName lang="en">UHEL</organizationShortName>
+                    <communicationInfo>
+                        <email>firstname.surname@helsinki.fi</email>
+                    </communicationInfo>
+                </affiliation>
+            </contactPerson>
+            <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <metadataCreationDate>2020-09-03</metadataCreationDate>
+                <metadataCreator>
+                    <surname lang="en">Lennes</surname>
+                    <givenName lang="en">Mietta</givenName>
+                    <sex>female</sex>
+                    <communicationInfo>
+                        <email>mietta.lennes@helsinki.fi</email>
+                        <url>http://orcid.org/0000-0003-4735-3017</url>
+                        <city>Helsinki</city>
+                        <country>Finland</country>
+                    </communicationInfo>
+                    <affiliation>
+                        <organizationName lang="en">University of Helsinki</organizationName>
+                        <organizationShortName lang="en">UHEL</organizationShortName>
+                        <communicationInfo>
+                            <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                    </affiliation>
+                </metadataCreator>
+                <metadataLastDateUpdated>2023-06-06</metadataLastDateUpdated>
+            </metadataInfo>
+            <versionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <version>1</version>
+            </versionInfo>
+            <resourceDocumentationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <documentation>
+                    <documentInfo>
+                        <documentType>other</documentType>
+                        <title lang="fi">Lisenssi tutkimuskäyttöön (puhelahjat)</title>
+                        <title lang="en">License for research use (puhelahjat)</title>
+                        <editor>University of Helsinki</editor>
+                        <year>2022</year>
+                        <url>http://urn.fi/urn:nbn:fi:lb-2022020223</url>
+                        <documentLanguageName>English</documentLanguageName>
+                        <documentLanguageId>en</documentLanguageId>
+                    </documentInfo>
+                </documentation>
+                <documentation>
+                    <documentInfo>
+                        <documentType>other</documentType>
+                        <title lang="fi">Aineistoryhmän sivu: Lahjoita puhetta -aineistot (puhelahjat) tutkimuskäyttöön</title>
+                        <title lang="en">Resource group: Donate Speech datasets (puhelahjat) for research use</title>
+                        <editor>FIN-CLARIN</editor>
+                        <url>http://urn.fi/urn:nbn:fi:lb-2022102122</url>
+                        <documentLanguageName>Finnish</documentLanguageName>
+                        <documentLanguageId>fi</documentLanguageId>
+                    </documentInfo>
+                </documentation>
+                <documentation>
+                    <documentInfo>
+                        <documentType>other</documentType>
+                        <title lang="fi">Aineistoryhmän sivu: Lahjoita puhetta -aineistot (puhelahjat) yrityskäyttöön</title>
+                        <title lang="en">Resource group: Donate Speech datasets (puhelahjat) for commercial use</title>
+                        <editor>FIN-CLARIN</editor>
+                        <year>2023</year>
+                        <url>http://urn.fi/urn:nbn:fi:lb-2022111627</url>
+                        <documentLanguageName>English</documentLanguageName>
+                        <documentLanguageId>en</documentLanguageId>
+                    </documentInfo>
+                </documentation>
+                <documentation>
+                    <documentInfo>
+                        <documentType>other</documentType>
+                        <title lang="fi">Lisenssi yrityskäyttöön (puhelahjat): Puheaineiston käytön yleiset ehdot</title>
+                        <title lang="en">License for commercial use (puhelahjat): General Terms of Speech Material Use</title>
+                        <editor>University of Helsinki</editor>
+                        <year>2022</year>
+                        <url>http://urn.fi/urn:nbn:fi:lb-2022060130</url>
+                        <documentLanguageName>English</documentLanguageName>
+                        <documentLanguageId>en</documentLanguageId>
+                    </documentInfo>
+                </documentation>
+                <documentation>
+                    <documentInfo>
+                        <documentType>other</documentType>
+                        <title lang="fi">Lahjoita puhetta -kampanjan kuvaus Kielipankissa</title>
+                        <title lang="en">Description of the Donate Speech campaign in the Language Bank of Finland</title>
+                        <url>https://www.kielipankki.fi/donate-speech</url>
+                        <documentLanguageName>English</documentLanguageName>
+                        <documentLanguageId>en</documentLanguageId>
+                    </documentInfo>
+                </documentation>
+                <documentation>
+                    <documentInfo>
+                        <documentType>manual</documentType>
+                        <title lang="fi">Litterointiohjeet</title>
+                        <title lang="en">Transcription instructions</title>
+                        <editor>Kielipankki</editor>
+                        <year>2021</year>
+                        <url>https://www.kielipankki.fi/wp-content/uploads/resource_documentation/puhelahjat_litterointiohjeet.pdf</url>
+                        <documentLanguageName>Finnish</documentLanguageName>
+                        <documentLanguageId>fi</documentLanguageId>
+                    </documentInfo>
+                </documentation>
+            </resourceDocumentationInfo>
+            <resourceCreationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <creationEndDate>2021-09-14</creationEndDate>
+            </resourceCreationInfo>
+            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <relationType>HasPart</relationType>
+                <relatedResource>
+                    <targetResourceNameURI>Donate Speech: Annotated dataset, http://urn.fi/urn:nbn:fi:lb-2022060128</targetResourceNameURI>
+                </relatedResource>
+            </relationInfo>
+            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <relationType>HasPart</relationType>
+                <relatedResource>
+                    <targetResourceNameURI>Donate Speech: Selected dataset, http://urn.fi/urn:nbn:fi:lb-2022060127</targetResourceNameURI>
+                </relatedResource>
+            </relationInfo>
+            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <relationType>HasPart</relationType>
+                <relatedResource>
+                    <targetResourceNameURI>Donate Speech Corpus: Sample, http://urn.fi/urn:nbn:fi:lb-2022060126</targetResourceNameURI>
+                </relatedResource>
+            </relationInfo>
+            <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <corpusInfo>
+                    <resourceType>corpus</resourceType>
+                    <corpusMediaType>
+                        <corpusTextInfo>
+                            <mediaType>text</mediaType>
+                            <lingualityInfo>
+                                <lingualityType>monolingual</lingualityType>
+                            </lingualityInfo>
+                            <languageInfo>
+                                <languageId>fi</languageId>
+                                <languageName>Finnish</languageName>
+                            </languageInfo>
+                            <sizeInfo>
+                                <size>1600</size>
+                                <sizeUnit>hours</sizeUnit>
+                            </sizeInfo>
+                        </corpusTextInfo>
+                        <corpusAudioInfo>
+                            <mediaType>audio</mediaType>
+                            <lingualityInfo>
+                                <lingualityType>monolingual</lingualityType>
+                            </lingualityInfo>
+                            <languageInfo>
+                                <languageId>fi</languageId>
+                                <languageName>Finnish</languageName>
+                            </languageInfo>
+                            <audioSizeInfo>
+                                <sizeInfo>
+                                    <size>3200</size>
+                                    <sizeUnit>hours</sizeUnit>
+                                </sizeInfo>
+                            </audioSizeInfo>
+                            <timeCoverageInfo>
+                                <timeCoverage>2020-06-16T00:00:00 - 2021-09-14T06:39:57</timeCoverage>
+                            </timeCoverageInfo>
+                        </corpusAudioInfo>
+                    </corpusMediaType>
+                </corpusInfo>
+            </resourceComponentType>
+        </info:resourceInfo>
+    </metadata>
+</record>

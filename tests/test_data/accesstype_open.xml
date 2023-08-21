@@ -1,0 +1,178 @@
+<record xmlns="http://www.openarchives.org/OAI/2.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <identifier>oai:kielipankki.fi:shaaf000</identifier>
+        <datestamp>2023-05-16T03:58:07Z</datestamp>
+    </header>
+    <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+            <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <resourceName lang="fi">Suomen puupankki FinnTreeBank 3:n Helsinki-Korp-versio</resourceName>
+                <resourceName lang="en">The Helsinki Korp Version of the Finnish TreeBank 3</resourceName>
+                <description lang="en">The resource, which is the The Helsinki Korp version of the Finnish TreeBank 3 (FTB3), can be accessed at http://urn.fi/urn:nbn:fi:lb-2016051001
+
+
+For more information see http://urn.fi/urn:nbn:fi:lb-201406022</description>
+                <resourceShortName lang="en">FinnTreeBank3-korp</resourceShortName>
+                <url>http://urn.fi/urn:nbn:fi:lb-2016051001</url>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-2016042602</identifier>
+            </identificationInfo>
+            <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <availability>available-unrestrictedUse</availability>
+                <licenceInfo>
+                    <licence>CC-BY</licence>
+                    <restrictionsOfUse>attribution</restrictionsOfUse>
+                    <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+                    <executionLocation>http://urn.fi/urn:nbn:fi:lb-201406021</executionLocation>
+                    <attributionText lang="en">See Documentation section.</attributionText>
+                    <licensor>
+                        <organizationInfo>
+                            <organizationName lang="en">University of Helsinki</organizationName>
+                            <organizationShortName lang="en">UHEL</organizationShortName>
+                            <communicationInfo>
+                                <email>firstname.surname@helsinki.fi</email>
+                            </communicationInfo>
+                        </organizationInfo>
+                    </licensor>
+                    <distributionRightsHolder>
+                        <organizationInfo>
+                            <organizationName lang="en">University of Helsinki</organizationName>
+                            <organizationShortName lang="en">UHEL</organizationShortName>
+                            <communicationInfo>
+                                <email>firstname.surname@helsinki.fi</email>
+                            </communicationInfo>
+                        </organizationInfo>
+                    </distributionRightsHolder>
+                </licenceInfo>
+                <iprHolder>
+                    <organizationInfo>
+                        <organizationName lang="en">University of Helsinki</organizationName>
+                        <organizationShortName lang="en">UHEL</organizationShortName>
+                        <communicationInfo>
+                            <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                    </organizationInfo>
+                </iprHolder>
+            </distributionInfo>
+            <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <surname lang="en">The Language Bank of Finland</surname>
+                <givenName lang="en">User support at CSC - IT Center for Science Ltd.</givenName>
+                <sex>unknown</sex>
+                <communicationInfo>
+                    <email>kielipankki@csc.fi</email>
+                </communicationInfo>
+            </contactPerson>
+            <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <metadataCreationDate>2016-04-26</metadataCreationDate>
+                <metadataCreator>
+                    <surname lang="en">Bartis</surname>
+                    <givenName lang="en">Imre</givenName>
+                    <sex>male</sex>
+                    <communicationInfo>
+                        <email>imre.bartis@helsinki.fi</email>
+                        <url>http://orcid.org/0000-0002-9455-8771</url>
+                        <city>Helsinki</city>
+                        <country>Finland</country>
+                    </communicationInfo>
+                    <position>Project Coordinator</position>
+                    <affiliation>
+                        <organizationName lang="en">FIN-CLARIN</organizationName>
+                        <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
+                        <departmentName lang="en">University of Helsinki</departmentName>
+                        <communicationInfo>
+                            <email>finclarin@helsinki.fi</email>
+                            <url>http://www.helsinki.fi/fin-clarin</url>
+                            <address>PO Box 24 (Unioninkatu 40)</address>
+                            <zipCode>00014</zipCode>
+                            <city>University of Helsinki</city>
+                            <country>Finland</country>
+                        </communicationInfo>
+                    </affiliation>
+                </metadataCreator>
+                <metadataCreator>
+                    <surname lang="en">Dieckmann</surname>
+                    <givenName lang="en">Ute</givenName>
+                    <sex>unknown</sex>
+                    <communicationInfo>
+                        <email>ute.dieckmann@helsinki.fi</email>
+                    </communicationInfo>
+                    <affiliation>
+                        <organizationName lang="en">FIN-CLARIN</organizationName>
+                        <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
+                        <departmentName lang="en">University of Helsinki</departmentName>
+                        <communicationInfo>
+                            <email>finclarin@helsinki.fi</email>
+                            <url>http://www.helsinki.fi/fin-clarin</url>
+                            <address>PO Box 24 (Unioninkatu 40)</address>
+                            <zipCode>00014</zipCode>
+                            <city>University of Helsinki</city>
+                            <country>Finland</country>
+                        </communicationInfo>
+                    </affiliation>
+                </metadataCreator>
+                <metadataLanguageName>English</metadataLanguageName>
+                <metadataLanguageId>en</metadataLanguageId>
+                <metadataLastDateUpdated>2023-05-15</metadataLastDateUpdated>
+                <revision>link to license added</revision>
+            </metadataInfo>
+            <resourceDocumentationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <documentation>
+                    <documentUnstructured>How to cite: www.kielipankki.fi/viittaus/?key=urn:nbn:fi:lb-2016042602&amp;lang=en</documentUnstructured>
+                </documentation>
+                <documentation>
+                    <documentUnstructured>Resource group page: http://urn.fi/urn:nbn:fi:lb-2021031604</documentUnstructured>
+                </documentation>
+                <documentation>
+                    <documentInfo>
+                        <documentType>other</documentType>
+                        <title lang="en">License (Finnish TreeBank / FTB)</title>
+                        <editor>FIN-CLARIN</editor>
+                        <url>http://urn.fi/urn:nbn:fi:lb-2022090204</url>
+                    </documentInfo>
+                </documentation>
+            </resourceDocumentationInfo>
+            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <relationType>contains</relationType>
+                <relatedResource>
+                    <targetResourceNameURI>The Finnish Sub-corpus of the JRC-Aquis Multilingual Parallel Corpus http://urn.fi/urn:nbn:fi:lb-2016042710</targetResourceNameURI>
+                </relatedResource>
+            </relationInfo>
+            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <relationType>IsVariantFormOf</relationType>
+                <relatedResource>
+                    <targetResourceNameURI>The Downloadable Version of the Finnish TreeBank 3 http://urn.fi/urn:nbn:fi:lb-2016042601</targetResourceNameURI>
+                </relatedResource>
+            </relationInfo>
+            <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+                <corpusInfo>
+                    <resourceType>corpus</resourceType>
+                    <corpusMediaType>
+                        <corpusTextInfo>
+                            <mediaType>text</mediaType>
+                            <lingualityInfo>
+                                <lingualityType>monolingual</lingualityType>
+                            </lingualityInfo>
+                            <languageInfo>
+                                <languageId>fi</languageId>
+                                <languageName>Finnish</languageName>
+                            </languageInfo>
+                            <sizeInfo>
+                                <size>4366955</size>
+                                <sizeUnit>sentences</sizeUnit>
+                            </sizeInfo>
+                            <sizeInfo>
+                                <size>76369439</size>
+                                <sizeUnit>tokens</sizeUnit>
+                            </sizeInfo>
+                            <annotationInfo>
+                                <annotationType>syntacticAnnotation-treebanks</annotationType>
+                            </annotationInfo>
+                        </corpusTextInfo>
+                    </corpusMediaType>
+                </corpusInfo>
+            </resourceComponentType>
+        </info:resourceInfo>
+    </metadata>
+</record>
