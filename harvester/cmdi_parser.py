@@ -91,6 +91,33 @@ class MSRecordParser:
         if resourcetype == "corpus":
             return True
 
+    def _get_license_url_from_documentation(self):
+        """
+        Retrieves the license url for RES corpora.
+        """
+        doc_elements = self.xml.xpath("//info:resourceDocumentationInfo/info:documentation", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+
+        for doc_element in doc_elements:
+            doc_unstruct_element = doc_element.xpath("info:documentUnstructured/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+            doc_info_elements = doc_element.xpath("info:documentInfo", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+
+            if doc_unstruct_element:
+                doc_unstruct_text = doc_unstruct_element[0].lower()
+                if "license:" in doc_unstruct_text or "license" in doc_unstruct_text:
+                    license_urn = [word for word in doc_unstruct_text.split() if word.startswith("http://urn.fi")]
+                    if license_urn:
+                        return license_urn[0]
+            
+            elif doc_info_elements:
+                for doc_info_elem in doc_info_elements:
+                    title_element = doc_info_elem.xpath("info:title[@lang='en']/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+                    if title_element and "license" in title_element[0].lower():
+                        license_urn = doc_info_elem.xpath("info:url/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+                        if license_urn:
+                            return license_urn[0]
+
+        return None
+
 
 
     def json_converter(self):
