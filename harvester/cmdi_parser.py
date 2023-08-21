@@ -118,6 +118,23 @@ class MSRecordParser:
 
         return None
 
+    def _get_license_information(self, license_element, mapped_licenses_dict):
+        """
+        Retrieves the license and its possible url (only applies to RES and "other" licenses) to a dictionary.
+        """
+        license_dict = {}
+
+        license_text = license_element.xpath("info:licence/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
+
+        if license_text in mapped_licenses_dict:
+            license_dict["url"] = mapped_licenses_dict[license_text]
+
+            if license_text == "CLARIN_RES" or license_text == "other":
+                custom_url = self._get_license_url_from_documentation()
+                if custom_url:
+                    license_dict["custom_url"] = custom_url
+                
+        return license_dict
 
 
     def json_converter(self):
