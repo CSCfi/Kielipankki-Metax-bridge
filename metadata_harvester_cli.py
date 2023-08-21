@@ -25,8 +25,7 @@ def retrieve_metadata_content(url):
         # click.echo(metadata_content)
         lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
         metadata_record = MSRecordParser(lxml_record)
-        if metadata_record.check_metadatainfo_exists() == True:
-            click.echo(metadata_record.json_converter())
+        click.echo(metadata_record.json_converter())
 
 if __name__ == "__main__":
     retrieve_metadata_content()
