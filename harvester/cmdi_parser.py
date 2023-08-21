@@ -195,12 +195,25 @@ class MSRecordParser:
             if self._get_resourcetype_corpus(): #We may prefer to do this elsewhere later on
 
                 output = {
+                    #data_catalog, language and field_of_science is dummy data until they are implemented later on
+                    "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+                    "language": [
+                        {
+                            "url": "http://lexvo.org/id/iso639-3/fin"
+                        }
+                    ],
+                    "field_of_science": [
+                        {
+                            "url": "http://www.yso.fi/onto/okm-tieteenala/ta112",
+                        }
+                    ],
                     "persistent_identifier": self._get_identifier("//info:identificationInfo/info:identifier/text()"),
                     "title": self._get_language_contents("//info:resourceName"),
                     "description": self._get_language_contents("//info:description"),
                     "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
                     "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
-                    "access_rights": self._map_access_rights()
+                    "access_rights": self._map_access_rights(),
+                    
                 }
 
                 return json.dumps(output)
