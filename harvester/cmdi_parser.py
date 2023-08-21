@@ -89,7 +89,7 @@ class MSRecordParser:
 
     def _get_license_url_from_documentation(self):
         """
-        Retrieves the license url for RES corpora.
+        Retrieves the license url.
         """
         doc_elements = self.xml.xpath("//info:resourceDocumentationInfo/info:documentation", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
 
@@ -116,7 +116,7 @@ class MSRecordParser:
 
     def _get_license_information(self, license_element, mapped_licenses_dict):
         """
-        Retrieves the license and its possible url (only applies to RES and "other" licenses) to a dictionary.
+        Retrieves the license and its possible url to a dictionary.
         """
         license_dict = {}
 
