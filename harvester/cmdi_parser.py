@@ -83,6 +83,15 @@ class MSRecordParser:
         if license_elements_list:
             return license_elements_list
 
+    def _get_resourcetype_corpus(self):
+        """
+        Helper method to only retrieve "corpus" records.
+        """
+        resourcetype = self._get_text_xpath("//info:resourceType/text()")
+        if resourcetype == "corpus":
+            return True
+
+
 
     def json_converter(self):
         """
