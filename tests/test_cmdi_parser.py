@@ -199,3 +199,13 @@ def test_accesstype_open_record(accesstype_open_record):
         }
             }
     assert result == expected_result
+
+@pytest.fixture
+def missing_pid_record():
+    return _get_file_as_lxml("tests/test_data/missing_pid.xml")
+
+def test_missing_pid_record(missing_pid_record):
+    missing_pid_record = MSRecordParser(missing_pid_record)
+    result = missing_pid_record.json_converter()
+    expected_result = None
+    assert result == expected_result
