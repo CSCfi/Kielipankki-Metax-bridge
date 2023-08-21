@@ -128,11 +128,9 @@ class MSRecordParser:
 
         if license_text in mapped_licenses_dict:
             license_dict["url"] = mapped_licenses_dict[license_text]
-
-            if license_text == "CLARIN_RES" or license_text == "other":
-                custom_url = self._get_license_url_from_documentation()
-                if custom_url:
-                    license_dict["custom_url"] = custom_url
+            custom_url = self._get_license_url_from_documentation()
+            if custom_url:
+                license_dict["custom_url"] = custom_url
                 
         return license_dict
 
@@ -197,13 +195,16 @@ class MSRecordParser:
         Converts text and dictionaries to JSON.
         """
 
-        output = {
-            "persistent_identifier": self._get_identifier("//info:identificationInfo/info:identifier/text()"),
-            "title": self._get_language_contents("//info:resourceName"),
-            "description": self._get_language_contents("//info:description"),
-            "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
-            "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
-            "access_rights": self._map_access_rights()
-        }
+        if self._check_metadatainfo_exists(): #We may prefer to do this elsewhere later on
+            if self._get_resourcetype_corpus(): #We may prefer to do this elsewhere later on
 
-        return json.dumps(output)
+                output = {
+                    "persistent_identifier": self._get_identifier("//info:identificationInfo/info:identifier/text()"),
+                    "title": self._get_language_contents("//info:resourceName"),
+                    "description": self._get_language_contents("//info:description"),
+                    "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
+                    "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
+                    "access_rights": self._map_access_rights()
+                }
+
+                return json.dumps(output)
