@@ -67,13 +67,9 @@ class MSRecordParser:
         Only records with PIDs are relevant.
         """
         metadata = self.xml.xpath("//info:metadataInfo", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
-        if metadata:
-            urn = self.xml.xpath("//info:identificationInfo/info:identifier", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
-            if not urn:
-                return False
-        if not metadata:
-            return False
-        return True
+        urn = self.xml.xpath("//info:identificationInfo/info:identifier", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+
+        return bool(metadata and urn)
     
     def _get_list_of_licenses(self):
         """
