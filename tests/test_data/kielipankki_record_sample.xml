@@ -1,123 +1,125 @@
-<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
-<responseDate>2023-08-10T06:22:09Z</responseDate>
-<request verb="ListRecords" metadataPrefix="info">https://kielipankki.fi/md_api/que</request>
-<ListRecords>
-<record>
-<header>
-<identifier>oai:kielipankki.fi:shf53fd0</identifier>
-<datestamp>2022-09-02T10:41:46Z</datestamp>
-</header>
-<metadata>
-<info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
-<identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-<resourceName lang="fi">Silva Kiurun ajanilmausaineisto</resourceName>
-<resourceName lang="en">Silva Kiuru's Time Expressions Corpus</resourceName>
-<description lang="fi">Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.</description>
-<description lang="en">This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.</description>
-<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
-<identifier>http://urn.fi/urn:nbn:fi:lb-2017021609</identifier>
-</identificationInfo>
-<distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-<availability>available-unrestrictedUse</availability>
-<licenceInfo>
-<licence>underNegotiation</licence>
-<licensor>
-<organizationInfo>
-<organizationName lang="en">University of Helsinki</organizationName>
-<organizationShortName lang="en">UHEL</organizationShortName>
-<communicationInfo>
-<email>firstname.surname@helsinki.fi</email>
-</communicationInfo>
-</organizationInfo>
-</licensor>
-<distributionRightsHolder>
-<organizationInfo>
-<organizationName lang="en">University of Helsinki</organizationName>
-<organizationShortName lang="en">UHEL</organizationShortName>
-<communicationInfo>
-<email>firstname.surname@helsinki.fi</email>
-</communicationInfo>
-</organizationInfo>
-</distributionRightsHolder>
-</licenceInfo>
-<iprHolder>
-<organizationInfo>
-<organizationName lang="en">University of Helsinki</organizationName>
-<organizationShortName lang="en">UHEL</organizationShortName>
-<communicationInfo>
-<email>firstname.surname@helsinki.fi</email>
-</communicationInfo>
-</organizationInfo>
-</iprHolder>
-</distributionInfo>
-<contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
-<surname lang="en">Siiroinen</surname>
-<givenName lang="en">Mari</givenName>
-<sex>female</sex>
-<communicationInfo>
-<email>mari.siiroinen@helsinki.fi</email>
-<country>Finland</country>
-</communicationInfo>
-<affiliation>
-<organizationName lang="en">University of Helsinki</organizationName>
-<departmentName lang="en">Department of Finnish, Finno-Ugrian and Scandinavian Studies</departmentName>
-<communicationInfo>
-<email>miia.rajala@helsinki.fi</email>
-<url>http://www.helsinki.fi/fus/index.htm</url>
-<country>Finland</country>
-</communicationInfo>
-</affiliation>
-</contactPerson>
-<metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-<metadataCreationDate>2017-02-15</metadataCreationDate>
-<metadataCreator>
-<surname lang="und">Bartis</surname>
-<givenName lang="und">Imre</givenName>
-<sex>male</sex>
-<communicationInfo>
-<email>imre.bartis@helsinki.fi</email>
-<url>http://orcid.org/0000-0002-9455-8771</url>
-<city>Helsinki</city>
-<country>Finland</country>
-</communicationInfo>
-<position>Project Coordinator</position>
-</metadataCreator>
-<metadataLanguageName>English</metadataLanguageName>
-<metadataLanguageName>Finnish</metadataLanguageName>
-<metadataLanguageId>en</metadataLanguageId>
-<metadataLanguageId>fi</metadataLanguageId>
-<metadataLastDateUpdated>2017-02-15</metadataLastDateUpdated>
-</metadataInfo>
-<resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>fi</languageId>
-<languageName>Finnish</languageName>
-</languageInfo>
-<modalityInfo>
-<modalityType>writtenLanguage</modalityType>
-</modalityInfo>
-<sizeInfo>
-<size>1</size>
-<sizeUnit>other</sizeUnit>
-</sizeInfo>
-<textFormatInfo>
-<mimeType>application/msword</mimeType>
-</textFormatInfo>
-</corpusTextInfo>
-</corpusMediaType>
-</corpusInfo>
-</resourceComponentType>
-</info:resourceInfo>
-</metadata>
-</record>
-<resumptionToken expirationDate="2023-08-10T13:02:09Z" completeListSize="915" cursor="0">TGlzdFJlY29yZHMgbmV3ZGJfMyAxNjkxNjcyNTI5IGluZm8gICAgMTAwIDQwMyA2ZjI3MGQ0OGI2NDZiY2JhZmM5ZDA2ZTdlZTVhMGQ3Mw==</resumptionToken>
-</ListRecords>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2023-08-10T06:22:09Z</responseDate>
+    <request verb="ListRecords" metadataPrefix="info">https://kielipankki.fi/md_api/que</request>
+    <ListRecords>
+        <record>
+            <header>
+                <identifier>oai:kielipankki.fi:shf53fd0</identifier>
+                <datestamp>2022-09-02T10:41:46Z</datestamp>
+            </header>
+            <metadata>
+                <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+                    <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                        <resourceName lang="fi">Silva Kiurun ajanilmausaineisto</resourceName>
+                        <resourceName lang="en">Silva Kiuru's Time Expressions Corpus</resourceName>
+                        <description lang="fi">Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.</description>
+                        <description lang="en">This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.</description>
+                        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                        <identifier>http://urn.fi/urn:nbn:fi:lb-2017021609</identifier>
+                    </identificationInfo>
+                    <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                        <availability>available-unrestrictedUse</availability>
+                        <licenceInfo>
+                            <licence>underNegotiation</licence>
+                            <licensor>
+                                <organizationInfo>
+                                    <organizationName lang="en">University of Helsinki</organizationName>
+                                    <organizationShortName lang="en">UHEL</organizationShortName>
+                                    <communicationInfo>
+                                        <email>firstname.surname@helsinki.fi</email>
+                                    </communicationInfo>
+                                </organizationInfo>
+                            </licensor>
+                            <distributionRightsHolder>
+                                <organizationInfo>
+                                    <organizationName lang="en">University of Helsinki</organizationName>
+                                    <organizationShortName lang="en">UHEL</organizationShortName>
+                                    <communicationInfo>
+                                        <email>firstname.surname@helsinki.fi</email>
+                                    </communicationInfo>
+                                </organizationInfo>
+                            </distributionRightsHolder>
+                        </licenceInfo>
+                        <iprHolder>
+                            <organizationInfo>
+                                <organizationName lang="en">University of Helsinki</organizationName>
+                                <organizationShortName lang="en">UHEL</organizationShortName>
+                                <communicationInfo>
+                                    <email>firstname.surname@helsinki.fi</email>
+                                </communicationInfo>
+                            </organizationInfo>
+                        </iprHolder>
+                    </distributionInfo>
+                    <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+                        <surname lang="en">Siiroinen</surname>
+                        <givenName lang="en">Mari</givenName>
+                        <sex>female</sex>
+                        <communicationInfo>
+                            <email>mari.siiroinen@helsinki.fi</email>
+                            <country>Finland</country>
+                        </communicationInfo>
+                        <affiliation>
+                            <organizationName lang="en">University of Helsinki</organizationName>
+                            <departmentName lang="en">Department of Finnish, Finno-Ugrian and Scandinavian Studies</departmentName>
+                            <communicationInfo>
+                                <email>miia.rajala@helsinki.fi</email>
+                                <url>http://www.helsinki.fi/fus/index.htm</url>
+                                <country>Finland</country>
+                            </communicationInfo>
+                        </affiliation>
+                    </contactPerson>
+                    <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+                        <metadataCreationDate>2017-02-15</metadataCreationDate>
+                        <metadataCreator>
+                            <surname lang="und">Bartis</surname>
+                            <givenName lang="und">Imre</givenName>
+                            <sex>male</sex>
+                            <communicationInfo>
+                                <email>imre.bartis@helsinki.fi</email>
+                                <url>http://orcid.org/0000-0002-9455-8771</url>
+                                <city>Helsinki</city>
+                                <country>Finland</country>
+                            </communicationInfo>
+                            <position>Project Coordinator</position>
+                        </metadataCreator>
+                        <metadataLanguageName>English</metadataLanguageName>
+                        <metadataLanguageName>Finnish</metadataLanguageName>
+                        <metadataLanguageId>en</metadataLanguageId>
+                        <metadataLanguageId>fi</metadataLanguageId>
+                        <metadataLastDateUpdated>2017-02-15</metadataLastDateUpdated>
+                    </metadataInfo>
+                    <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+                        <corpusInfo>
+                            <resourceType>corpus</resourceType>
+                            <corpusMediaType>
+                                <corpusTextInfo>
+                                    <mediaType>text</mediaType>
+                                    <lingualityInfo>
+                                        <lingualityType>monolingual</lingualityType>
+                                    </lingualityInfo>
+                                    <languageInfo>
+                                        <languageId>fi</languageId>
+                                        <languageName>Finnish</languageName>
+                                    </languageInfo>
+                                    <modalityInfo>
+                                        <modalityType>writtenLanguage</modalityType>
+                                    </modalityInfo>
+                                    <sizeInfo>
+                                        <size>1</size>
+                                        <sizeUnit>other</sizeUnit>
+                                    </sizeInfo>
+                                    <textFormatInfo>
+                                        <mimeType>application/msword</mimeType>
+                                    </textFormatInfo>
+                                </corpusTextInfo>
+                            </corpusMediaType>
+                        </corpusInfo>
+                    </resourceComponentType>
+                </info:resourceInfo>
+            </metadata>
+        </record>
+        <resumptionToken expirationDate="2023-08-10T13:02:09Z" completeListSize="915" cursor="0">TGlzdFJlY29yZHMgbmV3ZGJfMyAxNjkxNjcyNTI5IGluZm8gICAgMTAwIDQwMyA2ZjI3MGQ0OGI2NDZiY2JhZmM5ZDA2ZTdlZTVhMGQ3Mw==</resumptionToken>
+    </ListRecords>
 </OAI-PMH>
