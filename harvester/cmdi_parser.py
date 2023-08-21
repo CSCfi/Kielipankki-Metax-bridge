@@ -62,8 +62,10 @@ class MSRecordParser:
         else:
             raise ValueError("No date found")
 
-    #At least for now, a method that we uset to check if a record has metadata (==record is not deleted) and a PID
-    def check_metadatainfo_exists(self):
+    def _check_metadatainfo_exists(self):
+        """
+        Only records with PIDs are relevant.
+        """
         metadata = self.xml.xpath("//info:metadataInfo", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
         if metadata:
             urn = self.xml.xpath("//info:identificationInfo/info:identifier", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
@@ -72,8 +74,7 @@ class MSRecordParser:
         if not metadata:
             return False
         return True
-            
-    
+
     def json_converter(self):
         """
         Converts text and dictionaries to JSON.
@@ -84,7 +85,8 @@ class MSRecordParser:
             "title": self._get_language_contents("//info:resourceName"),
             "description": self._get_language_contents("//info:description"),
             "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
-            "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()")
+            "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
+            "access_rights": self._map_access_rights()
         }
 
         return json.dumps(output)
