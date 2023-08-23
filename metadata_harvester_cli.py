@@ -22,8 +22,6 @@ def retrieve_metadata_content(url):
     api = PMH_API(url)
     metadata_contents = api.get_all_metadata_records()
     for metadata_content in metadata_contents:
-        # click.echo(metadata_content)
-        # click.echo("XXX")
         lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
         metadata_record = MSRecordParser(lxml_record)
         click.echo(metadata_record.json_converter())
