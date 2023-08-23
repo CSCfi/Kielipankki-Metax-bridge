@@ -72,6 +72,17 @@ def test_json_converter(single_record):
     result = record.json_converter()
     expected_result = json.dumps(
         {
+    "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+    "language": [
+        {
+            "url": "http://lexvo.org/id/iso639-3/fin"
+        }
+    ],
+    "field_of_science": [
+        {
+            "url": "http://www.yso.fi/onto/okm-tieteenala/ta112"
+        }
+    ],
     "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
     "title": {
         "en": "Silva Kiuru's Time Expressions Corpus",
@@ -90,7 +101,7 @@ def test_json_converter(single_record):
             }
         ],
         "access_type": {
-            "access_type": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+            "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
         }
     }
 }
