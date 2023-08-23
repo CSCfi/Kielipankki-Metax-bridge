@@ -67,7 +67,7 @@ def single_record_response(kielipankki_api_url):
     }
                }
 
-#These tests hang when retrieve_metadata_content() does not have a limit. When changing value to "1", the tests pass without problems.
+#These tests hang when get_all_metadata_records() does not have a limit. When changing value to "1", the tests pass without problems.
 def test_defined_url(single_record_xml, single_record_response, kielipankki_api_url):
     """
     Test that the CLI can fetch records from a specific URL
