@@ -1,7 +1,7 @@
 import pytest
 from lxml import etree
 import json
-from harvester.cmdi_parser import MSRecordParser
+from harvester.metadata_parser import MSRecordParser
 
 
 def _get_file_as_lxml(filename):

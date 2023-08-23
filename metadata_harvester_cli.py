@@ -5,7 +5,7 @@ Command line interface for the metadata harvester
 import click
 
 from harvester.pmh_interface import PMH_API
-from harvester.cmdi_parser import MSRecordParser
+from harvester.metadata_parser import MSRecordParser
 from lxml import etree
 
 
@@ -20,7 +20,7 @@ def retrieve_metadata_content(url):
     Fetch metadata records and transform them to JSON.
     """
     api = PMH_API(url)
-    metadata_contents = api.get_all_metadata_records() #limit to only three for initial testing purposes
+    metadata_contents = api.get_all_metadata_records()
     for metadata_content in metadata_contents:
         # click.echo(metadata_content)
         # click.echo("XXX")
