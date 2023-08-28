@@ -62,14 +62,13 @@ class MSRecordParser:
         else:
             raise ValueError("No date found")
 
-    def _check_metadatainfo_exists(self):
+    def _check_pid_exists(self):
         """
         Only records with PIDs are relevant.
         """
-        metadata = self.xml.xpath("//info:metadataInfo", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
         urn = self.xml.xpath("//info:identificationInfo/info:identifier", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
 
-        return bool(metadata and urn)
+        return bool(urn)
     
     def _get_list_of_licenses(self):
         """
@@ -191,7 +190,7 @@ class MSRecordParser:
         Converts text and dictionaries to JSON.
         """
 
-        if self._check_metadatainfo_exists(): #We may prefer to do this elsewhere later on
+        if self._check_pid_exists(): #We may prefer to do this elsewhere later on
             if self._get_resourcetype_corpus(): #We may prefer to do this elsewhere later on
 
                 output = {
