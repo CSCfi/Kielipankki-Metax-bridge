@@ -35,5 +35,7 @@ def update_dataset(metax_dataset_id, metadata_json):
     try:
         r.raise_for_status()
     except HTTPError as e:
+        logging.error(f'Failed to update catalog record {metax_dataset_id}')
         raise
+    logging.info(f"Updated dataset. Response text: {r.text}")
     return json.loads(r.text)['id']
