@@ -1,6 +1,9 @@
 import requests
 from requests import HTTPError
 import json
+import logging
+
+logging.basicConfig(filename='metax_api_requests.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 metax_base_url = "https://metax-service.fd-staging.csc.fi/v3"
