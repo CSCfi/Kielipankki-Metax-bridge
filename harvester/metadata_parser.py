@@ -62,7 +62,7 @@ class MSRecordParser:
         else:
             raise ValueError("No date found")
 
-    def _check_pid_exists(self):
+    def check_pid_exists(self):
         """
         Only records with PIDs are relevant.
         """
@@ -78,7 +78,7 @@ class MSRecordParser:
         if license_elements_list:
             return license_elements_list
 
-    def _get_resourcetype_corpus(self):
+    def check_resourcetype_corpus(self):
         """
         Helper method to only retrieve "corpus" records.
         """
@@ -190,29 +190,27 @@ class MSRecordParser:
         Converts text and dictionaries to JSON.
         """
 
-        if self._check_pid_exists(): #We may prefer to do this elsewhere later on
-            if self._get_resourcetype_corpus(): #We may prefer to do this elsewhere later on
 
-                output = {
-                    #data_catalog, language and field_of_science is dummy data until they are implemented later on
-                    "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
-                    "language": [
-                        {
-                            "url": "http://lexvo.org/id/iso639-3/fin"
-                        }
-                    ],
-                    "field_of_science": [
-                        {
-                            "url": "http://www.yso.fi/onto/okm-tieteenala/ta112",
-                        }
-                    ],
-                    "persistent_identifier": self.get_identifier("//info:identificationInfo/info:identifier/text()"),
-                    "title": self._get_language_contents("//info:resourceName"),
-                    "description": self._get_language_contents("//info:description"),
-                    "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
-                    "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
-                    "access_rights": self._map_access_rights(),
-                    
+        output = {
+            #data_catalog, language and field_of_science is dummy data until they are implemented later on
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "language": [
+                {
+                    "url": "http://lexvo.org/id/iso639-3/fin"
                 }
+            ],
+            "field_of_science": [
+                {
+                    "url": "http://www.yso.fi/onto/okm-tieteenala/ta112",
+                }
+            ],
+            "persistent_identifier": self.get_identifier("//info:identificationInfo/info:identifier/text()"),
+            "title": self._get_language_contents("//info:resourceName"),
+            "description": self._get_language_contents("//info:description"),
+            "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
+            "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
+            "access_rights": self._map_access_rights(),
+            
+        }
 
-                return json.dumps(output)
+        return json.dumps(output)
