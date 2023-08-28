@@ -8,7 +8,7 @@ import metax_api
 from lxml import etree
 
 
-def retrieve_metadata_content(url):
+def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
     Fetch metadata records and transform them to JSON.
     """
