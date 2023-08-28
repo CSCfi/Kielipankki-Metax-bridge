@@ -24,3 +24,11 @@ def create_dataset(metadata_json):
     except HTTPError as e:
         raise
     return json.loads(r.text)['id']
+
+def update_dataset(metax_dataset_id, metadata_json):
+    r = requests.put(f"{metax_base_url}/datasets/{metax_dataset_id}", json=metadata_json, headers=headers)
+    try:
+        r.raise_for_status()
+    except HTTPError as e:
+        raise
+    return json.loads(r.text)['id']
