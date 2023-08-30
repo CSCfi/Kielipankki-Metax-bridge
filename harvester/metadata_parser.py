@@ -190,8 +190,6 @@ class MSRecordParser:
         """
         Converts text and dictionaries to JSON.
         """
-
-
         output = {
             #data_catalog, language and field_of_science is dummy data until they are implemented later on
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
@@ -211,7 +209,6 @@ class MSRecordParser:
             "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
             "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
             "access_rights": self._map_access_rights(),
-            
-        }
 
-        return json.dumps(output)
+        }
+        return output
