@@ -6,6 +6,7 @@ from harvester.pmh_interface import PMH_API
 from harvester.metadata_parser import MSRecordParser
 import metax_api
 from lxml import etree
+from datetime import datetime, timedelta
 
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
@@ -22,6 +23,16 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
                 pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
                 all_mapped_data_dict[pid] = metadata_record.data_converter()
     return all_mapped_data_dict
+
+def check_changes_from_last_week(kielipankki_record):
+    """
+    Check if harvested data has changes since last week.
+    """
+    modified_date = datetime.strptime(kielipankki_record["modified"], "%Y-%m-%dT%H:%M:%S.%fZ").date()
+    today = datetime.now().date()
+    week_from_today = today - timedelta(days=7)
+    return week_from_today <= modified_date <= today
+
 
 if __name__ == "__main__":
     retrieve_metadata_content()
