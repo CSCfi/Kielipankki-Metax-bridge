@@ -20,7 +20,7 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
         if metadata_record.check_pid_exists():
             if metadata_record.check_resourcetype_corpus():
                 pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
-                all_mapped_data_dict[pid] = metadata_record.json_converter()
+                all_mapped_data_dict[pid] = metadata_record.data_converter()
     return all_mapped_data_dict
 
 if __name__ == "__main__":
