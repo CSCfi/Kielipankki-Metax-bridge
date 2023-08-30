@@ -192,7 +192,7 @@ class MSRecordParser:
         """
         output = {
             #data_catalog, language and field_of_science is dummy data until they are implemented later on
-            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3",
             "language": [
                 {
                     "url": "http://lexvo.org/id/iso639-3/fin"
