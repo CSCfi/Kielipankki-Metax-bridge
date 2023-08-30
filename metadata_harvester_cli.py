@@ -9,7 +9,7 @@ from lxml import etree
 
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
-    Fetch metadata records and transform them to JSON.
+    Fetch metadata records and convert and map them to Metax compliant dictionary.
     """
     api = PMH_API(url)
     all_mapped_data_dict = {}
