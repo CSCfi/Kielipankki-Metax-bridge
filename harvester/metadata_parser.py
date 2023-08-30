@@ -156,14 +156,15 @@ class MSRecordParser:
             "CLARIN_RES": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinRES-1.0",
             "other": "http://uri.suomi.fi/codelist/fairdata/license/code/other",
             "underNegotiation": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation",
-            "proprietary": "http://uri.suomi.fi/codelist/fairdata/license/code/proprietary",
+            "proprietary": "http://uri.suomi.fi/codelist/fairdata/license/code/other-closed", #??
             "CC-BY": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-1.0",
-            "CC-BY-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-ND4.0",
-            "CC-BY-NC": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC2.0",
-            "CC-BY-SA": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-SA4.0",
-            "CC-BY-NC-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-ND4.0",
-            "CC-BY-NC-SA": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-SA4.0",
-            "CC-ZERO": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-ZERO"
+            "CC-BY-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-ND-4.0",
+            "CC-BY-NC": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-2.0",
+            "CC-BY-SA": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-SA-3.0",
+            "CC-BY-NC-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-ND-4.0",
+            "CC-BY-NC-SA": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-SA-4.0",
+            "CC-ZERO": "http://uri.suomi.fi/codelist/fairdata/license/code/CC0-1.0",
+            "ApacheLicence_2.0": "http://uri.suomi.fi/codelist/fairdata/license/code/Apache-2.0"
         }
 
         license_elements_list = self._get_list_of_licenses()
