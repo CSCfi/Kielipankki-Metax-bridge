@@ -186,9 +186,9 @@ class MSRecordParser:
         return license_package
 
 
-    def json_converter(self):
+    def data_converter(self):
         """
-        Converts text and dictionaries to JSON.
+        Converts text and dictionaries to Metax compliant dictionary.
         """
         output = {
             #data_catalog, language and field_of_science is dummy data until they are implemented later on
