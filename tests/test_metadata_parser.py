@@ -26,7 +26,7 @@ def test_get_description(single_record):
 
 def test_get_identifier(single_record):
     record = MSRecordParser(single_record)
-    result = record._get_identifier("//info:identificationInfo/info:identifier/text()")
+    result = record.get_identifier("//info:identificationInfo/info:identifier/text()")
     expected_result = "urn.fi/urn:nbn:fi:lb-2017021609"
     assert result == expected_result
 
@@ -54,7 +54,7 @@ def test_get_description_not_empty(single_record):
 
 def test_get_identifier_not_empty(single_record):
     record = MSRecordParser(single_record)
-    result = record._get_identifier("//info:identificationInfo/info:identifier/text()")
+    result = record.get_identifier("//info:identificationInfo/info:identifier/text()")
     assert result != ""
 
 def test_get_modified_not_empty(single_record):
@@ -67,9 +67,9 @@ def test_get_issued_not_empty(single_record):
     result = record._get_date("//info:metadataInfo/info:metadataCreationDate/text()")
     assert result != ""
 
-def test_json_converter(single_record):
+def test_data_converter(single_record):
     record = MSRecordParser(single_record)
-    result = record.json_converter()
+    result = record.data_converter()
     expected_result = json.dumps(
         {
     "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
@@ -114,7 +114,7 @@ def deleted_record():
 
 def test_deleted_record(deleted_record):
     deleted_record = MSRecordParser(deleted_record)
-    result = deleted_record.json_converter()
+    result = deleted_record.data_converter()
     expected_result = None
     assert result == expected_result
 
@@ -124,7 +124,7 @@ def tool_record():
 
 def test_tool_record(tool_record):
     tool_record = MSRecordParser(tool_record)
-    result = tool_record.json_converter()
+    result = tool_record.data_converter()
     expected_result = None
     assert result == expected_result
 
@@ -217,6 +217,6 @@ def missing_pid_record():
 
 def test_missing_pid_record(missing_pid_record):
     missing_pid_record = MSRecordParser(missing_pid_record)
-    result = missing_pid_record.json_converter()
+    result = missing_pid_record.data_converter()
     expected_result = None
     assert result == expected_result
