@@ -215,8 +215,8 @@ def test_accesstype_open_record(accesstype_open_record):
 def missing_pid_record():
     return _get_file_as_lxml("tests/test_data/missing_pid.xml")
 
-def test_missing_pid_record(missing_pid_record):
+def test_check_pid_exists(missing_pid_record):
     missing_pid_record = MSRecordParser(missing_pid_record)
-    result = missing_pid_record.data_converter()
-    expected_result = None
+    result = missing_pid_record.check_pid_exists()
+    expected_result = False
     assert result == expected_result
