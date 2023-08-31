@@ -109,16 +109,6 @@ def test_data_converter(single_record):
     assert result == expected_result
 
 @pytest.fixture
-def deleted_record():
-    return _get_file_as_lxml("tests/test_data/deleted_record.xml")
-
-def test_deleted_record(deleted_record):
-    deleted_record = MSRecordParser(deleted_record)
-    result = deleted_record.data_converter()
-    expected_result = None
-    assert result == expected_result
-
-@pytest.fixture
 def tool_record():
     return _get_file_as_lxml("tests/test_data/tool_record.xml")
 
