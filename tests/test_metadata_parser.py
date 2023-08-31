@@ -70,9 +70,8 @@ def test_get_issued_not_empty(single_record):
 def test_data_converter(single_record):
     record = MSRecordParser(single_record)
     result = record.data_converter()
-    expected_result = json.dumps(
-        {
-    "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+    expected_result = {
+    "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3",
     "language": [
         {
             "url": "http://lexvo.org/id/iso639-3/fin"
@@ -105,7 +104,6 @@ def test_data_converter(single_record):
         }
     }
 }
-    )
     assert result == expected_result
 
 @pytest.fixture
