@@ -112,9 +112,9 @@ def test_data_converter(single_record):
 def tool_record():
     return _get_file_as_lxml("tests/test_data/tool_record.xml")
 
-def test_tool_record(tool_record):
+def test_check_resourcetype_corpus(tool_record):
     tool_record = MSRecordParser(tool_record)
-    result = tool_record.data_converter()
+    result = tool_record.check_resourcetype_corpus()
     expected_result = None
     assert result == expected_result
 
