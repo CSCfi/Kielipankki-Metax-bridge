@@ -54,6 +54,7 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
 def send_data_to_metax(all_mapped_data_dict):
     """
     Make PUT and POST requests based on changes and existance of PIDs in Metax.
+    :param all_mapped_data_dict: a dictionary of mapped data
     """
     if all_mapped_data_dict:
         try:
