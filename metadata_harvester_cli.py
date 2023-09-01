@@ -6,7 +6,6 @@ from harvester.pmh_interface import PMH_API
 from harvester.metadata_parser import MSRecordParser
 import metax_api
 from lxml import etree
-from datetime import datetime, timedelta
 import logging
 
 logger_harvester = logging.getLogger("harvester")
@@ -24,10 +23,6 @@ def get_last_harvest_date():
         if lines:
             log_date = lines[-1].split()[0]
             return log_date
-        else:
-            today = datetime.now().date()
-            week_from_today = today - timedelta(days=7)
-            return week_from_today.strftime("%Y-%m-%d")
 
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
