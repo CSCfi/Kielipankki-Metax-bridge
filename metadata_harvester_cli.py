@@ -61,14 +61,19 @@ def send_data_to_metax(all_mapped_data_dict):
     """
     Make PUT and POST requests based on changes and existance of PIDs in Metax.
     """
-    for pid in all_mapped_data_dict.keys():
-        dataset_dict = all_mapped_data_dict[pid]
-        if metax_api.check_if_dataset_record_in_datacatalog(pid):
-            metax_dataset_id = metax_api.get_dataset_record_metax_id(pid)
-            metax_api.update_dataset(metax_dataset_id, dataset_dict)
-        else:
-            metax_api.create_dataset(dataset_dict)
-
+    if all_mapped_data_dict:
+        try:
+            for pid in all_mapped_data_dict.keys():
+                dataset_dict = all_mapped_data_dict[pid]
+                if metax_api.check_if_dataset_record_in_datacatalog(pid):
+                    metax_dataset_id = metax_api.get_dataset_record_metax_id(pid)
+                    metax_api.update_dataset(metax_dataset_id, dataset_dict)
+                else:
+                    metax_api.create_dataset(dataset_dict)
+        except:
+            raise
+    else:
+        pass
 
 
 if __name__ == "__main__":
