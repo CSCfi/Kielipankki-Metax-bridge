@@ -1,5 +1,5 @@
 """
-Command line interface for the metadata harvester
+Main script for running metadata harvesting and sending it to Metax.
 """
 
 from harvester.pmh_interface import PMH_API
