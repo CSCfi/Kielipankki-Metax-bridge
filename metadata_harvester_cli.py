@@ -28,7 +28,9 @@ def get_last_harvest_date():
 
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
-    Fetch metadata records and convert and map them to Metax compliant dictionary.
+    Fetches metadata records since the last logged harvest. If date is missing, all records are fetched.
+    :param url: string value of a url
+    :return: dictionary of mapped data
     """
     try:
         api = PMH_API(url)
