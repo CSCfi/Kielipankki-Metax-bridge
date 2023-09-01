@@ -30,4 +30,11 @@ class PMH_API:
                 yield metadata_record
                 if count >= limit:
                     break
-
+    def get_changed_records_from_last_harvest(self, date):
+        """
+        Fetch records that are new or updated since a date.
+        """
+        metadata_records = self.sickle.ListRecords(**{"metadataPrefix": "info","from": date})
+        for metadata_record in metadata_records:
+            yield metadata_record
+  
