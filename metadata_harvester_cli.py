@@ -16,6 +16,8 @@ logger_harvester.addHandler(file_handler_harvester)
 
 def get_last_harvest_date():
     """Only successful harvests are logged. This function gets the last harvesting date from the log.
+    :param filename: string value of a file name
+    :return: date in last line
     """
     log_file_path = "harvester.log"
     with open(log_file_path, "r") as file:
