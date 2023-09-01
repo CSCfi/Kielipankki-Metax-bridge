@@ -3,7 +3,12 @@ from requests import HTTPError
 import json
 import logging
 
-logging.basicConfig(filename='metax_api_requests.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# logging.basicConfig(filename='metax_api_requests.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger_api = logging.getLogger("metax_api_requests")
+logger_api.setLevel(logging.INFO)
+file_handler_api = logging.FileHandler("metax_api_requests.log")
+file_handler_api.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+logger_api.addHandler(file_handler_api)
 
 
 metax_base_url = "https://metax-service.fd-staging.csc.fi/v3"
@@ -33,9 +38,9 @@ def create_dataset(metadata_dict):
     try:
         r.raise_for_status()
     except HTTPError as e:
-        logging.error(f"Failed to create dataset. Response text: {r.text}")
+        logger_api.error(f"Failed to create dataset. Response text: {r.text}")
         raise
-    logging.info(f"Created dataset. Response text: {r.text}")
+    logger_api.info(f"Created dataset. Response text: {r.text}")
     return json.loads(r.text)['id']
 
 def update_dataset(metax_dataset_id, metadata_dict):
@@ -46,7 +51,7 @@ def update_dataset(metax_dataset_id, metadata_dict):
     try:
         r.raise_for_status()
     except HTTPError as e:
-        logging.error(f'Failed to update catalog record {metax_dataset_id}')
+        logger_api.error(f'Failed to update catalog record {metax_dataset_id}')
         raise
-    logging.info(f"Updated dataset. Response text: {r.text}")
+    logger_api.info(f"Updated dataset. Response text: {r.text}")
     return json.loads(r.text)['id']
