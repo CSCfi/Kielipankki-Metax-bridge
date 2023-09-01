@@ -33,6 +33,7 @@ class PMH_API:
     def get_changed_records_from_last_harvest(self, date):
         """
         Fetch records that are new or updated since a date.
+        :param date: date string value
         """
         metadata_records = self.sickle.ListRecords(**{"metadataPrefix": "info","from": date,"ignore_deleted":True})
         for metadata_record in metadata_records:
