@@ -35,7 +35,11 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     try:
         api = PMH_API(url)
         all_mapped_data_dict = {}
-        metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date())
+        if get_last_harvest_date("harvester.log"):
+            metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date("harvester.log"))
+        else:
+            metadata_contents = api.get_all_metadata_records()
+
         for metadata_content in metadata_contents:
             lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
             metadata_record = MSRecordParser(lxml_record)
