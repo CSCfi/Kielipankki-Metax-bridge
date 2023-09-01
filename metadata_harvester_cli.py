@@ -33,17 +33,20 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
     Fetch metadata records and convert and map them to Metax compliant dictionary.
     """
-    api = PMH_API(url)
-    all_mapped_data_dict = {}
-    metadata_contents = api.get_all_metadata_records()
-    for metadata_content in metadata_contents:
-        lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
-        metadata_record = MSRecordParser(lxml_record)
-        if metadata_record.check_pid_exists():
-            if metadata_record.check_resourcetype_corpus():
-                pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
-                all_mapped_data_dict[pid] = metadata_record.data_converter()
-    return all_mapped_data_dict
+    try:
+        api = PMH_API(url)
+        all_mapped_data_dict = {}
+        metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date())
+        for metadata_content in metadata_contents:
+            lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
+            metadata_record = MSRecordParser(lxml_record)
+            if metadata_record.check_pid_exists():
+                if metadata_record.check_resourcetype_corpus():
+                    pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
+                    all_mapped_data_dict[pid] = metadata_record.data_converter()
+        return all_mapped_data_dict
+    except:
+        raise
 
 def check_changes_from_last_week(kielipankki_record):
     """
