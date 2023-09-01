@@ -15,6 +15,19 @@ file_handler_harvester = logging.FileHandler("harvester.log")
 file_handler_harvester.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 logger_harvester.addHandler(file_handler_harvester)
 
+def get_last_harvest_date():
+    """Only successful harvests are logged. This function gets the last harvesting date from the log.
+    """
+    log_file_path = "harvester.log"
+    with open(log_file_path, "r") as file:
+        lines = file.readlines()
+        if lines:
+            log_date = lines[-1].split()[0]
+            return log_date
+        else:
+            today = datetime.now().date()
+            week_from_today = today - timedelta(days=7)
+            return week_from_today.strftime("%Y-%m-%d")
 
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
