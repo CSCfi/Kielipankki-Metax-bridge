@@ -51,15 +51,6 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     except:
         raise
 
-def check_changes_from_last_week(kielipankki_record):
-    """
-    Check if harvested data has changes since last week.
-    """
-    modified_date = datetime.strptime(kielipankki_record["modified"], "%Y-%m-%dT%H:%M:%S.%fZ").date()
-    today = datetime.now().date()
-    week_from_today = today - timedelta(days=7)
-    return week_from_today <= modified_date <= today
-
 def send_data_to_metax(all_mapped_data_dict):
     """
     Make PUT and POST requests based on changes and existance of PIDs in Metax.
