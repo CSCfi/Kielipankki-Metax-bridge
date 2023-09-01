@@ -77,5 +77,9 @@ def send_data_to_metax(all_mapped_data_dict):
 
 
 if __name__ == "__main__":
-    send_data_to_metax(retrieve_metadata_content())
+    try:
+        send_data_to_metax(retrieve_metadata_content())
+        logger_harvester.info("Success")
+    except:
+        raise
         
