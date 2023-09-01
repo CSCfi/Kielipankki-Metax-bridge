@@ -34,7 +34,7 @@ class PMH_API:
         """
         Fetch records that are new or updated since a date.
         """
-        metadata_records = self.sickle.ListRecords(**{"metadataPrefix": "info","from": date})
+        metadata_records = self.sickle.ListRecords(**{"metadataPrefix": "info","from": date,"ignore_deleted":True})
         for metadata_record in metadata_records:
             yield metadata_record
   
