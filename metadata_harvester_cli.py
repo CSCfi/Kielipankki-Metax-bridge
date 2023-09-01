@@ -7,6 +7,14 @@ from harvester.metadata_parser import MSRecordParser
 import metax_api
 from lxml import etree
 from datetime import datetime, timedelta
+import logging
+
+logger_harvester = logging.getLogger("harvester")
+logger_harvester.setLevel(logging.DEBUG)
+file_handler_harvester = logging.FileHandler("harvester.log")
+file_handler_harvester.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+logger_harvester.addHandler(file_handler_harvester)
+
 
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
