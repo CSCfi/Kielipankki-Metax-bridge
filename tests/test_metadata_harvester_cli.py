@@ -4,6 +4,7 @@ import requests_mock
 from lxml import etree
 from click.testing import CliRunner
 import metadata_harvester_cli
+import os
 
 @pytest.fixture(autouse=True)
 def prevent_online_http_requests(monkeypatch):
@@ -101,22 +102,20 @@ def test_default_url(single_record_xml, single_record_response):
     assert single_record_response["description"]["en"] in result.output
     assert single_record_response["description"]["fi"] in result.output
 
-log_file = "test_harvester.log"
-
-log_file_data = [
-    "2023-08-30 09:00:00 - INFO - Success\n",
-    "2023-08-31 10:00:00 - INFO - Success\n",
-    "2023-09-01 11:00:00 - INFO - Success\n",
-]
-
 @pytest.fixture
 def create_test_log_file():
     """Create a temporary log file for testing and clean up afterwards."""
+    log_file = "harvester.log"
+    log_file_data = [
+        "2023-08-30 09:00:00 - INFO - Success\n",
+        "2023-08-31 10:00:00 - INFO - Success\n",
+        "2023-09-01 11:00:00 - INFO - Success\n",
+    ]
     with open(log_file, "w") as file:
         file.writelines(log_file_data)
     yield
     os.remove(log_file)
 
 def test_get_last_harvest_date(create_test_log_file):
-    last_harvest_date =metadata_harvester_cli.get_last_harvest_date(log_file)
+    last_harvest_date =metadata_harvester_cli.get_last_harvest_date()
     assert last_harvest_date == "2023-09-01"
