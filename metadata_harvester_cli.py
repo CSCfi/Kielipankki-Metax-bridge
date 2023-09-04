@@ -35,8 +35,8 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     try:
         api = PMH_API(url)
         all_mapped_data_dict = {}
-        if get_last_harvest_date("harvester.log"):
-            metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date("harvester.log"))
+        if get_last_harvest_date():
+            metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date())
         else:
             metadata_contents = api.get_all_metadata_records()
 
