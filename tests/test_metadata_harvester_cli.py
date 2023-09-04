@@ -73,10 +73,6 @@ def test_defined_url(single_record_xml, single_record_response, kielipankki_api_
     """
     Test that the CLI can fetch records from a specific URL
     """
-    runner = CliRunner()
-
-    result = runner.invoke(retrieve_metadata_content, ["--url", kielipankki_api_url], input=single_record_xml)
-    print(result)
 
     assert single_record_response["persistent_identifier"] in result.output
     assert single_record_response["title"]["en"] in result.output
@@ -90,9 +86,6 @@ def test_default_url(single_record_xml, single_record_response):
     """
     Test that the CLI can fetch records from the default URL
     """
-    runner = CliRunner()
-
-    result = runner.invoke(retrieve_metadata_content, input=single_record_xml)
 
     assert single_record_response["persistent_identifier"] in result.output
     assert single_record_response["title"]["en"] in result.output
