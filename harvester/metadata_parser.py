@@ -190,7 +190,7 @@ class MSRecordParser:
         """
         Converts text and dictionaries to Metax compliant dictionary.
         """
-        output = {
+        return {
             #data_catalog, language and field_of_science is dummy data until they are implemented later on
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3",
             "language": [
@@ -211,4 +211,3 @@ class MSRecordParser:
             "access_rights": self._map_access_rights(),
 
         }
-        return output
