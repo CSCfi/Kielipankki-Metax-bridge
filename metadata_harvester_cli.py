@@ -20,12 +20,15 @@ def get_last_harvest_date():
     :return: date in last line
     """
     log_file_path = "harvester.log"
-    with open(log_file_path, "r") as file:
-        lines = file.readlines()
-        if lines:
-            log_date = lines[-1].split()[0]
-            return log_date
-
+    try:
+        with open(log_file_path, "r") as file:
+            lines = file.readlines()
+            if lines:
+                log_date = lines[-1].split()[0]
+                return log_date
+    except FileNotFoundError:
+        return None
+    
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
     Fetches metadata records since the last logged harvest. If date is missing, all records are fetched.
