@@ -45,55 +45,21 @@ def single_record_response(kielipankki_api_url, single_record_xml):
     
     with requests_mock.Mocker() as mocker:
         mocker.get(kielipankki_api_url, text=single_record_xml)
-        yield {
-            "urn.fi/urn:nbn:fi:lb-2017021609": {
-            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609", 
-               "title": {
-                   "en": "Silva Kiuru's Time Expressions Corpus", 
-                   "fi": "Silva Kiurun ajanilmausaineisto"}, 
-               "description": {
-                   "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", 
-                   "fi": "T\\u00e4m\\u00e4 suomen kielen ajanilmauksia k\\u00e4sitt\\u00e4v\\u00e4 aineisto on koottu kaunokirjallisten alkuper\\u00e4isteosten, k\\u00e4\\u00e4nn\\u00f6sten, murreaineistojen ja muiden tekstien pohjalta."}, 
-               "modified": "2017-02-15T00:00:00.000000Z", 
-               "issued": "2017-02-15T00:00:00.000000Z",
-               "access_rights": {
-        "license": [
-            {
-                "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
-            }
-        ],
-        "access_type": {
-            "access_type": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
-        }
-    }
-               }}
+        yield {"urn.fi/urn:nbn:fi:lb-2017021609": {"data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3", "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}], "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}], "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609", "title": {"en": "Silva Kiuru's Time Expressions Corpus", "fi": "Silva Kiurun ajanilmausaineisto"}, "description": {"en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta."},"modified": "2017-02-15T00:00:00.000000Z", "issued": "2017-02-15T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"}}}}
 
-#These tests hang when get_all_metadata_records() does not have a limit. When changing value to "1", the tests pass without problems.
-def test_defined_url(single_record_response, kielipankki_api_url, create_test_log_file):
+def test_retrieve_metadata_content_with_last_harvest_date(single_record_response, create_test_log_file):
     """
-    Test that the CLI can fetch records from a specific URL
+    Test that fetching records based on a date in log file succeeds (only updated records are fetched).
     """
     result = metadata_harvester_cli.retrieve_metadata_content()
-    assert single_record_response["urn.fi/urn:nbn:fi:lb-2017021609"]["persistent_identifier"] in result.output
-    # assert single_record_response["title"]["en"] in result.output
-    # assert single_record_response["title"]["fi"] in result.output
-    # assert single_record_response["modified"] in result.output
-    # assert single_record_response["issued"] in result.output
-    # assert single_record_response["description"]["en"] in result.output
-    # assert single_record_response["description"]["fi"] in result.output 
+    assert single_record_response == result
 
-# def test_default_url(single_record_xml, single_record_response):
-#     """
-#     Test that the CLI can fetch records from the default URL
-#     """
-
-#     assert single_record_response["persistent_identifier"] in result.output
-#     assert single_record_response["title"]["en"] in result.output
-#     assert single_record_response["title"]["fi"] in result.output
-#     assert single_record_response["modified"] in result.output
-#     assert single_record_response["issued"] in result.output
-#     assert single_record_response["description"]["en"] in result.output
-#     assert single_record_response["description"]["fi"] in result.output
+def test_retrieve_metadata_content_without_last_harvest_date(single_record_response):
+    """
+    Test that fetching records without a log file succeeds (all records are fetched).
+    """
+    result = metadata_harvester_cli.retrieve_metadata_content()
+    assert single_record_response == result
 
 @pytest.fixture
 def create_test_log_file():
@@ -113,3 +79,9 @@ def test_get_last_harvest_date(create_test_log_file):
     """Test getting the last date in the log file"""
     last_harvest_date =metadata_harvester_cli.get_last_harvest_date()
     assert last_harvest_date == "2023-09-01"
+
+def test_get_last_harvest_no_file():
+    """Test handling non-existing file."""
+    last_harvest_date =metadata_harvester_cli.get_last_harvest_date()
+    assert last_harvest_date == None
+
