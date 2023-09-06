@@ -186,7 +186,7 @@ class MSRecordParser:
         return license_package
 
 
-    def data_converter(self):
+    def to_dict(self):
         """
         Converts text and dictionaries to Metax compliant dictionary.
         """

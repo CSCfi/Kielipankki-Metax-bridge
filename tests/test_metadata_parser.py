@@ -67,9 +67,9 @@ def test_get_issued_not_empty(single_record):
     result = record._get_date("//info:metadataInfo/info:metadataCreationDate/text()")
     assert result != ""
 
-def test_data_converter(single_record):
+def test_to_dict(single_record):
     record = MSRecordParser(single_record)
-    result = record.data_converter()
+    result = record.to_dict()
     expected_result = {
     "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3",
     "language": [
