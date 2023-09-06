@@ -120,6 +120,5 @@
                 </info:resourceInfo>
             </metadata>
         </record>
-        <resumptionToken expirationDate="2023-08-10T13:02:09Z" completeListSize="915" cursor="0">TGlzdFJlY29yZHMgbmV3ZGJfMyAxNjkxNjcyNTI5IGluZm8gICAgMTAwIDQwMyA2ZjI3MGQ0OGI2NDZiY2JhZmM5ZDA2ZTdlZTVhMGQ3Mw==</resumptionToken>
     </ListRecords>
 </OAI-PMH>
