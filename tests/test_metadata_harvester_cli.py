@@ -51,37 +51,39 @@ def test_retrieve_metadata_content_with_last_harvest_date(single_record_response
     """
     Test that fetching records based on a date in log file succeeds (only updated records are fetched).
     """
-    result = metadata_harvester_cli.retrieve_metadata_content()
+    result = metadata_harvester_cli.retrieve_metadata_content("harvester_test.log")    
     assert single_record_response == result
 
 def test_retrieve_metadata_content_without_last_harvest_date(single_record_response):
     """
     Test that fetching records without a log file succeeds (all records are fetched).
     """
-    result = metadata_harvester_cli.retrieve_metadata_content()
+    result = metadata_harvester_cli.retrieve_metadata_content("harvester_test.log")
     assert single_record_response == result
 
 @pytest.fixture
 def create_test_log_file():
     """Create a temporary log file for testing and clean up afterwards."""
-    log_file = "harvester.log"
+    log_file = "harvester_test.log"
     log_file_data = [
-        "2023-08-30 09:00:00 - INFO - Success\n",
-        "2023-08-31 10:00:00 - INFO - Success\n",
-        "2023-09-01 11:00:00 - INFO - Success\n",
+        "2023-09-08 14:34:16,887 - INFO - Started\n"
+        "2023-09-08 14:42:58,652 - INFO - Success, all records harvested\n"
+        "2023-09-08 14:44:58,690 - INFO - Started\n"
+        "2023-09-08 14:45:58,690 - INFO - Started\n"
+        "2023-09-08 14:45:58,956 - INFO - Success, records harvested since 2023-09-08T14:34:16Z\n"
     ]
     with open(log_file, "w") as file:
         file.writelines(log_file_data)
-    yield
+    yield log_file
     os.remove(log_file)
 
 def test_get_last_harvest_date(create_test_log_file):
-    """Test getting the last date in the log file"""
-    last_harvest_date =metadata_harvester_cli.get_last_harvest_date()
-    assert last_harvest_date == "2023-09-01"
+    """Test getting the last start time of successful harvest date in the log file"""
+    last_harvest_date =metadata_harvester_cli.get_last_harvest_date(create_test_log_file)
+    assert last_harvest_date == "2023-09-08T14:45:58Z"
 
 def test_get_last_harvest_no_file():
     """Test handling non-existing file."""
-    last_harvest_date =metadata_harvester_cli.get_last_harvest_date()
+    last_harvest_date =metadata_harvester_cli.get_last_harvest_date("harvester_test.log")
     assert last_harvest_date == None
 

@@ -15,14 +15,13 @@ file_handler_harvester = logging.FileHandler("harvester.log")
 file_handler_harvester.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 logger_harvester.addHandler(file_handler_harvester)
 
-def get_last_harvest_date():
-    """Only successful harvests are logged. This function gets the last successful harvesting date from the log.
+def get_last_harvest_date(filename):
+    """This function gets the start time of last successful harvesting date from the log if found.
     :param filename: string value of a file name
     :return: date in last line
     """
-    log_file_path = "harvester.log"
     try:
-        with open(log_file_path, "r") as file:
+        with open(filename, "r") as file:
             lines = file.readlines()
 
             for i in range(len(lines) - 1, -1, -1):
@@ -32,12 +31,12 @@ def get_last_harvest_date():
                         log_datetime = datetime.strptime(log_datetime_str, "%Y-%m-%d %H:%M:%S,%f")
                         return log_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
                     else:
-                        continue # Continue until a successful harvest has been logged
+                        continue # Continue until a successful harvest has been found
         return None
     except FileNotFoundError:
         return None
 
-def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
+def retrieve_metadata_content(log_file, url="https://kielipankki.fi/md_api/que"):
     """
     Fetches metadata records since the last logged harvest. If date is missing, all records are fetched.
     :param url: string value of a url
@@ -46,9 +45,8 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     try:
         api = PMH_API(url)
         all_mapped_data_dict = {}
-        if get_last_harvest_date():
-            metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date())
-
+        if get_last_harvest_date(log_file):
+            metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date(log_file))
         else:
             metadata_contents = api.get_all_metadata_records()
 
@@ -85,10 +83,10 @@ def send_data_to_metax(all_mapped_data_dict):
 
 
 if __name__ == "__main__":
-    last_harvest_date = get_last_harvest_date()
+    last_harvest_date = get_last_harvest_date("harvester.log")
     logger_harvester.info("Started")
     try:
-        send_data_to_metax(retrieve_metadata_content())
+        send_data_to_metax(retrieve_metadata_content("harvester.log"))
         if last_harvest_date:
             logger_harvester.info(f"Success, records harvested since {last_harvest_date}")
         else:
