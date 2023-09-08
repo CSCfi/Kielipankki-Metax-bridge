@@ -87,3 +87,23 @@ def test_get_last_harvest_no_file():
     last_harvest_date =metadata_harvester_cli.get_last_harvest_date("harvester_test.log")
     assert last_harvest_date == None
 
+@pytest.fixture
+def create_test_log_file_with_unsuccessful_harvests():
+    """Create a temporary log file for testing and clean up afterwards."""
+    log_file = "harvester_test.log"
+    log_file_data = [
+        "2023-09-08 14:34:16,887 - INFO - Started\n"
+        "2023-09-08 14:42:58,652 - INFO - Success, all records harvested\n"
+        "2023-09-08 14:44:58,690 - INFO - Started\n"
+        "2023-09-08 14:45:58,690 - INFO - Started\n"
+        "2023-09-08 14:45:58,956 - INFO - Started\n"
+    ]
+    with open(log_file, "w") as file:
+        file.writelines(log_file_data)
+    yield log_file
+    os.remove(log_file)
+
+def test_get_last_harvest_with_unsuccessful_harvests(create_test_log_file_with_unsuccessful_harvests):
+    """Test getting the last start time of successful harvest date in the log file"""
+    last_harvest_date =metadata_harvester_cli.get_last_harvest_date(create_test_log_file_with_unsuccessful_harvests)
+    assert last_harvest_date == "2023-09-08T14:34:16Z"
