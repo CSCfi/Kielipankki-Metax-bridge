@@ -7,6 +7,7 @@ from harvester.metadata_parser import MSRecordParser
 import metax_api
 from lxml import etree
 import logging
+from datetime import datetime
 
 logger_harvester = logging.getLogger("harvester")
 logger_harvester.setLevel(logging.DEBUG)
@@ -15,7 +16,7 @@ file_handler_harvester.setFormatter(logging.Formatter("%(asctime)s - %(levelname
 logger_harvester.addHandler(file_handler_harvester)
 
 def get_last_harvest_date():
-    """Only successful harvests are logged. This function gets the last harvesting date from the log.
+    """Only successful harvests are logged. This function gets the last successful harvesting date from the log.
     :param filename: string value of a file name
     :return: date in last line
     """
@@ -23,12 +24,19 @@ def get_last_harvest_date():
     try:
         with open(log_file_path, "r") as file:
             lines = file.readlines()
-            if lines:
-                log_date = lines[-1].split()[0]
-                return log_date
+
+            for i in range(len(lines) - 1, -1, -1):
+                if "success" in lines[i].lower():
+                    if i > 0 and "started" in lines[i - 1].lower():
+                        log_datetime_str = lines[i - 1].split(" - ")[0]
+                        log_datetime = datetime.strptime(log_datetime_str, "%Y-%m-%d %H:%M:%S,%f")
+                        return log_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
+                    else:
+                        continue # Continue until a successful harvest has been logged
+        return None
     except FileNotFoundError:
         return None
-    
+
 def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
     """
     Fetches metadata records since the last logged harvest. If date is missing, all records are fetched.
@@ -40,17 +48,19 @@ def retrieve_metadata_content(url="https://kielipankki.fi/md_api/que"):
         all_mapped_data_dict = {}
         if get_last_harvest_date():
             metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date())
+
         else:
             metadata_contents = api.get_all_metadata_records()
 
-        for metadata_content in metadata_contents:
-            lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
-            metadata_record = MSRecordParser(lxml_record)
-            if metadata_record.check_pid_exists():
-                if metadata_record.check_resourcetype_corpus():
-                    pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
-                    all_mapped_data_dict[pid] = metadata_record.to_dict()
-        return all_mapped_data_dict
+        if metadata_contents:
+            for metadata_content in metadata_contents:
+                lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
+                metadata_record = MSRecordParser(lxml_record)
+                if metadata_record.check_pid_exists():
+                    if metadata_record.check_resourcetype_corpus():
+                        pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
+                        all_mapped_data_dict[pid] = metadata_record.to_dict()
+            return all_mapped_data_dict
     except:
         raise
 
@@ -75,9 +85,14 @@ def send_data_to_metax(all_mapped_data_dict):
 
 
 if __name__ == "__main__":
+    last_harvest_date = get_last_harvest_date()
+    logger_harvester.info("Started")
     try:
         send_data_to_metax(retrieve_metadata_content())
-        logger_harvester.info("Success")
+        if last_harvest_date:
+            logger_harvester.info(f"Success, records harvested since {last_harvest_date}")
+        else:
+            logger_harvester.info("Success, all records harvested")
     except:
         raise
         
