@@ -3,7 +3,7 @@ Fetch data from an OAI-PMH API of Metashare
 """
 
 from sickle import Sickle
-
+from sickle.oaiexceptions import NoRecordsMatch
 
 class PMH_API:
     """
@@ -30,12 +30,15 @@ class PMH_API:
                 yield metadata_record
                 if count >= limit:
                     break
-    def get_changed_records_from_last_harvest(self, date):
+    
+    def get_changed_records_from_last_harvest(self, datetime):
         """
         Fetch records that are new or updated since a date.
         :param date: date string value
         """
-        metadata_records = self.sickle.ListRecords(**{"metadataPrefix": "info","from": date,"ignore_deleted":True})
-        for metadata_record in metadata_records:
-            yield metadata_record
-  
+        try:
+            metadata_records = self.sickle.ListRecords(**{"metadataPrefix": "info","from": datetime,"ignore_deleted":True})
+            for metadata_record in metadata_records:
+                yield metadata_record
+        except NoRecordsMatch:
+            return None
