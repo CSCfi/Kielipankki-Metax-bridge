@@ -190,6 +190,18 @@ def test_accesstype_open_record(accesstype_open_record):
     assert result == expected_result
 
 @pytest.fixture
+def license_with_custom_url_in_doc_unstruct_record():
+    """A record containing lisence url in documentation elements."""
+    return _get_file_as_lxml("tests/test_data/license_in_doc_unstruct.xml")
+
+def test_custom_url_from_doc_unstruct_element(license_with_custom_url_in_doc_unstruct_record):
+    """A record containing lisence url in documentation elements."""
+    record = MSRecordParser(license_with_custom_url_in_doc_unstruct_record)
+    result = record._map_access_rights()
+    expected_result = {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinRES-1.0", "custom_url": "http://urn.fi/urn:nbn:fi:lb-2016112304"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"}}
+    assert result == expected_result
+
+@pytest.fixture
 def missing_pid_record():
     """A record that doesn't have a PID."""
     return _get_file_as_lxml("tests/test_data/missing_pid.xml")
