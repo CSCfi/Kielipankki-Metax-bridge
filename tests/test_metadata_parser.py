@@ -47,32 +47,6 @@ def test_get_issued_date(single_record):
     expected_result = "2017-02-15T00:00:00.000000Z"
     assert result == expected_result
  
-def test_get_title_not_empty(single_record):
-    """Check that """
-    record = MSRecordParser(single_record)
-    result = record._get_language_contents("//info:resourceName")
-    assert result
-
-def test_get_description_not_empty(single_record):
-    record = MSRecordParser(single_record)
-    result = record._get_language_contents("//info:description")
-    assert result
-
-def test_get_identifier_not_empty(single_record):
-    record = MSRecordParser(single_record)
-    result = record.get_identifier("//info:identificationInfo/info:identifier/text()")
-    assert result
-
-def test_get_modified_not_empty(single_record):
-    record = MSRecordParser(single_record)
-    result = record._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()")
-    assert result
-
-def test_get_issued_not_empty(single_record):
-    record = MSRecordParser(single_record)
-    result = record._get_date("//info:metadataInfo/info:metadataCreationDate/text()")
-    assert result
-
 def test_to_dict(single_record):
     """Test that all relevant elements are mapped to a dictionary."""
     record = MSRecordParser(single_record)
