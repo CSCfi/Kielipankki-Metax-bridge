@@ -42,25 +42,22 @@ def retrieve_metadata_content(log_file, url="https://kielipankki.fi/md_api/que")
     :param url: string value of a url
     :return: dictionary of mapped data
     """
-    try:
-        api = PMH_API(url)
-        all_mapped_data_dict = {}
-        if get_last_harvest_date(log_file):
-            metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date(log_file))
-        else:
-            metadata_contents = api.get_all_metadata_records()
+    api = PMH_API(url)
+    all_mapped_data_dict = {}
+    if get_last_harvest_date(log_file):
+        metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date(log_file))
+    else:
+        metadata_contents = api.get_all_metadata_records()
 
-        if metadata_contents:
-            for metadata_content in metadata_contents:
-                lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
-                metadata_record = MSRecordParser(lxml_record)
-                if metadata_record.check_pid_exists():
-                    if metadata_record.check_resourcetype_corpus():
-                        pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
-                        all_mapped_data_dict[pid] = metadata_record.to_dict()
-            return all_mapped_data_dict
-    except:
-        raise
+    if metadata_contents:
+        for metadata_content in metadata_contents:
+            lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
+            metadata_record = MSRecordParser(lxml_record)
+            if metadata_record.check_pid_exists():
+                if metadata_record.check_resourcetype_corpus():
+                    pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
+                    all_mapped_data_dict[pid] = metadata_record.to_dict()
+        return all_mapped_data_dict
 
 def send_data_to_metax(all_mapped_data_dict):
     """
@@ -68,16 +65,13 @@ def send_data_to_metax(all_mapped_data_dict):
     :param all_mapped_data_dict: a dictionary of mapped data
     """
     if all_mapped_data_dict:
-        try:
-            for pid in all_mapped_data_dict.keys():
-                dataset_dict = all_mapped_data_dict[pid]
-                if metax_api.check_if_dataset_record_in_datacatalog(pid):
-                    metax_dataset_id = metax_api.get_dataset_record_metax_id(pid)
-                    metax_api.update_dataset(metax_dataset_id, dataset_dict)
-                else:
-                    metax_api.create_dataset(dataset_dict)
-        except:
-            raise
+        for pid in all_mapped_data_dict.keys():
+            dataset_dict = all_mapped_data_dict[pid]
+            if metax_api.check_if_dataset_record_in_datacatalog(pid):
+                metax_dataset_id = metax_api.get_dataset_record_metax_id(pid)
+                metax_api.update_dataset(metax_dataset_id, dataset_dict)
+            else:
+                metax_api.create_dataset(dataset_dict)
     else:
         pass
 
@@ -85,12 +79,8 @@ def send_data_to_metax(all_mapped_data_dict):
 if __name__ == "__main__":
     last_harvest_date = get_last_harvest_date("harvester.log")
     logger_harvester.info("Started")
-    try:
-        send_data_to_metax(retrieve_metadata_content("harvester.log"))
-        if last_harvest_date:
-            logger_harvester.info(f"Success, records harvested since {last_harvest_date}")
-        else:
-            logger_harvester.info("Success, all records harvested")
-    except:
-        raise
-        
+    send_data_to_metax(retrieve_metadata_content("harvester.log"))
+    if last_harvest_date:
+        logger_harvester.info(f"Success, records harvested since {last_harvest_date}")
+    else:
+        logger_harvester.info("Success, all records harvested")        
