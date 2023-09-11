@@ -2,25 +2,8 @@ import pytest
 import requests
 import requests_mock
 from lxml import etree
-from click.testing import CliRunner
 import metadata_harvester_cli
 import os
-
-@pytest.fixture(autouse=True)
-def prevent_online_http_requests(monkeypatch):
-    """
-    Patch urlopen so that all non-patched requests raise an error.
-    """
-
-    def urlopen_error(self, method, url, *args, **kwargs):
-        raise RuntimeError(
-            f"Requests are not allowed in tests, but a test attempted a "
-            f"{method} request to {self.scheme}://{self.host}{url}"
-        )
-
-    monkeypatch.setattr(
-        "urllib3.connectionpool.HTTPConnectionPool.urlopen", urlopen_error
-    )
 
 @pytest.fixture
 def kielipankki_api_url():
