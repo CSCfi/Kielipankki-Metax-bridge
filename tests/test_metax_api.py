@@ -10,10 +10,6 @@ def metax_base_url():
     return "https://metax-service.fd-staging.csc.fi/v3"
 
 @pytest.fixture
-def headers():
-    return {'Content-Type': 'application/json'}
-
-@pytest.fixture
 def kielipankki_datacatalog_id():
     """Data catalog identifier for Kielipankki data."""
     return "urn:nbn:fi:att:data-catalog-kielipankki-v3"
