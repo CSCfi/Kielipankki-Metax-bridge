@@ -31,18 +31,18 @@ def single_record_response(kielipankki_api_url, single_record_xml):
         mocker.get(kielipankki_api_url, text=single_record_xml)
         yield {"urn.fi/urn:nbn:fi:lb-2017021609": {"data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3", "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}], "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}], "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609", "title": {"en": "Silva Kiuru's Time Expressions Corpus", "fi": "Silva Kiurun ajanilmausaineisto"}, "description": {"en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta."},"modified": "2017-02-15T00:00:00.000000Z", "issued": "2017-02-15T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"}}}}
 
-def test_retrieve_metadata_content_with_last_harvest_date(single_record_response, create_test_log_file):
+def test_records_to_dict_with_last_harvest_date(single_record_response, create_test_log_file):
     """
     Test that fetching records based on a date in log file succeeds (only updated records are fetched).
     """
-    result = metadata_harvester_cli.retrieve_metadata_content("harvester_test.log")    
+    result = metadata_harvester_cli.records_to_dict("harvester_test.log")    
     assert single_record_response == result
 
-def test_retrieve_metadata_content_without_last_harvest_date(single_record_response):
+def test_records_to_dict_without_last_harvest_date(single_record_response):
     """
     Test that fetching records without a log file succeeds (all records are fetched).
     """
-    result = metadata_harvester_cli.retrieve_metadata_content("harvester_test.log")
+    result = metadata_harvester_cli.records_to_dict("harvester_test.log")
     assert single_record_response == result
 
 @pytest.fixture
