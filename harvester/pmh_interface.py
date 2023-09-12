@@ -16,25 +16,18 @@ class PMH_API:
         """
         self.sickle = Sickle(url)
 
-    def get_all_metadata_records(self, limit=None):
+    def fetch_records(self):
         """
-        Get content for all records available from the API.
-
-        :param limit: Maximum number of records to retrieve. Default None fetches all records.
+        Fetch all non-deleted records from the API.
         """
         metadata_records = self.sickle.ListRecords(metadataPrefix="info", ignore_deleted=True)
-        if not limit:
-            yield from metadata_records
-        else:
-            for count, metadata_record in enumerate(metadata_records, start=1):
-                yield metadata_record
-                if count >= limit:
-                    break
+        for metadata_record in metadata_records:
+            yield metadata_record
     
-    def get_changed_records_from_last_harvest(self, datetime):
+    def fetch_changed_records(self, datetime):
         """
         Fetch records that are new or updated since a date.
-        :param date: date string value
+        :param datetime: date (and time) string value
         """
         try:
             metadata_records = self.sickle.ListRecords(**{"metadataPrefix": "info","from": datetime,"ignore_deleted":True})

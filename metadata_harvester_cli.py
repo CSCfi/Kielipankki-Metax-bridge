@@ -45,9 +45,9 @@ def retrieve_metadata_content(log_file, url="https://kielipankki.fi/md_api/que")
     api = PMH_API(url)
     all_mapped_data_dict = {}
     if get_last_harvest_date(log_file):
-        metadata_contents = api.get_changed_records_from_last_harvest(get_last_harvest_date(log_file))
+        metadata_contents = api.fetch_changed_records(get_last_harvest_date(log_file))
     else:
-        metadata_contents = api.get_all_metadata_records()
+        metadata_contents = api.fetch_records()
 
     if metadata_contents:
         for metadata_content in metadata_contents:
