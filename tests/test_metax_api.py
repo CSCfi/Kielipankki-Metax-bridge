@@ -67,7 +67,7 @@ def test_get_dataset_record_metax_id(dataset_pid, mock_requests_get_record):
 @pytest.fixture
 def mock_post_put_response_json():
     """Mock an id of a dataset in Metax."""
-    return '{"id": "000-000-000"}'
+    return _get_file_as_string("tests/test_data/put_post_response.json")
 
 @pytest.fixture
 def mock_requests_post(mock_post_put_response_json, metax_base_url):
@@ -81,8 +81,8 @@ def test_create_dataset_successful(mock_requests_post, caplog):
     metadata_dict = {"persistent_identifier": "urn.fi/urn:nbn:fi:lb-201603170300", "title": {"en": "The Corpus"}, "description": {"en": "A large corpus"}, "modified": "2016-03-17T00:00:00.000000Z", "issued": "2016-03-17T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"}}}
 
     with caplog.at_level(logging.INFO):
-        dataset_id = metax_api.create_dataset(metadata_dict)
-    assert dataset_id == "000-000-000"
+        response_text = metax_api.create_dataset(metadata_dict)
+    assert response_text in caplog.text
     assert "Created dataset" in caplog.text
     assert len(mock_requests_post.request_history) == 1
     assert mock_requests_post.request_history[0].method == "POST"
@@ -105,28 +105,28 @@ def test_create_dataset_failed(mock_requests_post, caplog, metax_base_url):
 @pytest.fixture
 def mock_requests_put(mock_post_put_response_json, metax_base_url):
     """Mock a PUT request of a dataset to Metax."""
-    metax_dataset_id = "000-000-000"
+    metax_dataset_id = "441560f5-4c2a-48eb-bc1a-489639ec3573"
     with requests_mock.Mocker() as mocker:
         mocker.put(f"{metax_base_url}/datasets/{metax_dataset_id}", text=mock_post_put_response_json)
         yield mocker
 
 def test_update_dataset_successful(mock_requests_put, caplog):
     """Test that an existing dataset in Metax is successfully updated."""
-    metax_dataset_id = "000-000-000"
+    metax_dataset_id = "441560f5-4c2a-48eb-bc1a-489639ec3573"
     sample_dict = {"persistent_identifier": "urn.fi/urn:nbn:fi:lb-201603170300", "title": {"en": "The Corpus"}, "description": {"en": "A large corpus"}, "modified": "2016-03-17T00:00:00.000000Z", "issued": "2016-03-17T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"}}}
 
     with caplog.at_level(logging.INFO):
-        dataset_id = metax_api.update_dataset(metax_dataset_id, sample_dict)
-    assert dataset_id == "000-000-000"
+        response_text = metax_api.update_dataset(metax_dataset_id, sample_dict)
+    assert response_text in caplog.text
     assert "Updated dataset" in caplog.text
     assert len(mock_requests_put.request_history) == 1
     assert mock_requests_put.request_history[0].method == "PUT"
-    assert mock_requests_put.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets/000-000-000"
+    assert mock_requests_put.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets/441560f5-4c2a-48eb-bc1a-489639ec3573"
 
 
 def test_update_dataset_failed(mock_requests_put, caplog, metax_base_url):
     """Test that an ill-formed dictionary results in a bad request to Metax."""
-    metax_dataset_id = "000-000-001"
+    metax_dataset_id = "441560f5-4c2a-48eb-bc1a-489639ec3573"
     mock_requests_put.put(f"{metax_base_url}/datasets/{metax_dataset_id}", status_code=400)
     sample_dict = {"persistent_identifier": "urn.fi/urn:nbn:fi:lb-201603170300", "title": {"en": "The Corpus"}, "description": {"en": "A large corpus"}, "modified": "2016-03-17T00:00:00.000000Z", "issued": "2016-03-17T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"orl": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"}}}
 
@@ -135,5 +135,5 @@ def test_update_dataset_failed(mock_requests_put, caplog, metax_base_url):
     assert "Failed to update" in caplog.text
     assert len(mock_requests_put.request_history) == 1
     assert mock_requests_put.request_history[0].method == "PUT"
-    assert mock_requests_put.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets/000-000-001"
+    assert mock_requests_put.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets/441560f5-4c2a-48eb-bc1a-489639ec3573"
 
