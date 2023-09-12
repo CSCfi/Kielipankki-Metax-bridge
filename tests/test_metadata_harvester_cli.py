@@ -13,11 +13,13 @@ def kielipankki_api_url():
     return "https://kielipankki.fi/md_api/que?metadataPrefix=info&verb=ListRecords"
 
 def _get_file_as_string(filename):
+    """Return given file as string."""
     with open(filename) as infile:
         return infile.read()
 
 @pytest.fixture
 def single_record_xml():
+    """Well-formed sample xml"""
     return _get_file_as_string("tests/test_data/kielipankki_record_sample.xml")
 
 @pytest.fixture
@@ -25,7 +27,6 @@ def single_record_response(kielipankki_api_url, single_record_xml):
     """
     A GET request that returns the XML data as a dictionary
     """
-    
     with requests_mock.Mocker() as mocker:
         mocker.get(kielipankki_api_url, text=single_record_xml)
         yield {"urn.fi/urn:nbn:fi:lb-2017021609": {"data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3", "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}], "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}], "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609", "title": {"en": "Silva Kiuru's Time Expressions Corpus", "fi": "Silva Kiurun ajanilmausaineisto"}, "description": {"en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta."},"modified": "2017-02-15T00:00:00.000000Z", "issued": "2017-02-15T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"}}}}
