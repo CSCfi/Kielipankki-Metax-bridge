@@ -1,9 +1,9 @@
+import os
 import pytest
 import requests
 import requests_mock
 from lxml import etree
 import metadata_harvester_cli
-import os
 
 @pytest.fixture
 def kielipankki_api_url():
@@ -60,15 +60,15 @@ def create_test_log_file():
     yield log_file
     os.remove(log_file)
 
-def test_get_last_harvest_date(create_test_log_file):
+def test_last_harvest_date(create_test_log_file):
     """Test getting the last start time of successful harvest date in the log file"""
-    last_harvest_date =metadata_harvester_cli.get_last_harvest_date(create_test_log_file)
-    assert last_harvest_date == "2023-09-08T14:45:58Z"
+    harvested_date =metadata_harvester_cli.last_harvest_date(create_test_log_file)
+    assert harvested_date == "2023-09-08T14:45:58Z"
 
 def test_get_last_harvest_no_file():
     """Test handling non-existing file."""
-    last_harvest_date =metadata_harvester_cli.get_last_harvest_date("harvester_test.log")
-    assert last_harvest_date == None
+    harvested_date =metadata_harvester_cli.last_harvest_date("harvester_test.log")
+    assert harvested_date == None
 
 @pytest.fixture
 def create_test_log_file_with_unsuccessful_harvests():
@@ -88,5 +88,5 @@ def create_test_log_file_with_unsuccessful_harvests():
 
 def test_get_last_harvest_with_unsuccessful_harvests(create_test_log_file_with_unsuccessful_harvests):
     """Test getting the last start time of successful harvest date in the log file"""
-    last_harvest_date =metadata_harvester_cli.get_last_harvest_date(create_test_log_file_with_unsuccessful_harvests)
-    assert last_harvest_date == "2023-09-08T14:34:16Z"
+    harvested_date =metadata_harvester_cli.last_harvest_date(create_test_log_file_with_unsuccessful_harvests)
+    assert harvested_date == "2023-09-08T14:34:16Z"

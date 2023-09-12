@@ -15,7 +15,7 @@ file_handler_harvester = logging.FileHandler("harvester.log")
 file_handler_harvester.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 logger_harvester.addHandler(file_handler_harvester)
 
-def get_last_harvest_date(filename):
+def last_harvest_date(filename):
     """This function gets the start time of last successful harvesting date from the log if found.
     :param filename: string value of a file name
     :return: date in last line
@@ -44,8 +44,8 @@ def retrieve_metadata_content(log_file, url="https://kielipankki.fi/md_api/que")
     """
     api = PMH_API(url)
     all_mapped_data_dict = {}
-    if get_last_harvest_date(log_file):
-        metadata_contents = api.fetch_changed_records(get_last_harvest_date(log_file))
+    if last_harvest_date(log_file):
+        metadata_contents = api.fetch_changed_records(last_harvest_date(log_file))
     else:
         metadata_contents = api.fetch_records()
 
@@ -77,10 +77,10 @@ def send_data_to_metax(all_mapped_data_dict):
 
 
 if __name__ == "__main__":
-    last_harvest_date = get_last_harvest_date("harvester.log")
+    harvested_date = last_harvest_date("harvester.log")
     logger_harvester.info("Started")
     send_data_to_metax(retrieve_metadata_content("harvester.log"))
     if last_harvest_date:
-        logger_harvester.info(f"Success, records harvested since {last_harvest_date}")
+        logger_harvester.info(f"Success, records harvested since {harvested_date}")
     else:
         logger_harvester.info("Success, all records harvested")        
