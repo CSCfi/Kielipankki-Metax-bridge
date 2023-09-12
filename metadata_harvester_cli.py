@@ -16,9 +16,9 @@ file_handler_harvester.setFormatter(logging.Formatter("%(asctime)s - %(levelname
 logger_harvester.addHandler(file_handler_harvester)
 
 def last_harvest_date(filename):
-    """This function gets the start time of last successful harvesting date from the log if found.
+    """This function gets the start time of last successful harvesting date and time from the log if found.
     :param filename: string value of a file name
-    :return: date in last line
+    :return: date and time
     """
     try:
         with open(filename, "r") as file:
@@ -36,7 +36,7 @@ def last_harvest_date(filename):
     except FileNotFoundError:
         return None
 
-def retrieve_metadata_content(log_file, url="https://kielipankki.fi/md_api/que"):
+def records_to_dict(log_file, url="https://kielipankki.fi/md_api/que"):
     """
     Fetches metadata records since the last logged harvest. If date is missing, all records are fetched.
     :param url: string value of a url
@@ -79,7 +79,7 @@ def send_data_to_metax(all_mapped_data_dict):
 if __name__ == "__main__":
     harvested_date = last_harvest_date("harvester.log")
     logger_harvester.info("Started")
-    send_data_to_metax(retrieve_metadata_content("harvester.log"))
+    send_data_to_metax(records_to_dict("harvester.log"))
     if last_harvest_date:
         logger_harvester.info(f"Success, records harvested since {harvested_date}")
     else:
