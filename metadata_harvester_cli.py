@@ -2,21 +2,24 @@
 Main script for running metadata harvesting and sending it to Metax.
 """
 
+import logging
+from datetime import datetime
+from lxml import etree
 from harvester.pmh_interface import PMH_API
 from harvester.metadata_parser import MSRecordParser
 import metax_api
-from lxml import etree
-import logging
-from datetime import datetime
 
 logger_harvester = logging.getLogger("harvester")
 logger_harvester.setLevel(logging.DEBUG)
 file_handler_harvester = logging.FileHandler("harvester.log")
-file_handler_harvester.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+file_handler_harvester.setFormatter(logging.Formatter(
+    "%(asctime)s - %(levelname)s - %(message)s"))
 logger_harvester.addHandler(file_handler_harvester)
 
+
 def last_harvest_date(filename):
-    """This function gets the start time of last successful harvesting date and time from the log if found.
+    """This function gets the start time of last successful harvesting date and time from the log
+    if found.
     :param filename: string value of a file name
     :return: date and time
     """
@@ -28,36 +31,41 @@ def last_harvest_date(filename):
                 if "success" in lines[i].lower():
                     if i > 0 and "started" in lines[i - 1].lower():
                         log_datetime_str = lines[i - 1].split(" - ")[0]
-                        log_datetime = datetime.strptime(log_datetime_str, "%Y-%m-%d %H:%M:%S,%f")
+                        log_datetime = datetime.strptime(
+                            log_datetime_str, "%Y-%m-%d %H:%M:%S,%f")
                         return log_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
-                    else:
-                        continue # Continue until a successful harvest has been found
         return None
     except FileNotFoundError:
         return None
 
+
 def records_to_dict(log_file, url="https://kielipankki.fi/md_api/que"):
     """
-    Fetches metadata records since the last logged harvest. If date is missing, all records are fetched.
+    Fetches metadata records since the last logged harvest. If date is missing, all records are
+    fetched.
     :param url: string value of a url
     :return: dictionary of mapped data
     """
     api = PMH_API(url)
     all_mapped_data_dict = {}
     if last_harvest_date(log_file):
-        metadata_contents = api.fetch_changed_records(last_harvest_date(log_file))
+        metadata_contents = api.fetch_changed_records(
+            last_harvest_date(log_file))
     else:
         metadata_contents = api.fetch_records()
 
     if metadata_contents:
         for metadata_content in metadata_contents:
-            lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
+            lxml_record = etree.fromstring(
+                etree.tostring(metadata_content.xml))
             metadata_record = MSRecordParser(lxml_record)
             if metadata_record.check_pid_exists():
                 if metadata_record.check_resourcetype_corpus():
-                    pid = metadata_record.get_identifier("//info:identificationInfo/info:identifier/text()")
+                    pid = metadata_record.get_identifier(
+                        "//info:identificationInfo/info:identifier/text()")
                     all_mapped_data_dict[pid] = metadata_record.to_dict()
-        return all_mapped_data_dict
+    return all_mapped_data_dict
+
 
 def send_data_to_metax(all_mapped_data_dict):
     """
@@ -80,7 +88,7 @@ if __name__ == "__main__":
     harvested_date = last_harvest_date("harvester.log")
     logger_harvester.info("Started")
     send_data_to_metax(records_to_dict("harvester.log"))
-    if last_harvest_date:
-        logger_harvester.info(f"Success, records harvested since {harvested_date}")
+    if harvested_date:
+        logger_harvester.info("Success, records harvested since %s", harvested_date)
     else:
-        logger_harvester.info("Success, all records harvested")        
+        logger_harvester.info("Success, all records harvested")
