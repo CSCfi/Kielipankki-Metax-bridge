@@ -13,7 +13,7 @@ logger_api.addHandler(file_handler_api)
 
 METAX_BASE_URL = "https://metax-service.fd-staging.csc.fi/v3"
 HEADERS = {'Content-Type': 'application/json'}
-KIELIPANKKI_CATALOG_ID = "urn:nbn:fi:att:data-catalog-kielipankki-v3"
+KIELIPANKKI_CATALOG_ID = "urn:nbn:fi:att:data-catalog-kielipankki-v4"
 TIMEOUT = 30
 
 def check_if_dataset_record_in_datacatalog(dataset_pid):
