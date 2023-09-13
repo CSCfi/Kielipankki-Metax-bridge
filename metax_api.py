@@ -50,7 +50,7 @@ def create_dataset(metadata_dict):
     response = requests.post(
         f"{METAX_BASE_URL}/datasets",
         json=metadata_dict,
-        HEADERS=HEADERS,
+        headers=HEADERS,
         timeout=TIMEOUT)
     try:
         response.raise_for_status()
@@ -68,7 +68,7 @@ def update_dataset(metax_dataset_id, metadata_dict):
     response = requests.put(
         f"{METAX_BASE_URL}/datasets/{metax_dataset_id}",
         json=metadata_dict,
-        HEADERS=HEADERS,
+        headers=HEADERS,
         timeout=TIMEOUT)
     try:
         response.raise_for_status()
