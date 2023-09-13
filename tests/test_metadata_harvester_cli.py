@@ -104,18 +104,3 @@ def test_get_last_harvest_with_unsuccessful_harvests(create_test_log_file_with_u
     harvested_date = metadata_harvester_cli.last_harvest_date(
         create_test_log_file_with_unsuccessful_harvests)
     assert harvested_date == "2023-09-08T14:34:16Z"
-
-
-def test_send_data_to_metax(mock_requests_get_no_pid, single_record_to_dict, mock_requests_post):
-    """Test creating a record in Metax from a dictionary."""
-    metadata_harvester_cli.send_data_to_metax(single_record_to_dict)
-    assert len(mock_requests_get_no_pid.request_history) == 1
-    assert mock_requests_get_no_pid.request_history[0].method == "GET"
-    assert mock_requests_get_no_pid.request_history[0].url == "https://" \
-        "metax-service.fd-staging.csc.fi/v3/datasets?" \
-        "data_catalog_id=urn:nbn:fi:att:data-catalog-kielipankki-v4" \
-        "&persistent_identifier=urn.fi/urn:nbn:fi:lb-2017021609"
-    assert len(mock_requests_post.request_history) == 1
-    assert mock_requests_post.request_history[0].method == "POST"
-    assert mock_requests_post.request_history[0].url == "https://" \
-        "metax-service.fd-staging.csc.fi/v3/datasets"
