@@ -56,6 +56,7 @@ def create_dataset(metadata_dict):
         response.raise_for_status()
     except HTTPError as error:
         logger_api.error("Error: %s. Failed to create dataset. Response text: %s ", error, response.text)
+        raise
     logger_api.info("Created dataset. Response text: %s", response.text)
     return json.loads(response.text)['id']
 
@@ -74,5 +75,6 @@ def update_dataset(metax_dataset_id, metadata_dict):
         response.raise_for_status()
     except HTTPError as error:
         logger_api.error("Error: %s. Failed to update catalog record %s", error, metax_dataset_id)
+        raise
     logger_api.info("Updated dataset. Response text: %s", response.text)
     return json.loads(response.text)['id']
