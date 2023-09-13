@@ -52,7 +52,7 @@ def test_to_dict(single_record):
     record = MSRecordParser(single_record)
     result = record.to_dict()
     expected_result = {
-    "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v3",
+    "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4",
     "language": [
         {
             "url": "http://lexvo.org/id/iso639-3/fin"
