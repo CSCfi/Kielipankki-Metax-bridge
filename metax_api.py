@@ -3,16 +3,15 @@ import logging
 import requests
 from requests import HTTPError
 
-# logging.basicConfig(filename='metax_api_requests.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger_api = logging.getLogger("metax_api_requests")
 logger_api.setLevel(logging.INFO)
 file_handler_api = logging.FileHandler("metax_api_requests.log")
-file_handler_api.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+file_handler_api.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 logger_api.addHandler(file_handler_api)
 
 
 METAX_BASE_URL = "https://metax-service.fd-staging.csc.fi/v3"
-HEADERS = {'Content-Type': 'application/json'}
+HEADERS = {"Content-Type": "application/json"}
 KIELIPANKKI_CATALOG_ID = "urn:nbn:fi:att:data-catalog-kielipankki-v4"
 TIMEOUT = 30
 
@@ -58,7 +57,7 @@ def create_dataset(metadata_dict):
         logger_api.error("Error: %s. Failed to create dataset. Response text: %s ", error, response.text)
         raise
     logger_api.info("Created dataset. Response text: %s", response.text)
-    return json.loads(response.text)['id']
+    return json.loads(response.text)["id"]
 
 def update_dataset(metax_dataset_id, metadata_dict):
     """
@@ -77,4 +76,4 @@ def update_dataset(metax_dataset_id, metadata_dict):
         logger_api.error("Error: %s. Failed to update catalog record %s", error, metax_dataset_id)
         raise
     logger_api.info("Updated dataset. Response text: %s", response.text)
-    return json.loads(response.text)['id']
+    return json.loads(response.text)["id"]
