@@ -30,7 +30,7 @@ def metax_base_url():
 @pytest.fixture
 def kielipankki_datacatalog_id():
     """Data catalog identifier for Kielipankki data."""
-    return "urn:nbn:fi:att:data-catalog-kielipankki-v3"
+    return "urn:nbn:fi:att:data-catalog-kielipankki-v4"
 
 @pytest.fixture
 def mock_get_response_json():
@@ -47,7 +47,7 @@ def mock_requests_get_record(
     mock_get_response_json, metax_base_url, kielipankki_datacatalog_id, dataset_pid):
     """A mock GET request to Metax."""
     with requests_mock.Mocker() as mocker:
-        mocker.get(f"{metax_base_url}/datasets?data_catalog_id={kielipankki_datacatalog_id}&persistent_identifier={dataset_pid}", text=mock_get_response_json)
+        mocker.get(f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&persistent_identifier={dataset_pid}", text=mock_get_response_json)
         yield mocker
 
 @pytest.fixture
