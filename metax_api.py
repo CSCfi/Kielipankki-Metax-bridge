@@ -23,7 +23,7 @@ def check_if_dataset_record_in_datacatalog(dataset_pid):
     :return: boolean
     """
     response = requests.get(
-        f"{METAX_BASE_URL}/datasets?data_catalog_id={KIELIPANKKI_CATALOG_ID}&persistent_identifier={dataset_pid}",
+        f"{METAX_BASE_URL}/datasets?data_catalog__id={KIELIPANKKI_CATALOG_ID}&persistent_identifier={dataset_pid}",
         headers=HEADERS,
         timeout=TIMEOUT)
     return response.json()["count"] == 1 #Once Metax implements unique PIDs this check can be removed
@@ -35,7 +35,7 @@ def get_dataset_record_metax_id(dataset_pid):
     :return: the dataset identifier in Metax
     """
     response = requests.get(
-        f"{METAX_BASE_URL}/datasets?data_catalog_id={KIELIPANKKI_CATALOG_ID}&persistent_identifier={dataset_pid}",
+        f"{METAX_BASE_URL}/datasets?data_catalog__id={KIELIPANKKI_CATALOG_ID}&persistent_identifier={dataset_pid}",
         headers=HEADERS,
         timeout=TIMEOUT)
     if response.json()["count"] == 1: #Once Metax implements unique PIDs this check can be removed
