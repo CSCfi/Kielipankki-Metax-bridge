@@ -43,11 +43,13 @@ def dataset_pid():
     return "urn.fi/urn:nbn:fi:lb-2016101210"
 
 @pytest.fixture
-def mock_requests_get_record(
-    mock_get_response_json, metax_base_url, kielipankki_datacatalog_id, dataset_pid):
+def mock_requests_get_record(mock_get_response_json, metax_base_url,
+                             kielipankki_datacatalog_id, dataset_pid):
     """A mock GET request to Metax."""
     with requests_mock.Mocker() as mocker:
-        mocker.get(f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&persistent_identifier={dataset_pid}", text=mock_get_response_json)
+        mocker.get(
+            f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&" \
+            f"persistent_identifier={dataset_pid}", text=mock_get_response_json)
         yield mocker
 
 @pytest.fixture
@@ -59,7 +61,8 @@ def mock_post_put_response_json():
 def mock_requests_post(mock_post_put_response_json, metax_base_url):
     """Mock a post request to Metax."""
     with requests_mock.Mocker() as mocker:
-        mocker.post(f"{metax_base_url}/datasets", text=mock_post_put_response_json)
+        mocker.post(f"{metax_base_url}/datasets",
+                    text=mock_post_put_response_json)
         yield mocker
 
 @pytest.fixture
@@ -68,6 +71,7 @@ def mock_requests_put(mock_post_put_response_json, metax_base_url):
     metax_dataset_id = "441560f5-4c2a-48eb-bc1a-489639ec3573"
     with requests_mock.Mocker() as mocker:
         mocker.put(
-            f"{metax_base_url}/datasets/{metax_dataset_id}", text=mock_post_put_response_json)
+            f"{metax_base_url}/datasets/{metax_dataset_id}",
+            text=mock_post_put_response_json)
         yield mocker
         
