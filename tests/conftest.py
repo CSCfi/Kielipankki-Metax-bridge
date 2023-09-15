@@ -17,6 +17,19 @@ def prevent_online_http_requests(monkeypatch):
         "urllib3.connectionpool.HTTPConnectionPool.urlopen", urlopen_error
     )
 
+
+@pytest.fixture
+def shared_request_mocker():
+    """
+    Shared requests_mock.Mocker for all request mocking in tests
+
+    When mocking multiple requests for one test, all mocking must be done using one
+    Mocker object.
+    """
+    with requests_mock.Mocker() as m:
+        yield m
+
+
 def _get_file_as_string(filename):
     """Return given file as string."""
     with open(filename) as infile:
@@ -43,14 +56,21 @@ def dataset_pid():
     return "urn.fi/urn:nbn:fi:lb-2016101210"
 
 @pytest.fixture
-def mock_requests_get_record(mock_get_response_json, metax_base_url,
-                             kielipankki_datacatalog_id, dataset_pid):
+def mock_requests_get_record(
+    shared_request_mocker,
+    mock_get_response_json,
+    metax_base_url,
+    kielipankki_datacatalog_id,
+    dataset_pid,
+):
     """A mock GET request to Metax."""
-    with requests_mock.Mocker() as mocker:
-        mocker.get(
-            f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&" \
-            f"persistent_identifier={dataset_pid}", text=mock_get_response_json)
-        yield mocker
+    shared_request_mocker.get(
+        f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&"
+        f"persistent_identifier={dataset_pid}",
+        text=mock_get_response_json,
+    )
+    return shared_request_mocker
+
 
 @pytest.fixture
 def mock_post_put_response_json():
@@ -58,20 +78,28 @@ def mock_post_put_response_json():
     return _get_file_as_string("tests/test_data/put_post_response.json")
 
 @pytest.fixture
-def mock_requests_post(mock_post_put_response_json, metax_base_url):
+def mock_requests_post(
+    shared_request_mocker, mock_post_put_response_json, metax_base_url
+):
     """Mock a post request to Metax."""
-    with requests_mock.Mocker() as mocker:
-        mocker.post(f"{metax_base_url}/datasets",
-                    text=mock_post_put_response_json)
-        yield mocker
+    shared_request_mocker.post(
+        f"{metax_base_url}/datasets", text=mock_post_put_response_json
+    )
+    return shared_request_mocker
+
 
 @pytest.fixture
-def mock_requests_put(mock_post_put_response_json, metax_base_url):
+def metax_dataset_id():
+    return "441560f5-4c2a-48eb-bc1a-489639ec3573"
+
+
+@pytest.fixture
+def mock_requests_put(
+    shared_request_mocker, mock_post_put_response_json, metax_base_url, metax_dataset_id
+):
     """Mock a PUT request of a dataset to Metax."""
-    metax_dataset_id = "441560f5-4c2a-48eb-bc1a-489639ec3573"
-    with requests_mock.Mocker() as mocker:
-        mocker.put(
-            f"{metax_base_url}/datasets/{metax_dataset_id}",
-            text=mock_post_put_response_json)
-        yield mocker
-        
+    shared_request_mocker.put(
+        f"{metax_base_url}/datasets/{metax_dataset_id}",
+        text=mock_post_put_response_json,
+    )
+    return shared_request_mocker
