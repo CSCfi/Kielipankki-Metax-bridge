@@ -1,3 +1,5 @@
+import re
+
 import pytest
 import requests_mock
 
@@ -101,5 +103,33 @@ def mock_requests_put(
     shared_request_mocker.put(
         f"{metax_base_url}/datasets/{metax_dataset_id}",
         text=mock_post_put_response_json,
+    )
+    return shared_request_mocker
+
+
+@pytest.fixture
+def mock_metashare_record_not_found_in_datacatalog(
+    shared_request_mocker, metax_base_url
+):
+    """
+    Mock Metashare dataset requests to always report that PID does not
+    exist.
+    """
+    dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
+    shared_request_mocker.get(dataset_request_matcher, json={"count": 0})
+    return shared_request_mocker
+
+
+@pytest.fixture
+def mock_metashare_record_found_in_datacatalog(
+    shared_request_mocker, metax_base_url, single_record_to_dict, metax_dataset_id
+):
+    """
+    Mock Metashare dataset requests to always report that PID exists.
+    """
+    dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
+    shared_request_mocker.get(
+        dataset_request_matcher,
+        json={"count": 1, "results": [{"id": metax_dataset_id}]},
     )
     return shared_request_mocker
