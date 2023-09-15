@@ -104,3 +104,73 @@ def test_get_last_harvest_with_unsuccessful_harvests(create_test_log_file_with_u
     harvested_date = metadata_harvester_cli.last_harvest_date(
         create_test_log_file_with_unsuccessful_harvests)
     assert harvested_date == "2023-09-08T14:34:16Z"
+
+
+def test_send_data_to_metax_single_new_record(
+    single_record_to_dict,
+    mock_metashare_record_not_found_in_datacatalog,
+    mock_requests_post,
+):
+    """
+    Check that creating one new metadata record works
+
+    This means that Metax is queried for existence of the PID (not found) and then a new
+    record is POSTed. We also check that the posted data corresponds to the record dict
+    passed to the function.
+    """
+    metadata_harvester_cli.send_data_to_metax(single_record_to_dict)
+
+    assert mock_requests_post.call_count == 2
+
+    expected_post_request = mock_requests_post.request_history[1]
+
+    assert expected_post_request.method == "POST"
+    assert expected_post_request.json() == list(single_record_to_dict.values())[0]
+
+
+def test_send_data_to_metax_single_pre_existing_record(
+    single_record_to_dict,
+    mock_metashare_record_found_in_datacatalog,
+    mock_requests_put,
+):
+    """
+    Check that creating one new metadata record works
+
+    This means that Metax is queried for existence of the PID (found), fetches the Metax
+    ID for the record, and then a new record is PUT. We also check that the posted
+    data corresponds to the record dict passed to the function.
+    """
+    metadata_harvester_cli.send_data_to_metax(single_record_to_dict)
+
+    assert mock_requests_put.call_count == 3
+
+    expected_put_request = mock_requests_put.request_history[2]
+
+    assert expected_put_request.method == "PUT"
+    assert expected_put_request.json() == list(single_record_to_dict.values())[0]
+
+
+def test_send_data_to_metax_multiple_records(
+    mock_metashare_record_not_found_in_datacatalog,
+    mock_requests_post,
+):
+    """
+    Check that send_data_to_metax can handle more than one record at once.
+
+    This test only covers totally new records, as other tests are assumed to ensure that
+    updating old records works. Thus we expect to see one GET (check whether the record
+    already exists in Metax) and one POST (add the new record) for each given item in
+    the metadata records. This test also checks that teach POST has unique data.
+    """
+    record_dict = {
+        "pid1": {"meta": "data", "id": "pid1"},
+        "pid2": {"infor": "mation", "id": "pid2"},
+    }
+    metadata_harvester_cli.send_data_to_metax(record_dict)
+
+    assert mock_requests_post.call_count == 4
+
+    post_requests = mock_requests_post.request_history[1::2]
+    for post_request, record in zip(post_requests, record_dict.values()):
+        assert post_request.method == "POST"
+        assert post_request.json()["id"] == record["id"]
