@@ -1,6 +1,5 @@
 import os
 import pytest
-import requests_mock
 import metadata_harvester_cli
 
 
@@ -25,13 +24,12 @@ def single_record_xml():
 
 
 @pytest.fixture
-def single_record_to_dict(kielipankki_api_url, single_record_xml):
+def single_record_to_dict(shared_request_mocker, kielipankki_api_url, single_record_xml):
     """
     A GET request that returns the XML data as a dictionary
     """
-    with requests_mock.Mocker() as mocker:
-        mocker.get(kielipankki_api_url, text=single_record_xml)
-        yield {"urn.fi/urn:nbn:fi:lb-2017021609": {"data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4", "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}], "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}], "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609", "title": {"en": "Silva Kiuru's Time Expressions Corpus", "fi": "Silva Kiurun ajanilmausaineisto"}, "description": {"en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta."}, "modified": "2017-02-15T00:00:00.000000Z", "issued": "2017-02-15T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"}}}}
+    shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
+    yield {"urn.fi/urn:nbn:fi:lb-2017021609": {"data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4", "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}], "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}], "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609", "title": {"en": "Silva Kiuru's Time Expressions Corpus", "fi": "Silva Kiurun ajanilmausaineisto"}, "description": {"en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta."}, "modified": "2017-02-15T00:00:00.000000Z", "issued": "2017-02-15T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"}}}}
 
 
 def test_records_to_dict_with_last_harvest_date(single_record_to_dict, create_test_log_file):
@@ -99,7 +97,8 @@ def create_test_log_file_with_unsuccessful_harvests():
     os.remove(log_file)
 
 
-def test_get_last_harvest_with_unsuccessful_harvests(create_test_log_file_with_unsuccessful_harvests):
+def test_get_last_harvest_with_unsuccessful_harvest(
+    create_test_log_file_with_unsuccessful_harvests):
     """Test getting the last start time of successful harvest date in the log file"""
     harvested_date = metadata_harvester_cli.last_harvest_date(
         create_test_log_file_with_unsuccessful_harvests)
@@ -175,6 +174,7 @@ def test_send_data_to_metax_multiple_records(
         assert post_request.method == "POST"
         assert post_request.json()["id"] == record["id"]
 
+
 def test_send_data_to_metax_no_records_post(shared_request_mocker, metax_base_url):
     """
     Check that send_data_to_metax does not POST if en empty dictinary is passed to it.
@@ -185,6 +185,7 @@ def test_send_data_to_metax_no_records_post(shared_request_mocker, metax_base_ur
 
     assert shared_request_mocker.call_count == 0
 
+
 def test_send_data_to_metax_no_records_put(shared_request_mocker, metax_base_url):
     """
     Check that send_data_to_metax does not PUT if an empty dictionary is passed to it.
@@ -194,3 +195,54 @@ def test_send_data_to_metax_no_records_put(shared_request_mocker, metax_base_url
     shared_request_mocker.put(metax_base_url)
 
     assert shared_request_mocker.call_count == 0
+
+
+def test_main_all_data_harvested(
+    mock_requests_post,
+    mock_metashare_record_not_found_in_datacatalog,
+    single_record_to_dict):
+    """
+    Check that when no successful harvest date is available, all data is fetched from Kielipankki
+    and then sent to Metax.
+    """
+    metadata_harvester_cli.main()
+
+    assert mock_requests_post.call_count == 3
+    assert mock_requests_post.request_history[2].method == "POST"
+    assert mock_requests_post.request_history[2].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+
+
+def test_main_new_records_harvested_since_date(
+    mock_requests_post,
+    mock_metashare_record_not_found_in_datacatalog,
+    single_record_to_dict,
+    create_test_log_file):
+    """
+    Check that, when there is a successful harvest logged, new and updated records since that 
+    date are fetched from Kielipankki and then sent to Metax. 
+    
+    This test covers POSTing new records.
+    """
+    metadata_harvester_cli.main()
+
+    assert mock_requests_post.call_count == 3
+    assert mock_requests_post.request_history[2].method == "POST"
+    assert mock_requests_post.request_history[2].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+
+
+def test_main_changed_records_harvested_since_date(
+    mock_requests_put,
+    mock_metashare_record_found_in_datacatalog,
+    single_record_to_dict,
+    create_test_log_file):
+    """
+    Check that, when there is a successful harvest logged previously, new and updated records
+    are fetched from Kielipankki and then sent to Metax.
+
+    This test covers only changed records that are PUT to Metax.
+    """
+    metadata_harvester_cli.main()
+
+    assert mock_requests_put.call_count == 4
+    assert mock_requests_put.request_history[3].method == "PUT"
+    assert mock_requests_put.request_history[3].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
