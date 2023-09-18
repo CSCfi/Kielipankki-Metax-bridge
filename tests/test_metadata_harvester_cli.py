@@ -39,7 +39,7 @@ def test_records_to_dict_with_last_harvest_date(single_record_to_dict, create_te
     Test that fetching records based on a date in log file succeeds (only updated records are
     fetched).
     """
-    result = metadata_harvester_cli.records_to_dict(create_test_log_file)
+    result = metadata_harvester_cli.records_to_dict("2023-09-08T14:34:16Z")
     assert single_record_to_dict == result
 
 
@@ -47,7 +47,7 @@ def test_records_to_dict_without_last_harvest_date(single_record_to_dict):
     """
     Test that fetching records without a log file succeeds (all records are fetched).
     """
-    result = metadata_harvester_cli.records_to_dict("harvester_test.log")
+    result = metadata_harvester_cli.records_to_dict(None)
     assert single_record_to_dict == result
 
 
