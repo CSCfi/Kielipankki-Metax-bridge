@@ -39,7 +39,7 @@ def last_harvest_date(filename):
         return None
 
 
-def records_to_dict(log_file, url="https://kielipankki.fi/md_api/que"):
+def records_to_dict(date_time, url="https://kielipankki.fi/md_api/que"):
     """
     Fetches metadata records since the last logged harvest. If date is missing, all records are
     fetched.
@@ -48,9 +48,8 @@ def records_to_dict(log_file, url="https://kielipankki.fi/md_api/que"):
     """
     api = PMH_API(url)
     all_mapped_data_dict = {}
-    if last_harvest_date(log_file):
-        metadata_contents = api.fetch_changed_records(
-            last_harvest_date(log_file))
+    if date_time:
+        metadata_contents = api.fetch_changed_records(date_time)
     else:
         metadata_contents = api.fetch_records()
 
@@ -83,12 +82,18 @@ def send_data_to_metax(all_mapped_data_dict):
     else:
         pass
 
-
-if __name__ == "__main__":
+def main():
+    """
+    Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
+    """
     harvested_date = last_harvest_date("harvester.log")
     logger_harvester.info("Started")
-    send_data_to_metax(records_to_dict("harvester.log"))
+    send_data_to_metax(records_to_dict(harvested_date))
     if harvested_date:
         logger_harvester.info("Success, records harvested since %s", harvested_date)
     else:
         logger_harvester.info("Success, all records harvested")
+
+
+if __name__ == "__main__":
+    main()
