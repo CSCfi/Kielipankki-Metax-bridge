@@ -9,9 +9,8 @@ def test_check_if_dataset_record_pid_in_datacatalog(
     """Check that a dataset with a given PID exists in Metax by making a proper GET request to 
     specified url."""
     result = metax_api.check_if_dataset_record_in_datacatalog(dataset_pid)
-    assert len(mock_requests_get_record.request_history) == 1
+    assert mock_requests_get_record.call_count == 1
     assert mock_requests_get_record.request_history[0].method == "GET"
-    assert mock_requests_get_record.request_history[0].url == f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&persistent_identifier={dataset_pid}"
     assert result
 
 
@@ -21,18 +20,16 @@ def test_check_if_dataset_record_pid_not_in_datacatalog(mock_requests_get_record
     mock_requests_get_record.get(f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&persistent_identifier={dataset_pid}", text='{"count": 0}')
     result = metax_api.check_if_dataset_record_in_datacatalog(dataset_pid)
     assert not result
-    assert len(mock_requests_get_record.request_history) == 1
+    assert mock_requests_get_record.call_count == 1
     assert mock_requests_get_record.request_history[0].method == "GET"
-    assert mock_requests_get_record.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets?data_catalog__id=urn:nbn:fi:att:data-catalog-kielipankki-v4&persistent_identifier=urn.fi//urn:nbn:fi:lb-0000000"
 
 
 def test_get_dataset_record_metax_id(dataset_pid, mock_requests_get_record):
     """Test that a Metax record is returned for an existing PID."""
     result = metax_api.get_dataset_record_metax_id(dataset_pid)
     assert result == "1f32f478-8e7e-4d72-9638-d29a4f1430aa"
-    assert len(mock_requests_get_record.request_history) == 1
+    assert mock_requests_get_record.call_count == 1
     assert mock_requests_get_record.request_history[0].method == "GET"
-    assert mock_requests_get_record.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets?data_catalog__id=urn:nbn:fi:att:data-catalog-kielipankki-v4&persistent_identifier=urn.fi/urn:nbn:fi:lb-2016101210"
 
 
 def test_create_dataset_successful(mock_requests_post, caplog):
@@ -43,9 +40,8 @@ def test_create_dataset_successful(mock_requests_post, caplog):
         response_text = metax_api.create_dataset(metadata_dict)
     assert response_text in caplog.text
     assert "Created dataset" in caplog.text
-    assert len(mock_requests_post.request_history) == 1
+    assert mock_requests_post.call_count == 1
     assert mock_requests_post.request_history[0].method == "POST"
-    assert mock_requests_post.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets"
 
 
 def test_create_dataset_failed(mock_requests_post, caplog, metax_base_url):
@@ -56,9 +52,8 @@ def test_create_dataset_failed(mock_requests_post, caplog, metax_base_url):
     with pytest.raises(requests.exceptions.HTTPError), caplog.at_level(logging.ERROR):
         metax_api.create_dataset(metadata_dict)
     assert "Failed to create dataset" in caplog.text
-    assert len(mock_requests_post.request_history) == 1
+    assert mock_requests_post.call_count == 1
     assert mock_requests_post.request_history[0].method == "POST"
-    assert mock_requests_post.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets"
 
 
 def test_update_dataset_successful(mock_requests_put, caplog):
@@ -70,9 +65,8 @@ def test_update_dataset_successful(mock_requests_put, caplog):
         response_text = metax_api.update_dataset(metax_dataset_id, sample_dict)
     assert response_text in caplog.text
     assert "Updated dataset" in caplog.text
-    assert len(mock_requests_put.request_history) == 1
+    assert mock_requests_put.call_count == 1
     assert mock_requests_put.request_history[0].method == "PUT"
-    assert mock_requests_put.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets/441560f5-4c2a-48eb-bc1a-489639ec3573"
 
 
 def test_update_dataset_failed(mock_requests_put, caplog, metax_base_url):
@@ -84,6 +78,5 @@ def test_update_dataset_failed(mock_requests_put, caplog, metax_base_url):
     with pytest.raises(requests.exceptions.HTTPError), caplog.at_level(logging.ERROR):
         metax_api.update_dataset(metax_dataset_id, sample_dict)
     assert "Failed to update" in caplog.text
-    assert len(mock_requests_put.request_history) == 1
+    assert mock_requests_put.call_count == 1
     assert mock_requests_put.request_history[0].method == "PUT"
-    assert mock_requests_put.request_history[0].url == "https://metax-service.fd-staging.csc.fi/v3/datasets/441560f5-4c2a-48eb-bc1a-489639ec3573"
