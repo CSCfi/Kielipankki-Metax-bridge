@@ -1,4 +1,5 @@
 import os
+import logging
 import pytest
 import metadata_harvester_cli
 
@@ -214,54 +215,64 @@ def test_send_data_to_metax_no_records_put(shared_request_mocker, metax_base_url
     assert shared_request_mocker.call_count == 0
 
 
-
-
 def test_main_all_data_harvested(
     mock_requests_post,
     mock_metashare_record_not_found_in_datacatalog,
-    single_record_to_dict):
+    single_record_to_dict,
+    create_test_log_file_with_unsuccessful_harvest,
+    caplog):
     """
-    Check that when no successful harvest date is available, all data is fetched from Kielipankki
-    and then sent to Metax.
+    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. The test also covers the situation where none of the record PID matches the ones in Metax so the data is POSTed to Metax.
     """
-    metadata_harvester_cli.main()
+    with caplog.at_level(logging.INFO):
+        metadata_harvester_cli.main(create_test_log_file_with_unsuccessful_harvest)
 
     assert mock_requests_post.call_count == 3
     assert mock_requests_post.request_history[2].method == "POST"
     assert mock_requests_post.request_history[2].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+
+    assert "Success, all records harvested" in caplog.text
 
 
 def test_main_new_records_harvested_since_date(
     mock_requests_post,
     mock_metashare_record_not_found_in_datacatalog,
     single_record_to_dict,
-    create_test_log_file):
+    create_test_log_file,
+    caplog):
     """
-    Check that, when there is a successful harvest logged, new and updated records since that 
-    date are fetched from Kielipankki and then sent to Metax. 
-    
+    Check that, when there is a successful harvest logged, new and updated records since that
+    date are fetched from Kielipankki and then sent to Metax.
+
     This test covers POSTing new records.
     """
-    metadata_harvester_cli.main()
+    with caplog.at_level(logging.INFO):
+        metadata_harvester_cli.main(create_test_log_file)
 
     assert mock_requests_post.call_count == 3
     assert mock_requests_post.request_history[2].method == "POST"
     assert mock_requests_post.request_history[2].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+
+    assert "Success, records harvested since" in caplog.text
 
 
 def test_main_changed_records_harvested_since_date(
     mock_requests_put,
     mock_metashare_record_found_in_datacatalog,
     single_record_to_dict,
-    create_test_log_file):
+    create_test_log_file,
+    caplog):
     """
     Check that, when there is a successful harvest logged previously, new and updated records
     are fetched from Kielipankki and then sent to Metax.
 
     This test covers only changed records that are PUT to Metax.
     """
-    metadata_harvester_cli.main()
+    with caplog.at_level(logging.INFO):
+        metadata_harvester_cli.main(create_test_log_file)
 
     assert mock_requests_put.call_count == 4
     assert mock_requests_put.request_history[3].method == "PUT"
     assert mock_requests_put.request_history[3].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+
+    assert "Success, records harvested since" in caplog.text
