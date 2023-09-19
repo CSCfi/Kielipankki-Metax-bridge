@@ -37,15 +37,19 @@ def test_records_to_dict_with_last_harvest_date(single_record_to_dict, create_te
     Test that fetching records based on a date in log file succeeds (only updated records are
     fetched).
     """
-    result = metadata_harvester_cli.records_to_dict("2023-09-08T14:34:16Z")
+    date = metadata_harvester_cli.last_harvest_date(create_test_log_file)
+    result = metadata_harvester_cli.records_to_dict(date)
+    assert date == "2023-09-08T14:45:58Z"
     assert single_record_to_dict == result
 
 
-def test_records_to_dict_without_last_harvest_date(single_record_to_dict):
+def test_records_to_dict_without_last_harvest_date(single_record_to_dict, create_test_log_file_with_unsuccessful_harvest):
     """
     Test that fetching records without a log file succeeds (all records are fetched).
     """
-    result = metadata_harvester_cli.records_to_dict(None)
+    date = metadata_harvester_cli.last_harvest_date(create_test_log_file_with_unsuccessful_harvest)
+    result = metadata_harvester_cli.records_to_dict(date)
+    assert date is None
     assert single_record_to_dict == result
 
 
@@ -59,6 +63,19 @@ def create_test_log_file():
         "2023-09-08 14:44:58,690 - INFO - Started\n"
         "2023-09-08 14:45:58,690 - INFO - Started\n"
         "2023-09-08 14:45:58,956 - INFO - Success, records harvested since 2023-09-08T14:34:16Z\n"
+    ]
+    with open(log_file, "w") as file:
+        file.writelines(log_file_data)
+    yield log_file
+    os.remove(log_file)
+
+
+@pytest.fixture
+def create_test_log_file_with_unsuccessful_harvest():
+    """Create a temporary log file with no successfull harvests and clean up afterwards."""
+    log_file = "harvester_test.log"
+    log_file_data = [
+        "2023-09-08 14:34:16,887 - INFO - Started\n"
     ]
     with open(log_file, "w") as file:
         file.writelines(log_file_data)
@@ -81,7 +98,7 @@ def test_get_last_harvest_no_file():
 
 
 @pytest.fixture
-def create_test_log_file_with_unsuccessful_harvests():
+def create_test_log_file_with_one_successful_harvest():
     """Create a temporary log file for testing and clean up afterwards."""
     log_file = "harvester_test.log"
     log_file_data = [
@@ -98,10 +115,10 @@ def create_test_log_file_with_unsuccessful_harvests():
 
 
 def test_get_last_harvest_with_unsuccessful_harvest(
-    create_test_log_file_with_unsuccessful_harvests):
+    create_test_log_file_with_one_successful_harvest):
     """Test getting the last start time of successful harvest date in the log file"""
     harvested_date = metadata_harvester_cli.last_harvest_date(
-        create_test_log_file_with_unsuccessful_harvests)
+        create_test_log_file_with_one_successful_harvest)
     assert harvested_date == "2023-09-08T14:34:16Z"
 
 
@@ -195,6 +212,8 @@ def test_send_data_to_metax_no_records_put(shared_request_mocker, metax_base_url
     shared_request_mocker.put(metax_base_url)
 
     assert shared_request_mocker.call_count == 0
+
+
 
 
 def test_main_all_data_harvested(
