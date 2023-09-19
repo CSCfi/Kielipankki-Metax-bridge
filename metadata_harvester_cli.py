@@ -82,11 +82,12 @@ def send_data_to_metax(all_mapped_data_dict):
     else:
         pass
 
-def main():
+def main(log_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
+    :param log_file: log file where harves dates are logged
     """
-    harvested_date = last_harvest_date("harvester.log")
+    harvested_date = last_harvest_date(log_file)
     logger_harvester.info("Started")
     send_data_to_metax(records_to_dict(harvested_date))
     if harvested_date:
@@ -96,4 +97,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main("harvester.log")
