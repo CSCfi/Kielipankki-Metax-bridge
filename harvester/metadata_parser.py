@@ -50,8 +50,9 @@ class MSRecordParser:
         """
         Retrieves the urn of the given XPath's url.
         """
-        identifier_url = self._get_text_xpath(xpath)
-        netloc, path = urlparse(identifier_url).netloc, urlparse(identifier_url).path
+        identifier_url = self._get_text_xpath(xpath).strip()
+        netloc, path = urlparse(
+            identifier_url).netloc, urlparse(identifier_url).path
         return netloc + path
 
     def _get_date(self, xpath):
@@ -131,12 +132,14 @@ class MSRecordParser:
                 for doc_info_elem in doc_info_elements:
                     title_element = doc_info_elem.xpath(
                         "info:title[@lang='en']/text()",
-                        namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+                        namespaces={
+                            "info": "http://www.ilsp.gr/META-XMLSchema"},
                     )
                     if title_element and "license" in title_element[0].lower():
                         license_urn = doc_info_elem.xpath(
                             "info:url/text()",
-                            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+                            namespaces={
+                                "info": "http://www.ilsp.gr/META-XMLSchema"},
                         )
                         if license_urn:
                             return license_urn[0]
@@ -233,7 +236,7 @@ class MSRecordParser:
         """
         return {
             # data_catalog, language and field_of_science is dummy data until they are implemented later on
-            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4",
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
             "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
             "field_of_science": [
                 {
