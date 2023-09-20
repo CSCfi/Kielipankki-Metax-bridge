@@ -48,7 +48,7 @@ def metax_base_url():
 @pytest.fixture
 def kielipankki_datacatalog_id():
     """Data catalog identifier for Kielipankki data."""
-    return "urn:nbn:fi:att:data-catalog-kielipankki-v4"
+    return "urn:nbn:fi:att:data-catalog-kielipankki"
 
 
 @pytest.fixture

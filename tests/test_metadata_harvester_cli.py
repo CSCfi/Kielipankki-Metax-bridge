@@ -33,7 +33,7 @@ def single_record_to_dict(
     shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
     yield {
         "urn.fi/urn:nbn:fi:lb-2017021609": {
-            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4",
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
             "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
             "field_of_science": [
                 {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
@@ -119,13 +119,15 @@ def create_test_log_file_with_unsuccessful_harvest(tmp_path):
 
 def test_last_harvest_date(create_test_log_file):
     """Test getting the last start time of successful harvest date in the log file"""
-    harvested_date = metadata_harvester_cli.last_harvest_date(create_test_log_file)
+    harvested_date = metadata_harvester_cli.last_harvest_date(
+        create_test_log_file)
     assert harvested_date == "2023-09-08T14:45:58Z"
 
 
 def test_get_last_harvest_no_file():
     """Test handling non-existing file."""
-    harvested_date = metadata_harvester_cli.last_harvest_date("harvester_test.log")
+    harvested_date = metadata_harvester_cli.last_harvest_date(
+        "harvester_test.log")
     assert harvested_date is None
 
 
@@ -175,7 +177,8 @@ def test_send_data_to_metax_single_new_record(
     expected_post_request = mock_requests_post.request_history[1]
 
     assert expected_post_request.method == "POST"
-    assert expected_post_request.json() == list(single_record_to_dict.values())[0]
+    assert expected_post_request.json() == list(
+        single_record_to_dict.values())[0]
 
 
 def test_send_data_to_metax_single_pre_existing_record(
@@ -197,7 +200,8 @@ def test_send_data_to_metax_single_pre_existing_record(
     expected_put_request = mock_requests_put.request_history[2]
 
     assert expected_put_request.method == "PUT"
-    assert expected_put_request.json() == list(single_record_to_dict.values())[0]
+    assert expected_put_request.json() == list(
+        single_record_to_dict.values())[0]
 
 
 def test_send_data_to_metax_multiple_records(
@@ -259,7 +263,8 @@ def test_main_all_data_harvested(
     Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. The test also covers the situation where none of the record PID matches the ones in Metax so the data is POSTed to Metax.
     """
     with caplog.at_level(logging.INFO):
-        metadata_harvester_cli.main(create_test_log_file_with_unsuccessful_harvest)
+        metadata_harvester_cli.main(
+            create_test_log_file_with_unsuccessful_harvest)
 
     assert mock_requests_post.call_count == 3
     assert mock_requests_post.request_history[2].method == "POST"
