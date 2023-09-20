@@ -3,6 +3,7 @@ import re
 import pytest
 import requests_mock
 
+
 @pytest.fixture(autouse=True)
 def prevent_online_http_requests(monkeypatch):
     """
@@ -37,25 +38,30 @@ def _get_file_as_string(filename):
     with open(filename) as infile:
         return infile.read()
 
+
 @pytest.fixture
 def metax_base_url():
     """Metax API"""
     return "https://metax-service.fd-staging.csc.fi/v3"
+
 
 @pytest.fixture
 def kielipankki_datacatalog_id():
     """Data catalog identifier for Kielipankki data."""
     return "urn:nbn:fi:att:data-catalog-kielipankki-v4"
 
+
 @pytest.fixture
 def mock_get_response_json():
     """A mocked response for a single dataset from Metax"""
     return _get_file_as_string("tests/test_data/metax_single_record_response.json")
 
+
 @pytest.fixture
 def dataset_pid():
     """Return PID of sample record."""
     return "urn.fi/urn:nbn:fi:lb-2016101210"
+
 
 @pytest.fixture
 def mock_requests_get_record(
@@ -78,6 +84,7 @@ def mock_requests_get_record(
 def mock_post_put_response_json():
     """Mock a response from Metax when making PUT or POST request."""
     return _get_file_as_string("tests/test_data/put_post_response.json")
+
 
 @pytest.fixture
 def mock_requests_post(

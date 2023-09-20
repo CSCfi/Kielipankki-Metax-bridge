@@ -22,7 +22,8 @@ class PMH_API:
         Fetch all non-deleted records from the API.
         """
         metadata_records = self.sickle.ListRecords(
-            metadataPrefix="info", ignore_deleted=True)
+            metadataPrefix="info", ignore_deleted=True
+        )
         for metadata_record in metadata_records:
             yield metadata_record
 
@@ -33,7 +34,8 @@ class PMH_API:
         """
         try:
             metadata_records = self.sickle.ListRecords(
-                **{"metadataPrefix": "info", "from": datetime, "ignore_deleted": True})
+                **{"metadataPrefix": "info", "from": datetime, "ignore_deleted": True}
+            )
             for metadata_record in metadata_records:
                 yield metadata_record
         except NoRecordsMatch:

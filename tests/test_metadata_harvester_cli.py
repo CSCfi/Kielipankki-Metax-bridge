@@ -24,15 +24,48 @@ def single_record_xml():
 
 
 @pytest.fixture
-def single_record_to_dict(shared_request_mocker, kielipankki_api_url, single_record_xml):
+def single_record_to_dict(
+    shared_request_mocker, kielipankki_api_url, single_record_xml
+):
     """
     A GET request that returns the XML data as a dictionary
     """
     shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
-    yield {"urn.fi/urn:nbn:fi:lb-2017021609": {"data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4", "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}], "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}], "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609", "title": {"en": "Silva Kiuru's Time Expressions Corpus", "fi": "Silva Kiurun ajanilmausaineisto"}, "description": {"en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.", "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta."}, "modified": "2017-02-15T00:00:00.000000Z", "issued": "2017-02-15T00:00:00.000000Z", "access_rights": {"license": [{"url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"}], "access_type": {"url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"}}}}
+    yield {
+        "urn.fi/urn:nbn:fi:lb-2017021609": {
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4",
+            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+            "field_of_science": [
+                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
+            ],
+            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+            "title": {
+                "en": "Silva Kiuru's Time Expressions Corpus",
+                "fi": "Silva Kiurun ajanilmausaineisto",
+            },
+            "description": {
+                "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
+                "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
+            },
+            "modified": "2017-02-15T00:00:00.000000Z",
+            "issued": "2017-02-15T00:00:00.000000Z",
+            "access_rights": {
+                "license": [
+                    {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
+                    }
+                ],
+                "access_type": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+                },
+            },
+        }
+    }
 
 
-def test_records_to_dict_with_last_harvest_date(single_record_to_dict, create_test_log_file):
+def test_records_to_dict_with_last_harvest_date(
+    single_record_to_dict, create_test_log_file
+):
     """
     Test that fetching records based on a date in log file succeeds (only updated records are
     fetched).
@@ -43,11 +76,15 @@ def test_records_to_dict_with_last_harvest_date(single_record_to_dict, create_te
     assert single_record_to_dict == result
 
 
-def test_records_to_dict_without_last_harvest_date(single_record_to_dict, create_test_log_file_with_unsuccessful_harvest):
+def test_records_to_dict_without_last_harvest_date(
+    single_record_to_dict, create_test_log_file_with_unsuccessful_harvest
+):
     """
     Test that fetching records without a log file succeeds (all records are fetched).
     """
-    date = metadata_harvester_cli.last_harvest_date(create_test_log_file_with_unsuccessful_harvest)
+    date = metadata_harvester_cli.last_harvest_date(
+        create_test_log_file_with_unsuccessful_harvest
+    )
     result = metadata_harvester_cli.records_to_dict(date)
     assert date is None
     assert single_record_to_dict == result
@@ -66,32 +103,29 @@ def create_test_log_file(tmp_path):
     ]
     log_file = tmp_path / "harvester_test.log"
     with open(log_file, "w") as file:
-            file.writelines(log_file_data)
+        file.writelines(log_file_data)
     return log_file
 
 
 @pytest.fixture
 def create_test_log_file_with_unsuccessful_harvest(tmp_path):
     """Create a temporary log file with no successfull harvests and clean up afterwards."""
-    log_file_data = [
-        "2023-09-08 14:34:16,887 - INFO - Started\n"
-    ]
+    log_file_data = ["2023-09-08 14:34:16,887 - INFO - Started\n"]
     log_file = tmp_path / "harvester_test.log"
     with open(log_file, "w") as file:
-            file.writelines(log_file_data)
+        file.writelines(log_file_data)
     return log_file
+
 
 def test_last_harvest_date(create_test_log_file):
     """Test getting the last start time of successful harvest date in the log file"""
-    harvested_date = metadata_harvester_cli.last_harvest_date(
-        create_test_log_file)
+    harvested_date = metadata_harvester_cli.last_harvest_date(create_test_log_file)
     assert harvested_date == "2023-09-08T14:45:58Z"
 
 
 def test_get_last_harvest_no_file():
     """Test handling non-existing file."""
-    harvested_date = metadata_harvester_cli.last_harvest_date(
-        "harvester_test.log")
+    harvested_date = metadata_harvester_cli.last_harvest_date("harvester_test.log")
     assert harvested_date is None
 
 
@@ -108,14 +142,17 @@ def create_test_log_file_with_one_successful_harvest(tmp_path):
     ]
     log_file = tmp_path / "harvester_test.log"
     with open(log_file, "w") as file:
-            file.writelines(log_file_data)
+        file.writelines(log_file_data)
     return log_file
 
+
 def test_get_last_harvest_with_unsuccessful_harvest(
-    create_test_log_file_with_one_successful_harvest):
+    create_test_log_file_with_one_successful_harvest,
+):
     """Test getting the last start time of successful harvest date in the log file"""
     harvested_date = metadata_harvester_cli.last_harvest_date(
-        create_test_log_file_with_one_successful_harvest)
+        create_test_log_file_with_one_successful_harvest
+    )
     assert harvested_date == "2023-09-08T14:34:16Z"
 
 
@@ -216,7 +253,8 @@ def test_main_all_data_harvested(
     mock_metashare_record_not_found_in_datacatalog,
     single_record_to_dict,
     create_test_log_file_with_unsuccessful_harvest,
-    caplog):
+    caplog,
+):
     """
     Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. The test also covers the situation where none of the record PID matches the ones in Metax so the data is POSTed to Metax.
     """
@@ -225,7 +263,10 @@ def test_main_all_data_harvested(
 
     assert mock_requests_post.call_count == 3
     assert mock_requests_post.request_history[2].method == "POST"
-    assert mock_requests_post.request_history[2].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+    assert (
+        mock_requests_post.request_history[2].json()["persistent_identifier"]
+        == list(single_record_to_dict.values())[0]["persistent_identifier"]
+    )
 
     assert "Success, all records harvested" in caplog.text
 
@@ -235,7 +276,8 @@ def test_main_new_records_harvested_since_date(
     mock_metashare_record_not_found_in_datacatalog,
     single_record_to_dict,
     create_test_log_file,
-    caplog):
+    caplog,
+):
     """
     Check that, when there is a successful harvest logged, new and updated records since that
     date are fetched from Kielipankki and then sent to Metax.
@@ -247,7 +289,10 @@ def test_main_new_records_harvested_since_date(
 
     assert mock_requests_post.call_count == 3
     assert mock_requests_post.request_history[2].method == "POST"
-    assert mock_requests_post.request_history[2].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+    assert (
+        mock_requests_post.request_history[2].json()["persistent_identifier"]
+        == list(single_record_to_dict.values())[0]["persistent_identifier"]
+    )
 
     assert "Success, records harvested since" in caplog.text
 
@@ -257,7 +302,8 @@ def test_main_changed_records_harvested_since_date(
     mock_metashare_record_found_in_datacatalog,
     single_record_to_dict,
     create_test_log_file,
-    caplog):
+    caplog,
+):
     """
     Check that, when there is a successful harvest logged previously, new and updated records
     are fetched from Kielipankki and then sent to Metax.
@@ -269,7 +315,9 @@ def test_main_changed_records_harvested_since_date(
 
     assert mock_requests_put.call_count == 4
     assert mock_requests_put.request_history[3].method == "PUT"
-    assert mock_requests_put.request_history[3].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
+    assert (
+        mock_requests_put.request_history[3].json()["persistent_identifier"]
+        == list(single_record_to_dict.values())[0]["persistent_identifier"]
+    )
 
     assert "Success, records harvested since" in caplog.text
-
