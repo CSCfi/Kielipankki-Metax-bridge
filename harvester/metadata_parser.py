@@ -156,7 +156,7 @@ class MSRecordParser:
             "CLARIN_RES": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinRES-1.0",
             "other": "http://uri.suomi.fi/codelist/fairdata/license/code/other",
             "underNegotiation": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation",
-            "proprietary": "http://uri.suomi.fi/codelist/fairdata/license/code/other-closed", #??
+            "proprietary": "http://uri.suomi.fi/codelist/fairdata/license/code/other-closed",
             "CC-BY": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-1.0",
             "CC-BY-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-ND-4.0",
             "CC-BY-NC": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-2.0",
