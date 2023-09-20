@@ -1,6 +1,6 @@
 import json
 from lxml import etree
-from urllib.parse import urlparse 
+from urllib.parse import urlparse
 from datetime import datetime
 
 
@@ -19,13 +19,16 @@ class MSRecordParser:
 
         :param xpath: The XPath expression to select the desired trees.
         :return: A dictionary of content for different language versions.
-            """
+        """
         result = {}
 
         languages = ["en", "fi", "und"]
 
         for lang in languages:
-            query = self.xml.xpath(f"{xpath}[@lang='{lang}']/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+            query = self.xml.xpath(
+                f"{xpath}[@lang='{lang}']/text()",
+                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            )
             if query:
                 result[lang] = query[0].strip()
 
@@ -39,7 +42,9 @@ class MSRecordParser:
         :return: The text content of the selected element.
 
         """
-        return self.xml.xpath(xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
+        return self.xml.xpath(
+            xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"}
+        )[0]
 
     def get_identifier(self, xpath):
         """
@@ -48,11 +53,11 @@ class MSRecordParser:
         identifier_url = self._get_text_xpath(xpath)
         netloc, path = urlparse(identifier_url).netloc, urlparse(identifier_url).path
         return netloc + path
-    
+
     def _get_date(self, xpath):
         """
         Retrieves the date of the given XPath and returns it  appropriate date-time format.
-       
+
         """
         date_str = self._get_text_xpath(xpath)
         if date_str:
@@ -66,15 +71,21 @@ class MSRecordParser:
         """
         Only records with PIDs are relevant.
         """
-        urn = self.xml.xpath("//info:identificationInfo/info:identifier", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+        urn = self.xml.xpath(
+            "//info:identificationInfo/info:identifier",
+            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        )
 
         return bool(urn)
-    
+
     def _get_list_of_licenses(self):
         """
         Retrieves all licenseInfo elements.
         """
-        license_elements_list = self.xml.xpath("//info:distributionInfo/info:licenceInfo", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+        license_elements_list = self.xml.xpath(
+            "//info:distributionInfo/info:licenceInfo",
+            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        )
         if license_elements_list:
             return license_elements_list
 
@@ -90,24 +101,43 @@ class MSRecordParser:
         """
         Retrieves the license url.
         """
-        doc_elements = self.xml.xpath("//info:resourceDocumentationInfo/info:documentation", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+        doc_elements = self.xml.xpath(
+            "//info:resourceDocumentationInfo/info:documentation",
+            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        )
 
         for doc_element in doc_elements:
-            doc_unstruct_element = doc_element.xpath("info:documentUnstructured/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
-            doc_info_elements = doc_element.xpath("info:documentInfo", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+            doc_unstruct_element = doc_element.xpath(
+                "info:documentUnstructured/text()",
+                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            )
+            doc_info_elements = doc_element.xpath(
+                "info:documentInfo",
+                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            )
 
             if doc_unstruct_element:
                 doc_unstruct_text = doc_unstruct_element[0].lower()
                 if "license:" in doc_unstruct_text or "license" in doc_unstruct_text:
-                    license_urn = [word for word in doc_unstruct_text.split() if word.startswith("http://urn.fi")]
+                    license_urn = [
+                        word
+                        for word in doc_unstruct_text.split()
+                        if word.startswith("http://urn.fi")
+                    ]
                     if license_urn:
                         return license_urn[0]
-            
+
             elif doc_info_elements:
                 for doc_info_elem in doc_info_elements:
-                    title_element = doc_info_elem.xpath("info:title[@lang='en']/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+                    title_element = doc_info_elem.xpath(
+                        "info:title[@lang='en']/text()",
+                        namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+                    )
                     if title_element and "license" in title_element[0].lower():
-                        license_urn = doc_info_elem.xpath("info:url/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})
+                        license_urn = doc_info_elem.xpath(
+                            "info:url/text()",
+                            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+                        )
                         if license_urn:
                             return license_urn[0]
 
@@ -119,14 +149,17 @@ class MSRecordParser:
         """
         license_dict = {}
 
-        license_text = license_element.xpath("info:licence/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
+        license_text = license_element.xpath(
+            "info:licence/text()",
+            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        )[0]
 
         if license_text in mapped_licenses_dict:
             license_dict["url"] = mapped_licenses_dict[license_text]
             custom_url = self._get_license_url_from_documentation()
             if custom_url:
                 license_dict["custom_url"] = custom_url
-                
+
         return license_dict
 
     def _get_access_type(self):
@@ -135,13 +168,20 @@ class MSRecordParser:
         """
         access_type_dict = {}
 
-        availability = self.xml.xpath("//info:distributionInfo/info:availability/text()", namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"})[0]
+        availability = self.xml.xpath(
+            "//info:distributionInfo/info:availability/text()",
+            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        )[0]
         if availability == "available-unrestrictedUse":
-            access_type_dict["url"] = "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+            access_type_dict[
+                "url"
+            ] = "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
 
-        else:            
-            access_type_dict["url"] = "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
-        
+        else:
+            access_type_dict[
+                "url"
+            ] = "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
+
         return access_type_dict
 
     def _map_access_rights(self):
@@ -164,7 +204,7 @@ class MSRecordParser:
             "CC-BY-NC-ND": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-ND-4.0",
             "CC-BY-NC-SA": "http://uri.suomi.fi/codelist/fairdata/license/code/CC-BY-NC-SA-4.0",
             "CC-ZERO": "http://uri.suomi.fi/codelist/fairdata/license/code/CC0-1.0",
-            "ApacheLicence_2.0": "http://uri.suomi.fi/codelist/fairdata/license/code/Apache-2.0"
+            "ApacheLicence_2.0": "http://uri.suomi.fi/codelist/fairdata/license/code/Apache-2.0",
         }
 
         license_elements_list = self._get_list_of_licenses()
@@ -172,8 +212,10 @@ class MSRecordParser:
 
         if license_elements_list:
             for license_element in license_elements_list:
-                license = self._get_license_information(license_element, license_mappings)
-                license_list.append(license)   
+                license = self._get_license_information(
+                    license_element, license_mappings
+                )
+                license_list.append(license)
         else:
             license = {"url": license_mappings["other"]}
             license_list.append(license)
@@ -185,29 +227,29 @@ class MSRecordParser:
 
         return license_package
 
-
     def to_dict(self):
         """
         Converts text and dictionaries to Metax compliant dictionary.
         """
         return {
-            #data_catalog, language and field_of_science is dummy data until they are implemented later on
+            # data_catalog, language and field_of_science is dummy data until they are implemented later on
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki-v4",
-            "language": [
-                {
-                    "url": "http://lexvo.org/id/iso639-3/fin"
-                }
-            ],
+            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
             "field_of_science": [
                 {
                     "url": "http://www.yso.fi/onto/okm-tieteenala/ta112",
                 }
             ],
-            "persistent_identifier": self.get_identifier("//info:identificationInfo/info:identifier/text()"),
+            "persistent_identifier": self.get_identifier(
+                "//info:identificationInfo/info:identifier/text()"
+            ),
             "title": self._get_language_contents("//info:resourceName"),
             "description": self._get_language_contents("//info:description"),
-            "modified": self._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()"),
-            "issued": self._get_date("//info:metadataInfo/info:metadataCreationDate/text()"),
+            "modified": self._get_date(
+                "//info:metadataInfo/info:metadataLastDateUpdated/text()"
+            ),
+            "issued": self._get_date(
+                "//info:metadataInfo/info:metadataCreationDate/text()"
+            ),
             "access_rights": self._map_access_rights(),
-
         }

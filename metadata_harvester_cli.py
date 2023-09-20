@@ -12,8 +12,9 @@ import metax_api
 logger_harvester = logging.getLogger("harvester")
 logger_harvester.setLevel(logging.DEBUG)
 file_handler_harvester = logging.FileHandler("harvester.log")
-file_handler_harvester.setFormatter(logging.Formatter(
-    "%(asctime)s - %(levelname)s - %(message)s"))
+file_handler_harvester.setFormatter(
+    logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+)
 logger_harvester.addHandler(file_handler_harvester)
 
 
@@ -32,7 +33,8 @@ def last_harvest_date(filename):
                     if i > 0 and "started" in lines[i - 1].lower():
                         log_datetime_str = lines[i - 1].split(" - ")[0]
                         log_datetime = datetime.strptime(
-                            log_datetime_str, "%Y-%m-%d %H:%M:%S,%f")
+                            log_datetime_str, "%Y-%m-%d %H:%M:%S,%f"
+                        )
                         return log_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
         return None
     except FileNotFoundError:
@@ -55,13 +57,13 @@ def records_to_dict(date_time, url="https://kielipankki.fi/md_api/que"):
 
     if metadata_contents:
         for metadata_content in metadata_contents:
-            lxml_record = etree.fromstring(
-                etree.tostring(metadata_content.xml))
+            lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
             metadata_record = MSRecordParser(lxml_record)
             if metadata_record.check_pid_exists():
                 if metadata_record.check_resourcetype_corpus():
                     pid = metadata_record.get_identifier(
-                        "//info:identificationInfo/info:identifier/text()")
+                        "//info:identificationInfo/info:identifier/text()"
+                    )
                     all_mapped_data_dict[pid] = metadata_record.to_dict()
     return all_mapped_data_dict
 
@@ -81,6 +83,7 @@ def send_data_to_metax(all_mapped_data_dict):
                 metax_api.create_dataset(dataset_dict)
     else:
         pass
+
 
 def main(log_file):
     """
