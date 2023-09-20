@@ -1,4 +1,3 @@
-import os
 import logging
 import pytest
 import metadata_harvester_cli
@@ -55,9 +54,9 @@ def test_records_to_dict_without_last_harvest_date(single_record_to_dict, create
 
 
 @pytest.fixture
-def create_test_log_file():
+def create_test_log_file(tmp_path):
     """Create a temporary log file for testing and clean up afterwards."""
-    log_file = "harvester_test.log"
+    # log_file = "harvester_test.log"
     log_file_data = [
         "2023-09-08 14:34:16,887 - INFO - Started\n"
         "2023-09-08 14:42:58,652 - INFO - Success, all records harvested\n"
@@ -65,24 +64,22 @@ def create_test_log_file():
         "2023-09-08 14:45:58,690 - INFO - Started\n"
         "2023-09-08 14:45:58,956 - INFO - Success, records harvested since 2023-09-08T14:34:16Z\n"
     ]
+    log_file = tmp_path / "harvester_test.log"
     with open(log_file, "w") as file:
-        file.writelines(log_file_data)
-    yield log_file
-    os.remove(log_file)
+            file.writelines(log_file_data)
+    return log_file
 
 
 @pytest.fixture
-def create_test_log_file_with_unsuccessful_harvest():
+def create_test_log_file_with_unsuccessful_harvest(tmp_path):
     """Create a temporary log file with no successfull harvests and clean up afterwards."""
-    log_file = "harvester_test.log"
     log_file_data = [
         "2023-09-08 14:34:16,887 - INFO - Started\n"
     ]
+    log_file = tmp_path / "harvester_test.log"
     with open(log_file, "w") as file:
-        file.writelines(log_file_data)
-    yield log_file
-    os.remove(log_file)
-
+            file.writelines(log_file_data)
+    return log_file
 
 def test_last_harvest_date(create_test_log_file):
     """Test getting the last start time of successful harvest date in the log file"""
@@ -99,9 +96,9 @@ def test_get_last_harvest_no_file():
 
 
 @pytest.fixture
-def create_test_log_file_with_one_successful_harvest():
+def create_test_log_file_with_one_successful_harvest(tmp_path):
     """Create a temporary log file for testing and clean up afterwards."""
-    log_file = "harvester_test.log"
+    # log_file = "harvester_test.log"
     log_file_data = [
         "2023-09-08 14:34:16,887 - INFO - Started\n"
         "2023-09-08 14:42:58,652 - INFO - Success, all records harvested\n"
@@ -109,11 +106,10 @@ def create_test_log_file_with_one_successful_harvest():
         "2023-09-08 14:45:58,690 - INFO - Started\n"
         "2023-09-08 14:45:58,956 - INFO - Started\n"
     ]
+    log_file = tmp_path / "harvester_test.log"
     with open(log_file, "w") as file:
-        file.writelines(log_file_data)
-    yield log_file
-    os.remove(log_file)
-
+            file.writelines(log_file_data)
+    return log_file
 
 def test_get_last_harvest_with_unsuccessful_harvest(
     create_test_log_file_with_one_successful_harvest):
@@ -276,3 +272,4 @@ def test_main_changed_records_harvested_since_date(
     assert mock_requests_put.request_history[3].json()["persistent_identifier"] == list(single_record_to_dict.values())[0]["persistent_identifier"]
 
     assert "Success, records harvested since" in caplog.text
+
