@@ -103,7 +103,7 @@ def delete_dataset(metax_dataset_id):
     """
     Deletes a dataset record in Metax.
     :param metax_dataset_id: the dataset identifier in Metax
-    :return:
+    :return: True
     """
     response = requests.delete(
         f"{METAX_BASE_URL}/datasets/{metax_dataset_id}",
@@ -119,3 +119,21 @@ def delete_dataset(metax_dataset_id):
         raise
     logger_api.info("Deleted dataset record %s", metax_dataset_id)
     return True
+
+
+def datacatalog_dataset_record_pids():
+    """
+    Fetches all dataset records from catalog.
+    :return: list of dataset record PIDs
+    """
+    url = f"{METAX_BASE_URL}/datasets?data_catalog__id={KIELIPANKKI_CATALOG_ID}&limit=100"
+    results = []
+    while url:
+        response = requests.get(
+            url,
+            headers=HEADERS,
+            timeout=TIMEOUT)
+        data = response.json()
+        results.extend(data["results"])
+        url = data["next"]
+    return [value["persistent_identifier"] for value in results]
