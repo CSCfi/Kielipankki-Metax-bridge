@@ -14,7 +14,7 @@ logger_api.addHandler(file_handler_api)
 
 METAX_BASE_URL = "https://metax-service.fd-staging.csc.fi/v3"
 HEADERS = {"Content-Type": "application/json"}
-KIELIPANKKI_CATALOG_ID = "urn:nbn:fi:att:data-catalog-kielipankki-v4"
+KIELIPANKKI_CATALOG_ID = "urn:nbn:fi:att:data-catalog-kielipankki"
 TIMEOUT = 30
 
 
@@ -97,3 +97,25 @@ def update_dataset(metax_dataset_id, metadata_dict):
         raise
     logger_api.info("Updated dataset. Response text: %s", response.text)
     return json.loads(response.text)["id"]
+
+
+def delete_dataset(metax_dataset_id):
+    """
+    Deletes a dataset record in Metax.
+    :param metax_dataset_id: the dataset identifier in Metax
+    :return:
+    """
+    response = requests.delete(
+        f"{METAX_BASE_URL}/datasets/{metax_dataset_id}",
+        headers=HEADERS,
+        timeout=TIMEOUT,
+    )
+    try:
+        response.raise_for_status()
+    except HTTPError as error:
+        logger_api.error(
+            "Error: %s. Failed to delete catalog record %s", error, metax_dataset_id
+        )
+        raise
+    logger_api.info("Deleted dataset record %s", metax_dataset_id)
+    return True
