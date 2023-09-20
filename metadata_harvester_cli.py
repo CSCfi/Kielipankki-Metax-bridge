@@ -57,7 +57,8 @@ def records_to_dict(date_time, url="https://kielipankki.fi/md_api/que"):
 
     if metadata_contents:
         for metadata_content in metadata_contents:
-            lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
+            lxml_record = etree.fromstring(
+                etree.tostring(metadata_content.xml))
             metadata_record = MSRecordParser(lxml_record)
             if metadata_record.check_pid_exists():
                 if metadata_record.check_resourcetype_corpus():
@@ -85,6 +86,29 @@ def send_data_to_metax(all_mapped_data_dict):
         pass
 
 
+def sync_deleted_records(url="https://kielipankki.fi/md_api/que"):
+    """
+    Compares record PIDs fetched from Kielipankki and Metax. Any records not existing in Kielipankki (anymore) are deleted from Metax as well.
+    """
+    api = PMH_API(url)
+    kielipankki_pids = []
+    metadata_contents = api.fetch_records()
+    for metadata_content in metadata_contents:
+        lxml_record = etree.fromstring(
+            etree.tostring(metadata_content.xml))
+        metadata_record = MSRecordParser(lxml_record)
+        if metadata_record.check_pid_exists():
+            if metadata_record.check_resourcetype_corpus():
+                pid = metadata_record.get_identifier(
+                    "//info:identificationInfo/info:identifier/text()")
+                kielipankki_pids.append(pid)
+
+    metax_pids = set(metax_api.datacatalog_dataset_record_pids())
+    pids_not_in_kielipankki = metax_pids.difference(set(kielipankki_pids))
+    for pid in pids_not_in_kielipankki:
+        metax_api.delete_dataset(metax_api.get_dataset_record_metax_id(pid))
+
+
 def main(log_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
@@ -94,9 +118,12 @@ def main(log_file):
     logger_harvester.info("Started")
     send_data_to_metax(records_to_dict(harvested_date))
     if harvested_date:
-        logger_harvester.info("Success, records harvested since %s", harvested_date)
+        logger_harvester.info(
+            "Success, records harvested since %s", harvested_date)
     else:
         logger_harvester.info("Success, all records harvested")
+
+    sync_deleted_records()
 
 
 if __name__ == "__main__":
