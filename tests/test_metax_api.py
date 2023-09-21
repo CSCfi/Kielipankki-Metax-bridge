@@ -153,3 +153,13 @@ def test_update_dataset_failed(mock_requests_put, caplog, metax_base_url):
     assert "Failed to update" in caplog.text
     assert mock_requests_put.call_count == 1
     assert mock_requests_put.request_history[0].method == "PUT"
+
+
+def test_delete_record(mock_delete_record, metax_dataset_id):
+    """
+    Test that a DELETE request of a dataset is successful (204 response).
+    """
+    response = metax_api.delete_dataset(metax_dataset_id)
+    assert mock_delete_record.call_count == 1
+    assert mock_delete_record.request_history[0].method == "DELETE"
+    assert response.status_code == 204

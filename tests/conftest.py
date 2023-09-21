@@ -140,3 +140,15 @@ def mock_metashare_record_found_in_datacatalog(
         json={"count": 1, "results": [{"id": metax_dataset_id}]},
     )
     return shared_request_mocker
+
+
+@pytest.fixture
+def mock_delete_record(shared_request_mocker, metax_dataset_id, metax_base_url):
+    """
+    Mock a DELETE request to Metax.
+    """
+    shared_request_mocker.delete(
+        f"{metax_base_url}/datasets/{metax_dataset_id}",
+        status_code=204,
+    )
+    return shared_request_mocker
