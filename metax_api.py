@@ -118,7 +118,7 @@ def delete_dataset(metax_dataset_id):
         )
         raise
     logger_api.info("Deleted dataset record %s", metax_dataset_id)
-    return True
+    return response
 
 
 def datacatalog_dataset_record_pids():
