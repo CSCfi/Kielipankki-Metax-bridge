@@ -163,3 +163,13 @@ def test_delete_record(mock_delete_record, metax_dataset_id):
     assert mock_delete_record.call_count == 1
     assert mock_delete_record.request_history[0].method == "DELETE"
     assert response.status_code == 204
+
+
+def test_datacatalog_dataset_record_pids(pids_list_in_datacatalog):
+    """
+    Test that querying a datacatalog in metax returns a list of all  its PIDs.
+    """
+    result = metax_api.datacatalog_dataset_record_pids()
+    assert pids_list_in_datacatalog.request_history[0].method == "GET"
+    assert pids_list_in_datacatalog.call_count == 1
+    assert result == ["pid1", "pid2"]

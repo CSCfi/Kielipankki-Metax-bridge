@@ -152,3 +152,24 @@ def mock_delete_record(shared_request_mocker, metax_dataset_id, metax_base_url):
         status_code=204,
     )
     return shared_request_mocker
+
+
+@pytest.fixture
+def pids_list_in_datacatalog(
+    shared_request_mocker, metax_base_url, kielipankki_datacatalog_id
+):
+    """
+    Mock a GET request to fetch all PIDs in a datacatalog.
+    """
+    pid_data = {
+        "results": [
+            {"persistent_identifier": "pid1"},
+            {"persistent_identifier": "pid2"},
+        ],
+        "next": None,
+    }
+    shared_request_mocker.get(
+        f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&limit=100",
+        json=pid_data,
+    )
+    return shared_request_mocker
