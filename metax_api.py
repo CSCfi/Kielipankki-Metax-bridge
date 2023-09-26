@@ -98,26 +98,13 @@ class MetaxAPI:
         endpoint = f"datasets/{record_id}"
         return self._make_request("PUT", endpoint, data=data)
 
-    def delete_dataset(metax_dataset_id):
+    def delete_record(self, record_id):
         """
-        Deletes a dataset record in Metax.
-        :param metax_dataset_id: the dataset identifier in Metax
-        :return: True
+        Delete a dataset record from Metax.
+        :param record_id: the record UUID in Metax
         """
-        response = requests.delete(
-            f"{METAX_BASE_URL}/datasets/{metax_dataset_id}",
-            headers=HEADERS,
-            timeout=TIMEOUT,
-        )
-        try:
-            response.raise_for_status()
-        except HTTPError as error:
-            logger_api.error(
-                "Error: %s. Failed to delete catalog record %s", error, metax_dataset_id
-            )
-            raise
-        logger_api.info("Deleted dataset record %s", metax_dataset_id)
-        return response
+        endpoint = f"datasets/{record_id}"
+        return self._make_request("DELETE", endpoint)
 
     def datacatalog_dataset_record_pids():
         """
