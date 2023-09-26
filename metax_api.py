@@ -67,36 +67,18 @@ class MetaxAPI:
             )
             return None
 
-    def check_if_dataset_record_in_datacatalog(dataset_pid):
+    def record_id(self, pid):
         """
-        Check if a dataset with given PID exists in given data catalog.
-        :param dataset_pid: the persistent identifier of the resource
-        :return: boolean
+        Get the UUID of a dataset record from Metax if such record exists.
+        :param dataset pid: the persistent identifier of the record
+        :return: the record identifier in Metax or None
         """
-        response = requests.get(
-            f"{METAX_BASE_URL}/datasets?data_catalog__id={KIELIPANKKI_CATALOG_ID}&persistent_identifier={dataset_pid}",
-            headers=HEADERS,
-            timeout=TIMEOUT,
-        )
-        return (
-            response.json()["count"] == 1
-        )  # Once Metax implements unique PIDs this check can be removed
-
-    def get_dataset_record_metax_id(dataset_pid):
-        """
-        Get the UUID of a dataset from Metax.
-        :param dataset pid: the persistent identifier of the resource
-        :return: the dataset identifier in Metax
-        """
-        response = requests.get(
-            f"{METAX_BASE_URL}/datasets?data_catalog__id={KIELIPANKKI_CATALOG_ID}&persistent_identifier={dataset_pid}",
-            headers=HEADERS,
-            timeout=TIMEOUT,
-        )
-        if (
-            response.json()["count"] == 1
-        ):  # Once Metax implements unique PIDs this check can be removed
-            return response.json()["results"][0]["id"]
+        params = {"data_catalog__id": self.CATALOG_ID,
+                  "persistent_identifier": pid}
+        endpoint = "datasets"
+        result = self._make_request("GET", endpoint, params)
+        assert result is not None
+        return result["results"][0]["id"] if result["count"] == 1 else None
 
     def create_dataset(metadata_dict):
         """
