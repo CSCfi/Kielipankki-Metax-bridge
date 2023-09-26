@@ -1,13 +1,13 @@
 import json
 import logging
 import requests
-from requests import HTTPError
 
 
 class MetaxAPI:
     """
     An API client for interacting with the Metax V3 service.
     """
+
     METAX_BASE_URL = "https://metax-service.fd-staging.csc.fi/v3"
     HEADERS = {"Content-Type": "application/json"}
     CATALOG_ID = "urn:nbn:fi:att:data-catalog-kielipankki"
