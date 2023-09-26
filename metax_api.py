@@ -106,18 +106,16 @@ class MetaxAPI:
         endpoint = f"datasets/{record_id}"
         return self._make_request("DELETE", endpoint)
 
-    def datacatalog_dataset_record_pids():
+    def datacatalog_record_pids(self):
         """
-        Fetches all dataset records from catalog.
+        Fetches all dataset record PIDs from catalog.
         :return: list of dataset record PIDs
         """
-        url = f"{METAX_BASE_URL}/datasets?data_catalog__id={KIELIPANKKI_CATALOG_ID}&limit=100"
+        url = f"{self.METAX_BASE_URL}/datasets?data_catalog__id={self.CATALOG_ID}&limit=100"
         results = []
         while url:
             response = requests.get(
-                url,
-                headers=HEADERS,
-                timeout=TIMEOUT)
+                url, headers=self.HEADERS, timeout=self.TIMEOUT)
             data = response.json()
             results.extend(data["results"])
             url = data["next"]
