@@ -102,7 +102,7 @@ def mock_requests_post(
 ):
     """Mock a post request to Metax."""
     shared_request_mocker.post(
-        f"{metax_base_url}/datasets", text=mock_post_put_response_json
+        f"{metax_base_url}/datasets", json=mock_post_put_response_json
     )
     return shared_request_mocker
 
