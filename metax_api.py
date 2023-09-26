@@ -89,27 +89,14 @@ class MetaxAPI:
         endpoint = "datasets"
         return self._make_request("POST", endpoint, data=data)
 
-    def update_dataset(metax_dataset_id, metadata_dict):
+    def update_record(self, record_id, data):
         """
         Update existing dataset record in Metax.
         :param metadata_dict: dictionary of metadata mappings
-        :return: the dataset identifier in Metax
+        :return: response JSON
         """
-        response = requests.put(
-            f"{METAX_BASE_URL}/datasets/{metax_dataset_id}",
-            json=metadata_dict,
-            headers=HEADERS,
-            timeout=TIMEOUT,
-        )
-        try:
-            response.raise_for_status()
-        except HTTPError as error:
-            logger_api.error(
-                "Error: %s. Failed to update catalog record %s", error, metax_dataset_id
-            )
-            raise
-        logger_api.info("Updated dataset. Response text: %s", response.text)
-        return json.loads(response.text)["id"]
+        endpoint = f"datasets/{record_id}"
+        return self._make_request("PUT", endpoint, data=data)
 
     def delete_dataset(metax_dataset_id):
         """
