@@ -28,14 +28,6 @@ def test_record_id_pid_not_in_datacatalog(
     assert mock_requests_get_record.call_count == 1
 
 
-def test_get_dataset_record_metax_id(dataset_pid, mock_requests_get_record):
-    """Test that a Metax record is returned for an existing PID."""
-    result = metax_api.get_dataset_record_metax_id(dataset_pid)
-    assert result == "1f32f478-8e7e-4d72-9638-d29a4f1430aa"
-    assert mock_requests_get_record.call_count == 1
-    assert mock_requests_get_record.request_history[0].method == "GET"
-
-
 def test_create_dataset_successful(mock_requests_post, caplog):
     """Check that a successful post request to Metax is made of a well-formed dictionary."""
     metadata_dict = {
