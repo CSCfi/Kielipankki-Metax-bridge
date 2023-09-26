@@ -5,30 +5,28 @@ import requests_mock
 import metax_api
 
 
-def test_check_if_dataset_record_pid_in_datacatalog(
-    dataset_pid, mock_requests_get_record, metax_base_url, kielipankki_datacatalog_id
+def test_record_id_pid_in_datacatalog(
+    dataset_pid, mock_requests_get_record, metax_api, mock_get_response_json
 ):
     """Check that a dataset with a given PID exists in Metax by making a proper GET request to
     specified url."""
-    result = metax_api.check_if_dataset_record_in_datacatalog(dataset_pid)
+    result = metax_api.record_id(dataset_pid)
+    assert result == mock_get_response_json["results"][0]["id"]
     assert mock_requests_get_record.call_count == 1
-    assert mock_requests_get_record.request_history[0].method == "GET"
-    assert result
 
 
-def test_check_if_dataset_record_pid_not_in_datacatalog(
-    mock_requests_get_record, metax_base_url, kielipankki_datacatalog_id
+def test_record_id_pid_not_in_datacatalog(
+    mock_requests_get_record, metax_base_url, kielipankki_datacatalog_id, metax_api
 ):
     """Test that a nn-existing PID in Metax is handled as expected."""
     dataset_pid = "urn.fi//urn:nbn:fi:lb-0000000"
     mock_requests_get_record.get(
         f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&persistent_identifier={dataset_pid}",
-        text='{"count": 0}',
+        json={"count": 0},
     )
-    result = metax_api.check_if_dataset_record_in_datacatalog(dataset_pid)
+    result = metax_api.record_id(dataset_pid)
     assert not result
     assert mock_requests_get_record.call_count == 1
-    assert mock_requests_get_record.request_history[0].method == "GET"
 
 
 def test_get_dataset_record_metax_id(dataset_pid, mock_requests_get_record):
