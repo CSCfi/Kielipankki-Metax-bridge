@@ -31,6 +31,42 @@ class MetaxAPI:
 
         return logger
 
+    def _make_request(self, method, endpoint, params=None, data=None):
+        """
+        Make an HTTP request to the specified endpoint.
+
+        :param method: The HTTP method to use here: "GET", "POST", "PUT", or "DELETE".
+        :param endpoint: The API endpoint to send the request to.
+        :param params: A dictionary of query parameters to include in the request URL.
+        :param data: A dictionary of data to include in the request body as JSON.
+
+        :return: dict or None depending on if the request was successful.
+        """
+        url = f"{self.METAX_BASE_URL}/{endpoint}"
+        headers = self.HEADERS
+
+        try:
+            response = requests.request(
+                method,
+                url,
+                params=params,
+                json=data,
+                headers=headers,
+                timeout=self.TIMEOUT,
+            )
+            response.raise_for_status()
+            if method != "GET":
+                self.logger.info(
+                    "Request succeeded. Method: %s, URL: %s", method, url)
+            if method == "DELETE":
+                return None
+            return response.json() if response.status_code == 200 else None
+        except requests.exceptions.RequestException as error:
+            self.logger.error(
+                "Request failed. Method: %s, URL: %s, Error: %s", method, url, error
+            )
+            return None
+
     def check_if_dataset_record_in_datacatalog(dataset_pid):
         """
         Check if a dataset with given PID exists in given data catalog.
