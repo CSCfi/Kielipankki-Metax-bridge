@@ -119,7 +119,7 @@ def mock_requests_put(
     """Mock a PUT request of a dataset to Metax."""
     shared_request_mocker.put(
         f"{metax_base_url}/datasets/{metax_dataset_id}",
-        mock_get_response_json=mock_post_put_response_json,
+        json=mock_post_put_response_json,
     )
     return shared_request_mocker
 
