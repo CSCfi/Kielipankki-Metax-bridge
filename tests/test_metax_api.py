@@ -28,7 +28,10 @@ def test_record_id_pid_not_in_datacatalog(
     assert mock_requests_get_record.call_count == 1
 
 
-def test_create_dataset_successful(mock_requests_post, caplog):
+def test_create_record_successful(
+        mock_requests_post,
+        caplog, metax_api,
+        mock_post_put_response_json):
     """Check that a successful post request to Metax is made of a well-formed dictionary."""
     metadata_dict = {
         "persistent_identifier": "urn.fi/urn:nbn:fi:lb-201603170300",
@@ -49,9 +52,9 @@ def test_create_dataset_successful(mock_requests_post, caplog):
     }
 
     with caplog.at_level(logging.INFO):
-        response_text = metax_api.create_dataset(metadata_dict)
-    assert response_text in caplog.text
-    assert "Created dataset" in caplog.text
+        response_json = metax_api.create_record(metadata_dict)
+    assert response_json == mock_post_put_response_json
+    assert "Request succeeded. Method: POST" in caplog.text
     assert mock_requests_post.call_count == 1
     assert mock_requests_post.request_history[0].method == "POST"
 
