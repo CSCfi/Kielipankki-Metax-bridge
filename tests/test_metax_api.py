@@ -171,11 +171,11 @@ def test_delete_record_failed(
     assert "Request failed. Method: DELETE" in caplog.text
 
 
-def test_datacatalog_dataset_record_pids(pids_list_in_datacatalog):
+def test_datacatalog_dataset_record_pids(pids_list_in_datacatalog, metax_api):
     """
     Test that querying a datacatalog in metax returns a list of all  its PIDs.
     """
-    result = metax_api.datacatalog_dataset_record_pids()
+    result = metax_api.datacatalog_record_pids()
     assert pids_list_in_datacatalog.request_history[0].method == "GET"
     assert pids_list_in_datacatalog.call_count == 1
     assert result == ["pid1", "pid2"]
