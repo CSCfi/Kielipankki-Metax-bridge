@@ -1,6 +1,7 @@
 import json
 import logging
 import requests
+from requests.exceptions import HTTPError
 
 
 class MetaxAPI:
@@ -60,11 +61,11 @@ class MetaxAPI:
             if method == "DELETE":
                 return None
             return response.json() if response.status_code == 200 else None
-        except requests.exceptions.RequestException as error:
+        except HTTPError as error:
             self.logger.error(
                 "Request failed. Method: %s, URL: %s, Error: %s", method, url, error
             )
-            return None
+            raise
 
     def record_id(self, pid):
         """
@@ -119,3 +120,8 @@ class MetaxAPI:
             results.extend(data["results"])
             url = data["next"]
         return [value["persistent_identifier"] for value in results]
+
+
+if __name__ == "__main__":
+    api = MetaxAPI()
+    print(api.create_record("jhghg"))
