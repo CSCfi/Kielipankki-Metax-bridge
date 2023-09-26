@@ -59,7 +59,7 @@ class MetaxAPI:
                 self.logger.info(
                     "Request succeeded. Method: %s, URL: %s", method, url)
             if method == "DELETE":
-                return None
+                return response
             return response.json() if response.status_code == 200 else None
         except HTTPError as error:
             self.logger.error(
@@ -120,8 +120,3 @@ class MetaxAPI:
             results.extend(data["results"])
             url = data["next"]
         return [value["persistent_identifier"] for value in results]
-
-
-if __name__ == "__main__":
-    api = MetaxAPI()
-    print(api.create_record("jhghg"))
