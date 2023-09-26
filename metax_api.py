@@ -80,29 +80,14 @@ class MetaxAPI:
         assert result is not None
         return result["results"][0]["id"] if result["count"] == 1 else None
 
-    def create_dataset(metadata_dict):
+    def create_record(self, data):
         """
         Create a dataset record to Metax.
         :param metadata_dict: dictionary of metadata mappings
-        :return: the dataset identifier in Metax
+        :return: response JSON
         """
-        response = requests.post(
-            f"{METAX_BASE_URL}/datasets",
-            json=metadata_dict,
-            headers=HEADERS,
-            timeout=TIMEOUT,
-        )
-        try:
-            response.raise_for_status()
-        except HTTPError as error:
-            logger_api.error(
-                "Error: %s. Failed to create dataset. Response text: %s ",
-                error,
-                response.text,
-            )
-            raise
-        logger_api.info("Created dataset. Response text: %s", response.text)
-        return json.loads(response.text)["id"]
+        endpoint = "datasets"
+        return self._make_request("POST", endpoint, data=data)
 
     def update_dataset(metax_dataset_id, metadata_dict):
         """
