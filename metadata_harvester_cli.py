@@ -7,7 +7,7 @@ from datetime import datetime
 from lxml import etree
 from harvester.pmh_interface import PMH_API
 from harvester.metadata_parser import MSRecordParser
-import metax_api
+from metax_api import MetaxAPI
 
 logger_harvester = logging.getLogger("harvester")
 logger_harvester.setLevel(logging.DEBUG)
@@ -75,13 +75,14 @@ def send_data_to_metax(all_mapped_data_dict):
     :param all_mapped_data_dict: a dictionary of mapped data
     """
     if all_mapped_data_dict:
+        metax_api = MetaxAPI()
         for pid in all_mapped_data_dict.keys():
             dataset_dict = all_mapped_data_dict[pid]
-            if metax_api.check_if_dataset_record_in_datacatalog(pid):
-                metax_dataset_id = metax_api.get_dataset_record_metax_id(pid)
-                metax_api.update_dataset(metax_dataset_id, dataset_dict)
+            if metax_api.record_id(pid):
+                metax_api.update_record(
+                    metax_api.record_id(pid), dataset_dict)
             else:
-                metax_api.create_dataset(dataset_dict)
+                metax_api.create_record(dataset_dict)
     else:
         pass
 
@@ -103,10 +104,11 @@ def sync_deleted_records(url="https://kielipankki.fi/md_api/que"):
                     "//info:identificationInfo/info:identifier/text()")
                 kielipankki_pids.append(pid)
 
-    metax_pids = set(metax_api.datacatalog_dataset_record_pids())
+    metax_api = MetaxAPI()
+    metax_pids = set(metax_api.datacatalog_record_pids())
     pids_not_in_kielipankki = metax_pids.difference(set(kielipankki_pids))
     for pid in pids_not_in_kielipankki:
-        metax_api.delete_dataset(metax_api.get_dataset_record_metax_id(pid))
+        metax_api.delete_record(metax_api.record_id(pid))
 
 
 def main(log_file):
