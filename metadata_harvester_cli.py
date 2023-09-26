@@ -86,34 +86,55 @@ def send_data_to_metax(mapped_records):
         pass
 
 
-def sync_deleted_records(url="https://kielipankki.fi/md_api/que"):
+def collect_metashare_pids(url="https://kielipankki.fi/md_api/que"):
     """
-    Compares record PIDs fetched from Kielipankki and Metax. Any records not existing in Kielipankki (anymore) are deleted from Metax as well.
+    Fetches Metashare records and returns their PIDs.
+    :return: List of PIDs as strings
     """
     api = PMH_API(url)
-    kielipankki_pids = []
+    metashare_pids = []
     metadata_contents = api.fetch_records()
     for metadata_content in metadata_contents:
-        lxml_record = etree.fromstring(
-            etree.tostring(metadata_content.xml))
+        lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
         metadata_record = MSRecordParser(lxml_record)
-        if metadata_record.check_pid_exists():
-            if metadata_record.check_resourcetype_corpus():
-                pid = metadata_record.get_identifier(
-                    "//info:identificationInfo/info:identifier/text()")
-                kielipankki_pids.append(pid)
+        if (
+            metadata_record.check_pid_exists()
+            and metadata_record.check_resourcetype_corpus()
+        ):
+            pid = metadata_record.get_identifier(
+                "//info:identificationInfo/info:identifier/text()"
+            )
+            metashare_pids.append(pid)
+    return metashare_pids
 
+
+def collect_metax_pids():
+    """
+    Fetches all existing PIDs in Kielipankki catalog records in Metax.
+    :return: List of PIDs as strings
+    """
     metax_api = MetaxAPI()
-    metax_pids = set(metax_api.datacatalog_record_pids())
-    pids_not_in_kielipankki = metax_pids.difference(set(kielipankki_pids))
-    for pid in pids_not_in_kielipankki:
+    return metax_api.datacatalog_record_pids()
+
+
+def sync_deleted_records(metashare_pids, metax_pids):
+    """
+    Compares record PIDs fetched from Kielipankki and Metax. Any records not existing in
+    Metashare (anymore) are deleted from Metax as well.
+    :param metashare_pids: List of PIDs as strings
+    :param metax_pids: List of PIDs as strings
+    """
+    metax_pids_set = set(metax_pids)
+    pids_not_in_metashare = metax_pids_set.difference(set(metashare_pids))
+    metax_api = MetaxAPI()
+    for pid in pids_not_in_metashare:
         metax_api.delete_record(metax_api.record_id(pid))
 
 
 def main(log_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
-    :param log_file: log file where harves dates are logged
+    :param log_file: log file where harvest dates are logged
     """
     harvested_date = last_harvest_date(log_file)
     logger_harvester.info("Started")
@@ -124,7 +145,7 @@ def main(log_file):
     else:
         logger_harvester.info("Success, all records harvested")
 
-    sync_deleted_records()
+    sync_deleted_records(collect_metashare_pids(), collect_metax_pids())
 
 
 if __name__ == "__main__":
