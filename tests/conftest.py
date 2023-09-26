@@ -1,7 +1,9 @@
 import re
 
 import pytest
+import json
 import requests_mock
+from metax_api import MetaxAPI
 
 
 @pytest.fixture(autouse=True)
@@ -33,6 +35,11 @@ def shared_request_mocker():
         yield m
 
 
+@pytest.fixture
+def metax_api(shared_request_mocker):
+    return MetaxAPI()
+
+
 def _get_file_as_string(filename):
     """Return given file as string."""
     with open(filename) as infile:
@@ -54,7 +61,9 @@ def kielipankki_datacatalog_id():
 @pytest.fixture
 def mock_get_response_json():
     """A mocked response for a single dataset from Metax"""
-    return _get_file_as_string("tests/test_data/metax_single_record_response.json")
+    file_string = _get_file_as_string(
+        "tests/test_data/metax_single_record_response.json")
+    return json.loads(file_string)
 
 
 @pytest.fixture
@@ -75,7 +84,7 @@ def mock_requests_get_record(
     shared_request_mocker.get(
         f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&"
         f"persistent_identifier={dataset_pid}",
-        text=mock_get_response_json,
+        json=mock_get_response_json,
     )
     return shared_request_mocker
 
