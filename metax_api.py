@@ -8,13 +8,12 @@ class MetaxAPI:
     An API client for interacting with the Metax V3 service.
     """
 
-    METAX_BASE_URL = "https://metax-service.fd-staging.csc.fi/v3"
-    HEADERS = {"Content-Type": "application/json"}
-    CATALOG_ID = "urn:nbn:fi:att:data-catalog-kielipankki"
-    TIMEOUT = 30
-
     def __init__(self):
         self.logger = self._setup_logger()
+        self.base_url = "https://metax-service.fd-staging.csc.fi/v3"
+        self.headers = {"Content-Type": "application/json"}
+        self.catalog_id = "urn:nbn:fi:att:data-catalog-kielipankki"
+        self.timeout = 30
 
     def _setup_logger(self):
         """
@@ -42,8 +41,8 @@ class MetaxAPI:
 
         :return: dict or None depending on if the request was successful.
         """
-        url = f"{self.METAX_BASE_URL}/{endpoint}"
-        headers = self.HEADERS
+        url = f"{self.base_url}/{endpoint}"
+        headers = self.headers
 
         try:
             response = requests.request(
@@ -52,7 +51,7 @@ class MetaxAPI:
                 params=params,
                 json=data,
                 headers=headers,
-                timeout=self.TIMEOUT,
+                timeout=self.timeout,
             )
             response.raise_for_status()
             if method != "GET":
@@ -73,7 +72,7 @@ class MetaxAPI:
         :param dataset pid: the persistent identifier of the record
         :return: the record identifier in Metax or None
         """
-        params = {"data_catalog__id": self.CATALOG_ID,
+        params = {"data_catalog__id": self.catalog_id,
                   "persistent_identifier": pid}
         endpoint = "datasets"
         result = self._make_request("GET", endpoint, params)
@@ -111,11 +110,11 @@ class MetaxAPI:
         Fetches all dataset record PIDs from catalog.
         :return: list of dataset record PIDs
         """
-        url = f"{self.METAX_BASE_URL}/datasets?data_catalog__id={self.CATALOG_ID}&limit=100"
+        url = f"{self.base_url}/datasets?data_catalog__id={self.catalog_id}&limit=100"
         results = []
         while url:
             response = requests.get(
-                url, headers=self.HEADERS, timeout=self.TIMEOUT)
+                url, headers=self.headers, timeout=self.timeout)
             data = response.json()
             results.extend(data["results"])
             url = data["next"]
