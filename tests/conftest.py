@@ -1,7 +1,7 @@
 import re
+import json
 
 import pytest
-import json
 import requests_mock
 from metax_api import MetaxAPI
 
@@ -92,7 +92,8 @@ def mock_requests_get_record(
 @pytest.fixture
 def mock_post_put_response_json():
     """Mock a response from Metax when making PUT or POST request."""
-    return _get_file_as_string("tests/test_data/put_post_response.json")
+    file_string = _get_file_as_string("tests/test_data/put_post_response.json")
+    return json.loads(file_string)
 
 
 @pytest.fixture
@@ -118,7 +119,7 @@ def mock_requests_put(
     """Mock a PUT request of a dataset to Metax."""
     shared_request_mocker.put(
         f"{metax_base_url}/datasets/{metax_dataset_id}",
-        text=mock_post_put_response_json,
+        mock_get_response_json=mock_post_put_response_json,
     )
     return shared_request_mocker
 
