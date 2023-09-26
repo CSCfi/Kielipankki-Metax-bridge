@@ -41,48 +41,47 @@ def last_harvest_date(filename):
         return None
 
 
-def records_to_dict(date_time, url="https://kielipankki.fi/md_api/que"):
+def records_to_dict(date_time=None, url="https://kielipankki.fi/md_api/que"):
     """
     Fetches metadata records since the last logged harvest. If date is missing, all records are
     fetched.
+    :param: date_time: date and time value in format that OAI PMH reads
     :param url: string value of a url
-    :return: dictionary of mapped data
+    :return: list of mapped Metashare records (dictionaries)
     """
     api = PMH_API(url)
-    all_mapped_data_dict = {}
-    if date_time:
-        metadata_contents = api.fetch_changed_records(date_time)
-    else:
-        metadata_contents = api.fetch_records()
+    if not date_time:
+        metashare_records = api.fetch_records()
+    metashare_records = api.fetch_changed_records(date_time)
 
-    if metadata_contents:
-        for metadata_content in metadata_contents:
+    mapped_records_list = []
+    if metashare_records:
+        for metashare_record in metashare_records:
             lxml_record = etree.fromstring(
-                etree.tostring(metadata_content.xml))
-            metadata_record = MSRecordParser(lxml_record)
-            if metadata_record.check_pid_exists():
-                if metadata_record.check_resourcetype_corpus():
-                    pid = metadata_record.get_identifier(
-                        "//info:identificationInfo/info:identifier/text()"
-                    )
-                    all_mapped_data_dict[pid] = metadata_record.to_dict()
-    return all_mapped_data_dict
+                etree.tostring(metashare_record.xml))
+            mapped_record = MSRecordParser(lxml_record)
+            if (
+                mapped_record.check_pid_exists()
+                and mapped_record.check_resourcetype_corpus()
+            ):
+                mapped_records_list.append(mapped_record.to_dict())
+    return mapped_records_list
 
 
-def send_data_to_metax(all_mapped_data_dict):
+def send_data_to_metax(mapped_records):
     """
     Make PUT and POST requests based on changes and existance of PIDs in Metax.
-    :param all_mapped_data_dict: a dictionary of mapped data
+    :param mapped_records: a list of mapped Metashare records (dictionaries)
     """
-    if all_mapped_data_dict:
+    if mapped_records:
         metax_api = MetaxAPI()
-        for pid in all_mapped_data_dict.keys():
-            dataset_dict = all_mapped_data_dict[pid]
+        for mapped_record in mapped_records:
+            pid = mapped_record["persistent_identifier"]
             if metax_api.record_id(pid):
                 metax_api.update_record(
-                    metax_api.record_id(pid), dataset_dict)
+                    metax_api.record_id(pid), mapped_record)
             else:
-                metax_api.create_record(dataset_dict)
+                metax_api.create_record(mapped_record)
     else:
         pass
 
