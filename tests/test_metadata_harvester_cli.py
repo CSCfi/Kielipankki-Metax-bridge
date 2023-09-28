@@ -31,36 +31,35 @@ def single_record_to_dict(
     A GET request that returns the XML data as a dictionary
     """
     shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
-    yield {
-        "urn.fi/urn:nbn:fi:lb-2017021609": {
-            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
-            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
-            "field_of_science": [
-                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
-            ],
-            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
-            "title": {
-                "en": "Silva Kiuru's Time Expressions Corpus",
-                "fi": "Silva Kiurun ajanilmausaineisto",
-            },
-            "description": {
-                "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
-                "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
-            },
-            "modified": "2017-02-15T00:00:00.000000Z",
-            "issued": "2017-02-15T00:00:00.000000Z",
-            "access_rights": {
-                "license": [
+    yield [{
+        "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+        "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+        "field_of_science": [
+            {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
+        ],
+        "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+        "title": {
+            "en": "Silva Kiuru's Time Expressions Corpus",
+            "fi": "Silva Kiurun ajanilmausaineisto",
+        },
+        "description": {
+            "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
+            "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
+        },
+        "modified": "2017-02-15T00:00:00.000000Z",
+        "issued": "2017-02-15T00:00:00.000000Z",
+        "access_rights": {
+            "license": [
                     {
                         "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
                     }
-                ],
-                "access_type": {
-                    "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
-                },
+            ],
+            "access_type": {
+                "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
             },
-        }
+        },
     }
+    ]
 
 
 def test_records_to_dict_with_last_harvest_date(
@@ -161,7 +160,7 @@ def test_get_last_harvest_with_unsuccessful_harvest(
 def test_send_data_to_metax_single_new_record(
     single_record_to_dict,
     mock_metashare_record_not_found_in_datacatalog,
-    mock_requests_post,
+    mock_requests_post
 ):
     """
     Check that creating one new metadata record works
@@ -177,8 +176,7 @@ def test_send_data_to_metax_single_new_record(
     expected_post_request = mock_requests_post.request_history[1]
 
     assert expected_post_request.method == "POST"
-    assert expected_post_request.json() == list(
-        single_record_to_dict.values())[0]
+    assert expected_post_request.json() == single_record_to_dict[0]
 
 
 def test_send_data_to_metax_single_pre_existing_record(
@@ -200,8 +198,7 @@ def test_send_data_to_metax_single_pre_existing_record(
     expected_put_request = mock_requests_put.request_history[2]
 
     assert expected_put_request.method == "PUT"
-    assert expected_put_request.json() == list(
-        single_record_to_dict.values())[0]
+    assert expected_put_request.json() == single_record_to_dict[0]
 
 
 def test_send_data_to_metax_multiple_records(
@@ -216,18 +213,19 @@ def test_send_data_to_metax_multiple_records(
     already exists in Metax) and one POST (add the new record) for each given item in
     the metadata records. This test also checks that teach POST has unique data.
     """
-    record_dict = {
-        "pid1": {"meta": "data", "id": "pid1"},
-        "pid2": {"infor": "mation", "id": "pid2"},
-    }
+    record_dict = [
+        {"meta": "data", "persistent_identifier": "pid1"},
+        {"infor": "mation", "persistent_identifier": "pid2"}
+    ]
     metadata_harvester_cli.send_data_to_metax(record_dict)
 
     assert mock_requests_post.call_count == 4
 
     post_requests = mock_requests_post.request_history[1::2]
-    for post_request, record in zip(post_requests, record_dict.values()):
+    for post_request, record in zip(post_requests, record_dict):
         assert post_request.method == "POST"
-        assert post_request.json()["id"] == record["id"]
+        assert post_request.json(
+        )["persistent_identifier"] == record["persistent_identifier"]
 
 
 def test_send_data_to_metax_no_records_post(shared_request_mocker, metax_base_url):
@@ -269,8 +267,9 @@ def test_main_all_data_harvested(
     assert mock_requests_post.call_count == 3
     assert mock_requests_post.request_history[2].method == "POST"
     assert (
-        mock_requests_post.request_history[2].json()["persistent_identifier"]
-        == list(single_record_to_dict.values())[0]["persistent_identifier"]
+        mock_requests_post.request_history[2].json(
+        )["persistent_identifier"]
+        == single_record_to_dict[0]["persistent_identifier"]
     )
 
     assert "Success, all records harvested" in caplog.text
@@ -296,7 +295,7 @@ def test_main_new_records_harvested_since_date(
     assert mock_requests_post.request_history[2].method == "POST"
     assert (
         mock_requests_post.request_history[2].json()["persistent_identifier"]
-        == list(single_record_to_dict.values())[0]["persistent_identifier"]
+        == single_record_to_dict[0]["persistent_identifier"]
     )
 
     assert "Success, records harvested since" in caplog.text
@@ -322,7 +321,7 @@ def test_main_changed_records_harvested_since_date(
     assert mock_requests_put.request_history[3].method == "PUT"
     assert (
         mock_requests_put.request_history[3].json()["persistent_identifier"]
-        == list(single_record_to_dict.values())[0]["persistent_identifier"]
+        == single_record_to_dict[0]["persistent_identifier"]
     )
 
     assert "Success, records harvested since" in caplog.text
