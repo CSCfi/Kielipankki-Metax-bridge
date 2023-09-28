@@ -109,7 +109,7 @@ def mock_requests_post(
 
 @pytest.fixture
 def metax_dataset_id():
-    return "441560f5-4c2a-48eb-bc1a-489639ec3573"
+    return "1f32f478-8e7e-4d72-9638-d29a4f1430aa"
 
 
 @pytest.fixture
@@ -133,13 +133,14 @@ def mock_metashare_record_not_found_in_datacatalog(
     exist.
     """
     dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
-    shared_request_mocker.get(dataset_request_matcher, json={"count": 0})
+    shared_request_mocker.get(dataset_request_matcher, json={
+                              "count": 0, "results": [], "next": None})
     return shared_request_mocker
 
 
 @pytest.fixture
 def mock_metashare_record_found_in_datacatalog(
-    shared_request_mocker, metax_base_url, single_record_to_dict, metax_dataset_id
+    shared_request_mocker, metax_base_url, metax_dataset_id, dataset_pid
 ):
     """
     Mock Metashare dataset requests to always report that PID exists.
@@ -147,7 +148,8 @@ def mock_metashare_record_found_in_datacatalog(
     dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
     shared_request_mocker.get(
         dataset_request_matcher,
-        json={"count": 1, "results": [{"id": metax_dataset_id}]},
+        json={"count": 1, "results": [
+            {"id": metax_dataset_id, "persistent_identifier": dataset_pid}], "next": None},
     )
     return shared_request_mocker
 
@@ -166,14 +168,14 @@ def mock_delete_record(shared_request_mocker, metax_dataset_id, metax_base_url):
 
 @pytest.fixture
 def mock_pids_list_in_datacatalog(
-    shared_request_mocker, metax_base_url, kielipankki_datacatalog_id
+    shared_request_mocker, metax_base_url, kielipankki_datacatalog_id, dataset_pid
 ):
     """
     Mock a GET request to fetch all PIDs in a datacatalog.
     """
     pid_data = {
         "results": [
-            {"persistent_identifier": "pid1"},
+            {"persistent_identifier": dataset_pid},
             {"persistent_identifier": "pid2"},
         ],
         "next": None,
@@ -182,7 +184,29 @@ def mock_pids_list_in_datacatalog(
         f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&limit=100",
         json=pid_data,
     )
-    return ["pid1", "pid2"]
+    return [dataset_pid, "pid2"]
+
+
+@pytest.fixture
+def mock_pids_list_in_datacatalog_matching_metashare(
+    shared_request_mocker, metax_base_url, kielipankki_datacatalog_id, dataset_pid
+):
+    """
+    Mock a GET request to fetch all PIDs in a datacatalog that matches those in Metashare.
+
+    This fixture needed for testing "syncing" operation.
+    """
+    pid_data = {
+        "results": [
+            {"persistent_identifier": dataset_pid}
+        ],
+        "next": None,
+    }
+    shared_request_mocker.get(
+        f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&limit=100",
+        json=pid_data,
+    )
+    return [dataset_pid]
 
 
 @pytest.fixture
@@ -200,6 +224,13 @@ def kielipankki_api_url():
 
 
 @pytest.fixture
-def mock_pids_list_from_metashare(shared_request_mocker, kielipankki_api_url, single_record_xml):
+def mock_pids_list_from_metashare(
+        shared_request_mocker,
+        kielipankki_api_url,
+        single_record_xml,
+        dataset_pid):
+    """
+    Mock a list of PIDs fetched from Metashare records.
+    """
     shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
-    return ["urn.fi/urn:nbn:fi:lb-2017021609"]
+    return [dataset_pid]
