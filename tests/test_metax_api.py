@@ -77,7 +77,7 @@ def test_create_dataset_failed(mock_requests_post, caplog, metax_base_url, metax
 
 def test_update_dataset_successful(mock_requests_put, caplog, metax_api, mock_post_put_response_json):
     """Test that an existing dataset in Metax is successfully updated."""
-    metax_dataset_id = "441560f5-4c2a-48eb-bc1a-489639ec3573"
+    metax_dataset_id = "1f32f478-8e7e-4d72-9638-d29a4f1430aa"
     sample_dict = {
         "persistent_identifier": "urn.fi/urn:nbn:fi:lb-201603170300",
         "title": {"en": "The Corpus"},
