@@ -36,7 +36,7 @@ def shared_request_mocker():
 
 
 @pytest.fixture
-def metax_api(shared_request_mocker):
+def metax_api():
     return MetaxAPI()
 
 
@@ -165,7 +165,7 @@ def mock_delete_record(shared_request_mocker, metax_dataset_id, metax_base_url):
 
 
 @pytest.fixture
-def pids_list_in_datacatalog(
+def mock_pids_list_in_datacatalog(
     shared_request_mocker, metax_base_url, kielipankki_datacatalog_id
 ):
     """
@@ -182,4 +182,24 @@ def pids_list_in_datacatalog(
         f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&limit=100",
         json=pid_data,
     )
-    return shared_request_mocker
+    return ["pid1", "pid2"]
+
+
+@pytest.fixture
+def single_record_xml():
+    """Well-formed sample xml"""
+    return _get_file_as_string("tests/test_data/kielipankki_record_sample.xml")
+
+
+@pytest.fixture
+def kielipankki_api_url():
+    """
+    The URL of the OAI-PMH API used in tests.
+    """
+    return "https://kielipankki.fi/md_api/que?metadataPrefix=info&verb=ListRecords"
+
+
+@pytest.fixture
+def mock_pids_list_from_metashare(shared_request_mocker, kielipankki_api_url, single_record_xml):
+    shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
+    return ["urn.fi/urn:nbn:fi:lb-2017021609"]

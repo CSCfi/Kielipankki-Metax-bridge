@@ -4,26 +4,6 @@ import metadata_harvester_cli
 
 
 @pytest.fixture
-def kielipankki_api_url():
-    """
-    The URL of the OAI-PMH API used in tests.
-    """
-    return "https://kielipankki.fi/md_api/que?metadataPrefix=info&verb=ListRecords"
-
-
-def _get_file_as_string(filename):
-    """Return given file as string."""
-    with open(filename) as infile:
-        return infile.read()
-
-
-@pytest.fixture
-def single_record_xml():
-    """Well-formed sample xml"""
-    return _get_file_as_string("tests/test_data/kielipankki_record_sample.xml")
-
-
-@pytest.fixture
 def single_record_to_dict(
     shared_request_mocker, kielipankki_api_url, single_record_xml
 ):
@@ -248,6 +228,22 @@ def test_send_data_to_metax_no_records_put(shared_request_mocker, metax_base_url
     shared_request_mocker.put(metax_base_url)
 
     assert shared_request_mocker.call_count == 0
+
+
+def test_collect_metashare_pids(mock_pids_list_from_metashare):
+    """
+    Test that a list of PIDs from Metashare records are returned.
+    """
+    pids = metadata_harvester_cli.collect_metashare_pids()
+    assert pids == mock_pids_list_from_metashare
+
+
+def test_collect_metax_pids(mock_pids_list_in_datacatalog):
+    """
+    Test that a list of PIDs from Metax are returned.
+    """
+    pids = metadata_harvester_cli.collect_metax_pids()
+    assert pids == mock_pids_list_in_datacatalog
 
 
 def test_main_all_data_harvested(
