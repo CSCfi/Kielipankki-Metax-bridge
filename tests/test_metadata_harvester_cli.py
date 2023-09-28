@@ -17,7 +17,7 @@ def single_record_to_dict(
         "field_of_science": [
             {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
         ],
-        "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+        "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
         "title": {
             "en": "Silva Kiuru's Time Expressions Corpus",
             "fi": "Silva Kiurun ajanilmausaineisto",
@@ -246,21 +246,53 @@ def test_collect_metax_pids(mock_pids_list_in_datacatalog):
     assert pids == mock_pids_list_in_datacatalog
 
 
-def test_main_all_data_harvested(
+def test_sync_deleted_records_with_diffs(
+        mock_pids_list_from_metashare,
+        mock_pids_list_in_datacatalog,
+        mock_metashare_record_found_in_datacatalog,
+        mock_delete_record
+):
+    """
+    Test that when PIDs collected from Metax do not exist in Metashare, those records are deleted from Metax.
+    """
+    metadata_harvester_cli.sync_deleted_records(
+        mock_pids_list_from_metashare, mock_pids_list_in_datacatalog)
+    assert mock_delete_record.call_count == 2
+
+
+def test_sync_deleted_records_no_diffs(
+        mock_pids_list_from_metashare,
+        mock_pids_list_in_datacatalog_matching_metashare,
+        mock_delete_record):
+    """
+    Test that when PIDs collected from Metax and Metashare match, no DELETE requests are made.
+    """
+    metadata_harvester_cli.sync_deleted_records(
+        mock_pids_list_from_metashare, mock_pids_list_in_datacatalog_matching_metashare)
+    assert mock_delete_record.call_count == 0
+
+
+def test_main_all_data_harvested_and_records_in_sync(
     mock_requests_post,
     mock_metashare_record_not_found_in_datacatalog,
     single_record_to_dict,
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
+    mock_pids_list_from_metashare,
+    mock_pids_list_in_datacatalog_matching_metashare,
 ):
     """
-    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. The test also covers the situation where none of the record PID matches the ones in Metax so the data is POSTed to Metax.
+    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. 
+
+    The test also covers the situation where none of the record PID matches the ones in Metax so the data is POSTed to Metax.
+
+    Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
     with caplog.at_level(logging.INFO):
         metadata_harvester_cli.main(
             create_test_log_file_with_unsuccessful_harvest)
 
-    assert mock_requests_post.call_count == 3
+    assert mock_requests_post.call_count == 5
     assert mock_requests_post.request_history[2].method == "POST"
     assert (
         mock_requests_post.request_history[2].json(
@@ -271,23 +303,62 @@ def test_main_all_data_harvested(
     assert "Success, all records harvested" in caplog.text
 
 
-def test_main_new_records_harvested_since_date(
+def test_main_all_data_harvested_and_records_not_in_sync(
+    mock_requests_put,
+    single_record_to_dict,
+    create_test_log_file_with_unsuccessful_harvest,
+    caplog,
+    mock_pids_list_from_metashare,
+    mock_pids_list_in_datacatalog,
+    mock_metashare_record_found_in_datacatalog,
+    mock_delete_record
+):
+    """
+    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. 
+
+    The test also covers the situation where the record PID matches the ones in Metax so the data is PUT to Metax.
+
+    Finally, the records from both services are compared resulting in one non-matching PID. This non-matching record is then DELETEd from Metax.
+    """
+
+    with caplog.at_level(logging.INFO):
+        metadata_harvester_cli.main(
+            create_test_log_file_with_unsuccessful_harvest)
+
+    assert mock_requests_put.call_count == 6
+    assert mock_requests_put.request_history[3].method == "PUT"
+    assert (
+        mock_requests_put.request_history[3].json(
+        )["persistent_identifier"]
+        == single_record_to_dict[0]["persistent_identifier"]
+    )
+
+    assert "Success, all records harvested" in caplog.text
+
+
+def test_main_new_records_harvested_since_date_and_records_in_sync(
     mock_requests_post,
-    mock_metashare_record_not_found_in_datacatalog,
     single_record_to_dict,
     create_test_log_file,
     caplog,
+    mock_pids_list_from_metashare,
+    mock_pids_list_in_datacatalog_matching_metashare,
+    mock_delete_record,
+    mock_metashare_record_not_found_in_datacatalog
+
 ):
     """
     Check that, when there is a successful harvest logged, new and updated records since that
     date are fetched from Kielipankki and then sent to Metax.
 
     This test covers POSTing new records.
+
+    Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
     with caplog.at_level(logging.INFO):
         metadata_harvester_cli.main(create_test_log_file)
 
-    assert mock_requests_post.call_count == 3
+    assert mock_requests_post.call_count == 5
     assert mock_requests_post.request_history[2].method == "POST"
     assert (
         mock_requests_post.request_history[2].json()["persistent_identifier"]
@@ -297,23 +368,29 @@ def test_main_new_records_harvested_since_date(
     assert "Success, records harvested since" in caplog.text
 
 
-def test_main_changed_records_harvested_since_date(
+def test_main_changed_records_harvested_since_date_and_records_not_in_sync(
     mock_requests_put,
     mock_metashare_record_found_in_datacatalog,
     single_record_to_dict,
     create_test_log_file,
     caplog,
+    mock_pids_list_from_metashare,
+    mock_pids_list_in_datacatalog,
+    mock_delete_record
 ):
     """
     Check that, when there is a successful harvest logged previously, new and updated records
     are fetched from Kielipankki and then sent to Metax.
 
     This test covers only changed records that are PUT to Metax.
+
+    Finally, the records from both services are compared resulting in one non-matching PID. This non-matching record is then DELETEd from Metax.
+
     """
     with caplog.at_level(logging.INFO):
         metadata_harvester_cli.main(create_test_log_file)
 
-    assert mock_requests_put.call_count == 4
+    assert mock_requests_put.call_count == 8
     assert mock_requests_put.request_history[3].method == "PUT"
     assert (
         mock_requests_put.request_history[3].json()["persistent_identifier"]
