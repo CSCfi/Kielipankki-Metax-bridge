@@ -37,13 +37,12 @@ def test_get_description(single_record):
     assert result == expected_result
 
 
-def test_get_identifier(single_record):
+def test_get_identifier(single_record, dataset_pid):
     """Check that a PID is returned."""
     record = MSRecordParser(single_record)
     result = record.get_identifier(
         "//info:identificationInfo/info:identifier/text()")
-    expected_result = "urn.fi/urn:nbn:fi:lb-2017021609"
-    assert result == expected_result
+    assert result == dataset_pid
 
 
 def test_get_modified_date(single_record):
@@ -72,7 +71,7 @@ def test_to_dict(single_record):
         "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
         "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
         "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}],
-        "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+        "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
         "title": {
             "en": "Silva Kiuru's Time Expressions Corpus",
             "fi": "Silva Kiurun ajanilmausaineisto",
