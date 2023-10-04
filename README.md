@@ -8,7 +8,7 @@ Furthermore, the tool checks whether records' PIDs in Kielipankki OAI-PMH API ma
 
 
 ### Requirements
-This tool works with Python 3.8 together with pip and virtualenv installed. The rest of the reuirements can be installed with ```pip install -r requirements.txt```.
+This tool works with Python 3.8 together with pip and virtualenv installed. The rest of the requirements can be installed with ```pip install -r requirements.txt```.
 
 ### Run the whole pipeline
 
