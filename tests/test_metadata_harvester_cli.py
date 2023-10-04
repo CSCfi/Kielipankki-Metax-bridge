@@ -193,16 +193,16 @@ def test_send_data_to_metax_multiple_records(
     already exists in Metax) and one POST (add the new record) for each given item in
     the metadata records. This test also checks that teach POST has unique data.
     """
-    record_dict = [
+    records = [
         {"meta": "data", "persistent_identifier": "pid1"},
         {"infor": "mation", "persistent_identifier": "pid2"}
     ]
-    metadata_harvester_cli.send_data_to_metax(record_dict)
+    metadata_harvester_cli.send_data_to_metax(records)
 
     assert mock_requests_post.call_count == 4
 
     post_requests = mock_requests_post.request_history[1::2]
-    for post_request, record in zip(post_requests, record_dict):
+    for post_request, record in zip(post_requests, records):
         assert post_request.method == "POST"
         assert post_request.json(
         )["persistent_identifier"] == record["persistent_identifier"]
@@ -212,8 +212,8 @@ def test_send_data_to_metax_no_records_post(shared_request_mocker, metax_base_ur
     """
     Check that send_data_to_metax does not POST if en empty dictinary is passed to it.
     """
-    record_dict = {}
-    metadata_harvester_cli.send_data_to_metax(record_dict)
+    records = []
+    metadata_harvester_cli.send_data_to_metax(records)
     shared_request_mocker.post(metax_base_url)
 
     assert shared_request_mocker.call_count == 0
@@ -223,8 +223,8 @@ def test_send_data_to_metax_no_records_put(shared_request_mocker, metax_base_url
     """
     Check that send_data_to_metax does not PUT if an empty dictionary is passed to it.
     """
-    record_dict = {}
-    metadata_harvester_cli.send_data_to_metax(record_dict)
+    records = []
+    metadata_harvester_cli.send_data_to_metax(records)
     shared_request_mocker.put(metax_base_url)
 
     assert shared_request_mocker.call_count == 0
