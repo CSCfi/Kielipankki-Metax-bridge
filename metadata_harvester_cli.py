@@ -69,17 +69,13 @@ def send_data_to_metax(mapped_records):
     Make PUT and POST requests based on changes and existance of PIDs in Metax.
     :param mapped_records: a list of mapped Metashare records (dictionaries)
     """
-    if mapped_records:
-        metax_api = MetaxAPI()
-        for mapped_record in mapped_records:
-            pid = mapped_record["persistent_identifier"]
-            if metax_api.record_id(pid):
-                metax_api.update_record(
-                    metax_api.record_id(pid), mapped_record)
-            else:
-                metax_api.create_record(mapped_record)
-    else:
-        pass
+    metax_api = MetaxAPI()
+    for mapped_record in mapped_records:
+        pid = mapped_record["persistent_identifier"]
+        if metax_api.record_id(pid):
+            metax_api.update_record(metax_api.record_id(pid), mapped_record)
+        else:
+            metax_api.create_record(mapped_record)
 
 
 def collect_metashare_pids(url="https://kielipankki.fi/md_api/que"):
