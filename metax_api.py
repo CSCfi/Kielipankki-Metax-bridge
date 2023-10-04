@@ -77,7 +77,6 @@ class MetaxAPI:
                   "persistent_identifier": pid}
         endpoint = "datasets"
         result = self._make_request("GET", endpoint, params)
-        assert result is not None  # Searching with parameters will always return "count"
         return result["results"][0]["id"] if result["count"] == 1 else None
 
     def create_record(self, data):
