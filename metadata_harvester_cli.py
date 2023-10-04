@@ -55,16 +55,14 @@ def records_to_dict(date_time=None, url="https://kielipankki.fi/md_api/que"):
     metashare_records = api.fetch_changed_records(date_time)
 
     mapped_records_list = []
-    if metashare_records:
-        for metashare_record in metashare_records:
-            lxml_record = etree.fromstring(
-                etree.tostring(metashare_record.xml))
-            mapped_record = MSRecordParser(lxml_record)
-            if (
-                mapped_record.check_pid_exists()
-                and mapped_record.check_resourcetype_corpus()
-            ):
-                mapped_records_list.append(mapped_record.to_dict())
+    for metashare_record in metashare_records:
+        lxml_record = etree.fromstring(etree.tostring(metashare_record.xml))
+        mapped_record = MSRecordParser(lxml_record)
+        if (
+            mapped_record.check_pid_exists()
+            and mapped_record.check_resourcetype_corpus()
+        ):
+            mapped_records_list.append(mapped_record.to_dict())
     return mapped_records_list
 
 

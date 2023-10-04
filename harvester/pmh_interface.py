@@ -30,6 +30,7 @@ class PMH_API:
     def fetch_changed_records(self, datetime):
         """
         Fetch records that are new or updated since a date.
+
         :param datetime: date (and time) string value
         """
         try:
@@ -39,4 +40,4 @@ class PMH_API:
             for metadata_record in metadata_records:
                 yield metadata_record
         except NoRecordsMatch:
-            return None
+            return
