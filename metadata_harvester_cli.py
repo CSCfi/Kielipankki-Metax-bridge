@@ -50,9 +50,7 @@ def records_to_dict(date_time=None, url="https://kielipankki.fi/md_api/que"):
     :return: list of mapped Metashare records (dictionaries)
     """
     api = PMH_API(url)
-    if not date_time:
-        metashare_records = api.fetch_records()
-    metashare_records = api.fetch_changed_records(date_time)
+    metashare_records = api.fetch_records(from_timestamp=date_time)
 
     mapped_records_list = []
     for metashare_record in metashare_records:
