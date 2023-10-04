@@ -17,25 +17,21 @@ class PMH_API:
         """
         self.sickle = Sickle(url)
 
-    def fetch_records(self):
-        """
-        Fetch all non-deleted records from the API.
-        """
-        metadata_records = self.sickle.ListRecords(
-            metadataPrefix="info", ignore_deleted=True
-        )
-        for metadata_record in metadata_records:
-            yield metadata_record
-
-    def fetch_changed_records(self, datetime):
+    def fetch_records(self, from_timestamp=None):
         """
         Fetch records that are new or updated since a date.
+
+        If no date is given, all records are fetched.
 
         :param datetime: date (and time) string value
         """
         try:
             metadata_records = self.sickle.ListRecords(
-                **{"metadataPrefix": "info", "from": datetime, "ignore_deleted": True}
+                **{
+                    "metadataPrefix": "info",
+                    "from": from_timestamp,
+                    "ignore_deleted": True,
+                }
             )
             for metadata_record in metadata_records:
                 yield metadata_record
