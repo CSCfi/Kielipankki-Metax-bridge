@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/             http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2024-01-04T13:32:00Z</responseDate>
+  <request verb="ListRecords" metadataPrefix="info">https://kielipankki.fi/md_api/que</request>
+  <ListRecords>
+    <record>
+      <header>
+        <identifier>oai:kielipankki.fi:shf53fd0</identifier>
+        <datestamp>2022-09-02T10:41:46Z</datestamp>
+      </header>
+      <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+          <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceName lang="fi">Silva Kiurun ajanilmausaineisto</resourceName>
+            <resourceName lang="en">Silva Kiuru's Time Expressions Corpus</resourceName>
+            <description lang="fi">Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.</description>
+            <description lang="en">This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.</description>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2017021609</identifier>
+          </identificationInfo>
+          <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <availability>available-unrestrictedUse</availability>
+            <licenceInfo>
+              <licence>underNegotiation</licence>
+              <licensor>
+                <organizationInfo>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </licensor>
+              <distributionRightsHolder>
+                <organizationInfo>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </distributionRightsHolder>
+            </licenceInfo>
+            <iprHolder>
+              <organizationInfo>
+                <organizationName lang="en">University of Helsinki</organizationName>
+                <organizationShortName lang="en">UHEL</organizationShortName>
+                <communicationInfo>
+                  <email>firstname.surname@helsinki.fi</email>
+                </communicationInfo>
+              </organizationInfo>
+            </iprHolder>
+          </distributionInfo>
+          <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <surname lang="en">Siiroinen</surname>
+            <givenName lang="en">Mari</givenName>
+            <sex>female</sex>
+            <communicationInfo>
+              <email>mari.siiroinen@helsinki.fi</email>
+              <country>Finland</country>
+            </communicationInfo>
+            <affiliation>
+              <organizationName lang="en">University of Helsinki</organizationName>
+              <departmentName lang="en">Department of Finnish, Finno-Ugrian and Scandinavian Studies</departmentName>
+              <communicationInfo>
+                <email>miia.rajala@helsinki.fi</email>
+                <url>http://www.helsinki.fi/fus/index.htm</url>
+                <country>Finland</country>
+              </communicationInfo>
+            </affiliation>
+          </contactPerson>
+          <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <metadataCreationDate>2017-02-15</metadataCreationDate>
+            <metadataCreator>
+              <surname lang="und">Bartis</surname>
+              <givenName lang="und">Imre</givenName>
+              <sex>male</sex>
+              <communicationInfo>
+                <email>imre.bartis@helsinki.fi</email>
+                <url>http://orcid.org/0000-0002-9455-8771</url>
+                <city>Helsinki</city>
+                <country>Finland</country>
+              </communicationInfo>
+              <position>Project Coordinator</position>
+            </metadataCreator>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageName>Finnish</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLanguageId>fi</metadataLanguageId>
+            <metadataLastDateUpdated>2017-02-15</metadataLastDateUpdated>
+          </metadataInfo>
+          <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <corpusInfo>
+              <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                <corpusTextInfo>
+                  <mediaType>text</mediaType>
+                  <lingualityInfo>
+                    <lingualityType>monolingual</lingualityType>
+                  </lingualityInfo>
+                  <languageInfo>
+                    <languageId>fi</languageId>
+                    <languageName>Finnish</languageName>
+                  </languageInfo>
+                  <modalityInfo>
+                    <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+                  <sizeInfo>
+                    <size>1</size>
+                    <sizeUnit>other</sizeUnit>
+                  </sizeInfo>
+                  <textFormatInfo>
+                    <mimeType>application/msword</mimeType>
+                  </textFormatInfo>
+                </corpusTextInfo>
+              </corpusMediaType>
+            </corpusInfo>
+          </resourceComponentType>
+        </info:resourceInfo>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:kielipankki.fi:sh0f73e0</identifier>
+        <datestamp>2022-09-02T10:41:46Z</datestamp>
+      </header>
+      <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+          <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceName lang="en">Argumentation and Argument Visualisation in Promoting Strategic Reading and Decision-making</resourceName>
+            <description lang="en">Corpus of upper secondary school students' think-aloud performances when searching the Internet for information; recordings and transcriptions; text files.</description>
+            <url>http://www.jyu.fi/coalition/</url>
+            <url>https://kitwiki.csc.fi/twiki/bin/view/FinCLARIN/FinClarinSiteJY</url>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-20140730196</identifier>
+          </identificationInfo>
+          <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <availability>available-restrictedUse</availability>
+            <licenceInfo>
+              <licence>underNegotiation</licence>
+              <licensor>
+                <personInfo>
+                  <surname lang="en">Kiili</surname>
+                  <givenName lang="en">Carita</givenName>
+                  <sex>female</sex>
+                  <communicationInfo>
+                    <email>carita.kiili@jyu.fi</email>
+                  </communicationInfo>
+                  <affiliation>
+                    <organizationName lang="fi">Jyväskylän yliopisto</organizationName>
+                    <organizationName lang="en">University of Jyväskylä</organizationName>
+                    <organizationShortName lang="en">JYU</organizationShortName>
+                    <departmentName lang="fi">Kielten laitos</departmentName>
+                    <departmentName lang="en">Department of Languages</departmentName>
+                    <communicationInfo>
+                      <email>registry@jyu.fi</email>
+                      <url>https://www.jyu.fi/en</url>
+                      <city>Jyväskylä</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </affiliation>
+                </personInfo>
+              </licensor>
+              <distributionRightsHolder>
+                <personInfo>
+                  <surname lang="en">Kiili</surname>
+                  <givenName lang="en">Carita</givenName>
+                  <sex>female</sex>
+                  <communicationInfo>
+                    <email>carita.kiili@jyu.fi</email>
+                  </communicationInfo>
+                  <affiliation>
+                    <organizationName lang="fi">Jyväskylän yliopisto</organizationName>
+                    <organizationName lang="en">University of Jyväskylä</organizationName>
+                    <organizationShortName lang="en">JYU</organizationShortName>
+                    <departmentName lang="fi">Kielten laitos</departmentName>
+                    <departmentName lang="en">Department of Languages</departmentName>
+                    <communicationInfo>
+                      <email>registry@jyu.fi</email>
+                      <url>https://www.jyu.fi/en</url>
+                      <city>Jyväskylä</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </affiliation>
+                </personInfo>
+              </distributionRightsHolder>
+            </licenceInfo>
+            <iprHolder>
+              <personInfo>
+                <surname lang="en">Kiili</surname>
+                <givenName lang="en">Carita</givenName>
+                <sex>female</sex>
+                <communicationInfo>
+                  <email>carita.kiili@jyu.fi</email>
+                </communicationInfo>
+                <affiliation>
+                  <organizationName lang="fi">Jyväskylän yliopisto</organizationName>
+                  <organizationName lang="en">University of Jyväskylä</organizationName>
+                  <organizationShortName lang="en">JYU</organizationShortName>
+                  <departmentName lang="fi">Kielten laitos</departmentName>
+                  <departmentName lang="en">Department of Languages</departmentName>
+                  <communicationInfo>
+                    <email>registry@jyu.fi</email>
+                    <url>https://www.jyu.fi/en</url>
+                    <city>Jyväskylä</city>
+                    <country>Finland</country>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </iprHolder>
+          </distributionInfo>
+          <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <surname lang="en">Kiili</surname>
+            <givenName lang="en">Carita</givenName>
+            <sex>female</sex>
+            <communicationInfo>
+              <email>carita.kiili@jyu.fi</email>
+            </communicationInfo>
+            <affiliation>
+              <organizationName lang="fi">Jyväskylän yliopisto</organizationName>
+              <organizationName lang="en">University of Jyväskylä</organizationName>
+              <organizationShortName lang="en">JYU</organizationShortName>
+              <departmentName lang="fi">Kielten laitos</departmentName>
+              <departmentName lang="en">Department of Languages</departmentName>
+              <communicationInfo>
+                <email>registry@jyu.fi</email>
+                <url>https://www.jyu.fi/en</url>
+                <city>Jyväskylä</city>
+                <country>Finland</country>
+              </communicationInfo>
+            </affiliation>
+          </contactPerson>
+          <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <metadataCreationDate>2014-07-30</metadataCreationDate>
+            <metadataCreator>
+              <surname lang="en">Bartis</surname>
+              <givenName lang="en">Imre</givenName>
+              <sex>male</sex>
+              <communicationInfo>
+                <email>imre.bartis@helsinki.fi</email>
+                <url>http://orcid.org/0000-0002-9455-8771</url>
+                <city>Helsinki</city>
+                <country>Finland</country>
+              </communicationInfo>
+              <position>Project Coordinator</position>
+              <affiliation>
+                <organizationName lang="en">FIN-CLARIN</organizationName>
+                <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
+                <departmentName lang="en">University of Helsinki</departmentName>
+                <communicationInfo>
+                  <email>finclarin@helsinki.fi</email>
+                  <url>http://www.helsinki.fi/fin-clarin</url>
+                  <address>PO Box 24 (Unioninkatu 40)</address>
+                  <zipCode>00014</zipCode>
+                  <city>University of Helsinki</city>
+                  <country>Finland</country>
+                </communicationInfo>
+              </affiliation>
+            </metadataCreator>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLastDateUpdated>2014-07-30</metadataLastDateUpdated>
+          </metadataInfo>
+          <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <corpusInfo>
+              <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                <corpusTextInfo>
+                  <mediaType>text</mediaType>
+                  <lingualityInfo>
+                    <lingualityType>monolingual</lingualityType>
+                  </lingualityInfo>
+                  <languageInfo>
+                    <languageId>fi</languageId>
+                    <languageName>Finnish</languageName>
+                  </languageInfo>
+                  <sizeInfo>
+                    <size>1</size>
+                    <sizeUnit>other</sizeUnit>
+                  </sizeInfo>
+                </corpusTextInfo>
+                <corpusAudioInfo>
+                  <mediaType>audio</mediaType>
+                  <lingualityInfo>
+                    <lingualityType>monolingual</lingualityType>
+                  </lingualityInfo>
+                  <languageInfo>
+                    <languageId>fi</languageId>
+                    <languageName>Finnish</languageName>
+                  </languageInfo>
+                  <audioSizeInfo>
+                    <sizeInfo>
+                      <size>1</size>
+                      <sizeUnit>other</sizeUnit>
+                    </sizeInfo>
+                  </audioSizeInfo>
+                </corpusAudioInfo>
+              </corpusMediaType>
+            </corpusInfo>
+          </resourceComponentType>
+        </info:resourceInfo>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:kielipankki.fi:sh41ac60</identifier>
+        <datestamp>2022-11-17T04:02:11Z</datestamp>
+      </header>
+      <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+          <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceName lang="fi">Suomenkielinen OpenSubtitles 2017, Kielipankin Korp-versio</resourceName>
+            <resourceName lang="en">Finnish OpenSubtitles 2017, Kielipankki Korp Version</resourceName>
+            <description lang="fi">Aineisto kattaa Opensubtitles.org sivuston jakamat elokuvien ja tv-ohjelmien suomenkieliset tekstitykset. Aineisto on johdannainen
+monikielisestä Opensubtitles2018 korpuksesta (http://opus.nlpl.eu/OpenSubtitles2018.php). Aineisto on jaettu lähteisiin ja lauseisiin. Lauseet on morfosyntaktisesti jäsennetty käyttäen Turku Dependenssi jäsennintä (http://turkunlp.github.io/Finnish-dep-parser/).</description>
+            <description lang="en">The corpus is available in Kielipankki through the Interface Korp.
+The corpus contains Finnish subtitles for movies and TV-series from http://www.opensubtitles.org/ The corpus is a derivative of the [OPUS OpenSubtitles2018](http://opus.nlpl.eu/OpenSubtitles2018.php) multilingual corpus. Information on the material processing up to sentence splitting can be found in the original publication Lison &amp; Tiedemann (2016). The corpus has been tokenized and annotated with morpho-syntactic analysis produced with the [Turku Dependency Parser](http://turkunlp.github.io/Finnish-dep-parser/). P. Lison and J. Tiedemann, 2016, OpenSubtitles2016: Extracting Large Parallel Corpora from Movie and TV Subtitles. In Proceedings of the 10th International Conference on Language Resources and Evaluation (LREC 2016)</description>
+            <resourceShortName lang="en">opensub-fi-2017-korp</resourceShortName>
+            <url>http://urn.fi/urn:nbn:fi:lb-2018060404</url>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2018060403</identifier>
+          </identificationInfo>
+          <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <availability>available-unrestrictedUse</availability>
+            <licenceInfo>
+              <licence>CC-BY</licence>
+              <restrictionsOfUse>attribution</restrictionsOfUse>
+              <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+              <licensor>
+                <personInfo>
+                  <surname lang="fi">Huovilainen</surname>
+                  <givenName lang="fi">Tatu</givenName>
+                  <sex>male</sex>
+                  <communicationInfo>
+                    <email>tatu.huovilainen@helsinki.fi</email>
+                  </communicationInfo>
+                  <affiliation>
+                    <organizationName lang="en">University of Helsinki</organizationName>
+                    <organizationShortName lang="en">UHEL</organizationShortName>
+                    <communicationInfo>
+                      <email>firstname.surname@helsinki.fi</email>
+                    </communicationInfo>
+                  </affiliation>
+                </personInfo>
+              </licensor>
+              <distributionRightsHolder>
+                <organizationInfo>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </distributionRightsHolder>
+            </licenceInfo>
+            <iprHolder>
+              <personInfo>
+                <surname lang="fi">Huovilainen</surname>
+                <givenName lang="fi">Tatu</givenName>
+                <sex>male</sex>
+                <communicationInfo>
+                  <email>tatu.huovilainen@helsinki.fi</email>
+                </communicationInfo>
+                <affiliation>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </iprHolder>
+          </distributionInfo>
+          <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <surname lang="en">FIN-CLARIN</surname>
+            <givenName lang="en">User support</givenName>
+            <communicationInfo>
+              <email>fin-clarin@helsinki.fi</email>
+            </communicationInfo>
+          </contactPerson>
+          <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <metadataCreationDate>2018-06-04</metadataCreationDate>
+            <metadataCreator>
+              <surname lang="en">Dieckmann</surname>
+              <givenName lang="en">Ute</givenName>
+              <sex>unknown</sex>
+              <communicationInfo>
+                <email>ute.dieckmann@helsinki.fi</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="en">FIN-CLARIN</organizationName>
+                <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
+                <departmentName lang="en">University of Helsinki</departmentName>
+                <communicationInfo>
+                  <email>finclarin@helsinki.fi</email>
+                  <url>http://www.helsinki.fi/fin-clarin</url>
+                  <address>PO Box 24 (Unioninkatu 40)</address>
+                  <zipCode>00014</zipCode>
+                  <city>University of Helsinki</city>
+                  <country>Finland</country>
+                </communicationInfo>
+              </affiliation>
+            </metadataCreator>
+            <metadataCreator>
+              <surname lang="en">Westerlund</surname>
+              <givenName lang="en">Hanna</givenName>
+              <communicationInfo>
+                <email>hanna.westerlund@helsinki.fi</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="en">FIN-CLARIN</organizationName>
+                <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
+                <departmentName lang="en">University of Helsinki</departmentName>
+                <communicationInfo>
+                  <email>finclarin@helsinki.fi</email>
+                  <url>http://www.helsinki.fi/fin-clarin</url>
+                  <address>PO Box 24 (Unioninkatu 40)</address>
+                  <zipCode>00014</zipCode>
+                  <city>University of Helsinki</city>
+                  <country>Finland</country>
+                </communicationInfo>
+              </affiliation>
+            </metadataCreator>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLastDateUpdated>2021-08-13</metadataLastDateUpdated>
+            <revision>Link to resource group page and attribution details added</revision>
+          </metadataInfo>
+          <resourceDocumentationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <documentation>
+              <documentUnstructured>CHANGE LOG 12.11.2019 Added Kielipankki Korp Version to the title</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>CHANGE LOG: 30.1.2020 Availability changed from Restricted to Unrestricted.</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>Resource group page: http://urn.fi/urn:nbn:fi:lb-2021081202</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>How to cite: https://www.kielipankki.fi/viittaus/?key=opensub-fi-2017-korp&amp;lang=en</documentUnstructured>
+            </documentation>
+          </resourceDocumentationInfo>
+          <resourceCreationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceCreator>
+              <personInfo>
+                <surname lang="fi">Huovilainen</surname>
+                <givenName lang="fi">Tatu</givenName>
+                <sex>male</sex>
+                <communicationInfo>
+                  <email>tatu.huovilainen@helsinki.fi</email>
+                </communicationInfo>
+                <affiliation>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </resourceCreator>
+          </resourceCreationInfo>
+          <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <relationType>IsVariantFormOf</relationType>
+            <relatedResource>
+              <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2019110801</targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <corpusInfo>
+              <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                <corpusTextInfo>
+                  <mediaType>text</mediaType>
+                  <lingualityInfo>
+                    <lingualityType>monolingual</lingualityType>
+                  </lingualityInfo>
+                  <languageInfo>
+                    <languageId>fi</languageId>
+                    <languageName>Finnish</languageName>
+                  </languageInfo>
+                  <sizeInfo>
+                    <size>267645406</size>
+                    <sizeUnit>tokens</sizeUnit>
+                  </sizeInfo>
+                  <sizeInfo>
+                    <size>52002003</size>
+                    <sizeUnit>sentences</sizeUnit>
+                  </sizeInfo>
+                </corpusTextInfo>
+              </corpusMediaType>
+            </corpusInfo>
+          </resourceComponentType>
+        </info:resourceInfo>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:kielipankki.fi:sh8b3620</identifier>
+        <datestamp>2022-09-02T10:41:46Z</datestamp>
+      </header>
+      <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+          <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceName lang="en">Lingsoft Proofreader for ICT Language for Finnish</resourceName>
+            <description lang="fi">Erityisalojen tarkistimet ovat Lingsoftin ainutlaatuinen ja kustannuksia säästävä ratkaisu toimialojen sisäisen kielen tarkistamiseen. Lingsoft Proofreader for Finnish ICT Language tarkistaa ICT-terminologian Microsoft-tyylioppaan mukaisesti.</description>
+            <description lang="en">Lingsoft Proofreader for Finnish ICT Language checks ICT terminology in accordance with the Microsoft Style Guide.</description>
+            <url>http://www.lingsoft.fi/tuotteet/msstyle</url>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2014073096</identifier>
+          </identificationInfo>
+          <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <availability>available-restrictedUse</availability>
+            <licenceInfo>
+              <licence>underNegotiation</licence>
+              <fee>250,00 € + VAT 24 %</fee>
+              <licensor>
+                <organizationInfo>
+                  <organizationName lang="en">Lingsoft</organizationName>
+                  <communicationInfo>
+                    <email>etunimi.sukunimi@lingsoft.fi</email>
+                    <url>http://www.lingsoft.fi</url>
+                  </communicationInfo>
+                </organizationInfo>
+              </licensor>
+              <distributionRightsHolder>
+                <personInfo>
+                  <surname lang="en">Contact</surname>
+                  <communicationInfo>
+                    <email>info@lingsoft.fi</email>
+                  </communicationInfo>
+                  <affiliation>
+                    <organizationName lang="en">Lingsoft</organizationName>
+                    <communicationInfo>
+                      <email>etunimi.sukunimi@lingsoft.fi</email>
+                      <url>http://www.lingsoft.fi</url>
+                    </communicationInfo>
+                  </affiliation>
+                </personInfo>
+              </distributionRightsHolder>
+              <userNature>commercial</userNature>
+            </licenceInfo>
+            <iprHolder>
+              <organizationInfo>
+                <organizationName lang="en">Lingsoft</organizationName>
+                <communicationInfo>
+                  <email>etunimi.sukunimi@lingsoft.fi</email>
+                  <url>http://www.lingsoft.fi</url>
+                </communicationInfo>
+              </organizationInfo>
+            </iprHolder>
+          </distributionInfo>
+          <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <surname lang="en">Contact</surname>
+            <givenName lang="en">-</givenName>
+            <communicationInfo>
+              <email>firstname.surname@lingsoft.fi</email>
+              <url>http://www.lingsoft.fi</url>
+            </communicationInfo>
+            <affiliation>
+              <organizationName lang="en">Lingsoft</organizationName>
+              <communicationInfo>
+                <email>etunimi.sukunimi@lingsoft.fi</email>
+                <url>http://www.lingsoft.fi</url>
+              </communicationInfo>
+            </affiliation>
+          </contactPerson>
+          <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <metadataCreationDate>2012-12-06</metadataCreationDate>
+            <metadataCreator>
+              <surname lang="en">Pöyhönen</surname>
+              <givenName lang="en">Saara</givenName>
+              <sex>female</sex>
+              <communicationInfo>
+                <email>saara.poyhonen@helsinki.fi</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="en">University of Helsinki</organizationName>
+                <organizationShortName lang="en">UHEL</organizationShortName>
+                <communicationInfo>
+                  <email>firstname.surname@helsinki.fi</email>
+                </communicationInfo>
+              </affiliation>
+            </metadataCreator>
+            <originalMetadataLink>http://www.lingsoft.fi/tuotteet/msstyle</originalMetadataLink>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageName>Finnish</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLanguageId>fi</metadataLanguageId>
+            <metadataLastDateUpdated>2012-12-06</metadataLastDateUpdated>
+          </metadataInfo>
+          <usageInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <foreseenUseInfo>
+              <foreseenUse>humanUse</foreseenUse>
+              <useNLPSpecific>spellChecking</useNLPSpecific>
+            </foreseenUseInfo>
+            <actualUseInfo>
+              <actualUse>humanUse</actualUse>
+              <useNLPSpecific>spellChecking</useNLPSpecific>
+            </actualUseInfo>
+          </usageInfo>
+          <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <toolServiceInfo>
+              <resourceType>toolService</resourceType>
+              <toolServiceType>tool</toolServiceType>
+              <toolServiceSubtype>Spell checker</toolServiceSubtype>
+              <languageDependent>true</languageDependent>
+              <inputInfo>
+                <mediaType>text</mediaType>
+                <modalityType>writtenLanguage</modalityType>
+                <languageName>Finnish</languageName>
+                <languageId>fi</languageId>
+              </inputInfo>
+              <outputInfo>
+                <mediaType>text</mediaType>
+                <modalityType>writtenLanguage</modalityType>
+                <languageName>Finnish</languageName>
+                <languageId>fi</languageId>
+              </outputInfo>
+            </toolServiceInfo>
+          </resourceComponentType>
+        </info:resourceInfo>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:kielipankki.fi:sh48ab80</identifier>
+        <datestamp>2022-09-07T04:12:33Z</datestamp>
+      </header>
+      <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+          <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceName lang="fi">Ylen suomenkielinen uutisarkisto 2011-2018, sekoitettu, Korp</resourceName>
+            <resourceName lang="en">Yle Finnish News Archive 2011-2018, scrambled, Korp</resourceName>
+            <description lang="en">The corpus, containing the articles from YLE https://yle.fi from 2011-2018  as scrambled sentences, is available at Korp.</description>
+            <resourceShortName lang="en">ylenews-fi-2011-2018-s-korp</resourceShortName>
+            <url>http://urn.fi/urn:nbn:fi:lb-2019121006</url>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2019121004</identifier>
+          </identificationInfo>
+          <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <availability>available-unrestrictedUse</availability>
+            <licenceInfo>
+              <licence>CC-BY</licence>
+              <restrictionsOfUse>attribution</restrictionsOfUse>
+              <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+              <licensor>
+                <organizationInfo>
+                  <organizationName lang="fi">Yleisradio Oy</organizationName>
+                  <organizationName lang="en">Finnish Broadcasting Company (Yle)</organizationName>
+                  <organizationShortName lang="fi">Yle</organizationShortName>
+                  <communicationInfo>
+                    <email>yleinfo@yle.fi</email>
+                    <url>https://yle.fi/</url>
+                    <country>Finland</country>
+                  </communicationInfo>
+                </organizationInfo>
+              </licensor>
+              <distributionRightsHolder>
+                <organizationInfo>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </distributionRightsHolder>
+            </licenceInfo>
+            <iprHolder>
+              <organizationInfo>
+                <organizationName lang="fi">Yleisradio Oy</organizationName>
+                <organizationName lang="en">Finnish Broadcasting Company (Yle)</organizationName>
+                <organizationShortName lang="fi">Yle</organizationShortName>
+                <communicationInfo>
+                  <email>yleinfo@yle.fi</email>
+                  <url>https://yle.fi/</url>
+                  <country>Finland</country>
+                </communicationInfo>
+              </organizationInfo>
+            </iprHolder>
+          </distributionInfo>
+          <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <surname lang="en">FIN-CLARIN</surname>
+            <givenName lang="en">User support</givenName>
+            <communicationInfo>
+              <email>fin-clarin@helsinki.fi</email>
+            </communicationInfo>
+          </contactPerson>
+          <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <metadataCreationDate>2019-12-12</metadataCreationDate>
+            <metadataCreator>
+              <surname lang="en">Jauhiainen</surname>
+              <givenName lang="en">Tommi</givenName>
+              <communicationInfo>
+                <email>firstname.lastname@helsinki.fi</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="en">University of Helsinki</organizationName>
+                <organizationShortName lang="en">UHEL</organizationShortName>
+                <communicationInfo>
+                  <email>firstname.surname@helsinki.fi</email>
+                </communicationInfo>
+              </affiliation>
+            </metadataCreator>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLastDateUpdated>2019-12-12</metadataLastDateUpdated>
+          </metadataInfo>
+          <resourceDocumentationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <documentation>
+              <documentUnstructured>Resource group page http://urn.fi/urn:nbn:fi:lb-2021020901</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>How to cite: https://www.kielipankki.fi/viittaus/?key=ylenews-fi-2011-2018-s-korp&amp;lang=en</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>CHANGE LOG: 21.6.2020 restriction Attribution added.</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentInfo>
+                <documentType>other</documentType>
+                <title lang="fi">Lisenssi (Ylen uutisarkisto, sekoitetut virkkeet)</title>
+                <title lang="en">License (Yle News Archive, scrambled sentences)</title>
+                <editor>FIN-CLARIN</editor>
+                <url>http://urn.fi/urn:nbn:fi:lb-2022082901</url>
+              </documentInfo>
+            </documentation>
+          </resourceDocumentationInfo>
+          <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <relationType>isDerivedFrom</relationType>
+            <relatedResource>
+              <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2017070501</targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <relationType>isVariantFormOf</relationType>
+            <relatedResource>
+              <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2019121003</targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <relationType>isSourceOf</relationType>
+            <relatedResource>
+              <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2020021107</targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <relationType>IsPartOf</relationType>
+            <relatedResource>
+              <targetResourceNameURI>Yle Finnish News Archive 2011-2021, scrambled, Korp http://urn.fi/urn:nbn:fi:lb-2022032205</targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <corpusInfo>
+              <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                <corpusTextInfo>
+                  <mediaType>text</mediaType>
+                  <lingualityInfo>
+                    <lingualityType>monolingual</lingualityType>
+                  </lingualityInfo>
+                  <languageInfo>
+                    <languageId>fi</languageId>
+                    <languageName>Finnish</languageName>
+                  </languageInfo>
+                  <sizeInfo>
+                    <size>207500221</size>
+                    <sizeUnit>tokens</sizeUnit>
+                  </sizeInfo>
+                  <sizeInfo>
+                    <size>18708231</size>
+                    <sizeUnit>sentences</sizeUnit>
+                  </sizeInfo>
+                </corpusTextInfo>
+              </corpusMediaType>
+            </corpusInfo>
+          </resourceComponentType>
+        </info:resourceInfo>
+      </metadata>
+    </record>
+  </ListRecords>
+</OAI-PMH>
