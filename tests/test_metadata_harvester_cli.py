@@ -231,14 +231,6 @@ def test_send_data_to_metax_no_records_put(shared_request_mocker, metax_base_url
     assert shared_request_mocker.call_count == 0
 
 
-def test_collect_metashare_pids(mock_pids_list_from_metashare):
-    """
-    Test that a list of PIDs from Metashare records are returned.
-    """
-    pids = metadata_harvester_cli.collect_metashare_pids()
-    assert pids == mock_pids_list_from_metashare
-
-
 def test_collect_metax_pids(mock_pids_list_in_datacatalog):
     """
     Test that a list of PIDs from Metax are returned.

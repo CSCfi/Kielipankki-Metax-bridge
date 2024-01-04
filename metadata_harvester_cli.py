@@ -78,28 +78,6 @@ def send_data_to_metax(mapped_records):
             metax_api.create_record(mapped_record)
 
 
-def collect_metashare_pids(url="https://kielipankki.fi/md_api/que"):
-    """
-    Fetches Metashare records and returns their PIDs.
-    :return: List of PIDs as strings
-    """
-    api = PMH_API(url)
-    metashare_pids = []
-    metadata_contents = api.fetch_records()
-    for metadata_content in metadata_contents:
-        lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
-        metadata_record = MSRecordParser(lxml_record)
-        if (
-            metadata_record.check_pid_exists()
-            and metadata_record.check_resourcetype_corpus()
-        ):
-            pid = metadata_record.get_identifier(
-                "//info:identificationInfo/info:identifier/text()"
-            )
-            metashare_pids.append(pid)
-    return metashare_pids
-
-
 def collect_metax_pids():
     """
     Fetches all existing PIDs in Kielipankki catalog records in Metax.
@@ -128,6 +106,8 @@ def main(log_file):
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
     :param log_file: log file where harvest dates are logged
     """
+    metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
+
     harvested_date = last_harvest_date(log_file)
     logger_harvester.info("Started")
     send_data_to_metax(records_to_dict(harvested_date))
@@ -136,7 +116,7 @@ def main(log_file):
     else:
         logger_harvester.info("Success, all records harvested")
 
-    sync_deleted_records(collect_metashare_pids(), collect_metax_pids())
+    sync_deleted_records(metashare_api.corpus_pids, collect_metax_pids())
 
 
 if __name__ == "__main__":
