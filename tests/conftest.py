@@ -62,7 +62,8 @@ def kielipankki_datacatalog_id():
 def mock_get_response_json():
     """A mocked response for a single dataset from Metax"""
     file_string = _get_file_as_string(
-        "tests/test_data/metax_single_record_response.json")
+        "tests/test_data/metax_single_record_response.json"
+    )
     return json.loads(file_string)
 
 
@@ -133,8 +134,9 @@ def mock_metashare_record_not_found_in_datacatalog(
     exist.
     """
     dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
-    shared_request_mocker.get(dataset_request_matcher, json={
-                              "count": 0, "results": [], "next": None})
+    shared_request_mocker.get(
+        dataset_request_matcher, json={"count": 0, "results": [], "next": None}
+    )
     return shared_request_mocker
 
 
@@ -148,8 +150,11 @@ def mock_metashare_record_found_in_datacatalog(
     dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
     shared_request_mocker.get(
         dataset_request_matcher,
-        json={"count": 1, "results": [
-            {"id": metax_dataset_id, "persistent_identifier": dataset_pid}], "next": None},
+        json={
+            "count": 1,
+            "results": [{"id": metax_dataset_id, "persistent_identifier": dataset_pid}],
+            "next": None,
+        },
     )
     return shared_request_mocker
 
@@ -197,9 +202,7 @@ def mock_pids_list_in_datacatalog_matching_metashare(
     This fixture needed for testing "syncing" operation.
     """
     pid_data = {
-        "results": [
-            {"persistent_identifier": dataset_pid}
-        ],
+        "results": [{"persistent_identifier": dataset_pid}],
         "next": None,
     }
     shared_request_mocker.get(
@@ -225,10 +228,8 @@ def kielipankki_api_url():
 
 @pytest.fixture
 def mock_pids_list_from_metashare(
-        shared_request_mocker,
-        kielipankki_api_url,
-        single_record_xml,
-        dataset_pid):
+    shared_request_mocker, kielipankki_api_url, single_record_xml, dataset_pid
+):
     """
     Mock a list of PIDs fetched from Metashare records.
     """

@@ -29,9 +29,8 @@ def test_record_id_pid_not_in_datacatalog(
 
 
 def test_create_record_successful(
-        mock_requests_post,
-        caplog, metax_api,
-        mock_post_put_response_json):
+    mock_requests_post, caplog, metax_api, mock_post_put_response_json
+):
     """Check that a successful post request to Metax is made of a well-formed dictionary."""
     metadata_dict = {
         "persistent_identifier": "urn.fi/urn:nbn:fi:lb-201603170300",
@@ -61,13 +60,12 @@ def test_create_record_successful(
 
 def test_create_dataset_failed(mock_requests_post, caplog, metax_base_url, metax_api):
     """Check that an ill-formed dictionary results in a bad request to Metax."""
-    mock_requests_post.post(
-        f"{metax_base_url}/datasets", status_code=400)
-    metadata_dict = {
-        "invalid_key": "invalid_value"
-    }
+    mock_requests_post.post(f"{metax_base_url}/datasets", status_code=400)
+    metadata_dict = {"invalid_key": "invalid_value"}
 
-    with pytest.raises(requests.exceptions.RequestException), caplog.at_level(logging.ERROR):
+    with pytest.raises(requests.exceptions.RequestException), caplog.at_level(
+        logging.ERROR
+    ):
         response = metax_api.create_record(metadata_dict)
         assert response.status_code == 400
     assert mock_requests_post.request_history[0].method == "POST"
@@ -75,7 +73,9 @@ def test_create_dataset_failed(mock_requests_post, caplog, metax_base_url, metax
     assert "Request failed. Method: POST" in caplog.text
 
 
-def test_update_dataset_successful(mock_requests_put, caplog, metax_api, mock_post_put_response_json):
+def test_update_dataset_successful(
+    mock_requests_put, caplog, metax_api, mock_post_put_response_json
+):
     """Test that an existing dataset in Metax is successfully updated."""
     metax_dataset_id = "1f32f478-8e7e-4d72-9638-d29a4f1430aa"
     sample_dict = {
@@ -151,11 +151,8 @@ def test_delete_record(mock_delete_record, metax_dataset_id, metax_api, metax_ba
 
 
 def test_delete_record_failed(
-    mock_delete_record,
-        metax_dataset_id,
-        metax_api,
-        caplog,
-        metax_base_url):
+    mock_delete_record, metax_dataset_id, metax_api, caplog, metax_base_url
+):
     """
     Test that a DELETE request of a dataset fails (404 response).
     """
