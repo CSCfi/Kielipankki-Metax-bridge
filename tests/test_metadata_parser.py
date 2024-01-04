@@ -40,16 +40,14 @@ def test_get_description(single_record):
 def test_get_identifier(single_record, dataset_pid):
     """Check that a PID is returned."""
     record = MSRecordParser(single_record)
-    result = record.get_identifier(
-        "//info:identificationInfo/info:identifier/text()")
+    result = record.get_identifier("//info:identificationInfo/info:identifier/text()")
     assert result == dataset_pid
 
 
 def test_get_modified_date(single_record):
     """Check that the modified date is returned in correct format."""
     record = MSRecordParser(single_record)
-    result = record._get_date(
-        "//info:metadataInfo/info:metadataLastDateUpdated/text()")
+    result = record._get_date("//info:metadataInfo/info:metadataLastDateUpdated/text()")
     expected_result = "2017-02-15T00:00:00.000000Z"
     assert result == expected_result
 
@@ -57,8 +55,7 @@ def test_get_modified_date(single_record):
 def test_get_issued_date(single_record):
     """Check that the issued date is returned in correct format."""
     record = MSRecordParser(single_record)
-    result = record._get_date(
-        "//info:metadataInfo/info:metadataCreationDate/text()")
+    result = record._get_date("//info:metadataInfo/info:metadataCreationDate/text()")
     expected_result = "2017-02-15T00:00:00.000000Z"
     assert result == expected_result
 
@@ -138,8 +135,7 @@ def license_with_custom_url_record():
 
 def test_license_custom_url_record(license_with_custom_url_record):
     """Test that license details and availability are mapped."""
-    license_with_custom_url_record = MSRecordParser(
-        license_with_custom_url_record)
+    license_with_custom_url_record = MSRecordParser(license_with_custom_url_record)
     result = license_with_custom_url_record._map_access_rights()
     expected_result = {
         "license": [

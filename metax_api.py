@@ -56,8 +56,7 @@ class MetaxAPI:
             )
             response.raise_for_status()
             if method != "GET":
-                self.logger.info(
-                    "Request succeeded. Method: %s, URL: %s", method, url)
+                self.logger.info("Request succeeded. Method: %s, URL: %s", method, url)
             if method == "DELETE":
                 return response
             return response.json() if response.status_code == 200 else None
@@ -73,8 +72,7 @@ class MetaxAPI:
         :param dataset pid: the persistent identifier of the record
         :return: the record identifier in Metax or None
         """
-        params = {"data_catalog__id": self.catalog_id,
-                  "persistent_identifier": pid}
+        params = {"data_catalog__id": self.catalog_id, "persistent_identifier": pid}
         endpoint = "datasets"
         result = self._make_request("GET", endpoint, params)
         return result["results"][0]["id"] if result["count"] == 1 else None
@@ -113,8 +111,7 @@ class MetaxAPI:
         url = f"{self.base_url}/datasets?data_catalog__id={self.catalog_id}&limit=100"
         results = []
         while url:
-            response = requests.get(
-                url, headers=self.headers, timeout=self.timeout)
+            response = requests.get(url, headers=self.headers, timeout=self.timeout)
             data = response.json()
             results.extend(data["results"])
             url = data["next"]

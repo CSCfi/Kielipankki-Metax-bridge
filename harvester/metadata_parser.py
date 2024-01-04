@@ -51,8 +51,7 @@ class MSRecordParser:
         Retrieves the urn of the given XPath's url.
         """
         identifier_url = self._get_text_xpath(xpath).strip()
-        netloc, path = urlparse(
-            identifier_url).netloc, urlparse(identifier_url).path
+        netloc, path = urlparse(identifier_url).netloc, urlparse(identifier_url).path
         return netloc + path
 
     def _get_date(self, xpath):
@@ -132,14 +131,12 @@ class MSRecordParser:
                 for doc_info_elem in doc_info_elements:
                     title_element = doc_info_elem.xpath(
                         "info:title[@lang='en']/text()",
-                        namespaces={
-                            "info": "http://www.ilsp.gr/META-XMLSchema"},
+                        namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
                     )
                     if title_element and "license" in title_element[0].lower():
                         license_urn = doc_info_elem.xpath(
                             "info:url/text()",
-                            namespaces={
-                                "info": "http://www.ilsp.gr/META-XMLSchema"},
+                            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
                         )
                         if license_urn:
                             return license_urn[0]

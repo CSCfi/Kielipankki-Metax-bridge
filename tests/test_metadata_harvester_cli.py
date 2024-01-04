@@ -11,34 +11,35 @@ def single_record_to_dict(
     A GET request that returns the XML data as a dictionary
     """
     shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
-    yield [{
-        "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
-        "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
-        "field_of_science": [
-            {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
-        ],
-        "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
-        "title": {
-            "en": "Silva Kiuru's Time Expressions Corpus",
-            "fi": "Silva Kiurun ajanilmausaineisto",
-        },
-        "description": {
-            "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
-            "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
-        },
-        "modified": "2017-02-15T00:00:00.000000Z",
-        "issued": "2017-02-15T00:00:00.000000Z",
-        "access_rights": {
-            "license": [
+    yield [
+        {
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+            "field_of_science": [
+                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
+            ],
+            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
+            "title": {
+                "en": "Silva Kiuru's Time Expressions Corpus",
+                "fi": "Silva Kiurun ajanilmausaineisto",
+            },
+            "description": {
+                "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
+                "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
+            },
+            "modified": "2017-02-15T00:00:00.000000Z",
+            "issued": "2017-02-15T00:00:00.000000Z",
+            "access_rights": {
+                "license": [
                     {
                         "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
                     }
-            ],
-            "access_type": {
-                "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+                ],
+                "access_type": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+                },
             },
-        },
-    }
+        }
     ]
 
 
@@ -98,15 +99,13 @@ def create_test_log_file_with_unsuccessful_harvest(tmp_path):
 
 def test_last_harvest_date(create_test_log_file):
     """Test getting the last start time of successful harvest date in the log file"""
-    harvested_date = metadata_harvester_cli.last_harvest_date(
-        create_test_log_file)
+    harvested_date = metadata_harvester_cli.last_harvest_date(create_test_log_file)
     assert harvested_date == "2023-09-08T14:45:58Z"
 
 
 def test_get_last_harvest_no_file():
     """Test handling non-existing file."""
-    harvested_date = metadata_harvester_cli.last_harvest_date(
-        "harvester_test.log")
+    harvested_date = metadata_harvester_cli.last_harvest_date("harvester_test.log")
     assert harvested_date is None
 
 
@@ -140,7 +139,7 @@ def test_get_last_harvest_with_unsuccessful_harvest(
 def test_send_data_to_metax_single_new_record(
     single_record_to_dict,
     mock_metashare_record_not_found_in_datacatalog,
-    mock_requests_post
+    mock_requests_post,
 ):
     """
     Check that creating one new metadata record works
@@ -195,7 +194,7 @@ def test_send_data_to_metax_multiple_records(
     """
     records = [
         {"meta": "data", "persistent_identifier": "pid1"},
-        {"infor": "mation", "persistent_identifier": "pid2"}
+        {"infor": "mation", "persistent_identifier": "pid2"},
     ]
     metadata_harvester_cli.send_data_to_metax(records)
 
@@ -204,8 +203,10 @@ def test_send_data_to_metax_multiple_records(
     post_requests = mock_requests_post.request_history[1::2]
     for post_request, record in zip(post_requests, records):
         assert post_request.method == "POST"
-        assert post_request.json(
-        )["persistent_identifier"] == record["persistent_identifier"]
+        assert (
+            post_request.json()["persistent_identifier"]
+            == record["persistent_identifier"]
+        )
 
 
 def test_send_data_to_metax_no_records_post(shared_request_mocker, metax_base_url):
@@ -247,28 +248,31 @@ def test_collect_metax_pids(mock_pids_list_in_datacatalog):
 
 
 def test_sync_deleted_records_with_diffs(
-        mock_pids_list_from_metashare,
-        mock_pids_list_in_datacatalog,
-        mock_metashare_record_found_in_datacatalog,
-        mock_delete_record
+    mock_pids_list_from_metashare,
+    mock_pids_list_in_datacatalog,
+    mock_metashare_record_found_in_datacatalog,
+    mock_delete_record,
 ):
     """
     Test that when PIDs collected from Metax do not exist in Metashare, those records are deleted from Metax.
     """
     metadata_harvester_cli.sync_deleted_records(
-        mock_pids_list_from_metashare, mock_pids_list_in_datacatalog)
+        mock_pids_list_from_metashare, mock_pids_list_in_datacatalog
+    )
     assert mock_delete_record.call_count == 2
 
 
 def test_sync_deleted_records_no_diffs(
-        mock_pids_list_from_metashare,
-        mock_pids_list_in_datacatalog_matching_metashare,
-        mock_delete_record):
+    mock_pids_list_from_metashare,
+    mock_pids_list_in_datacatalog_matching_metashare,
+    mock_delete_record,
+):
     """
     Test that when PIDs collected from Metax and Metashare match, no DELETE requests are made.
     """
     metadata_harvester_cli.sync_deleted_records(
-        mock_pids_list_from_metashare, mock_pids_list_in_datacatalog_matching_metashare)
+        mock_pids_list_from_metashare, mock_pids_list_in_datacatalog_matching_metashare
+    )
     assert mock_delete_record.call_count == 0
 
 
@@ -282,21 +286,19 @@ def test_main_all_data_harvested_and_records_in_sync(
     mock_pids_list_in_datacatalog_matching_metashare,
 ):
     """
-    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. 
+    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki.
 
     The test also covers the situation where none of the record PID matches the ones in Metax so the data is POSTed to Metax.
 
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
     with caplog.at_level(logging.INFO):
-        metadata_harvester_cli.main(
-            create_test_log_file_with_unsuccessful_harvest)
+        metadata_harvester_cli.main(create_test_log_file_with_unsuccessful_harvest)
 
     assert mock_requests_post.call_count == 5
     assert mock_requests_post.request_history[2].method == "POST"
     assert (
-        mock_requests_post.request_history[2].json(
-        )["persistent_identifier"]
+        mock_requests_post.request_history[2].json()["persistent_identifier"]
         == single_record_to_dict[0]["persistent_identifier"]
     )
 
@@ -311,10 +313,10 @@ def test_main_all_data_harvested_and_records_not_in_sync(
     mock_pids_list_from_metashare,
     mock_pids_list_in_datacatalog,
     mock_metashare_record_found_in_datacatalog,
-    mock_delete_record
+    mock_delete_record,
 ):
     """
-    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki. 
+    Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki.
 
     The test also covers the situation where the record PID matches the ones in Metax so the data is PUT to Metax.
 
@@ -322,14 +324,12 @@ def test_main_all_data_harvested_and_records_not_in_sync(
     """
 
     with caplog.at_level(logging.INFO):
-        metadata_harvester_cli.main(
-            create_test_log_file_with_unsuccessful_harvest)
+        metadata_harvester_cli.main(create_test_log_file_with_unsuccessful_harvest)
 
     assert mock_requests_put.call_count == 6
     assert mock_requests_put.request_history[3].method == "PUT"
     assert (
-        mock_requests_put.request_history[3].json(
-        )["persistent_identifier"]
+        mock_requests_put.request_history[3].json()["persistent_identifier"]
         == single_record_to_dict[0]["persistent_identifier"]
     )
 
@@ -344,8 +344,7 @@ def test_main_new_records_harvested_since_date_and_records_in_sync(
     mock_pids_list_from_metashare,
     mock_pids_list_in_datacatalog_matching_metashare,
     mock_delete_record,
-    mock_metashare_record_not_found_in_datacatalog
-
+    mock_metashare_record_not_found_in_datacatalog,
 ):
     """
     Check that, when there is a successful harvest logged, new and updated records since that
@@ -376,7 +375,7 @@ def test_main_changed_records_harvested_since_date_and_records_not_in_sync(
     caplog,
     mock_pids_list_from_metashare,
     mock_pids_list_in_datacatalog,
-    mock_delete_record
+    mock_delete_record,
 ):
     """
     Check that, when there is a successful harvest logged previously, new and updated records

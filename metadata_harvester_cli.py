@@ -132,8 +132,7 @@ def main(log_file):
     logger_harvester.info("Started")
     send_data_to_metax(records_to_dict(harvested_date))
     if harvested_date:
-        logger_harvester.info(
-            "Success, records harvested since %s", harvested_date)
+        logger_harvester.info("Success, records harvested since %s", harvested_date)
     else:
         logger_harvester.info("Success, all records harvested")
 
