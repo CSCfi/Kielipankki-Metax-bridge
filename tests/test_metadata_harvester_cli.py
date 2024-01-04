@@ -5,12 +5,12 @@ import metadata_harvester_cli
 
 @pytest.fixture
 def single_record_to_dict(
-    shared_request_mocker, kielipankki_api_url, single_record_xml
+    shared_request_mocker, kielipankki_api_url, metashare_single_record_xml
 ):
     """
     A GET request that returns the XML data as a dictionary
     """
-    shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
+    shared_request_mocker.get(kielipankki_api_url, text=metashare_single_record_xml)
     yield [
         {
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",

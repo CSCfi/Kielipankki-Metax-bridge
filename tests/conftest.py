@@ -213,8 +213,10 @@ def mock_pids_list_in_datacatalog_matching_metashare(
 
 
 @pytest.fixture
-def single_record_xml():
-    """Well-formed sample xml"""
+def metashare_single_record_xml():
+    """
+    Metashare ListRecords output that contains a single record.
+    """
     return _get_file_as_string("tests/test_data/kielipankki_record_sample.xml")
 
 
@@ -228,10 +230,10 @@ def kielipankki_api_url():
 
 @pytest.fixture
 def mock_pids_list_from_metashare(
-    shared_request_mocker, kielipankki_api_url, single_record_xml, dataset_pid
+    shared_request_mocker, kielipankki_api_url, metashare_single_record_xml, dataset_pid
 ):
     """
     Mock a list of PIDs fetched from Metashare records.
     """
-    shared_request_mocker.get(kielipankki_api_url, text=single_record_xml)
+    shared_request_mocker.get(kielipankki_api_url, text=metashare_single_record_xml)
     return [dataset_pid]
