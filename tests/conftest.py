@@ -221,6 +221,16 @@ def metashare_single_record_xml():
 
 
 @pytest.fixture
+def metashare_multiple_records_xml():
+    """
+    Metashare ListRecords output that contains a multiple records.
+    """
+    return _get_file_as_string(
+        "tests/test_data/kielipankki_record_sample_multiple_records.xml"
+    )
+
+
+@pytest.fixture
 def kielipankki_api_url():
     """
     The URL of the OAI-PMH API used in tests.
@@ -229,7 +239,7 @@ def kielipankki_api_url():
 
 
 @pytest.fixture
-def mock_pids_list_from_metashare(
+def mock_single_pid_list_from_metashare(
     shared_request_mocker, kielipankki_api_url, metashare_single_record_xml, dataset_pid
 ):
     """
@@ -237,3 +247,21 @@ def mock_pids_list_from_metashare(
     """
     shared_request_mocker.get(kielipankki_api_url, text=metashare_single_record_xml)
     return [dataset_pid]
+
+
+@pytest.fixture
+def mock_corpus_pid_list_from_metashare(
+    shared_request_mocker, kielipankki_api_url, metashare_multiple_records_xml
+):
+    """
+    Mock the record list to contain numerous resources, four of which are corpora.
+
+    :return: PIDs for the corpora
+    """
+    shared_request_mocker.get(kielipankki_api_url, text=metashare_multiple_records_xml)
+    return [
+        "urn.fi/urn:nbn:fi:lb-2017021609",
+        "urn.fi/urn:nbn:fi:lb-20140730196",
+        "urn.fi/urn:nbn:fi:lb-2018060403",
+        "urn.fi/urn:nbn:fi:lb-2019121004",
+    ]
