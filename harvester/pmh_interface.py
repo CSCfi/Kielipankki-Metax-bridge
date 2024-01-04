@@ -2,8 +2,11 @@
 Fetch data from an OAI-PMH API of Metashare
 """
 
+from lxml import etree
 from sickle import Sickle
 from sickle.oaiexceptions import NoRecordsMatch
+
+from harvester.metadata_parser import MSRecordParser
 
 
 class PMH_API:
@@ -37,3 +40,23 @@ class PMH_API:
                 yield metadata_record
         except NoRecordsMatch:
             return
+
+    @property
+    def corpus_pids(self):
+        """
+        PIDs for all corpora in Metashare.
+        :return: List of PIDs as strings
+        """
+        metashare_pids = []
+        for metadata_content in self.fetch_records():
+            lxml_record = etree.fromstring(etree.tostring(metadata_content.xml))
+            metadata_record = MSRecordParser(lxml_record)
+            if (
+                metadata_record.check_pid_exists()
+                and metadata_record.check_resourcetype_corpus()
+            ):
+                pid = metadata_record.get_identifier(
+                    "//info:identificationInfo/info:identifier/text()"
+                )
+                metashare_pids.append(pid)
+        return metashare_pids
