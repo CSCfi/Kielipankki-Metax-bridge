@@ -2,6 +2,7 @@
 Fetch data from an OAI-PMH API of Metashare
 """
 
+from copy import deepcopy
 from lxml import etree
 from sickle import Sickle
 from sickle.oaiexceptions import NoRecordsMatch
@@ -37,9 +38,7 @@ class PMH_API:
                 }
             )
             for metadata_record in metadata_records:
-                yield MSRecordParser(
-                    etree.fromstring(etree.tostring(metadata_record.xml))
-                )
+                yield MSRecordParser(deepcopy(metadata_record.xml))
         except NoRecordsMatch:
             return
 
