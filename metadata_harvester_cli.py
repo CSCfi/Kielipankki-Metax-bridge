@@ -78,15 +78,6 @@ def send_data_to_metax(mapped_records):
             metax_api.create_record(mapped_record)
 
 
-def collect_metax_pids():
-    """
-    Fetches all existing PIDs in Kielipankki catalog records in Metax.
-    :return: List of PIDs as strings
-    """
-    metax_api = MetaxAPI()
-    return metax_api.datacatalog_record_pids()
-
-
 def sync_deleted_records(metashare_pids, metax_pids):
     """
     Compares record PIDs fetched from Kielipankki and Metax. Any records not existing in
@@ -107,6 +98,7 @@ def main(log_file):
     :param log_file: log file where harvest dates are logged
     """
     metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
+    metax_api = MetaxAPI()
 
     harvested_date = last_harvest_date(log_file)
     logger_harvester.info("Started")
@@ -116,7 +108,7 @@ def main(log_file):
     else:
         logger_harvester.info("Success, all records harvested")
 
-    sync_deleted_records(metashare_api.corpus_pids, collect_metax_pids())
+    sync_deleted_records(metashare_api.corpus_pids, metax_api.datacatalog_record_pids())
 
 
 if __name__ == "__main__":
