@@ -58,8 +58,5 @@ class PMH_API:
         """
         metashare_pids = []
         for corpus in self.fetch_corpora():
-            pid = corpus.get_identifier(
-                "//info:identificationInfo/info:identifier/text()"
-            )
-            metashare_pids.append(pid)
+            metashare_pids.append(corpus.pid)
         return metashare_pids

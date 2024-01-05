@@ -37,11 +37,10 @@ def test_get_description(single_record):
     assert result == expected_result
 
 
-def test_get_identifier(single_record, dataset_pid):
-    """Check that a PID is returned."""
+def test_pid(single_record, dataset_pid):
+    """Check that the correct PID is returned."""
     record = MSRecordParser(single_record)
-    result = record.get_identifier("//info:identificationInfo/info:identifier/text()")
-    assert result == dataset_pid
+    assert record.pid == dataset_pid
 
 
 def test_get_modified_date(single_record):
