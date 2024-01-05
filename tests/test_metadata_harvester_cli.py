@@ -43,7 +43,7 @@ def single_record_to_dict(
     ]
 
 
-def test_records_to_dict_with_last_harvest_date(
+def test_metashare_corpora_to_dict_with_last_harvest_date(
     single_record_to_dict, create_test_log_file
 ):
     """
@@ -51,12 +51,12 @@ def test_records_to_dict_with_last_harvest_date(
     fetched).
     """
     date = metadata_harvester_cli.last_harvest_date(create_test_log_file)
-    result = metadata_harvester_cli.records_to_dict(date)
+    result = metadata_harvester_cli.metashare_corpora_to_dict(date)
     assert date == "2023-09-08T14:45:58Z"
     assert single_record_to_dict == result
 
 
-def test_records_to_dict_without_last_harvest_date(
+def test_metashare_corpora_to_dict_without_last_harvest_date(
     single_record_to_dict, create_test_log_file_with_unsuccessful_harvest
 ):
     """
@@ -65,7 +65,7 @@ def test_records_to_dict_without_last_harvest_date(
     date = metadata_harvester_cli.last_harvest_date(
         create_test_log_file_with_unsuccessful_harvest
     )
-    result = metadata_harvester_cli.records_to_dict(date)
+    result = metadata_harvester_cli.metashare_corpora_to_dict(date)
     assert date is None
     assert single_record_to_dict == result
 

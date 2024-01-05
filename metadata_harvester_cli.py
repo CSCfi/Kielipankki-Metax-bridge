@@ -41,24 +41,19 @@ def last_harvest_date(filename):
         return None
 
 
-def records_to_dict(date_time=None, url="https://kielipankki.fi/md_api/que"):
+def metashare_corpora_to_dict(date_time=None, url="https://kielipankki.fi/md_api/que"):
     """
-    Fetches metadata records since the last logged harvest. If date is missing, all records are
+    Fetches corpora added since the last logged harvest. If date is missing, all records are
     fetched.
     :param: date_time: date and time value in format that OAI PMH reads
     :param url: string value of a url
     :return: list of mapped Metashare records (dictionaries)
     """
     api = PMH_API(url)
-    metashare_records = api.fetch_records(from_timestamp=date_time)
 
     mapped_records_list = []
-    for metashare_record in metashare_records:
-        if (
-            metashare_record.check_pid_exists()
-            and metashare_record.check_resourcetype_corpus()
-        ):
-            mapped_records_list.append(metashare_record.to_dict())
+    for record in api.fetch_records(from_timestamp=date_time):
+        mapped_records_list.append(record.to_dict())
     return mapped_records_list
 
 
@@ -100,7 +95,7 @@ def main(log_file):
 
     harvested_date = last_harvest_date(log_file)
     logger_harvester.info("Started")
-    send_data_to_metax(records_to_dict(harvested_date))
+    send_data_to_metax(metashare_corpora_to_dict(harvested_date))
     if harvested_date:
         logger_harvester.info("Success, records harvested since %s", harvested_date)
     else:

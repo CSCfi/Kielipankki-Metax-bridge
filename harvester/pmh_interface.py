@@ -42,6 +42,14 @@ class PMH_API:
         except NoRecordsMatch:
             return
 
+    def fetch_corpora(self, from_timestamp=None):
+        """
+        Iterate over all corpora type records that have a PID
+        """
+        for record in self.fetch_records(from_timestamp=from_timestamp):
+            if record.check_pid_exists() and record.check_resourcetype_corpus():
+                yield record
+
     @property
     def corpus_pids(self):
         """
@@ -49,10 +57,9 @@ class PMH_API:
         :return: List of PIDs as strings
         """
         metashare_pids = []
-        for record in self.fetch_records():
-            if record.check_pid_exists() and record.check_resourcetype_corpus():
-                pid = record.get_identifier(
-                    "//info:identificationInfo/info:identifier/text()"
-                )
-                metashare_pids.append(pid)
+        for corpus in self.fetch_corpora():
+            pid = corpus.get_identifier(
+                "//info:identificationInfo/info:identifier/text()"
+            )
+            metashare_pids.append(pid)
         return metashare_pids
