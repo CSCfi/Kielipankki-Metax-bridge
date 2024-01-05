@@ -46,7 +46,7 @@ class MSRecordParser:
             xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"}
         )[0]
 
-    def get_identifier(self, xpath):
+    def _get_identifier(self, xpath):
         """
         Retrieves the urn of the given XPath's url.
         """
@@ -67,16 +67,24 @@ class MSRecordParser:
         else:
             raise ValueError("No date found")
 
+    @property
+    def pid(self):
+        """
+        Return the PID for this record
+        """
+        try:
+            return self._get_identifier(
+                "//info:identificationInfo/info:identifier/text()",
+            )
+        except IndexError:
+            # no PID found
+            return None
+
     def check_pid_exists(self):
         """
         Only records with PIDs are relevant.
         """
-        urn = self.xml.xpath(
-            "//info:identificationInfo/info:identifier",
-            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
-        )
-
-        return bool(urn)
+        return bool(self.pid)
 
     def _get_list_of_licenses(self):
         """
@@ -240,9 +248,7 @@ class MSRecordParser:
                     "url": "http://www.yso.fi/onto/okm-tieteenala/ta112",
                 }
             ],
-            "persistent_identifier": self.get_identifier(
-                "//info:identificationInfo/info:identifier/text()"
-            ),
+            "persistent_identifier": self.pid,
             "title": self._get_language_contents("//info:resourceName"),
             "description": self._get_language_contents("//info:description"),
             "modified": self._get_date(
