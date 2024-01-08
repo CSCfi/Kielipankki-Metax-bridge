@@ -1,8 +1,11 @@
 import re
 import json
 
+from lxml import etree
 import pytest
 import requests_mock
+
+from harvester.metadata_parser import MSRecordParser
 from metax_api import MetaxAPI
 
 
@@ -231,6 +234,14 @@ def metashare_multiple_records_xml():
 
 
 @pytest.fixture
+def metashare_no_records_xml():
+    """
+    Metashare ListRecords output that contains no records
+    """
+    return _get_file_as_string("tests/test_data/kielipankki_no_records.xml")
+
+
+@pytest.fixture
 def kielipankki_api_url():
     """
     The URL of the OAI-PMH API used in tests.
@@ -265,3 +276,87 @@ def mock_corpus_pid_list_from_metashare(
         "urn.fi/urn:nbn:fi:lb-2018060403",
         "urn.fi/urn:nbn:fi:lb-2019121004",
     ]
+
+
+@pytest.fixture
+def mock_metashare_get_single_record(
+    shared_request_mocker, kielipankki_api_url, metashare_single_record_xml
+):
+    """
+    Mock a GET request to the Metashare API to return XML with a single record.
+
+    :return: The corresponding metadata as a list of dicts, one dict per record
+    """
+    shared_request_mocker.get(kielipankki_api_url, text=metashare_single_record_xml)
+    yield [
+        {
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+            "field_of_science": [
+                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
+            ],
+            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
+            "title": {
+                "en": "Silva Kiuru's Time Expressions Corpus",
+                "fi": "Silva Kiurun ajanilmausaineisto",
+            },
+            "description": {
+                "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
+                "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
+            },
+            "modified": "2017-02-15T00:00:00.000000Z",
+            "issued": "2017-02-15T00:00:00.000000Z",
+            "access_rights": {
+                "license": [
+                    {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
+                    }
+                ],
+                "access_type": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+                },
+            },
+        }
+    ]
+
+
+@pytest.fixture
+def mock_metashare_get_multiple_records(
+    shared_request_mocker, kielipankki_api_url, metashare_multiple_records_xml
+):
+    """
+    Mock a GET request to the Metashare API to return XML with a multiple records record.
+    """
+    shared_request_mocker.get(kielipankki_api_url, text=metashare_multiple_records_xml)
+
+
+@pytest.fixture
+def mock_metashare_get_no_new_records(
+    shared_request_mocker,
+    kielipankki_api_url,
+    metashare_no_records_xml,
+    latest_harvest_timestamp,
+):
+    """
+    Mock a GET request to the Metashare API to return XML with no new records since
+    latest harvest.
+    """
+    shared_request_mocker.get(
+        kielipankki_api_url,
+        text=metashare_no_records_xml,
+    )
+
+
+@pytest.fixture
+def latest_harvest_timestamp():
+    """
+    A standardized last harvest date timestamp.
+    """
+    return "2023-09-08T14:34:16Z"
+
+
+@pytest.fixture
+def basic_metashare_record():
+    """Well-formed record sample of Kielipankki metadata."""
+    with open("tests/test_data/kielipankki_record_sample.xml") as xmlfile:
+        return MSRecordParser(etree.fromstring(xmlfile.read()))
