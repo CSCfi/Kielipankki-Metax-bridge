@@ -77,6 +77,21 @@ class MetaxAPI:
         result = self._make_request("GET", endpoint, params)
         return result["results"][0]["id"] if result["count"] == 1 else None
 
+    def send_record(self, record):
+        """
+        Create or udpate a record on Metax.
+
+        If a record with the same PID exists in Metax, its metadata is updated,
+        otherwise a new record is created.
+
+        :record: `MSRecordParser` object representing the metadata to be sent
+        """
+        metax_pid = self.record_id(record.pid)
+        if metax_pid:
+            self.update_record(metax_pid, record.to_dict())
+        else:
+            self.create_record(record.to_dict())
+
     def create_record(self, data):
         """
         Create a dataset record to Metax.

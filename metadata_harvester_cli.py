@@ -41,36 +41,6 @@ def last_harvest_date(filename):
         return None
 
 
-def metashare_corpora_to_dict(date_time=None, url="https://kielipankki.fi/md_api/que"):
-    """
-    Fetches corpora added since the last logged harvest. If date is missing, all records are
-    fetched.
-    :param: date_time: date and time value in format that OAI PMH reads
-    :param url: string value of a url
-    :return: list of mapped Metashare records (dictionaries)
-    """
-    api = PMH_API(url)
-
-    mapped_records_list = []
-    for record in api.fetch_records(from_timestamp=date_time):
-        mapped_records_list.append(record.to_dict())
-    return mapped_records_list
-
-
-def send_data_to_metax(mapped_records):
-    """
-    Make PUT and POST requests based on changes and existance of PIDs in Metax.
-    :param mapped_records: a list of mapped Metashare records (dictionaries)
-    """
-    metax_api = MetaxAPI()
-    for mapped_record in mapped_records:
-        pid = mapped_record["persistent_identifier"]
-        if metax_api.record_id(pid):
-            metax_api.update_record(metax_api.record_id(pid), mapped_record)
-        else:
-            metax_api.create_record(mapped_record)
-
-
 def sync_deleted_records(metashare_pids, metax_pids):
     """
     Compares record PIDs fetched from Kielipankki and Metax. Any records not existing in
@@ -95,7 +65,10 @@ def main(log_file):
 
     harvested_date = last_harvest_date(log_file)
     logger_harvester.info("Started")
-    send_data_to_metax(metashare_corpora_to_dict(harvested_date))
+
+    for record in metashare_api.fetch_records(from_timestamp=harvested_date):
+        metax_api.send_record(record)
+
     if harvested_date:
         logger_harvester.info("Success, records harvested since %s", harvested_date)
     else:
