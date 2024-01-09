@@ -168,12 +168,11 @@ def test_delete_record_failed(
     assert "Request failed. Method: DELETE" in caplog.text
 
 
-def test_datacatalog_dataset_record_pids(mock_pids_list_in_datacatalog, metax_api):
+def test_datacatalog_dataset_record_pids(mock_pids_in_datacatalog, metax_api):
     """
-    Test that querying a datacatalog in metax returns a list of all  its PIDs.
+    Test that querying a datacatalog in metax returns a set of all  its PIDs.
     """
-    result = metax_api.datacatalog_record_pids()
-    assert result == mock_pids_list_in_datacatalog
+    assert metax_api.datacatalog_record_pids == mock_pids_in_datacatalog
 
 
 @pytest.mark.usefixtures(
@@ -226,3 +225,70 @@ def test_send_data_to_metax_single_pre_existing_record(
 
     assert expected_put_request.method == "PUT"
     assert expected_put_request.json() == basic_metashare_record.to_dict()
+
+
+@pytest.mark.usefixtures(
+    "mock_metashare_record_found_in_datacatalog",
+    "mock_pids_in_datacatalog",
+)
+def test_delete_records_not_in_smaller_set(
+    mock_delete_record, metax_api, basic_metashare_record
+):
+    """
+    Check that when there is one record to be removed, it is removed.
+
+    This is checked by verifying that there is exactly one DELETE request.
+
+    We expect to see the following requests:
+    GET to fetch the records from Metax
+    GET to determine the Metax ID for the one record to be removed
+    DELETE to actually delete the record based on its Metax ID
+    """
+    metax_api.delete_records_not_in([basic_metashare_record])
+    assert mock_delete_record.call_count == 3
+    assert (
+        sum(
+            request.method == "DELETE" for request in mock_delete_record.request_history
+        )
+        == 1
+    )
+
+
+@pytest.mark.usefixtures(
+    "mock_pids_in_datacatalog_matching_metashare",
+)
+def test_delete_records_not_in_equal_set(
+    mock_delete_record, metax_api, basic_metashare_record
+):
+    """
+    Check that no records are removed when all should still be present.
+
+    This means that we expect to see only one request (the GET for records in
+    Metashare), and specifically no DELETE requests.
+    """
+    metax_api.delete_records_not_in([basic_metashare_record])
+    assert mock_delete_record.call_count == 1
+    assert mock_delete_record.request_history[0].method != "DELETE"
+
+
+@pytest.mark.usefixtures(
+    "mock_pids_in_datacatalog_matching_metashare",
+)
+def test_delete_records_larger_set(
+    mock_delete_record,
+    metax_api,
+    basic_metashare_record,
+    license_with_custom_url_record,
+):
+    """
+    Check that having extra records in the input set will not cause removals.
+
+    This situation should not occur in normal use via the CLI, but if the method is
+    called with extra records for any reason, we want to be sure that it won't result in
+    unwanted removals.
+    """
+    metax_api.delete_records_not_in(
+        [basic_metashare_record, license_with_custom_url_record]
+    )
+    assert mock_delete_record.call_count == 1
+    assert mock_delete_record.request_history[0].method != "DELETE"

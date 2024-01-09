@@ -72,36 +72,6 @@ def test_get_last_harvest_with_unsuccessful_harvest(
     assert harvested_date == "2023-09-08T14:34:16Z"
 
 
-def test_sync_deleted_records_with_diffs(
-    mock_single_pid_list_from_metashare,
-    mock_pids_list_in_datacatalog,
-    mock_metashare_record_found_in_datacatalog,
-    mock_delete_record,
-):
-    """
-    Test that when PIDs collected from Metax do not exist in Metashare, those records are deleted from Metax.
-    """
-    metadata_harvester_cli.sync_deleted_records(
-        mock_single_pid_list_from_metashare, mock_pids_list_in_datacatalog
-    )
-    assert mock_delete_record.call_count == 2
-
-
-def test_sync_deleted_records_no_diffs(
-    mock_single_pid_list_from_metashare,
-    mock_pids_list_in_datacatalog_matching_metashare,
-    mock_delete_record,
-):
-    """
-    Test that when PIDs collected from Metax and Metashare match, no DELETE requests are made.
-    """
-    metadata_harvester_cli.sync_deleted_records(
-        mock_single_pid_list_from_metashare,
-        mock_pids_list_in_datacatalog_matching_metashare,
-    )
-    assert mock_delete_record.call_count == 0
-
-
 def test_main_all_data_harvested_and_records_in_sync(
     mock_requests_post,
     mock_metashare_record_not_found_in_datacatalog,
@@ -109,7 +79,7 @@ def test_main_all_data_harvested_and_records_in_sync(
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
     mock_single_pid_list_from_metashare,
-    mock_pids_list_in_datacatalog_matching_metashare,
+    mock_pids_in_datacatalog_matching_metashare,
 ):
     """
     Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki.
@@ -137,7 +107,7 @@ def test_main_all_data_harvested_and_records_not_in_sync(
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
     mock_single_pid_list_from_metashare,
-    mock_pids_list_in_datacatalog,
+    mock_pids_in_datacatalog,
     mock_metashare_record_found_in_datacatalog,
     mock_delete_record,
 ):
@@ -178,7 +148,7 @@ def test_main_new_records_harvested_since_date_and_records_in_sync(
     create_test_log_file,
     caplog,
     mock_single_pid_list_from_metashare,
-    mock_pids_list_in_datacatalog_matching_metashare,
+    mock_pids_in_datacatalog_matching_metashare,
     mock_delete_record,
     mock_metashare_record_not_found_in_datacatalog,
 ):
@@ -210,7 +180,7 @@ def test_main_changed_records_harvested_since_date_and_records_not_in_sync(
     create_test_log_file,
     caplog,
     mock_single_pid_list_from_metashare,
-    mock_pids_list_in_datacatalog,
+    mock_pids_in_datacatalog,
     mock_delete_record,
 ):
     """
