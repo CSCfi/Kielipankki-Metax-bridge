@@ -92,6 +92,21 @@ class MetaxAPI:
         else:
             self.create_record(record.to_dict())
 
+    def delete_records_not_in(self, retained_records):
+        """
+        Delete all records whose PIDs are not present in `retained_records`.
+
+        This allows purging records from Metax when they have been marked as deleted in
+        the master data. Deletion is determined based on whether each record in Metax
+        has a counterpart with identical PID in `retained_records`.
+
+        :retained_records: iterable containing all the records that must not be deleted.
+        """
+        retained_pids = {record.pid for record in retained_records}
+        pids_to_be_deleted = self.datacatalog_record_pids.difference(retained_pids)
+        for pid in pids_to_be_deleted:
+            self.delete_record(self.record_id(pid))
+
     def create_record(self, data):
         """
         Create a dataset record to Metax.
@@ -118,10 +133,12 @@ class MetaxAPI:
         endpoint = f"datasets/{record_id}"
         return self._make_request("DELETE", endpoint)
 
+    @property
     def datacatalog_record_pids(self):
         """
         Fetches all dataset record PIDs from catalog.
-        :return: list of dataset record PIDs
+
+        :return: a set containing PIDs for all records in the dataset
         """
         url = f"{self.base_url}/datasets?data_catalog__id={self.catalog_id}&limit=100"
         results = []
@@ -130,4 +147,5 @@ class MetaxAPI:
             data = response.json()
             results.extend(data["results"])
             url = data["next"]
-        return [value["persistent_identifier"] for value in results]
+
+        return {value["persistent_identifier"] for value in results}

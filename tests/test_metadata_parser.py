@@ -116,12 +116,6 @@ def test_missing_license_record(missing_license_record):
     assert result == expected_result
 
 
-@pytest.fixture
-def license_with_custom_url_record():
-    """A record containing lisence url in documentation elements."""
-    return MSRecordParser(_get_file_as_lxml("tests/test_data/res_with_license_url.xml"))
-
-
 def test_license_custom_url_record(license_with_custom_url_record):
     """Test that license details and availability are mapped."""
     result = license_with_custom_url_record._map_access_rights()

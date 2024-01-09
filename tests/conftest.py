@@ -175,11 +175,13 @@ def mock_delete_record(shared_request_mocker, metax_dataset_id, metax_base_url):
 
 
 @pytest.fixture
-def mock_pids_list_in_datacatalog(
+def mock_pids_in_datacatalog(
     shared_request_mocker, metax_base_url, kielipankki_datacatalog_id, dataset_pid
 ):
     """
     Mock a GET request to fetch all PIDs in a datacatalog.
+
+    :return: A set containing the PIDs corresponding to the mocked request
     """
     pid_data = {
         "results": [
@@ -192,11 +194,11 @@ def mock_pids_list_in_datacatalog(
         f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&limit=100",
         json=pid_data,
     )
-    return [dataset_pid, "pid2"]
+    return {dataset_pid, "pid2"}
 
 
 @pytest.fixture
-def mock_pids_list_in_datacatalog_matching_metashare(
+def mock_pids_in_datacatalog_matching_metashare(
     shared_request_mocker, metax_base_url, kielipankki_datacatalog_id, dataset_pid
 ):
     """
@@ -212,7 +214,7 @@ def mock_pids_list_in_datacatalog_matching_metashare(
         f"{metax_base_url}/datasets?data_catalog__id={kielipankki_datacatalog_id}&limit=100",
         json=pid_data,
     )
-    return [dataset_pid]
+    return {dataset_pid}
 
 
 @pytest.fixture
@@ -359,4 +361,11 @@ def latest_harvest_timestamp():
 def basic_metashare_record():
     """Well-formed record sample of Kielipankki metadata."""
     with open("tests/test_data/kielipankki_record_sample.xml") as xmlfile:
+        return MSRecordParser(etree.fromstring(xmlfile.read()))
+
+
+@pytest.fixture
+def license_with_custom_url_record():
+    """A record containing lisence url in documentation elements."""
+    with open("tests/test_data/res_with_license_url.xml") as xmlfile:
         return MSRecordParser(etree.fromstring(xmlfile.read()))

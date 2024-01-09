@@ -41,20 +41,6 @@ def last_harvest_date(filename):
         return None
 
 
-def sync_deleted_records(metashare_pids, metax_pids):
-    """
-    Compares record PIDs fetched from Kielipankki and Metax. Any records not existing in
-    Metashare (anymore) are deleted from Metax as well.
-    :param metashare_pids: List of PIDs as strings
-    :param metax_pids: List of PIDs as strings
-    """
-    metax_pids_set = set(metax_pids)
-    pids_not_in_metashare = metax_pids_set.difference(set(metashare_pids))
-    metax_api = MetaxAPI()
-    for pid in pids_not_in_metashare:
-        metax_api.delete_record(metax_api.record_id(pid))
-
-
 def main(log_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
@@ -74,7 +60,7 @@ def main(log_file):
     else:
         logger_harvester.info("Success, all records harvested")
 
-    sync_deleted_records(metashare_api.corpus_pids, metax_api.datacatalog_record_pids())
+    metax_api.delete_records_not_in(metashare_api.fetch_records())
 
 
 if __name__ == "__main__":
