@@ -1,0 +1,3 @@
+[MESSAGES CONTROL]
+# Black takes care of indenting
+disable=bad-continuation
