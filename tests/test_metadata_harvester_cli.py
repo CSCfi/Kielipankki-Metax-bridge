@@ -12,7 +12,12 @@ from metadata_harvester_cli import full_harvest
 
 
 @pytest.fixture
-def create_test_log_file(tmp_path, latest_harvest_timestamp):
+def default_test_log_file_path(tmp_path):
+    return tmp_path / "harvester_test.log"
+
+
+@pytest.fixture
+def create_test_log_file(latest_harvest_timestamp, default_test_log_file_path):
     """Create a temporary log file for testing and clean up afterwards."""
     # log_file = "harvester_test.log"
     log_file_data = [
@@ -22,10 +27,9 @@ def create_test_log_file(tmp_path, latest_harvest_timestamp):
         "2023-09-08 14:45:58,690 - INFO - Started\n"
         "2023-09-08 14:45:58,956 - INFO - Success, records harvested since {latest_harvest_timestamp}\n"
     ]
-    log_file = tmp_path / "harvester_test.log"
-    with open(log_file, "w") as file:
-        file.writelines(log_file_data)
-    return log_file
+    with open(default_test_log_file_path, "w") as file_:
+        file_.writelines(log_file_data)
+    return default_test_log_file_path
 
 
 @pytest.fixture
@@ -57,13 +61,12 @@ def basic_configuration(create_test_config_file):
 
 
 @pytest.fixture
-def create_test_log_file_with_unsuccessful_harvest(tmp_path):
+def create_test_log_file_with_unsuccessful_harvest(default_test_log_file_path):
     """Create a temporary log file with no successfull harvests and clean up afterwards."""
     log_file_data = ["2023-09-08 14:34:16,887 - INFO - Started\n"]
-    log_file = tmp_path / "harvester_test.log"
-    with open(log_file, "w") as file:
-        file.writelines(log_file_data)
-    return log_file
+    with open(default_test_log_file_path, "w") as file_:
+        file_.writelines(log_file_data)
+    return default_test_log_file_path
 
 
 def test_last_harvest_date(create_test_log_file):
@@ -79,7 +82,7 @@ def test_get_last_harvest_no_file():
 
 
 @pytest.fixture
-def create_test_log_file_with_one_successful_harvest(tmp_path):
+def create_test_log_file_with_one_successful_harvest(default_test_log_file_path):
     """Create a temporary log file for testing and clean up afterwards."""
     # log_file = "harvester_test.log"
     log_file_data = [
@@ -89,10 +92,9 @@ def create_test_log_file_with_one_successful_harvest(tmp_path):
         "2023-09-08 14:45:58,690 - INFO - Started\n"
         "2023-09-08 14:45:58,956 - INFO - Started\n"
     ]
-    log_file = tmp_path / "harvester_test.log"
-    with open(log_file, "w") as file:
-        file.writelines(log_file_data)
-    return log_file
+    with open(default_test_log_file_path, "w") as file_:
+        file_.writelines(log_file_data)
+    return default_test_log_file_path
 
 
 def test_get_last_harvest_with_unsuccessful_harvest(
@@ -105,6 +107,32 @@ def test_get_last_harvest_with_unsuccessful_harvest(
     assert harvested_date == "2023-09-08T14:34:16Z"
 
 
+@pytest.fixture
+def run_cli(default_test_log_file_path, basic_configuration):
+    """
+    Helper for running the command line interface with given arguments.
+
+    If some argument is not specified, default testing values are used.
+
+    File arguments can be specified as strings or Paths: they are automatically
+    converted.
+    """
+
+    def _run_cli(log_file=None, configuration_file_path=None):
+        if log_file is None:
+            log_file = default_test_log_file_path
+        if configuration_file_path is None:
+            configuration_file_path = basic_configuration
+
+        runner = CliRunner()
+        return runner.invoke(
+            full_harvest,
+            [str(log_file), str(configuration_file_path)],
+        )
+
+    return _run_cli
+
+
 @pytest.mark.usefixtures(
     "mock_metashare_record_not_found_in_datacatalog",
     "mock_single_pid_list_from_metashare",
@@ -115,7 +143,7 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
-    basic_configuration,
+    run_cli,
 ):
     """
     Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki.
@@ -124,15 +152,8 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
 
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
-    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        result = runner.invoke(
-            full_harvest,
-            [
-                str(create_test_log_file_with_unsuccessful_harvest),
-                basic_configuration,
-            ],
-        )
+        result = run_cli(log_file=create_test_log_file_with_unsuccessful_harvest)
 
     assert result.exit_code == 0
 
@@ -157,7 +178,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
-    basic_configuration,
+    run_cli,
 ):
     """
     Check that when no successful harvest date is available (the log file does not have
@@ -176,15 +197,8 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the records from Metax (no overlap, so no further requests)
     """
-    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        result = runner.invoke(
-            full_harvest,
-            [
-                str(create_test_log_file_with_unsuccessful_harvest),
-                basic_configuration,
-            ],
-        )
+        result = run_cli(log_file=create_test_log_file_with_unsuccessful_harvest)
 
     assert result.exit_code == 0
 
@@ -209,7 +223,7 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     mock_metashare_get_single_record,
     create_test_log_file,
     caplog,
-    basic_configuration,
+    run_cli,
 ):
     """
     Check that, when there is a successful harvest logged, new and updated records since that
@@ -219,15 +233,8 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
 
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
-    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        result = runner.invoke(
-            full_harvest,
-            [
-                str(create_test_log_file),
-                basic_configuration,
-            ],
-        )
+        result = run_cli(log_file=create_test_log_file)
 
     assert result.exit_code == 0
 
@@ -252,7 +259,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     mock_metashare_get_single_record,
     create_test_log_file,
     caplog,
-    basic_configuration,
+    run_cli,
 ):
     """
     Check that, when there is a successful harvest logged previously, new and updated
@@ -272,15 +279,8 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     GET to get the Metax PID for the record to be deleted
     DELETE to delete the record
     """
-    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        result = runner.invoke(
-            full_harvest,
-            [
-                str(create_test_log_file),
-                basic_configuration,
-            ],
-        )
+        result = run_cli(log_file=create_test_log_file)
 
     assert result.exit_code == 0
 
@@ -302,7 +302,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
 def test_full_harvest_multiple_records(
     shared_request_mocker,
     create_test_log_file_with_unsuccessful_harvest,
-    basic_configuration,
+    run_cli,
 ):
     """
     Check that multiple records are looped over properly.
@@ -318,14 +318,7 @@ def test_full_harvest_multiple_records(
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
-    runner = CliRunner()
-    result = runner.invoke(
-        full_harvest,
-        [
-            str(create_test_log_file_with_unsuccessful_harvest),
-            basic_configuration,
-        ],
-    )
+    result = run_cli(log_file=create_test_log_file_with_unsuccessful_harvest)
 
     assert result.exit_code == 0
 
@@ -344,9 +337,7 @@ def test_full_harvest_multiple_records(
     "mock_requests_post",
     "mock_metashare_record_not_found_in_datacatalog",
 )
-def test_full_harvest_without_log_file(
-    shared_request_mocker, tmpdir, basic_configuration
-):
+def test_full_harvest_without_log_file(shared_request_mocker, tmpdir, run_cli):
     """
     Check that full harvest is done when a log file doesn't exist
 
@@ -361,13 +352,8 @@ def test_full_harvest_without_log_file(
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
-    runner = CliRunner()
-    result = runner.invoke(
-        full_harvest,
-        [
-            str(tmpdir / "this_path_does_not_exist" / "this_file_does_not_exist.txt"),
-            basic_configuration,
-        ],
+    result = run_cli(
+        log_file=tmpdir / "this_path_does_not_exist" / "this_file_does_not_exist.txt",
     )
 
     assert result.exit_code == 0
@@ -387,7 +373,8 @@ def test_full_harvest_without_log_file(
     "mock_metashare_record_not_found_in_datacatalog",
 )
 def test_full_harvest_no_new_records(
-    shared_request_mocker, create_test_log_file, basic_configuration
+    shared_request_mocker,
+    run_cli,
 ):
     """
     Test that when there are no new records, the program moves directly to checking for
@@ -400,13 +387,7 @@ def test_full_harvest_no_new_records(
         found)
     GET to fetch the Metax PIDs for comparison (none found)
     """
-    runner = CliRunner()
-    runner.invoke(
-        full_harvest,
-        [
-            str(create_test_log_file),
-            basic_configuration,
-        ],
-    )
+    run_cli()
+
     assert shared_request_mocker.call_count == 3
     assert all(r.method == "GET" for r in shared_request_mocker.request_history)
