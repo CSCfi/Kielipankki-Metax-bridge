@@ -72,14 +72,16 @@ def test_get_last_harvest_with_unsuccessful_harvest(
     assert harvested_date == "2023-09-08T14:34:16Z"
 
 
+@pytest.mark.usefixtures(
+    "mock_metashare_record_not_found_in_datacatalog",
+    "mock_single_pid_list_from_metashare",
+    "mock_pids_in_datacatalog_matching_metashare",
+)
 def test_main_all_data_harvested_and_records_in_sync(
     mock_requests_post,
-    mock_metashare_record_not_found_in_datacatalog,
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
-    mock_single_pid_list_from_metashare,
-    mock_pids_in_datacatalog_matching_metashare,
 ):
     """
     Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki.
@@ -101,15 +103,17 @@ def test_main_all_data_harvested_and_records_in_sync(
     assert "Success, all records harvested" in caplog.text
 
 
+@pytest.mark.usefixtures(
+    "mock_single_pid_list_from_metashare",
+    "mock_pids_in_datacatalog",
+    "mock_metashare_record_found_in_datacatalog",
+    "mock_delete_record",
+)
 def test_main_all_data_harvested_and_records_not_in_sync(
     mock_requests_put,
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
-    mock_single_pid_list_from_metashare,
-    mock_pids_in_datacatalog,
-    mock_metashare_record_found_in_datacatalog,
-    mock_delete_record,
 ):
     """
     Check that when no successful harvest date is available (the log file does not have
@@ -142,15 +146,17 @@ def test_main_all_data_harvested_and_records_not_in_sync(
     assert "Success, all records harvested" in caplog.text
 
 
+@pytest.mark.usefixtures(
+    "mock_single_pid_list_from_metashare",
+    "mock_pids_in_datacatalog_matching_metashare",
+    "mock_delete_record",
+    "mock_metashare_record_not_found_in_datacatalog",
+)
 def test_main_new_records_harvested_since_date_and_records_in_sync(
     mock_requests_post,
     mock_metashare_get_single_record,
     create_test_log_file,
     caplog,
-    mock_single_pid_list_from_metashare,
-    mock_pids_in_datacatalog_matching_metashare,
-    mock_delete_record,
-    mock_metashare_record_not_found_in_datacatalog,
 ):
     """
     Check that, when there is a successful harvest logged, new and updated records since that
@@ -173,15 +179,17 @@ def test_main_new_records_harvested_since_date_and_records_in_sync(
     assert "Success, records harvested since" in caplog.text
 
 
+@pytest.mark.usefixtures(
+    "mock_metashare_record_found_in_datacatalog",
+    "mock_single_pid_list_from_metashare",
+    "mock_pids_in_datacatalog",
+    "mock_delete_record",
+)
 def test_main_changed_records_harvested_since_date_and_records_not_in_sync(
     mock_requests_put,
-    mock_metashare_record_found_in_datacatalog,
     mock_metashare_get_single_record,
     create_test_log_file,
     caplog,
-    mock_single_pid_list_from_metashare,
-    mock_pids_in_datacatalog,
-    mock_delete_record,
 ):
     """
     Check that, when there is a successful harvest logged previously, new and updated
