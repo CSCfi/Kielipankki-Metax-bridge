@@ -1,6 +1,10 @@
 import logging
+
+from click.testing import CliRunner
 import pytest
+
 import metadata_harvester_cli
+from metadata_harvester_cli import full_harvest
 
 # Pylint does not understand fixture use
 # pylint: disable=redefined-outer-name
@@ -77,7 +81,7 @@ def test_get_last_harvest_with_unsuccessful_harvest(
     "mock_single_pid_list_from_metashare",
     "mock_pids_in_datacatalog_matching_metashare",
 )
-def test_main_all_data_harvested_and_records_in_sync(
+def test_full_harvest_all_data_harvested_and_records_in_sync(
     mock_requests_post,
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
@@ -90,8 +94,16 @@ def test_main_all_data_harvested_and_records_in_sync(
 
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
+    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        metadata_harvester_cli.main(create_test_log_file_with_unsuccessful_harvest)
+        result = runner.invoke(
+            full_harvest,
+            [
+                str(create_test_log_file_with_unsuccessful_harvest),
+            ],
+        )
+
+    assert result.exit_code == 0
 
     assert mock_requests_post.call_count == 5
     assert mock_requests_post.request_history[2].method == "POST"
@@ -109,7 +121,7 @@ def test_main_all_data_harvested_and_records_in_sync(
     "mock_metashare_record_found_in_datacatalog",
     "mock_delete_record",
 )
-def test_main_all_data_harvested_and_records_not_in_sync(
+def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     mock_requests_put,
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
@@ -132,9 +144,16 @@ def test_main_all_data_harvested_and_records_not_in_sync(
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the records from Metax (no overlap, so no further requests)
     """
-
+    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        metadata_harvester_cli.main(create_test_log_file_with_unsuccessful_harvest)
+        result = runner.invoke(
+            full_harvest,
+            [
+                str(create_test_log_file_with_unsuccessful_harvest),
+            ],
+        )
+
+    assert result.exit_code == 0
 
     assert mock_requests_put.call_count == 5
     assert mock_requests_put.request_history[2].method == "PUT"
@@ -152,7 +171,7 @@ def test_main_all_data_harvested_and_records_not_in_sync(
     "mock_delete_record",
     "mock_metashare_record_not_found_in_datacatalog",
 )
-def test_main_new_records_harvested_since_date_and_records_in_sync(
+def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     mock_requests_post,
     mock_metashare_get_single_record,
     create_test_log_file,
@@ -166,8 +185,16 @@ def test_main_new_records_harvested_since_date_and_records_in_sync(
 
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
+    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        metadata_harvester_cli.main(create_test_log_file)
+        result = runner.invoke(
+            full_harvest,
+            [
+                str(create_test_log_file),
+            ],
+        )
+
+    assert result.exit_code == 0
 
     assert mock_requests_post.call_count == 5
     assert mock_requests_post.request_history[2].method == "POST"
@@ -185,7 +212,7 @@ def test_main_new_records_harvested_since_date_and_records_in_sync(
     "mock_pids_in_datacatalog",
     "mock_delete_record",
 )
-def test_main_changed_records_harvested_since_date_and_records_not_in_sync(
+def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sync(
     mock_requests_put,
     mock_metashare_get_single_record,
     create_test_log_file,
@@ -209,8 +236,16 @@ def test_main_changed_records_harvested_since_date_and_records_not_in_sync(
     GET to get the Metax PID for the record to be deleted
     DELETE to delete the record
     """
+    runner = CliRunner()
     with caplog.at_level(logging.INFO):
-        metadata_harvester_cli.main(create_test_log_file)
+        result = runner.invoke(
+            full_harvest,
+            [
+                str(create_test_log_file),
+            ],
+        )
+
+    assert result.exit_code == 0
 
     assert mock_requests_put.call_count == 7
     assert mock_requests_put.request_history[2].method == "PUT"
@@ -227,7 +262,7 @@ def test_main_changed_records_harvested_since_date_and_records_not_in_sync(
     "mock_requests_post",
     "mock_metashare_record_not_found_in_datacatalog",
 )
-def test_main_multiple_records(
+def test_full_harvest_multiple_records(
     shared_request_mocker,
     create_test_log_file_with_unsuccessful_harvest,
 ):
@@ -245,7 +280,55 @@ def test_main_multiple_records(
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
-    metadata_harvester_cli.main(create_test_log_file_with_unsuccessful_harvest)
+    runner = CliRunner()
+    result = runner.invoke(
+        full_harvest,
+        [
+            str(create_test_log_file_with_unsuccessful_harvest),
+        ],
+    )
+
+    assert result.exit_code == 0
+
+    assert shared_request_mocker.call_count == 13
+    assert (
+        sum(
+            request.method == "POST"
+            for request in shared_request_mocker.request_history
+        )
+        == 5
+    )
+
+
+@pytest.mark.usefixtures(
+    "mock_metashare_get_multiple_records",
+    "mock_requests_post",
+    "mock_metashare_record_not_found_in_datacatalog",
+)
+def test_full_harvest_without_log_file(shared_request_mocker, tmpdir):
+    """
+    Check that full harvest is done when a log file doesn't exist
+
+    This is verified by checking that there is one POST request for each corpus in
+    Metashare and no unexpected requests happened.
+
+    The requests we expect to see:
+    GET to fetch the records from Metashare (for adding new records)
+    For each corpus record (5 in test data):
+        GET to get Metax PID (not found)
+        POST to send the data to Metax
+    GET to fetch the records from Metashare (again, for deleted records this time)
+    GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
+    """
+    runner = CliRunner()
+    result = runner.invoke(
+        full_harvest,
+        [
+            str(tmpdir / "this_path_does_not_exist" / "this_file_does_not_exist.txt"),
+        ],
+    )
+
+    assert result.exit_code == 0
 
     assert shared_request_mocker.call_count == 13
     assert (
@@ -261,7 +344,7 @@ def test_main_multiple_records(
     "mock_metashare_get_no_new_records",
     "mock_metashare_record_not_found_in_datacatalog",
 )
-def test_main_no_new_records(
+def test_full_harvest_no_new_records(
     shared_request_mocker,
     create_test_log_file,
 ):
@@ -276,6 +359,12 @@ def test_main_no_new_records(
         found)
     GET to fetch the Metax PIDs for comparison (none found)
     """
-    metadata_harvester_cli.main(create_test_log_file)
+    runner = CliRunner()
+    runner.invoke(
+        full_harvest,
+        [
+            str(create_test_log_file),
+        ],
+    )
     assert shared_request_mocker.call_count == 3
     assert all(r.method == "GET" for r in shared_request_mocker.request_history)
