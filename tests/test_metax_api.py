@@ -2,7 +2,20 @@ import logging
 import pytest
 import requests
 import requests_mock
-import metax_api
+
+from metax_api import MetaxAPI
+
+
+def test_api_token_in_headers(mock_requests_post):
+    """
+    Verify that the given API token is used when making requests.
+    """
+    metax = MetaxAPI("token_test_value")
+    metax.create_record({"dummy": "data"})
+    assert (
+        mock_requests_post.request_history[0].headers["Authorization"]
+        == "Token token_test_value"
+    )
 
 
 def test_record_id_pid_in_datacatalog(

@@ -40,7 +40,7 @@ def shared_request_mocker():
 
 @pytest.fixture
 def metax_api():
-    return MetaxAPI()
+    return MetaxAPI(api_token="dummyapitoken")
 
 
 def _get_file_as_string(filename):
