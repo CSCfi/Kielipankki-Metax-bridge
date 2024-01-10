@@ -4,7 +4,10 @@ Main script for running metadata harvesting and sending it to Metax.
 
 import logging
 from datetime import datetime
+
+import click
 from lxml import etree
+
 from harvester.pmh_interface import PMH_API
 from harvester.metadata_parser import MSRecordParser
 from metax_api import MetaxAPI
@@ -18,15 +21,15 @@ file_handler_harvester.setFormatter(
 logger_harvester.addHandler(file_handler_harvester)
 
 
-def last_harvest_date(filename):
+def last_harvest_date(log_file_path):
     """This function gets the start time of last successful harvesting date and time from the log
     if found.
     :param filename: string value of a file name
     :return: date and time
     """
     try:
-        with open(filename, "r") as file:
-            lines = file.readlines()
+        with open(log_file_path, "r") as log_file:
+            lines = log_file.readlines()
 
             for i in range(len(lines) - 1, -1, -1):
                 if "success" in lines[i].lower():
@@ -36,12 +39,14 @@ def last_harvest_date(filename):
                             log_datetime_str, "%Y-%m-%d %H:%M:%S,%f"
                         )
                         return log_datetime.strftime("%Y-%m-%dT%H:%M:%SZ")
-        return None
+            return None
     except FileNotFoundError:
         return None
 
 
-def main(log_file):
+@click.command()
+@click.argument("log_file", type=click.Path(), default="harvester.log")
+def full_harvest(log_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
     :param log_file: log file where harvest dates are logged
@@ -64,4 +69,4 @@ def main(log_file):
 
 
 if __name__ == "__main__":
-    main("harvester.log")
+    full_harvest()  # pylint: disable=no-value-for-parameter
