@@ -7,6 +7,7 @@ from datetime import datetime
 
 import click
 from lxml import etree
+import yaml
 
 from harvester.pmh_interface import PMH_API
 from harvester.metadata_parser import MSRecordParser
@@ -44,15 +45,46 @@ def last_harvest_date(log_file_path):
         return None
 
 
+def _config_from_file(config_file):
+    """
+    Read the YAML configuration from given file and return as a dict.
+
+    If the configuration file is malformed or missing some mandatory values, an
+    exception is raised.
+    """
+    try:
+        config = yaml.load(config_file, Loader=yaml.BaseLoader)
+    except yaml.YAMLError as e:
+        raise click.ClickException(
+            "Given configuration file does not seem to be in YAML fromat: "
+            f"{e}. See config/template.yml for valid configuration "
+            "file example."
+        )
+
+    if type(config) != dict:
+        raise click.ClickException(
+            "Unexpect configuration file structure. See config/template.yml for a "
+            "valid configuration file example."
+        )
+
+    if "metax_api_token" not in config:
+        raise click.ClickException(
+            'Value for "metax_api_token" not found in configuration file'
+        )
+    return config
+
+
 @click.command()
 @click.argument("log_file", type=click.Path(), default="harvester.log")
-def full_harvest(log_file):
+@click.argument("config_file", type=click.File("r"), default="config/config.yml")
+def full_harvest(log_file, config_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
     :param log_file: log file where harvest dates are logged
     """
+    config = _config_from_file(config_file)
     metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
-    metax_api = MetaxAPI()
+    metax_api = MetaxAPI(api_token=config["metax_api_token"])
 
     harvested_date = last_harvest_date(log_file)
     logger_harvester.info("Started")

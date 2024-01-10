@@ -2,6 +2,7 @@ import logging
 
 from click.testing import CliRunner
 import pytest
+import yaml
 
 import metadata_harvester_cli
 from metadata_harvester_cli import full_harvest
@@ -25,6 +26,34 @@ def create_test_log_file(tmp_path, latest_harvest_timestamp):
     with open(log_file, "w") as file:
         file.writelines(log_file_data)
     return log_file
+
+
+@pytest.fixture
+def create_test_config_file(tmp_path):
+    """
+    Factory helper for configuration files to be used in tests.
+    """
+
+    def _create_config(configuration_data):
+        """
+        Write the given configuration data into a temporary config file.
+
+        :return: path to the newly-created config file as a string
+        """
+        config_filename = tmp_path / "config.yml"
+        with open(config_filename, "w") as config_file:
+            yaml.dump(configuration_data, stream=config_file)
+        return str(config_filename)
+
+    return _create_config
+
+
+@pytest.fixture
+def basic_configuration(create_test_config_file):
+    """
+    Create a basic well-formed configuration file and return its path.
+    """
+    return create_test_config_file({"metax_api_token": "apitokentestvalue"})
 
 
 @pytest.fixture
@@ -86,6 +115,7 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
+    basic_configuration,
 ):
     """
     Check that when no successful harvest date is available (the log file does not have any successful harvests logged), all data is fetched from Kielipankki.
@@ -100,6 +130,7 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
             full_harvest,
             [
                 str(create_test_log_file_with_unsuccessful_harvest),
+                basic_configuration,
             ],
         )
 
@@ -126,6 +157,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     mock_metashare_get_single_record,
     create_test_log_file_with_unsuccessful_harvest,
     caplog,
+    basic_configuration,
 ):
     """
     Check that when no successful harvest date is available (the log file does not have
@@ -150,6 +182,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
             full_harvest,
             [
                 str(create_test_log_file_with_unsuccessful_harvest),
+                basic_configuration,
             ],
         )
 
@@ -176,6 +209,7 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     mock_metashare_get_single_record,
     create_test_log_file,
     caplog,
+    basic_configuration,
 ):
     """
     Check that, when there is a successful harvest logged, new and updated records since that
@@ -191,6 +225,7 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
             full_harvest,
             [
                 str(create_test_log_file),
+                basic_configuration,
             ],
         )
 
@@ -217,6 +252,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     mock_metashare_get_single_record,
     create_test_log_file,
     caplog,
+    basic_configuration,
 ):
     """
     Check that, when there is a successful harvest logged previously, new and updated
@@ -242,6 +278,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
             full_harvest,
             [
                 str(create_test_log_file),
+                basic_configuration,
             ],
         )
 
@@ -265,6 +302,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
 def test_full_harvest_multiple_records(
     shared_request_mocker,
     create_test_log_file_with_unsuccessful_harvest,
+    basic_configuration,
 ):
     """
     Check that multiple records are looped over properly.
@@ -285,6 +323,7 @@ def test_full_harvest_multiple_records(
         full_harvest,
         [
             str(create_test_log_file_with_unsuccessful_harvest),
+            basic_configuration,
         ],
     )
 
@@ -305,7 +344,9 @@ def test_full_harvest_multiple_records(
     "mock_requests_post",
     "mock_metashare_record_not_found_in_datacatalog",
 )
-def test_full_harvest_without_log_file(shared_request_mocker, tmpdir):
+def test_full_harvest_without_log_file(
+    shared_request_mocker, tmpdir, basic_configuration
+):
     """
     Check that full harvest is done when a log file doesn't exist
 
@@ -325,6 +366,7 @@ def test_full_harvest_without_log_file(shared_request_mocker, tmpdir):
         full_harvest,
         [
             str(tmpdir / "this_path_does_not_exist" / "this_file_does_not_exist.txt"),
+            basic_configuration,
         ],
     )
 
@@ -345,8 +387,7 @@ def test_full_harvest_without_log_file(shared_request_mocker, tmpdir):
     "mock_metashare_record_not_found_in_datacatalog",
 )
 def test_full_harvest_no_new_records(
-    shared_request_mocker,
-    create_test_log_file,
+    shared_request_mocker, create_test_log_file, basic_configuration
 ):
     """
     Test that when there are no new records, the program moves directly to checking for
@@ -364,6 +405,7 @@ def test_full_harvest_no_new_records(
         full_harvest,
         [
             str(create_test_log_file),
+            basic_configuration,
         ],
     )
     assert shared_request_mocker.call_count == 3

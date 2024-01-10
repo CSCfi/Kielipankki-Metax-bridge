@@ -5,3 +5,5 @@ __pycache__
 *.log
 *.coverage
 *.sw?
+config/*
+!config/template.yml
