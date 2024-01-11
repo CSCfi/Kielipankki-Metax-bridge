@@ -11,7 +11,7 @@ class MetaxAPI:
 
     def __init__(self, api_token):
         self.logger = self._setup_logger()
-        self.base_url = "https://metax-service.fd-staging.csc.fi/v3"
+        self.base_url = "https://metax.fd-rework.csc.fi/v3"
         self.headers = {
             "Content-Type": "application/json",
             "Authorization": f"Token {api_token}",
@@ -72,6 +72,7 @@ class MetaxAPI:
     def record_id(self, pid):
         """
         Get the UUID of a dataset record from Metax if such record exists.
+
         :param dataset pid: the persistent identifier of the record
         :return: the record identifier in Metax or None
         """
