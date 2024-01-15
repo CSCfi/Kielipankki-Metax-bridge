@@ -322,7 +322,7 @@ def mock_metashare_get_single_record(
                 "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
             },
             "modified": "2017-02-15T00:00:00Z",
-            "issued": "2017-02-15T00:00:00Z",
+            "created": "2017-02-15T00:00:00Z",
             "access_rights": {
                 "license": [
                     {
