@@ -321,8 +321,8 @@ def mock_metashare_get_single_record(
                 "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
                 "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
             },
-            "modified": "2017-02-15T00:00:00.000000Z",
-            "issued": "2017-02-15T00:00:00.000000Z",
+            "modified": "2017-02-15T00:00:00Z",
+            "issued": "2017-02-15T00:00:00Z",
             "access_rights": {
                 "license": [
                     {

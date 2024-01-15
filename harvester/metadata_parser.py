@@ -54,15 +54,14 @@ class MSRecordParser:
         netloc, path = urlparse(identifier_url).netloc, urlparse(identifier_url).path
         return netloc + path
 
-    def _get_date(self, xpath):
+    def _get_datetime(self, xpath):
         """
-        Retrieves the date of the given XPath and returns it  appropriate date-time format.
-
+        Retrieve the datetime from given XPath as a string (YYYY-mm-ddTHH:MM:SSZ)
         """
         date_str = self._get_text_xpath(xpath)
         if date_str:
             datetime_obj = datetime.strptime(date_str, "%Y-%m-%d")
-            formatted_date_str = datetime_obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+            formatted_date_str = datetime_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
             return formatted_date_str
         else:
             raise ValueError("No date found")
@@ -251,10 +250,10 @@ class MSRecordParser:
             "persistent_identifier": self.pid,
             "title": self._get_language_contents("//info:resourceName"),
             "description": self._get_language_contents("//info:description"),
-            "modified": self._get_date(
+            "modified": self._get_datetime(
                 "//info:metadataInfo/info:metadataLastDateUpdated/text()"
             ),
-            "issued": self._get_date(
+            "issued": self._get_datetime(
                 "//info:metadataInfo/info:metadataCreationDate/text()"
             ),
             "access_rights": self._map_access_rights(),
