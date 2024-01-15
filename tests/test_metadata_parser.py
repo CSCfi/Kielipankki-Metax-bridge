@@ -69,7 +69,7 @@ def test_to_dict(basic_metashare_record):
             "fi": "T\u00e4m\u00e4 suomen kielen ajanilmauksia k\u00e4sitt\u00e4v\u00e4 aineisto on koottu kaunokirjallisten alkuper\u00e4isteosten, k\u00e4\u00e4nn\u00f6sten, murreaineistojen ja muiden tekstien pohjalta.",
         },
         "modified": "2017-02-15T00:00:00Z",
-        "issued": "2017-02-15T00:00:00Z",
+        "created": "2017-02-15T00:00:00Z",
         "access_rights": {
             "license": [
                 {

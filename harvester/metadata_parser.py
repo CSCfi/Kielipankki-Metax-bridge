@@ -253,7 +253,7 @@ class MSRecordParser:
             "modified": self._get_datetime(
                 "//info:metadataInfo/info:metadataLastDateUpdated/text()"
             ),
-            "issued": self._get_datetime(
+            "created": self._get_datetime(
                 "//info:metadataInfo/info:metadataCreationDate/text()"
             ),
             "access_rights": self._map_access_rights(),
