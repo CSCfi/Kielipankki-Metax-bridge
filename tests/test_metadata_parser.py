@@ -34,21 +34,21 @@ def test_pid(basic_metashare_record, dataset_pid):
     assert basic_metashare_record.pid == dataset_pid
 
 
-def test_get_modified_date(basic_metashare_record):
+def test_get_modified_datetime(basic_metashare_record):
     """Check that the modified date is returned in correct format."""
-    result = basic_metashare_record._get_date(
+    result = basic_metashare_record._get_datetime(
         "//info:metadataInfo/info:metadataLastDateUpdated/text()"
     )
-    expected_result = "2017-02-15T00:00:00.000000Z"
+    expected_result = "2017-02-15T00:00:00Z"
     assert result == expected_result
 
 
-def test_get_issued_date(basic_metashare_record):
-    """Check that the issued date is returned in correct format."""
-    result = basic_metashare_record._get_date(
+def test_get_created_datetime(basic_metashare_record):
+    """Check that the created date is returned in correct format."""
+    result = basic_metashare_record._get_datetime(
         "//info:metadataInfo/info:metadataCreationDate/text()"
     )
-    expected_result = "2017-02-15T00:00:00.000000Z"
+    expected_result = "2017-02-15T00:00:00Z"
     assert result == expected_result
 
 
@@ -68,8 +68,8 @@ def test_to_dict(basic_metashare_record):
             "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
             "fi": "T\u00e4m\u00e4 suomen kielen ajanilmauksia k\u00e4sitt\u00e4v\u00e4 aineisto on koottu kaunokirjallisten alkuper\u00e4isteosten, k\u00e4\u00e4nn\u00f6sten, murreaineistojen ja muiden tekstien pohjalta.",
         },
-        "modified": "2017-02-15T00:00:00.000000Z",
-        "issued": "2017-02-15T00:00:00.000000Z",
+        "modified": "2017-02-15T00:00:00Z",
+        "issued": "2017-02-15T00:00:00Z",
         "access_rights": {
             "license": [
                 {
