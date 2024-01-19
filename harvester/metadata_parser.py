@@ -89,12 +89,10 @@ class MSRecordParser:
         """
         Retrieves all licenseInfo elements.
         """
-        license_elements_list = self.xml.xpath(
+        return self.xml.xpath(
             "//info:distributionInfo/info:licenceInfo",
             namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
         )
-        if license_elements_list:
-            return license_elements_list
 
     def check_resourcetype_corpus(self):
         """
@@ -194,6 +192,10 @@ class MSRecordParser:
     def _map_access_rights(self):
         """
         Retrieves and maps all license and access type information to a dictionary.
+
+        If any of the license elements found in the metadata do not have known specific
+        uri.suomi.fi mapping, the said license is skipped. If this would result in no
+        licenses being produced, the license is marked as "other".
         """
         license_package = {}
         license_mappings = {
@@ -217,14 +219,12 @@ class MSRecordParser:
         license_elements_list = self._get_list_of_licenses()
         license_list = []
 
-        if license_elements_list:
-            for license_element in license_elements_list:
-                license = self._get_license_information(
-                    license_element, license_mappings
-                )
-                if license:
-                    license_list.append(license)
-        else:
+        for license_element in license_elements_list:
+            license = self._get_license_information(license_element, license_mappings)
+            if license:
+                license_list.append(license)
+
+        if not license_list:
             license = {"url": license_mappings["other"]}
             license_list.append(license)
 
