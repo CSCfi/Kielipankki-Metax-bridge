@@ -222,7 +222,8 @@ class MSRecordParser:
                 license = self._get_license_information(
                     license_element, license_mappings
                 )
-                license_list.append(license)
+                if license:
+                    license_list.append(license)
         else:
             license = {"url": license_mappings["other"]}
             license_list.append(license)
