@@ -7,3 +7,5 @@ __pycache__
 *.sw?
 config/*
 !config/template.yml
+logs/*
+!logs/.gitkeep

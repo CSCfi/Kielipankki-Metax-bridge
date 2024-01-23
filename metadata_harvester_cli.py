@@ -13,13 +13,17 @@ from harvester.pmh_interface import PMH_API
 from harvester.metadata_parser import MSRecordParser
 from metax_api import MetaxAPI
 
-logger_harvester = logging.getLogger("harvester")
-logger_harvester.setLevel(logging.DEBUG)
-file_handler_harvester = logging.FileHandler("harvester.log")
-file_handler_harvester.setFormatter(
-    logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-)
-logger_harvester.addHandler(file_handler_harvester)
+
+def setup_cli_logger(log_file_name):
+    logger_harvester = logging.getLogger("harvester")
+    logger_harvester.setLevel(logging.DEBUG)
+    file_handler_harvester = logging.FileHandler(log_file_name)
+    file_handler_harvester.setFormatter(
+        logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    )
+    logger_harvester.addHandler(file_handler_harvester)
+
+    return logger_harvester
 
 
 def last_harvest_date(log_file_path):
@@ -67,17 +71,22 @@ def _config_from_file(config_file):
             "valid configuration file example."
         )
 
-    if "metax_api_token" not in config:
-        raise click.ClickException(
-            'Value for "metax_api_token" not found in configuration file'
-        )
-    return config
+    expected_configuration_values = [
+        "metax_api_token",
+        "harvester_log_file",
+    ]
+
+    for configuration_value in expected_configuration_values:
+        if configuration_value not in config:
+            raise click.ClickException(
+                f'Value for "{configuration_value}" not found in configuration file'
+            )
+        return config
 
 
 @click.command()
-@click.argument("log_file", type=click.Path(), default="harvester.log")
 @click.argument("config_file", type=click.File("r"), default="config/config.yml")
-def full_harvest(log_file, config_file):
+def full_harvest(config_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
     :param log_file: log file where harvest dates are logged
@@ -86,7 +95,8 @@ def full_harvest(log_file, config_file):
     metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
     metax_api = MetaxAPI(api_token=config["metax_api_token"])
 
-    harvested_date = last_harvest_date(log_file)
+    logger_harvester = setup_cli_logger(config["harvester_log_file"])
+    harvested_date = last_harvest_date(config["harvester_log_file"])
     logger_harvester.info("Started")
 
     for record in metashare_api.fetch_records(from_timestamp=harvested_date):
