@@ -53,11 +53,16 @@ def create_test_config_file(tmp_path):
 
 
 @pytest.fixture
-def basic_configuration(create_test_config_file):
+def basic_configuration(create_test_config_file, default_test_log_file_path):
     """
     Create a basic well-formed configuration file and return its path.
     """
-    return create_test_config_file({"metax_api_token": "apitokentestvalue"})
+    return create_test_config_file(
+        {
+            "metax_api_token": "apitokentestvalue",
+            "harvester_log_file": str(default_test_log_file_path),
+        }
+    )
 
 
 @pytest.fixture
@@ -108,7 +113,7 @@ def test_get_last_harvest_with_unsuccessful_harvest(
 
 
 @pytest.fixture
-def run_cli(default_test_log_file_path, basic_configuration):
+def run_cli(basic_configuration):
     """
     Helper for running the command line interface with given arguments.
 
@@ -118,16 +123,14 @@ def run_cli(default_test_log_file_path, basic_configuration):
     converted.
     """
 
-    def _run_cli(log_file=None, configuration_file_path=None):
-        if log_file is None:
-            log_file = default_test_log_file_path
+    def _run_cli(configuration_file_path=None):
         if configuration_file_path is None:
             configuration_file_path = basic_configuration
 
         runner = CliRunner()
         return runner.invoke(
             full_harvest,
-            [str(log_file), str(configuration_file_path)],
+            [str(configuration_file_path)],
         )
 
     return _run_cli
@@ -137,11 +140,11 @@ def run_cli(default_test_log_file_path, basic_configuration):
     "mock_metashare_record_not_found_in_datacatalog",
     "mock_single_pid_list_from_metashare",
     "mock_pids_in_datacatalog_matching_metashare",
+    "create_test_log_file_with_unsuccessful_harvest",
 )
 def test_full_harvest_all_data_harvested_and_records_in_sync(
     mock_requests_post,
     mock_metashare_get_single_record,
-    create_test_log_file_with_unsuccessful_harvest,
     caplog,
     run_cli,
 ):
@@ -153,7 +156,7 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli(log_file=create_test_log_file_with_unsuccessful_harvest)
+        result = run_cli()
 
     assert result.exit_code == 0
 
@@ -172,11 +175,11 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
     "mock_pids_in_datacatalog",
     "mock_metashare_record_found_in_datacatalog",
     "mock_delete_record",
+    "create_test_log_file_with_unsuccessful_harvest",
 )
 def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     mock_requests_put,
     mock_metashare_get_single_record,
-    create_test_log_file_with_unsuccessful_harvest,
     caplog,
     run_cli,
 ):
@@ -198,7 +201,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     GET to fetch the records from Metax (no overlap, so no further requests)
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli(log_file=create_test_log_file_with_unsuccessful_harvest)
+        result = run_cli()
 
     assert result.exit_code == 0
 
@@ -217,11 +220,11 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     "mock_pids_in_datacatalog_matching_metashare",
     "mock_delete_record",
     "mock_metashare_record_not_found_in_datacatalog",
+    "create_test_log_file",
 )
 def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     mock_requests_post,
     mock_metashare_get_single_record,
-    create_test_log_file,
     caplog,
     run_cli,
 ):
@@ -234,7 +237,7 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli(log_file=create_test_log_file)
+        result = run_cli()
 
     assert result.exit_code == 0
 
@@ -253,11 +256,11 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     "mock_single_pid_list_from_metashare",
     "mock_pids_in_datacatalog",
     "mock_delete_record",
+    "create_test_log_file",
 )
 def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sync(
     mock_requests_put,
     mock_metashare_get_single_record,
-    create_test_log_file,
     caplog,
     run_cli,
 ):
@@ -280,7 +283,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     DELETE to delete the record
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli(log_file=create_test_log_file)
+        result = run_cli()
 
     assert result.exit_code == 0
 
@@ -298,10 +301,10 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     "mock_metashare_get_multiple_records",
     "mock_requests_post",
     "mock_metashare_record_not_found_in_datacatalog",
+    "create_test_log_file_with_unsuccessful_harvest",
 )
 def test_full_harvest_multiple_records(
     shared_request_mocker,
-    create_test_log_file_with_unsuccessful_harvest,
     run_cli,
 ):
     """
@@ -318,7 +321,7 @@ def test_full_harvest_multiple_records(
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
-    result = run_cli(log_file=create_test_log_file_with_unsuccessful_harvest)
+    result = run_cli()
 
     assert result.exit_code == 0
 
@@ -337,9 +340,13 @@ def test_full_harvest_multiple_records(
     "mock_requests_post",
     "mock_metashare_record_not_found_in_datacatalog",
 )
-def test_full_harvest_without_log_file(shared_request_mocker, tmpdir, run_cli):
+def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
     """
-    Check that full harvest is done when a log file doesn't exist
+    Check that full harvest is done when a log file doesn't exist.
+
+    The log file will not exist because the tests use a log file in pytest-created
+    temporary file that is per-test, and this test does not use a fixture that would
+    create one.
 
     This is verified by checking that there is one POST request for each corpus in
     Metashare and no unexpected requests happened.
@@ -352,9 +359,7 @@ def test_full_harvest_without_log_file(shared_request_mocker, tmpdir, run_cli):
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
-    result = run_cli(
-        log_file=tmpdir / "this_path_does_not_exist" / "this_file_does_not_exist.txt",
-    )
+    result = run_cli()
 
     assert result.exit_code == 0
 
