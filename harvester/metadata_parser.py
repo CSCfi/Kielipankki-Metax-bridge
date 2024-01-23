@@ -225,8 +225,7 @@ class MSRecordParser:
                 license_list.append(license)
 
         if not license_list:
-            license = {"url": license_mappings["other"]}
-            license_list.append(license)
+            license_list.append({"url": license_mappings["other"]})
 
         access_type = self._get_access_type()
 
