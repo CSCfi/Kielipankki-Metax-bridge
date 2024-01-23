@@ -74,6 +74,7 @@ def _config_from_file(config_file):
     expected_configuration_values = [
         "metax_api_token",
         "harvester_log_file",
+        "metax_api_log_file",
     ]
 
     for configuration_value in expected_configuration_values:
@@ -93,7 +94,10 @@ def full_harvest(config_file):
     """
     config = _config_from_file(config_file)
     metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
-    metax_api = MetaxAPI(api_token=config["metax_api_token"])
+    metax_api = MetaxAPI(
+        api_token=config["metax_api_token"],
+        api_request_log_path=config["metax_api_log_file"],
+    )
 
     logger_harvester = setup_cli_logger(config["harvester_log_file"])
     harvested_date = last_harvest_date(config["harvester_log_file"])

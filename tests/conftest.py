@@ -39,8 +39,19 @@ def shared_request_mocker():
 
 
 @pytest.fixture
-def metax_api():
-    return MetaxAPI(api_token="dummyapitoken")
+def default_metax_api_log_file_path(tmp_path):
+    """
+    Temporary log file for logging Metax API calls
+    """
+    return tmp_path / "metax.log"
+
+
+@pytest.fixture
+def metax_api(default_metax_api_log_file_path):
+    return MetaxAPI(
+        api_token="dummyapitoken",
+        api_request_log_path=str(default_metax_api_log_file_path),
+    )
 
 
 def _get_file_as_string(filename):

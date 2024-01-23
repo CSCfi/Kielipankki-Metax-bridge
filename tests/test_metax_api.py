@@ -6,16 +6,29 @@ import requests_mock
 from metax_api import MetaxAPI
 
 
-def test_api_token_in_headers(mock_requests_post):
+def test_api_token_in_headers(mock_requests_post, default_metax_api_log_file_path):
     """
     Verify that the given API token is used when making requests.
     """
-    metax = MetaxAPI("token_test_value")
+    metax = MetaxAPI("token_test_value", str(default_metax_api_log_file_path))
     metax.create_record({"dummy": "data"})
     assert (
         mock_requests_post.request_history[0].headers["Authorization"]
         == "Token token_test_value"
     )
+
+
+@pytest.mark.usefixtures("mock_requests_post")
+def test_api_calls_logged(metax_api, default_metax_api_log_file_path):
+    """
+    Check that configuring the Metax API call logging works.
+
+    This is verified by ensuring that initially empty log file gets content when an API
+    call is made.
+    """
+    assert default_metax_api_log_file_path.stat().st_size == 0
+    metax_api.create_record({"dummy": "data"})
+    assert default_metax_api_log_file_path.stat().st_size != 0
 
 
 def test_record_id_pid_in_datacatalog(
