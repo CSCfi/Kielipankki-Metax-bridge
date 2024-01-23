@@ -2,3 +2,4 @@
 metax_api_token: filltokenhere
 
 harvester_log_file: logs/harvester.log
+metax_api_log_file: logs/metax_api_requests.log

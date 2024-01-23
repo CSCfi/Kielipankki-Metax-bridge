@@ -9,8 +9,8 @@ class MetaxAPI:
     An API client for interacting with the Metax V3 service.
     """
 
-    def __init__(self, api_token):
-        self.logger = self._setup_logger()
+    def __init__(self, api_token, api_request_log_path):
+        self.logger = self._setup_logger(api_request_log_path)
         self.base_url = "https://metax.fd-rework.csc.fi/v3"
         self.headers = {
             "Content-Type": "application/json",
@@ -19,13 +19,13 @@ class MetaxAPI:
         self.catalog_id = "urn:nbn:fi:att:data-catalog-kielipankki"
         self.timeout = 30
 
-    def _setup_logger(self):
+    def _setup_logger(self, api_request_log_path):
         """
         Set up and configure a logger for logging Metax API requests and responses.
         """
-        logger = logging.getLogger("metax_api_requests.log")
+        logger = logging.getLogger(api_request_log_path)
         logger.setLevel(logging.INFO)
-        file_handler = logging.FileHandler("metax_api_requests.log")
+        file_handler = logging.FileHandler(api_request_log_path)
         formatter = logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
         )

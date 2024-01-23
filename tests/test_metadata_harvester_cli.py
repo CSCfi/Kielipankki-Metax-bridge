@@ -53,7 +53,9 @@ def create_test_config_file(tmp_path):
 
 
 @pytest.fixture
-def basic_configuration(create_test_config_file, default_test_log_file_path):
+def basic_configuration(
+    create_test_config_file, default_test_log_file_path, default_metax_api_log_file_path
+):
     """
     Create a basic well-formed configuration file and return its path.
     """
@@ -61,6 +63,7 @@ def basic_configuration(create_test_config_file, default_test_log_file_path):
         {
             "metax_api_token": "apitokentestvalue",
             "harvester_log_file": str(default_test_log_file_path),
+            "metax_api_log_file": str(default_metax_api_log_file_path),
         }
     )
 
