@@ -6,25 +6,14 @@ import requests_mock
 from metax_api import MetaxAPI
 
 
-def test_api_token_in_headers(
-    mock_requests_post,
-    default_metax_api_log_file_path,
-    metax_base_url,
-    kielipankki_datacatalog_id,
-):
+def test_api_token_in_headers(mock_requests_post, metax_api):
     """
     Verify that the given API token is used when making requests.
     """
-    metax = MetaxAPI(
-        metax_base_url,
-        kielipankki_datacatalog_id,
-        "token_test_value",
-        str(default_metax_api_log_file_path),
-    )
-    metax.create_record({"dummy": "data"})
+    metax_api.create_record({"dummy": "data"})
     assert (
         mock_requests_post.request_history[0].headers["Authorization"]
-        == "Token token_test_value"
+        == "Token dummyapitoken"
     )
 
 
