@@ -62,6 +62,8 @@ def basic_configuration(
     return create_test_config_file(
         {
             "metax_api_token": "apitokentestvalue",
+            "metax_base_url": "https://metax.fd-rework.csc.fi/v3",
+            "metax_catalog_id": "urn:nbn:fi:att:data-catalog-kielipankki",
             "harvester_log_file": str(default_test_log_file_path),
             "metax_api_log_file": str(default_metax_api_log_file_path),
         }

@@ -73,6 +73,8 @@ def _config_from_file(config_file):
 
     expected_configuration_values = [
         "metax_api_token",
+        "metax_base_url",
+        "metax_catalog_id",
         "harvester_log_file",
         "metax_api_log_file",
     ]
@@ -95,6 +97,8 @@ def full_harvest(config_file):
     config = _config_from_file(config_file)
     metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
     metax_api = MetaxAPI(
+        base_url=config["metax_base_url"],
+        catalog_id=config["metax_catalog_id"],
         api_token=config["metax_api_token"],
         api_request_log_path=config["metax_api_log_file"],
     )

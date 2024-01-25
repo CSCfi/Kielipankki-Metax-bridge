@@ -47,8 +47,12 @@ def default_metax_api_log_file_path(tmp_path):
 
 
 @pytest.fixture
-def metax_api(default_metax_api_log_file_path):
+def metax_api(
+    default_metax_api_log_file_path, kielipankki_datacatalog_id, metax_base_url
+):
     return MetaxAPI(
+        base_url=metax_base_url,
+        catalog_id=kielipankki_datacatalog_id,
         api_token="dummyapitoken",
         api_request_log_path=str(default_metax_api_log_file_path),
     )

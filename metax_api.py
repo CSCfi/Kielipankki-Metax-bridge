@@ -9,14 +9,14 @@ class MetaxAPI:
     An API client for interacting with the Metax V3 service.
     """
 
-    def __init__(self, api_token, api_request_log_path):
+    def __init__(self, base_url, catalog_id, api_token, api_request_log_path):
         self.logger = self._setup_logger(api_request_log_path)
-        self.base_url = "https://metax.fd-rework.csc.fi/v3"
+        self.base_url = base_url
+        self.catalog_id = catalog_id
         self.headers = {
             "Content-Type": "application/json",
             "Authorization": f"Token {api_token}",
         }
-        self.catalog_id = "urn:nbn:fi:att:data-catalog-kielipankki"
         self.timeout = 30
 
     def _setup_logger(self, api_request_log_path):
