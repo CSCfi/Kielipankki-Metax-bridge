@@ -1,0 +1,24 @@
+name: Python unit tests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  unit-test:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install required Python packages
+      run: python3.8 -m pip install -r requirements_dev.txt --user
+    - name: Test with pytest
+      run: python3.8 -m pytest
