@@ -87,7 +87,9 @@ def test_create_record_successful(
 def test_create_dataset_failed(mock_requests_post, caplog, metax_base_url, metax_api):
     """Check that an ill-formed dictionary results in a bad request to Metax."""
     mock_requests_post.post(f"{metax_base_url}/datasets", status_code=400)
-    metadata_dict = {"invalid_key": "invalid_value"}
+    metadata_dict = {
+            "invalid_key": "invalid_value"
+            }
 
     with pytest.raises(requests.exceptions.RequestException), caplog.at_level(
         logging.ERROR

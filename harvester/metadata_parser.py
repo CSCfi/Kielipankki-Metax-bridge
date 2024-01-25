@@ -22,7 +22,7 @@ class MSRecordParser:
         """
         result = {}
 
-        languages = ["en", "fi", "und"]
+        languages = ["en","fi","und"]
 
         for lang in languages:
             query = self.xml.xpath(

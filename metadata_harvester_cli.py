@@ -71,11 +71,7 @@ def _config_from_file(config_file):
             "valid configuration file example."
         )
 
-    expected_configuration_values = [
-        "metax_api_token",
-        "harvester_log_file",
-        "metax_api_log_file",
-    ]
+    expected_configuration_values = ["metax_api_token", "harvester_log_file", "metax_api_log_file",]
 
     for configuration_value in expected_configuration_values:
         if configuration_value not in config:
