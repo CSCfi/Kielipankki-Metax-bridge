@@ -1,6 +1,7 @@
-from lxml import etree
-from urllib.parse import urlparse
 from datetime import datetime
+from urllib.parse import urlparse
+
+from lxml import etree
 
 
 class MSRecordParser:
