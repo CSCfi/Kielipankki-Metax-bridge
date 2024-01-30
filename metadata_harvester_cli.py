@@ -84,7 +84,7 @@ def _config_from_file(config_file):
             raise click.ClickException(
                 f'Value for "{configuration_value}" not found in configuration file'
             )
-        return config
+    return config
 
 
 @click.command()

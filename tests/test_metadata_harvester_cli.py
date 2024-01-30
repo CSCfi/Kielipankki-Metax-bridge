@@ -401,3 +401,22 @@ def test_full_harvest_no_new_records(
 
     assert shared_request_mocker.call_count == 3
     assert all(r.method == "GET" for r in shared_request_mocker.request_history)
+
+
+def test_cli_reporting_missing_configuration_values(create_test_config_file, run_cli):
+    """
+    Test that not providing all required configuration values in config file will
+    produce an informative error message and non-zero exit code.
+    """
+    create_test_config_file(
+        {
+            "metax_api_token": "qwerty",
+            "metax_base_url": "https://metax.fd-rework.csc.fi/",
+            "metax_catalog_id": "abc123",
+            # harvester_log_file not defined
+            "metax_api_log_file": "log.txt",
+        }
+    )
+    result = run_cli()
+    assert 'Value for "harvester_log_file" not found in configuration file'
+    assert result.exit_code != 0
