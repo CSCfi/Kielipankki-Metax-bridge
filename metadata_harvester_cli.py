@@ -107,7 +107,7 @@ def full_harvest(config_file):
     harvested_date = last_harvest_date(config["harvester_log_file"])
     logger_harvester.info("Started")
 
-    for record in metashare_api.fetch_records(from_timestamp=harvested_date):
+    for record in metashare_api.fetch_corpora(from_timestamp=harvested_date):
         metax_api.send_record(record)
 
     if harvested_date:

@@ -320,7 +320,7 @@ def test_full_harvest_multiple_records(
 
     The requests we expect to see:
     GET to fetch the records from Metashare (for adding new records)
-    For each corpus record (5 in test data):
+    For each corpus record (4 in test data, one record is not a corpus):
         GET to get Metax PID (not found)
         POST to send the data to Metax
     GET to fetch the records from Metashare (again, for deleted records this time)
@@ -330,13 +330,13 @@ def test_full_harvest_multiple_records(
 
     assert result.exit_code == 0
 
-    assert shared_request_mocker.call_count == 13
+    assert shared_request_mocker.call_count == 11
     assert (
         sum(
             request.method == "POST"
             for request in shared_request_mocker.request_history
         )
-        == 5
+        == 4
     )
 
 
@@ -358,7 +358,7 @@ def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
 
     The requests we expect to see:
     GET to fetch the records from Metashare (for adding new records)
-    For each corpus record (5 in test data):
+    For each corpus record (4 in test data):
         GET to get Metax PID (not found)
         POST to send the data to Metax
     GET to fetch the records from Metashare (again, for deleted records this time)
@@ -368,13 +368,13 @@ def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
 
     assert result.exit_code == 0
 
-    assert shared_request_mocker.call_count == 13
+    assert shared_request_mocker.call_count == 11
     assert (
         sum(
             request.method == "POST"
             for request in shared_request_mocker.request_history
         )
-        == 5
+        == 4
     )
 
 
