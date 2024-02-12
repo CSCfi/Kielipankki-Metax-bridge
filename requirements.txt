@@ -1,4 +1,5 @@
 click
+iso639-lang
 sickle
 lxml
 PyYAML
