@@ -1,4 +1,5 @@
 from datetime import datetime
+import iso639
 from urllib.parse import urlparse
 
 from lxml import etree
@@ -234,14 +235,62 @@ class MSRecordParser:
 
         return license_package
 
+    def _get_resource_languages(self):
+        """
+        Return the languages in the resource as a list of dicts containing lexvo urls.
+
+        The input data from Metashare can contain both short 2-letter language codes
+        (e.g. "fi") and the long 3-letter ones (e.g. "fin"), but Metax only accepts
+        Lexvo URIs in form http://lexvo.org/id/iso639-3/LLL or similar for ISO 639-5.
+        Here LLL is the three-letter language code from ISO 639-3. This requires
+        translating the codes from one standard to another and prepending the lexvo URI.
+        When available, ISO 639-3 is preferred.
+
+        We also have two non-standard language codes in the source data: "hbp" and "hbk"
+        for "Hungarian (Budapest)" and "Hungarian (Bucharest)". These are submitted as
+        plain Hungarian (hun).
+
+        Same language code can be present in languages twice (e.g. fi for "Standard
+        Finnish" and "Easy-to-read Finnish"), but those are eliminated.
+        """
+        language_codes = self.xml.xpath(
+            "//info:languageInfo/info:languageId/text()",
+            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        )
+        iso639_urls = set()
+        for language_code in language_codes:
+            try:
+                language = iso639.Lang(language_code.lower())
+
+                if language.pt3:
+                    iso639_urls.add(f"http://lexvo.org/id/iso639-3/{language.pt3}")
+                elif language.pt5:
+                    iso639_urls.add(f"http://lexvo.org/id/iso639-5/{language.pt5}")
+                else:
+                    raise ValueError(
+                        "Could not determine three-letter language code for %s"
+                        % language_code,
+                    )
+
+            except iso639.exceptions.InvalidLanguageValue:
+                if language_code in ["hbk", "hbp"]:
+                    iso639_urls.add("http://lexvo.org/id/iso639-3/hun")
+                else:
+                    raise ValueError(
+                        "Could not determine ISO 639 language code for %s"
+                        % language_code,
+                    )
+
+        return [{"url": url} for url in iso639_urls]
+
     def to_dict(self):
         """
         Converts text and dictionaries to Metax compliant dictionary.
         """
         return {
-            # data_catalog, language and field_of_science is dummy data until they are implemented later on
+            # field_of_science is dummy data until they are implemented later on
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
-            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+            "language": self._get_resource_languages(),
             "field_of_science": [
                 {
                     "url": "http://www.yso.fi/onto/okm-tieteenala/ta112",

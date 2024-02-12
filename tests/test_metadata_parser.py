@@ -219,3 +219,33 @@ def missing_pid_record():
 def test_check_pid_exists(missing_pid_record):
     """Check that a missing PID is handled."""
     assert not missing_pid_record.check_pid_exists()
+
+
+def test_get_resource_languages(basic_metashare_record):
+    """
+    Verify that a single language from a record is returned in Metax-approved format.
+
+    Metax espects a list of dicts, each dict describing one language. The only
+    information required for each language is a lexvo url.
+    """
+    assert basic_metashare_record._get_resource_languages() == [
+        {"url": "http://lexvo.org/id/iso639-3/fin"}
+    ]
+
+
+def test_get_resource_languages_with_multiple_languages():
+    """
+    Check that multiple languages for one resource are reported properly. Also includes
+    an ISO 639-5 language.
+    """
+    record = MSRecordParser(
+        _get_file_as_lxml(
+            "tests/test_data/kielipankki_record_sample_multiple_languages.xml"
+        )
+    )
+    languages = record._get_resource_languages()
+    assert len(languages) == 4
+
+    language_urls = [language["url"] for language in languages]
+    assert "http://lexvo.org/id/iso639-5/smi" in language_urls
+    assert "http://lexvo.org/id/iso639-3/swe" in language_urls

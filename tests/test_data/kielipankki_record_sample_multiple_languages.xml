@@ -1,0 +1,193 @@
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+<responseDate>2023-08-10T06:22:09Z</responseDate>
+<request verb="GetRecord" identifier="oai:kielipankki.fi:sh0721e0" metadataPrefix="info">https://kielipankki.fi/md_api/que</request>
+<GetRecord>
+  <record>
+    <header>
+      <identifier>oai:kielipankki.fi:sh0721e0</identifier>
+      <datestamp>2023-03-22T05:03:42Z</datestamp>
+    </header>
+    <metadata>
+      <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">
+          The Finnish Broadcasting Company Corpus of Subtitles
+        </resourceName>
+        <description lang="fi">
+          Jukka Mäkisalon ja Sonja Tirkkonen-Condit v. 2005 laatima käännetyn tekstityksen digitaalinen tutkimusaineisto. Yle-ruututeksikorpus sisältää kaikki Ylen lähettämät digitaaliset tv-tekstitykset v. 1992-2004.
+        </description>
+        <description lang="en">
+          Digital research material of translated subtitles compiled by Jukka Mäkisalo and Sonja Tirkkonen-Condit, 2005. The corpus contains all the digital TV subtitles of the Finnish Broadcasting Company from 1992 to 2004.
+        </description>
+        <resourceShortName lang="fi">YLE-korpus</resourceShortName>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+        <identifier>http://urn.fi/urn:nbn:fi:lb-20140730134</identifier>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>underNegotiation</availability>
+        <licenceInfo>
+          <licence>underNegotiation</licence>
+          <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+          <licensor>
+            <personInfo>
+              <surname lang="en">Mäkisalo</surname>
+              <givenName lang="en">Jukka</givenName>
+              <sex>male</sex>
+              <communicationInfo>
+                <email>jukka.makisalo@uef.fi</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="fi">Itä-Suomen yliopisto</organizationName>
+                <organizationName lang="en">University of Eastern Finland</organizationName>
+                <organizationShortName lang="en">UEF</organizationShortName>
+                <communicationInfo>
+                  <email>kirjaamo@uef.fi</email>
+                  <url>http://www.uef.fi/uef/english</url>
+                  <url>https://ror.org/00cyydd11</url>
+                  <country>Finland</country>
+                </communicationInfo>
+              </affiliation>
+            </personInfo>
+          </licensor>
+          <distributionRightsHolder>
+            <personInfo>
+              <surname lang="en">Mäkisalo</surname>
+              <givenName lang="en">Jukka</givenName>
+              <sex>male</sex>
+              <communicationInfo>
+                <email>jukka.makisalo@uef.fi</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="fi">Itä-Suomen yliopisto</organizationName>
+                <organizationName lang="en">University of Eastern Finland</organizationName>
+                <organizationShortName lang="en">UEF</organizationShortName>
+                <communicationInfo>
+                  <email>kirjaamo@uef.fi</email>
+                  <url>http://www.uef.fi/uef/english</url>
+                  <url>https://ror.org/00cyydd11</url>
+                  <country>Finland</country>
+                </communicationInfo>
+              </affiliation>
+            </personInfo>
+          </distributionRightsHolder>
+          <userNature>academic</userNature>
+        </licenceInfo>
+        <iprHolder>
+          <personInfo>
+            <surname lang="en">Mäkisalo</surname>
+            <givenName lang="en">Jukka</givenName>
+            <sex>male</sex>
+            <communicationInfo>
+              <email>jukka.makisalo@uef.fi</email>
+            </communicationInfo>
+            <affiliation>
+              <organizationName lang="fi">Itä-Suomen yliopisto</organizationName>
+              <organizationName lang="en">University of Eastern Finland</organizationName>
+              <organizationShortName lang="en">UEF</organizationShortName>
+              <communicationInfo>
+                <email>kirjaamo@uef.fi</email>
+                <url>http://www.uef.fi/uef/english</url>
+                <url>https://ror.org/00cyydd11</url>
+                <country>Finland</country>
+              </communicationInfo>
+            </affiliation>
+          </personInfo>
+        </iprHolder>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Mäkisalo</surname>
+        <givenName lang="en">Jukka</givenName>
+        <sex>male</sex>
+        <communicationInfo>
+          <email>jukka.makisalo@uef.fi</email>
+        </communicationInfo>
+        <affiliation>
+          <organizationName lang="fi">Itä-Suomen yliopisto</organizationName>
+          <organizationName lang="en">University of Eastern Finland</organizationName>
+          <organizationShortName lang="en">UEF</organizationShortName>
+          <communicationInfo>
+            <email>kirjaamo@uef.fi</email>
+            <url>http://www.uef.fi/uef/english</url>
+            <url>https://ror.org/00cyydd11</url>
+            <country>Finland</country>
+          </communicationInfo>
+        </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-08-02</metadataCreationDate>
+        <metadataCreator>
+          <surname lang="en">Bartis</surname>
+          <givenName lang="en">Imre</givenName>
+          <sex>male</sex>
+          <communicationInfo>
+            <email>imre.bartis@helsinki.fi</email>
+            <url>http://orcid.org/0000-0002-9455-8771</url>
+            <city>Helsinki</city>
+            <country>Finland</country>
+          </communicationInfo>
+          <position>Project Coordinator</position>
+          <affiliation>
+            <organizationName lang="en">FIN-CLARIN</organizationName>
+            <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
+            <departmentName lang="en">University of Helsinki</departmentName>
+            <communicationInfo>
+              <email>finclarin@helsinki.fi</email>
+              <url>http://www.helsinki.fi/fin-clarin</url>
+              <address>PO Box 24 (Unioninkatu 40)</address>
+              <zipCode>00014</zipCode>
+              <city>University of Helsinki</city>
+              <country>Finland</country>
+            </communicationInfo>
+          </affiliation>
+        </metadataCreator>
+        <metadataLanguageName>Finnish</metadataLanguageName>
+        <metadataLanguageName>English</metadataLanguageName>
+        <metadataLanguageId>Fi</metadataLanguageId>
+        <metadataLanguageId>en</metadataLanguageId>
+        <metadataLastDateUpdated>2014-04-24</metadataLastDateUpdated>
+      </metadataInfo>
+
+      <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+        <corpusInfo>
+          <resourceType>corpus</resourceType>
+          <corpusMediaType>
+            <corpusTextInfo>
+              <mediaType>text</mediaType>
+              <lingualityInfo>
+                <lingualityType>multilingual</lingualityType>
+                <multilingualityType>multilingualSingleText</multilingualityType>
+              </lingualityInfo>
+              <languageInfo>
+                <languageId>Fi</languageId>
+                <languageName>Finnish</languageName>
+              </languageInfo>
+              <languageInfo>
+                <languageId>En</languageId>
+                <languageName>English</languageName>
+              </languageInfo>
+              <languageInfo>
+                <languageId>Sv</languageId>
+                <languageName>Swedish</languageName>
+              </languageInfo>
+              <languageInfo>
+                <languageId>smi</languageId>
+                <languageName>Sami languages</languageName>
+              </languageInfo>
+              <modalityInfo>
+                <modalityType>spokenLanguage</modalityType>
+              </modalityInfo>
+              <sizeInfo>
+                <size>100000000</size>
+                <sizeUnit>words</sizeUnit>
+              </sizeInfo>
+            </corpusTextInfo>
+          </corpusMediaType>
+        </corpusInfo>
+      </resourceComponentType>
+    </info:resourceInfo>
+  </metadata>
+</record>
+</GetRecord>
+</OAI-PMH>
