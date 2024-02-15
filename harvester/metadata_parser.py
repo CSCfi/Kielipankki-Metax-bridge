@@ -14,7 +14,7 @@ class MSRecordParser:
         """
         self.xml = xml
 
-    def _get_language_contents(self, xpath):
+    def _get_element_text_in_preferred_language(self, xpath):
         """
         Retrieve the content from XML tree and XPath expression for different language versions.
 
@@ -297,8 +297,12 @@ class MSRecordParser:
                 }
             ],
             "persistent_identifier": self.pid,
-            "title": self._get_language_contents("//info:resourceName"),
-            "description": self._get_language_contents("//info:description"),
+            "title": self._get_element_text_in_preferred_language(
+                "//info:resourceName"
+            ),
+            "description": self._get_element_text_in_preferred_language(
+                "//info:description"
+            ),
             "modified": self._get_datetime(
                 "//info:metadataInfo/info:metadataLastDateUpdated/text()"
             ),

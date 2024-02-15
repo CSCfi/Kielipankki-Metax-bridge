@@ -11,7 +11,9 @@ def _get_file_as_lxml(filename):
 
 def test_get_title(basic_metashare_record):
     """Testing that different language versions of "title" are mapped."""
-    result = basic_metashare_record._get_language_contents("//info:resourceName")
+    result = basic_metashare_record._get_element_text_in_preferred_language(
+        "//info:resourceName"
+    )
     expected_result = {
         "en": "Silva Kiuru's Time Expressions Corpus",
         "fi": "Silva Kiurun ajanilmausaineisto",
@@ -21,7 +23,9 @@ def test_get_title(basic_metashare_record):
 
 def test_get_description(basic_metashare_record):
     """Testing that different language versions of "description" are mapped."""
-    result = basic_metashare_record._get_language_contents("//info:description")
+    result = basic_metashare_record._get_element_text_in_preferred_language(
+        "//info:description"
+    )
     expected_result = {
         "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
         "fi": "T\u00e4m\u00e4 suomen kielen ajanilmauksia k\u00e4sitt\u00e4v\u00e4 aineisto on koottu kaunokirjallisten alkuper\u00e4isteosten, k\u00e4\u00e4nn\u00f6sten, murreaineistojen ja muiden tekstien pohjalta.",
