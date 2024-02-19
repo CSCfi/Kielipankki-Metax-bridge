@@ -384,3 +384,34 @@ def license_with_custom_url_record():
     """A record containing lisence url in documentation elements."""
     with open("tests/test_data/res_with_license_url.xml") as xmlfile:
         return MSRecordParser(etree.fromstring(xmlfile.read()))
+
+
+@pytest.fixture
+def language_vocabulary_endpoint_url():
+    """
+    URL for "fetching" the language vocabulary in tests.
+    """
+    return "https://metax.fairdata.fi/es/reference_data/language/_search?size=10000"
+
+
+@pytest.fixture(autouse=True)
+def mock_metax_language_vocabulary_endpoint(
+    language_vocabulary_endpoint_url, shared_request_mocker
+):
+    """
+    Make GET requests to the "Metax language vocabulary endpoint" return a small mocked
+    response.
+
+    This response will only list five languages/language families:
+     - http://lexvo.org/id/iso639-3/kaf
+     - http://lexvo.org/id/iso639-5/smi
+     - http://lexvo.org/id/iso639-3/eng
+     - http://lexvo.org/id/iso639-3/fin
+     - http://lexvo.org/id/iso639-3/swe
+
+    The response dicts are also somewhat trimmed down, because we don't need the full
+    data with all translations.
+    """
+    with open("tests/test_data/metax_language_vocabulary.json", "r") as response_json:
+        data = json.loads(response_json.read())
+    shared_request_mocker.get(language_vocabulary_endpoint_url, json=data)

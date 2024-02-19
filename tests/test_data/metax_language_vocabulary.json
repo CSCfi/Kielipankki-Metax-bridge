@@ -1,0 +1,150 @@
+{
+  "took": 68,
+  "timed_out": false,
+  "_shards": {
+    "total": 2,
+    "successful": 2,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 5,
+      "relation": "eq"
+    },
+    "max_score": 2.300493,
+    "hits": [
+      {
+        "_index": "reference_data",
+        "_type": "_doc",
+        "_id": "language_kaf",
+        "_score": 2.300493,
+        "_source": {
+          "id": "language_kaf",
+          "code": "kaf",
+          "type": "language",
+          "uri": "http://lexvo.org/id/iso639-3/kaf",
+          "wkt": "",
+          "input_file_format": "",
+          "output_format_version": "",
+          "label": {
+            "en": "Katso",
+            "und": "Katso"
+          },
+          "parent_ids": [],
+          "child_ids": [],
+          "has_children": false,
+          "same_as": [],
+          "internal_code": "",
+          "scheme": "http://lexvo.org/id/"
+        }
+      },
+      {
+        "_index": "reference_data",
+        "_type": "_doc",
+        "_id": "language_smi",
+        "_score": 2.2677848,
+        "_source": {
+          "id": "language_smi",
+          "code": "smi",
+          "type": "language",
+          "uri": "http://lexvo.org/id/iso639-5/smi",
+          "wkt": "",
+          "input_file_format": "",
+          "output_format_version": "",
+          "label": {
+            "cs": "sámské jazyky",
+            "fi": "saamelaiskieli",
+            "ee": "Samigbe",
+            "id": "Bahasa Sami",
+            "und": "saamelaiskieli"
+          },
+          "parent_ids": [],
+          "child_ids": [],
+          "has_children": false,
+          "same_as": [],
+          "internal_code": "",
+          "scheme": "http://lexvo.org/id/"
+        }
+      },
+            {
+        "_index": "reference_data",
+        "_type": "_doc",
+        "_id": "language_eng",
+        "_score": 2.300493,
+        "_source": {
+          "id": "language_eng",
+          "code": "eng",
+          "type": "language",
+          "uri": "http://lexvo.org/id/iso639-3/eng",
+          "wkt": "",
+          "input_file_format": "",
+          "output_format_version": "",
+          "label": {
+            "yue": "英文",
+            "bar": "Englische Sproch",
+            "fi": "englanti",
+            "zsm": "Inggeris",
+            "os": "англисаг",
+            "und": "englanti"
+          },
+          "parent_ids": [],
+          "child_ids": [],
+          "has_children": false,
+          "same_as": [],
+          "internal_code": "",
+          "scheme": "http://lexvo.org/id/"
+        }
+      },
+      {
+        "_index": "reference_data",
+        "_type": "_doc",
+        "_id": "language_fin",
+        "_score": 2.300493,
+        "_source": {
+          "id": "language_fin",
+          "code": "fin",
+          "type": "language",
+          "uri": "http://lexvo.org/id/iso639-3/fin",
+          "wkt": "",
+          "input_file_format": "",
+          "output_format_version": "",
+          "label": {
+            "he": "פינית",
+            "fi": "suomi",
+            "fr": "finnois",
+            "fil": "Finnish",
+            "udm": "Финн кыл",
+            "und": "suomi"
+          },
+          "parent_ids": [],
+          "child_ids": [],
+          "has_children": false,
+          "same_as": [],
+          "internal_code": "",
+          "scheme": "http://lexvo.org/id/"
+        }
+      },
+      {
+        "_index": "reference_data",
+        "_type": "_doc",
+        "_id": "language_swe",
+        "_score": 2.2677848,
+        "_source": {
+          "id": "language_swe",
+          "code": "swe",
+          "type": "language",
+          "uri": "http://lexvo.org/id/iso639-3/swe",
+          "wkt": "",
+          "input_file_format": "",
+          "output_format_version": "",
+          "label": {
+            "fi": "ruotsi",
+            "nah": "Sueciatlahtōlli",
+            "be": "шведская"
+          }
+        }
+      }
+    ]
+  }
+}
