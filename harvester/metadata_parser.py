@@ -1,8 +1,8 @@
 from datetime import datetime
-import iso639
 from urllib.parse import urlparse
 
 from lxml import etree
+import iso639
 
 from harvester import language_validator
 
