@@ -4,6 +4,8 @@ from urllib.parse import urlparse
 
 from lxml import etree
 
+from harvester import language_validator
+
 
 class MSRecordParser:
     def __init__(self, xml):
@@ -263,14 +265,17 @@ class MSRecordParser:
                 language = iso639.Lang(language_code.lower())
 
                 if language.pt3:
-                    iso639_urls.add(f"http://lexvo.org/id/iso639-3/{language.pt3}")
+                    language_uri = f"http://lexvo.org/id/iso639-3/{language.pt3}"
                 elif language.pt5:
-                    iso639_urls.add(f"http://lexvo.org/id/iso639-5/{language.pt5}")
+                    language_uri = f"http://lexvo.org/id/iso639-5/{language.pt5}"
                 else:
                     raise ValueError(
                         "Could not determine three-letter language code for %s"
                         % language_code,
                     )
+
+                if language_validator.language_in_vocabulary(language_uri):
+                    iso639_urls.add(language_uri)
 
             except iso639.exceptions.InvalidLanguageValue:
                 if language_code in ["hbk", "hbp"]:
