@@ -175,6 +175,10 @@
                 <languageId>smi</languageId>
                 <languageName>Sami languages</languageName>
               </languageInfo>
+              <languageInfo>
+                <languageId>abc</languageId>
+                <languageName>Unsupported language</languageName>
+              </languageInfo>
               <modalityInfo>
                 <modalityType>spokenLanguage</modalityType>
               </modalityInfo>
