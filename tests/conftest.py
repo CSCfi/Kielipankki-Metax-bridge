@@ -310,7 +310,7 @@ def mock_metashare_get_single_record(
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
             "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
             "field_of_science": [
-                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta112"}
+                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
             ],
             "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
             "title": {

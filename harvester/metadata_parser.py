@@ -293,12 +293,11 @@ class MSRecordParser:
         Converts text and dictionaries to Metax compliant dictionary.
         """
         return {
-            # field_of_science is dummy data until they are implemented later on
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
             "language": self._get_resource_languages(),
             "field_of_science": [
                 {
-                    "url": "http://www.yso.fi/onto/okm-tieteenala/ta112",
+                    "url": "http://www.yso.fi/onto/okm-tieteenala/ta6121",
                 }
             ],
             "persistent_identifier": self.pid,
