@@ -334,6 +334,15 @@ def mock_metashare_get_single_record(
                     "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
                 },
             },
+            "actors": [
+                {
+                    "roles": ["curator"],
+                    "person": {
+                        "name": "Mari Siiroinen",
+                        "email": "mari.siiroinen@helsinki.fi",
+                    },
+                }
+            ],
         }
     ]
 

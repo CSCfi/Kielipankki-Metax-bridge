@@ -84,6 +84,15 @@ def test_to_dict(basic_metashare_record):
                 "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
             },
         },
+        "actors": [
+            {
+                "roles": ["curator"],
+                "person": {
+                    "name": "Mari Siiroinen",
+                    "email": "mari.siiroinen@helsinki.fi",
+                },
+            }
+        ],
     }
     assert result == expected_result
 
@@ -253,3 +262,20 @@ def test_get_resource_languages_with_multiple_languages():
     language_urls = [language["url"] for language in languages]
     assert "http://lexvo.org/id/iso639-5/smi" in language_urls
     assert "http://lexvo.org/id/iso639-3/swe" in language_urls
+
+
+def test_get_actors(basic_metashare_record):
+    """
+    Check that all actor data is present in a Metax-compatible format for a basic
+    record.
+
+    NB: this is heavily WIP, assuming that the only type of actor implemented is
+    curator.
+    """
+    actors = basic_metashare_record._get_actors()
+
+    assert len(actors) == 1
+    assert actors[0] == {
+        "roles": ["curator"],
+        "person": {"name": "Mari Siiroinen", "email": "mari.siiroinen@helsinki.fi"},
+    }
