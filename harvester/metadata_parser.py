@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 from lxml import etree
 import iso639
 
+from harvester.actor import Actor
 from harvester import language_validator
 
 
@@ -288,6 +289,26 @@ class MSRecordParser:
 
         return [{"url": url} for url in iso639_urls]
 
+    def _get_actors(self):
+        """
+        Return the actors for this resource.
+        """
+        actors = []
+
+        curator_elements = self.xml.xpath(
+            "//info:resourceInfo/info:contactPerson",
+            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        )[0]
+
+        if not isinstance(curator_elements, list):
+            curator_elements = [curator_elements]
+
+        for curator_element in curator_elements:
+            curator_actor = Actor(curator_element, roles=["curator"])
+            actors.append(curator_actor.to_metax_dict())
+
+        return actors
+
     def to_dict(self):
         """
         Converts text and dictionaries to Metax compliant dictionary.
@@ -314,4 +335,5 @@ class MSRecordParser:
                 "//info:metadataInfo/info:metadataCreationDate/text()"
             ),
             "access_rights": self._map_access_rights(),
+            "actors": self._get_actors(),
         }
