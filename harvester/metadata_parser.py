@@ -297,6 +297,7 @@ class MSRecordParser:
 
         actor_role_element_xpaths = {
             "creator": "//info:metadataInfo/info:metadataCreator",
+            "publisher": "//info:distributionInfo/info:licenceInfo/info:distributionRightsHolder",
             "curator": "//info:resourceInfo/info:contactPerson",
         }
 

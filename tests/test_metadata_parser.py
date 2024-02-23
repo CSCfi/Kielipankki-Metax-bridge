@@ -89,6 +89,7 @@ def test_to_dict(basic_metashare_record):
                 "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
                 "roles": ["creator"],
             },
+            {"person": None, "roles": ["publisher"]},
             {
                 "roles": ["curator"],
                 "person": {
@@ -275,10 +276,14 @@ def test_get_actors(basic_metashare_record):
 
     NB: this is heavily WIP, assuming that the only type of actor implemented is
     curator.
+
+    Publisher role does not yet contain meaningful information due to the test data only
+    having an organization as a distributionRightsHolder and organizations have not been
+    implemented yet.
     """
     actors = basic_metashare_record._get_actors()
 
-    assert len(actors) == 2
+    assert len(actors) == 3
     assert {
         "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
         "roles": ["creator"],
@@ -288,3 +293,5 @@ def test_get_actors(basic_metashare_record):
         "roles": ["curator"],
         "person": {"name": "Mari Siiroinen", "email": "mari.siiroinen@helsinki.fi"},
     } in actors
+
+    assert {"person": None, "roles": ["publisher"]} in actors
