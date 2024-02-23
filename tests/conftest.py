@@ -350,6 +350,7 @@ def mock_metashare_get_single_record(
                         "email": "mari.siiroinen@helsinki.fi",
                     },
                 },
+                {"person": None, "roles": ["rights_holder"]},
             ],
         }
     ]
