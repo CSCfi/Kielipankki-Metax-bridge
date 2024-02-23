@@ -295,17 +295,22 @@ class MSRecordParser:
         """
         actors = []
 
-        curator_elements = self.xml.xpath(
-            "//info:resourceInfo/info:contactPerson",
-            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
-        )[0]
+        actor_role_element_xpaths = {
+            "curator": "//info:resourceInfo/info:contactPerson",
+        }
 
-        if not isinstance(curator_elements, list):
-            curator_elements = [curator_elements]
+        for role, xpath in actor_role_element_xpaths.items():
+            curator_elements = self.xml.xpath(
+                xpath,
+                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            )[0]
 
-        for curator_element in curator_elements:
-            curator_actor = Actor(curator_element, roles=["curator"])
-            actors.append(curator_actor.to_metax_dict())
+            if not isinstance(curator_elements, list):
+                curator_elements = [curator_elements]
+
+            for curator_element in curator_elements:
+                curator_actor = Actor(curator_element, roles=[role])
+                actors.append(curator_actor.to_metax_dict())
 
         return actors
 
