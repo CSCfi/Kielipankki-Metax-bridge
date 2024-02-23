@@ -36,8 +36,10 @@ class Actor:
         """
         if "givenName" in self.data:
             return f"{self.data['givenName']} {self.data['surname']}"
-        else:
+        elif "surname" in self.data:
             return f"{self.data['surname']}"
+        else:
+            return None
 
     @property
     def email(self):
@@ -48,7 +50,8 @@ class Actor:
         return communicationInfo.get("email", None)
 
     def to_metax_dict(self):
-        return {
-            "roles": list(self.roles),
-            "person": {"name": self.name, "email": self.email},
-        }
+        if self.name:
+            person_dict = {"name": self.name, "email": self.email}
+        else:
+            person_dict = None
+        return {"roles": list(self.roles), "person": person_dict}
