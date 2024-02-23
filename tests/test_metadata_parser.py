@@ -97,6 +97,7 @@ def test_to_dict(basic_metashare_record):
                     "email": "mari.siiroinen@helsinki.fi",
                 },
             },
+            {"person": None, "roles": ["rights_holder"]},
         ],
     }
     assert result == expected_result
@@ -283,7 +284,7 @@ def test_get_actors(basic_metashare_record):
     """
     actors = basic_metashare_record._get_actors()
 
-    assert len(actors) == 3
+    assert len(actors) == 4
     assert {
         "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
         "roles": ["creator"],
@@ -295,3 +296,5 @@ def test_get_actors(basic_metashare_record):
     } in actors
 
     assert {"person": None, "roles": ["publisher"]} in actors
+
+    assert {"person": None, "roles": ["rights_holder"]} in actors

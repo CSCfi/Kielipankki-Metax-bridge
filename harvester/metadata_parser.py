@@ -299,6 +299,7 @@ class MSRecordParser:
             "creator": "//info:metadataInfo/info:metadataCreator",
             "publisher": "//info:distributionInfo/info:licenceInfo/info:distributionRightsHolder",
             "curator": "//info:resourceInfo/info:contactPerson",
+            "rights_holder": "//info:distributionInfo/info:iprHolder",
         }
 
         for role, xpath in actor_role_element_xpaths.items():
