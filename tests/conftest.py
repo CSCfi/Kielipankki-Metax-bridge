@@ -336,12 +336,19 @@ def mock_metashare_get_single_record(
             },
             "actors": [
                 {
+                    "person": {
+                        "email": "imre.bartis@helsinki.fi",
+                        "name": "Imre Bartis",
+                    },
+                    "roles": ["creator"],
+                },
+                {
                     "roles": ["curator"],
                     "person": {
                         "name": "Mari Siiroinen",
                         "email": "mari.siiroinen@helsinki.fi",
                     },
-                }
+                },
             ],
         }
     ]

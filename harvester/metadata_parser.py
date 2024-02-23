@@ -296,6 +296,7 @@ class MSRecordParser:
         actors = []
 
         actor_role_element_xpaths = {
+            "creator": "//info:metadataInfo/info:metadataCreator",
             "curator": "//info:resourceInfo/info:contactPerson",
         }
 
@@ -303,7 +304,7 @@ class MSRecordParser:
             curator_elements = self.xml.xpath(
                 xpath,
                 namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
-            )[0]
+            )
 
             if not isinstance(curator_elements, list):
                 curator_elements = [curator_elements]
