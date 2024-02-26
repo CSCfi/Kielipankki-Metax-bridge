@@ -298,3 +298,52 @@ def test_get_actors(basic_metashare_record):
     assert {"person": None, "roles": ["publisher"]} in actors
 
     assert {"person": None, "roles": ["rights_holder"]} in actors
+
+
+def test_multiple_actors_for_same_role():
+    """
+    Check that having more than one actor for a single role will report them all.
+
+    To be developed further: affiliations missing (KP-7425), and we might want to merge
+    the records for same actor having more than one role.
+    """
+    record = MSRecordParser(
+        _get_file_as_lxml(
+            "tests/test_data/kielipankki_record_sample_multiple_actors.xml"
+        )
+    )
+    assert record._get_actors() == [
+        {
+            "roles": ["creator"],
+            "person": {
+                "name": "Miina Metadataattori",
+                "email": "metadatamiina@example.com",
+            },
+        },
+        {
+            "roles": ["creator"],
+            "person": {
+                "name": "Aarne Aputoveri",
+                "email": "aarne.aputoveri@example.com",
+            },
+        },
+        {"roles": ["publisher"], "person": None},
+        {
+            "roles": ["curator"],
+            "person": {
+                "name": "User support FIN-CLARIN",
+                "email": "fin-clarin@helsinki.fi",
+            },
+        },
+        {
+            "roles": ["rights_holder"],
+            "person": {"name": "Tepi Tutkija", "email": "tepitutkija@example.com"},
+        },
+        {
+            "roles": ["rights_holder"],
+            "person": {
+                "name": "Aarne Aputoveri",
+                "email": "aarne.aputoveri@example.com",
+            },
+        },
+    ]
