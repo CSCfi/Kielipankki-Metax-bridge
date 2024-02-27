@@ -49,9 +49,35 @@ class Actor:
         communicationInfo = self.data.get("communicationInfo", {})
         return communicationInfo.get("email", None)
 
+    def add_roles(self, roles):
+        """
+        Add given roles for this actor.
+        """
+        self.roles.update(roles)
+
     def to_metax_dict(self):
+        """
+        Return the actor as a Metax-compatible dict
+
+        The list of roles is sorted to make sure that the representation for a same
+        actor always stays the same. In addition to just being neat, this also improves
+        testaibility. Performance hit should be minimal, as the lists are tiny (4 items
+        at most).
+        """
         if self.name:
             person_dict = {"name": self.name, "email": self.email}
         else:
             person_dict = None
-        return {"roles": list(self.roles), "person": person_dict}
+        return {"roles": sorted(list(self.roles)), "person": person_dict}
+
+    def __eq__(self, other):
+        """
+        Check if two objects represent the same person.
+
+        The actors are deemed equal if their names and emails match. This allows merging
+        the entries of same person having multiple roles.
+        """
+        if not isinstance(other, Actor):
+            return False
+
+        return self.name == other.name and self.email == other.email
