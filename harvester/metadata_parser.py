@@ -312,10 +312,16 @@ class MSRecordParser:
                 curator_elements = [curator_elements]
 
             for curator_element in curator_elements:
-                curator_actor = Actor(curator_element, roles=[role])
-                actors.append(curator_actor.to_metax_dict())
+                actors.append(Actor(curator_element, roles=[role]))
 
-        return actors
+        merged_actors = []
+        for actor in actors:
+            if actor not in merged_actors:
+                merged_actors.append(actor)
+            else:
+                merged_actors[merged_actors.index(actor)].add_roles(actor.roles)
+
+        return [actor.to_metax_dict() for actor in merged_actors]
 
     def to_dict(self):
         """
