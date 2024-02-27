@@ -64,11 +64,21 @@ class Actor:
         testaibility. Performance hit should be minimal, as the lists are tiny (4 items
         at most).
         """
+        return {"roles": sorted(list(self.roles)), "person": self._person_dict}
+
+    @property
+    def _person_dict(self):
         if self.name:
-            person_dict = {"name": self.name, "email": self.email}
+            return {"name": self.name, "email": self.email}
         else:
-            person_dict = None
-        return {"roles": sorted(list(self.roles)), "person": person_dict}
+            return None
+
+    @property
+    def has_person_data(self):
+        """
+        Return True if the actor has information about an individual person.
+        """
+        return self._person_dict is not None
 
     def __eq__(self, other):
         """

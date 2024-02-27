@@ -342,7 +342,6 @@ def mock_metashare_get_single_record(
                     },
                     "roles": ["creator"],
                 },
-                {"person": None, "roles": ["publisher", "rights_holder"]},
                 {
                     "roles": ["curator"],
                     "person": {

@@ -89,7 +89,6 @@ def test_to_dict(basic_metashare_record):
                 "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
                 "roles": ["creator"],
             },
-            {"person": None, "roles": ["publisher", "rights_holder"]},
             {
                 "roles": ["curator"],
                 "person": {
@@ -283,7 +282,7 @@ def test_get_actors(basic_metashare_record):
     """
     actors = basic_metashare_record._get_actors()
 
-    # assert len(actors) == 4
+    assert len(actors) == 2
     assert {
         "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
         "roles": ["creator"],
@@ -293,10 +292,6 @@ def test_get_actors(basic_metashare_record):
         "roles": ["curator"],
         "person": {"name": "Mari Siiroinen", "email": "mari.siiroinen@helsinki.fi"},
     } in actors
-
-    # assert {"person": None, "roles": ["publisher"]} in actors
-
-    # assert {"person": None, "roles": ["rights_holder"]} in actors
 
 
 def test_multiple_actors_for_same_role():
@@ -325,7 +320,6 @@ def test_multiple_actors_for_same_role():
                 "email": "aarne.aputoveri@example.com",
             },
         },
-        {"roles": ["publisher"], "person": None},
         {
             "roles": ["curator"],
             "person": {

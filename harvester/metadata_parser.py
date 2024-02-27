@@ -313,6 +313,8 @@ class MSRecordParser:
 
             for curator_element in curator_elements:
                 new_actor = Actor(curator_element, roles=[role])
+                if not new_actor.has_person_data:
+                    continue
                 if new_actor in actors:
                     actors[actors.index(new_actor)].add_roles(new_actor.roles)
                 else:
