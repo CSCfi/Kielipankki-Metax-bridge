@@ -165,10 +165,10 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
 
     assert result.exit_code == 0
 
-    assert mock_requests_post.call_count == 5
-    assert mock_requests_post.request_history[2].method == "POST"
+    assert mock_requests_post.call_count == 6
+    assert mock_requests_post.request_history[3].method == "POST"
     assert (
-        mock_requests_post.request_history[2].json()["persistent_identifier"]
+        mock_requests_post.request_history[3].json()["persistent_identifier"]
         == mock_metashare_get_single_record[0]["persistent_identifier"]
     )
 
@@ -201,6 +201,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     Expected requests made during this test:
     GET to fetch the records from Metashare (for adding new records)
     GET to get the Metax PID (found)
+    GET to determine which language codes are accepted by Metax
     PUT to to update the data in Metax
     GET to fetch the records from Metashare (again, for deleted records this time)
     GET to fetch the records from Metax (no overlap, so no further requests)
@@ -210,10 +211,10 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
 
     assert result.exit_code == 0
 
-    assert mock_requests_put.call_count == 5
-    assert mock_requests_put.request_history[2].method == "PUT"
+    assert mock_requests_put.call_count == 6
+    assert mock_requests_put.request_history[3].method == "PUT"
     assert (
-        mock_requests_put.request_history[2].json()["persistent_identifier"]
+        mock_requests_put.request_history[3].json()["persistent_identifier"]
         == mock_metashare_get_single_record[0]["persistent_identifier"]
     )
 
@@ -246,10 +247,10 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
 
     assert result.exit_code == 0
 
-    assert mock_requests_post.call_count == 5
-    assert mock_requests_post.request_history[2].method == "POST"
+    assert mock_requests_post.call_count == 6
+    assert mock_requests_post.request_history[3].method == "POST"
     assert (
-        mock_requests_post.request_history[2].json()["persistent_identifier"]
+        mock_requests_post.request_history[3].json()["persistent_identifier"]
         == mock_metashare_get_single_record[0]["persistent_identifier"]
     )
 
@@ -292,10 +293,10 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
 
     assert result.exit_code == 0
 
-    assert mock_requests_put.call_count == 7
-    assert mock_requests_put.request_history[2].method == "PUT"
+    assert mock_requests_put.call_count == 8
+    assert mock_requests_put.request_history[3].method == "PUT"
     assert (
-        mock_requests_put.request_history[2].json()["persistent_identifier"]
+        mock_requests_put.request_history[3].json()["persistent_identifier"]
         == mock_metashare_get_single_record[0]["persistent_identifier"]
     )
 
@@ -330,7 +331,7 @@ def test_full_harvest_multiple_records(
 
     assert result.exit_code == 0
 
-    assert shared_request_mocker.call_count == 11
+    assert shared_request_mocker.call_count == 12
     assert (
         sum(
             request.method == "POST"
@@ -368,7 +369,7 @@ def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
 
     assert result.exit_code == 0
 
-    assert shared_request_mocker.call_count == 11
+    assert shared_request_mocker.call_count == 12
     assert (
         sum(
             request.method == "POST"

@@ -18,7 +18,7 @@ def test_fetch_records_with_last_harvest_date(
     assert records == mock_metashare_get_single_record
     assert (
         urllib.parse.quote(latest_harvest_timestamp)
-        in shared_request_mocker.last_request.url
+        in shared_request_mocker.request_history[0].url
     )
 
 

@@ -5,6 +5,7 @@ from lxml import etree
 import pytest
 import requests_mock
 
+from harvester import language_validator
 from harvester.metadata_parser import MSRecordParser
 from metax_api import MetaxAPI
 
@@ -412,6 +413,7 @@ def mock_metax_language_vocabulary_endpoint(
     The response dicts are also somewhat trimmed down, because we don't need the full
     data with all translations.
     """
+    language_validator._allowed_language_uris.cache_clear()
     with open("tests/test_data/metax_language_vocabulary.json", "r") as response_json:
         data = json.loads(response_json.read())
     shared_request_mocker.get(language_vocabulary_endpoint_url, json=data)
