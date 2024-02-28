@@ -212,15 +212,16 @@ def test_send_record(
     """
     Check that creating one new metadata record works
 
-    This means that Metax is queried for existence of the PID (not found) and then a new
-    record is POSTed. We also check that the posted data corresponds to the record dict
-    passed to the function.
+    This means that Metax is queried for existence of the PID (not found), metadata is
+    made into a Metax-compatible dict (causing the Metax API to be queried for allowed
+    language codes) and then a new record is POSTed. We also check that the posted data
+    corresponds to the record dict passed to the function.
     """
     metax_api.send_record(basic_metashare_record)
 
-    assert shared_request_mocker.call_count == 2
+    assert shared_request_mocker.call_count == 3
 
-    expected_post_request = shared_request_mocker.request_history[1]
+    expected_post_request = shared_request_mocker.request_history[2]
 
     assert expected_post_request.method == "POST"
     assert expected_post_request.json() == basic_metashare_record.to_dict()
@@ -238,15 +239,16 @@ def test_send_data_to_metax_single_pre_existing_record(
     """
     Check that creating one new metadata record works
 
-    This means that Metax is queried for existence of the PID (found), fetches the Metax
-    ID for the record, and then a new record is PUT. We also check that the posted
+    This means that Metax is queried for existence of the PID (found), metadata is
+    made into a Metax-compatible dict (causing the Metax API to be queried for allowed
+    language codes) and then a new record is PUT. We also check that the posted
     data corresponds to the record dict passed to the function.
     """
     metax_api.send_record(basic_metashare_record)
 
-    assert shared_request_mocker.call_count == 2
+    assert shared_request_mocker.call_count == 3
 
-    expected_put_request = shared_request_mocker.request_history[1]
+    expected_put_request = shared_request_mocker.request_history[2]
 
     assert expected_put_request.method == "PUT"
     assert expected_put_request.json() == basic_metashare_record.to_dict()
