@@ -68,6 +68,12 @@ class Actor:
 
     @property
     def _person_dict(self):
+        """
+        Return personal information about the actor as a Metax-compatible dict.
+
+        If the actor is not a person or personal information is otherwise not available,
+        None is returned.
+        """
         if self.name:
             return {"name": self.name, "email": self.email}
         else:
