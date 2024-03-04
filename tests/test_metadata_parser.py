@@ -88,12 +88,16 @@ def test_to_dict(basic_metashare_record):
             {
                 "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
                 "roles": ["creator"],
+                "organization": None,
             },
             {
                 "roles": ["curator"],
                 "person": {
                     "name": "Mari Siiroinen",
                     "email": "mari.siiroinen@helsinki.fi",
+                },
+                "organization": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
                 },
             },
         ],
@@ -273,9 +277,6 @@ def test_get_actors(basic_metashare_record):
     Check that all actor data is present in a Metax-compatible format for a basic
     record.
 
-    NB: this is heavily WIP, assuming that the only type of actor implemented is
-    curator.
-
     Publisher role does not yet contain meaningful information due to the test data only
     having an organization as a distributionRightsHolder and organizations have not been
     implemented yet.
@@ -286,11 +287,15 @@ def test_get_actors(basic_metashare_record):
     assert {
         "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
         "roles": ["creator"],
+        "organization": None,
     } in actors
 
     assert {
         "roles": ["curator"],
         "person": {"name": "Mari Siiroinen", "email": "mari.siiroinen@helsinki.fi"},
+        "organization": {
+            "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
+        },
     } in actors
 
 
@@ -312,6 +317,7 @@ def test_multiple_actors_for_same_role():
                 "name": "Miina Metadataattori",
                 "email": "metadatamiina@example.com",
             },
+            "organization": None,
         },
         {
             "roles": ["creator", "rights_holder"],
@@ -319,6 +325,7 @@ def test_multiple_actors_for_same_role():
                 "name": "Aarne Aputoveri",
                 "email": "aarne.aputoveri@example.com",
             },
+            "organization": None,
         },
         {
             "roles": ["curator"],
@@ -326,9 +333,13 @@ def test_multiple_actors_for_same_role():
                 "name": "User support FIN-CLARIN",
                 "email": "fin-clarin@helsinki.fi",
             },
+            "organization": None,
         },
         {
             "roles": ["rights_holder"],
             "person": {"name": "Tepi Tutkija", "email": "tepitutkija@example.com"},
+            "organization": {
+                "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+            },
         },
     ]

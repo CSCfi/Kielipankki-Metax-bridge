@@ -336,6 +336,7 @@ def mock_metashare_get_single_record(
             },
             "actors": [
                 {
+                    "organization": None,
                     "person": {
                         "email": "imre.bartis@helsinki.fi",
                         "name": "Imre Bartis",
@@ -343,6 +344,9 @@ def mock_metashare_get_single_record(
                     "roles": ["creator"],
                 },
                 {
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+                    },
                     "roles": ["curator"],
                     "person": {
                         "name": "Mari Siiroinen",
