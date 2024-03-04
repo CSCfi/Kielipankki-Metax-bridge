@@ -92,8 +92,20 @@ class Actor:
 
     @property
     def _organization_url(self):
+        """
+        Return URI for the affiliation of this actor.
+
+        The URIs are from http://uri.suomi.fi/codelist/fairdata/organization/code. For
+        FIN-CLARIAH affiliations, the home organization from the `departmentName` field
+        is used when determining the URI.
+
+        Raises UnknownOrganizationException if URI match is not found.
+        """
 
         organization_name = self.data["affiliation"]["organizationName"]
+
+        if organization_name == "FIN-CLARIN":
+            organization_name = self.data["affiliation"]["departmentName"]
 
         url_base = "http://uri.suomi.fi/codelist/fairdata/organization/code"
         organization_codes = {

@@ -317,7 +317,9 @@ def test_multiple_actors_for_same_role():
                 "name": "Miina Metadataattori",
                 "email": "metadatamiina@example.com",
             },
-            "organization": None,
+            "organization": {
+                "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/10089"
+            },
         },
         {
             "roles": ["creator", "rights_holder"],
@@ -325,7 +327,9 @@ def test_multiple_actors_for_same_role():
                 "name": "Aarne Aputoveri",
                 "email": "aarne.aputoveri@example.com",
             },
-            "organization": None,
+            "organization": {
+                "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
+            },
         },
         {
             "roles": ["curator"],
