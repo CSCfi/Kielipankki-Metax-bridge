@@ -64,7 +64,11 @@ class Actor:
         testaibility. Performance hit should be minimal, as the lists are tiny (4 items
         at most).
         """
-        return {"roles": sorted(list(self.roles)), "person": self._person_dict}
+        return {
+            "roles": sorted(list(self.roles)),
+            "person": self._person_dict,
+            "organization": self._organization_dict,
+        }
 
     @property
     def _person_dict(self):
@@ -86,6 +90,49 @@ class Actor:
         """
         return self._person_dict is not None
 
+    @property
+    def _organization_url(self):
+
+        organization_name = self.data["affiliation"]["organizationName"]
+
+        url_base = "http://uri.suomi.fi/codelist/fairdata/organization/code"
+        organization_codes = {
+            "Aalto University": "10076",
+            "CSC — IT Center for Science Ltd": "09206320",
+            "Centre for Applied Language Studies": "01906-213060",
+            "National Library of Finland": "01901-H981",
+            "South Eastern Finland University of Applied Sciences": "10118",
+            "University of Eastern Finland": "10088",
+            "University of Helsinki": "01901",
+            "University of Jyväskylä": "01906",
+            "University of Oulu": "01904",
+            "University of Tampere": "10122",
+            "University of Turku": "10089",
+        }
+        if organization_name in organization_codes:
+            return f"{url_base}/{organization_codes[organization_name]}"
+        raise UnknownOrganizationException(
+            f"Could not determine URI for {organization_name}"
+        )
+
+    @property
+    def _organization_dict(self):
+        """
+        Return organization information about the actor as a Metax-compatible dict.
+
+        If the actor is not an organization or a person with organization information
+        available, None is returned.
+        """
+        if "affiliation" not in self.data:
+            return None
+
+        try:
+            return {"url": self._organization_url}
+        except UnknownOrganizationException as e:
+            # TODO: this should be eliminated before this ticket is done
+            print(e)
+            return None
+
     def __eq__(self, other):
         """
         Check if two objects represent the same person.
@@ -97,3 +144,9 @@ class Actor:
             return False
 
         return self.name == other.name and self.email == other.email
+
+
+class UnknownOrganizationException(Exception):
+    """
+    Exception to be raised when an URI cannot be determined for an organization
+    """
