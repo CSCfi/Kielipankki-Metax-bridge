@@ -91,7 +91,7 @@ class Actor:
         return self._person_dict is not None
 
     @property
-    def _organization_url(self):
+    def _organization_uri(self):
         """
         Return URI for the affiliation of this actor.
 
@@ -139,7 +139,7 @@ class Actor:
             return None
 
         try:
-            return {"url": self._organization_url}
+            return {"url": self._organization_uri}
         except UnknownOrganizationException as e:
             # TODO: this should be eliminated before this ticket is done
             print(e)
