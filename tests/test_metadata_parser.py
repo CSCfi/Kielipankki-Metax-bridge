@@ -302,8 +302,6 @@ def test_get_actors(basic_metashare_record):
 def test_multiple_actors_for_same_role():
     """
     Check that having more than one actor for a single role will report them all.
-
-    To be developed further: affiliations missing (KP-7425)
     """
     record = MSRecordParser(
         _get_file_as_lxml(
