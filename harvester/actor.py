@@ -10,7 +10,7 @@ class Actor:
         use. The root element (e.g. "contactPerson") is omitted, because that
         information is already included in `roles`.
         """
-        self.supported_languages = ["fi", "en", "und"]
+        self.supported_languages = ["en", "fi", "und"]
         self.data = self._etree_to_dict(element)
         if len(self.data) == 1:
             self.data = list(self.data.values())[0]
