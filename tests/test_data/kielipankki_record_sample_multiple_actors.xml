@@ -138,6 +138,23 @@
                 </communicationInfo>
               </affiliation>
             </metadataCreator>
+            <metadataCreator>
+              <surname lang="en">Affiliaattori</surname>
+              <givenName lang="en">Amanda</givenName>
+              <communicationInfo>
+                <email>aaffil@example.com</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="en">Imaginary organization</organizationName>
+                <organizationName lang="fi">Kuvitteellinen organisaatio</organizationName>
+                <organizationShortName lang="en">imag-org</organizationShortName>
+                <departmentName lang="en">Department of Investigations</departmentName>
+                <communicationInfo>
+                  <email>imaginary@example.com</email>
+                  <url>http://www.imaginary.example</url>
+                </communicationInfo>
+              </affiliation>
+            </metadataCreator>
             <metadataLanguageName>English</metadataLanguageName>
             <metadataLanguageId>en</metadataLanguageId>
             <metadataLastDateUpdated>2021-08-13</metadataLastDateUpdated>

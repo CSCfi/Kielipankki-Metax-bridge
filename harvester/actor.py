@@ -10,16 +10,63 @@ class Actor:
         use. The root element (e.g. "contactPerson") is omitted, because that
         information is already included in `roles`.
         """
+        self.supported_languages = ["fi", "en", "und"]
         self.data = self._etree_to_dict(element)
         if len(self.data) == 1:
             self.data = list(self.data.values())[0]
 
         self.roles = set(roles)
 
+    def _language(self, element):
+        """
+        Return language of given element from `lang` attribute. None if not present.
+        """
+        for attribute in element.items():
+            if attribute[0] == "lang":
+                return attribute[1]
+        return None
+
     def _etree_to_dict(self, element):
+        """
+        Convert the XML data describing this actor into a dict
+
+        If there are fields with language information (e.g. organization names, but also
+        person names), language information is added to the field name, separated by an
+        underscore.
+
+        NB: if a field is repeated without changing language information (e.g. multiple
+        email addresses), only the last one will be present in the dict.
+
+        The resulting dict can e.g. look something like this:
+        {
+          "contactPerson": {
+            "surname_en": "Smith",
+            "givenName_en": "John",
+            "sex": "female",
+            "communicationInfo": {
+              "email": "john.smith@example.com",
+              "country": "Finland"
+            },
+            "affiliation": {
+              "organizationName_en": "University of Whatnot",
+              "departmentName_en": "Department of Science",
+              "organizationName_fi": "Joku Yliopisto",
+              "departmentName_fi": "Tieteen osasto",
+              "communicationInfo": {
+                "email": "whatnot_univ@example.com",
+                "country": "Finland"
+              }
+            }
+          }
+        }
+
+        """
         result = {}
         key = re.sub("{.*}", "", element.tag)
         if len(element) == 0:
+            language = self._language(element)
+            if self._language(element):
+                key = key + "_" + language
             result[key] = element.text
         else:
             subresult = {}
@@ -32,14 +79,16 @@ class Actor:
     @property
     def name(self):
         """
-        Return
+        Return name of the person represented by this actor.
+
+        If the name is provided in more than one language, only one is returned, fields
+        preference order being determined by the order of `self.supported_languages`.
         """
-        if "givenName" in self.data:
-            return f"{self.data['givenName']} {self.data['surname']}"
-        elif "surname" in self.data:
-            return f"{self.data['surname']}"
-        else:
-            return None
+        for language in self.supported_languages:
+            if f"givenName_{language}" in self.data:
+                return f"{self.data['givenName'+'_'+language]} {self.data['surname'+'_'+language]}"
+            if f"surname_{language}" in self.data:
+                return f"{self.data['surname'+'_'+language]}"
 
     @property
     def email(self):
@@ -99,13 +148,16 @@ class Actor:
         FIN-CLARIAH affiliations, the home organization from the `departmentName` field
         is used when determining the URI.
 
+        Organization names seem to always available in English, so English names are
+        used for matching.
+
         Raises UnknownOrganizationException if URI match is not found.
         """
 
-        organization_name = self.data["affiliation"]["organizationName"]
+        organization_name = self.data["affiliation"]["organizationName_en"]
 
         if organization_name == "FIN-CLARIN":
-            organization_name = self.data["affiliation"]["departmentName"]
+            organization_name = self.data["affiliation"]["departmentName_en"]
 
         url_base = "http://uri.suomi.fi/codelist/fairdata/organization/code"
         organization_codes = {
@@ -127,7 +179,65 @@ class Actor:
             f"Could not determine URI for {organization_name}"
         )
 
+    def _none_if_no_affiliation(func):
+        """
+        Wrapper for properties that are None if the actor does not have affiliation data
+        """
+        # Wrapper shouldn't have self despite being defined in class
+        # pylint: disable=no-self-argument
+
+        def wrapper(self, *args, **kwargs):
+            if "affiliation" not in self.data:
+                return None
+            # pylint: disable=not-callable
+            return func(self, *args, **kwargs)
+
+        return wrapper
+
     @property
+    @_none_if_no_affiliation
+    def organization_name(self):
+        """
+        Return the nameis of the organizaton in all supported and provided languages.
+
+        The element is mandatory in Metashare, so handling for missing key is not
+        needed, but there can be multiple language versions, each of which is sent to
+        Metax.
+        """
+        languages = {}
+        for language in self.supported_languages:
+            if f"organizationName_{language}" in self.data["affiliation"]:
+                languages[language] = self.data["affiliation"][
+                    f"organizationName_{language}"
+                ]
+        return languages
+
+    @property
+    @_none_if_no_affiliation
+    def organization_homepage(self):
+        """
+        Return the organization home page as Metax-compatible dict if available, otherwise None.
+
+        The communicationInfo element is mandatory for affiliation, so handling for that
+        not being present is not needed.
+        """
+        if "url" in self.data["affiliation"]["communicationInfo"]:
+            return {"identifier": self.data["affiliation"]["communicationInfo"]["url"]}
+        return None
+
+    @property
+    @_none_if_no_affiliation
+    def organization_email(self):
+        """
+        Return the organization's contact email.
+
+        The communicationInfo and email elements are mandatory, so they should always be
+        present.
+        """
+        return self.data["affiliation"]["communicationInfo"]["email"]
+
+    @property
+    @_none_if_no_affiliation
     def _organization_dict(self):
         """
         Return organization information about the actor as a Metax-compatible dict.
@@ -135,15 +245,14 @@ class Actor:
         If the actor is not an organization or a person with organization information
         available, None is returned.
         """
-        if "affiliation" not in self.data:
-            return None
-
         try:
             return {"url": self._organization_uri}
-        except UnknownOrganizationException as e:
-            # TODO: this should be eliminated before this ticket is done
-            print(e)
-            return None
+        except UnknownOrganizationException:
+            return {
+                "pref_label": self.organization_name,
+                "homepage": self.organization_homepage,
+                "email": self.organization_email,
+            }
 
     def __eq__(self, other):
         """
