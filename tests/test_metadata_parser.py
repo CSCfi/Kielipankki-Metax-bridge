@@ -369,8 +369,8 @@ def test_multiple_names_for_actor():
     Check that having the name in more than one language will result in Finnish name
     being preferred.
 
-    The test data for this test would also have the English name "Carl Gustaf"
-    available, but the Finnish "Kaarle Kustaa" should be preferred.
+    The test data for this test would also have the Finnish name "Kaarle Kustaa"
+    available, but the English "Carl Gustaf" should be preferred.
     """
     record = MSRecordParser(
         _get_file_as_lxml(
@@ -379,4 +379,4 @@ def test_multiple_names_for_actor():
     )
     actors = record._get_actors()
     assert len(actors) == 1
-    assert actors[0]["person"]["name"] == "Kaarle Kustaa Bernadotte"
+    assert actors[0]["person"]["name"] == "Carl Gustaf Bernadotte"
