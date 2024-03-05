@@ -1,0 +1,140 @@
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/3.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2023-08-10T06:22:09Z</responseDate>
+  <request verb="GetRecord" identifier="oai:kielipankki.fi:sh41ac60" metadataPrefix="info">https://kielipankki.fi/md_api/que</request>
+  <GetRecord>
+    <record xmlns="http://www.openarchives.org/OAI/2.0/">
+      <header>
+        <identifier>oai:kielipankki.fi:sh41ac60</identifier>
+        <datestamp>2022-11-17T04:02:11Z</datestamp>
+      </header>
+      <metadata>
+        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+          <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceName lang="fi">Suomenkielinen OpenSubtitles 2017, Kielipankin Korp-versio</resourceName>
+            <resourceName lang="en">Finnish OpenSubtitles 2017, Kielipankki Korp Version</resourceName>
+            <description lang="fi">OpenSubtitles kuvaus</description>
+            <description lang="en">OpenSubtitles description</description>
+            <resourceShortName lang="en">opensub-fi-2017-korp</resourceShortName>
+            <url>http://urn.fi/urn:nbn:fi:lb-2018060404</url>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2018060403</identifier>
+          </identificationInfo>
+          <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <availability>available-unrestrictedUse</availability>
+            <licenceInfo>
+              <licence>CC-BY</licence>
+              <restrictionsOfUse>attribution</restrictionsOfUse>
+              <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+              <licensor>
+                <personInfo>
+                  <surname lang="fi">Tutkija</surname>
+                  <givenName lang="fi">Tepi</givenName>
+                  <sex>male</sex>
+                  <communicationInfo>
+                    <email>tepitutkija@example.com</email>
+                  </communicationInfo>
+                  <affiliation>
+                    <organizationName lang="en">University of Helsinki</organizationName>
+                    <organizationShortName lang="en">UHEL</organizationShortName>
+                    <communicationInfo>
+                      <email>firstname.surname@helsinki.fi</email>
+                    </communicationInfo>
+                  </affiliation>
+                </personInfo>
+              </licensor>
+              <distributionRightsHolder>
+                <organizationInfo>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </distributionRightsHolder>
+            </licenceInfo>
+            <iprHolder>
+              <surname lang="en">Bernadotte</surname>
+              <givenName lang="en">Carl Gustaf</givenName>
+              <surname lang="fi">Bernadotte</surname>
+              <givenName lang="fi">Kaarle Kustaa</givenName>
+              <communicationInfo>
+                <email>kungen@example.com</email>
+              </communicationInfo>
+            </iprHolder>
+          </distributionInfo>
+          <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <metadataCreationDate>2018-06-04</metadataCreationDate>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLastDateUpdated>2021-08-13</metadataLastDateUpdated>
+            <revision>Link to resource group page and attribution details added</revision>
+          </metadataInfo>
+          <resourceDocumentationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <documentation>
+              <documentUnstructured>CHANGE LOG 12.11.2019 Added Kielipankki Korp Version to the title</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>CHANGE LOG: 30.1.2020 Availability changed from Restricted to Unrestricted.</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>Resource group page: http://urn.fi/urn:nbn:fi:lb-2021081202</documentUnstructured>
+            </documentation>
+            <documentation>
+              <documentUnstructured>How to cite: https://www.kielipankki.fi/viittaus/?key=opensub-fi-2017-korp&amp;lang=en</documentUnstructured>
+            </documentation>
+          </resourceDocumentationInfo>
+          <resourceCreationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <resourceCreator>
+              <personInfo>
+                <surname lang="fi">Tutkija</surname>
+                <givenName lang="fi">Tepi</givenName>
+                <sex>male</sex>
+                <communicationInfo>
+                  <email>tepitutkija@example.com</email>
+                </communicationInfo>
+                <affiliation>
+                  <organizationName lang="en">University of Helsinki</organizationName>
+                  <organizationShortName lang="en">UHEL</organizationShortName>
+                  <communicationInfo>
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </resourceCreator>
+          </resourceCreationInfo>
+          <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <relationType>IsVariantFormOf</relationType>
+            <relatedResource>
+              <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2019110801</targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
+            <corpusInfo>
+              <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                <corpusTextInfo>
+                  <mediaType>text</mediaType>
+                  <lingualityInfo>
+                    <lingualityType>monolingual</lingualityType>
+                  </lingualityInfo>
+                  <languageInfo>
+                    <languageId>fi</languageId>
+                    <languageName>Finnish</languageName>
+                  </languageInfo>
+                  <sizeInfo>
+                    <size>267645406</size>
+                    <sizeUnit>tokens</sizeUnit>
+                  </sizeInfo>
+                  <sizeInfo>
+                    <size>52002003</size>
+                    <sizeUnit>sentences</sizeUnit>
+                  </sizeInfo>
+                </corpusTextInfo>
+              </corpusMediaType>
+            </corpusInfo>
+          </resourceComponentType>
+        </info:resourceInfo>
+      </metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>
