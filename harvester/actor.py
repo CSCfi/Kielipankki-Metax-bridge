@@ -80,6 +80,7 @@ class Actor:
                 return f"{self.data['givenName'+'_'+language]} {self.data['surname'+'_'+language]}"
             if f"surname_{language}" in self.data:
                 return f"{self.data['surname'+'_'+language]}"
+        return None
 
     @property
     def email(self):
@@ -120,8 +121,7 @@ class Actor:
         """
         if self.name:
             return {"name": self.name, "email": self.email}
-        else:
-            return None
+        return None
 
     @property
     def has_person_data(self):
