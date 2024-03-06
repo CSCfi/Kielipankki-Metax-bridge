@@ -72,7 +72,7 @@ class Actor:
         """
         Return name of the person represented by this actor.
 
-        If the name is provided in more than one language, only one is returned, fields
+        If the name is provided in more than one language, only one is returned,
         preference order being determined by the order of `self.supported_languages`.
         """
         for language in self.supported_languages:
@@ -86,8 +86,8 @@ class Actor:
         """
         Email address of the person. None if not available.
         """
-        communicationInfo = self.data.get("communicationInfo", {})
-        return communicationInfo.get("email", None)
+        communication_info = self.data.get("communicationInfo", {})
+        return communication_info.get("email", None)
 
     def add_roles(self, roles):
         """
