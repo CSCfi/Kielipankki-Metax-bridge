@@ -17,15 +17,6 @@ class Actor:
 
         self.roles = set(roles)
 
-    def _language(self, element):
-        """
-        Return language of given element from `lang` attribute. None if not present.
-        """
-        for attribute in element.items():
-            if attribute[0] == "lang":
-                return attribute[1]
-        return None
-
     def _etree_to_dict(self, element):
         """
         Convert the XML data describing this actor into a dict
@@ -64,8 +55,8 @@ class Actor:
         result = {}
         key = re.sub("{.*}", "", element.tag)
         if len(element) == 0:
-            language = self._language(element)
-            if self._language(element):
+            language = element.attrib.get("lang", None)
+            if language:
                 key = key + "_" + language
             result[key] = element.text
         else:
