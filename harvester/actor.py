@@ -106,7 +106,7 @@ class Actor:
         at most).
         """
         return {
-            "roles": sorted(list(self.roles)),
+            "roles": sorted(self.roles),
             "person": self._person_dict,
             "organization": self._organization_dict,
         }
