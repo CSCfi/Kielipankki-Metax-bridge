@@ -249,13 +249,18 @@ class Actor:
         """
         Check if two objects represent the same person.
 
-        The actors are deemed equal if their names and emails match. This allows merging
-        the entries of same person having multiple roles.
+        The actors are deemed equal if their names, emails and organizations match. This
+        allows merging the entries of same person having multiple roles. The same
+        natural person having represented different organizations will not be merged.
         """
         if not isinstance(other, Actor):
             return False
 
-        return self.name == other.name and self.email == other.email
+        return (
+            self.name == other.name
+            and self.email == other.email
+            and self._organization_dict == other._organization_dict
+        )
 
 
 class UnknownOrganizationException(Exception):
