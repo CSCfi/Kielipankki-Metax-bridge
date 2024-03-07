@@ -7,7 +7,7 @@ import functools
 import requests
 
 
-@functools.lru_cache
+@functools.lru_cache(maxsize=None)
 def _allowed_language_uris(language_vocabulary_endpoint):
     """
     Return a list of allowed language URIs from the given endpoint.
