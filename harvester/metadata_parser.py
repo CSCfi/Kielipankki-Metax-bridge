@@ -249,10 +249,6 @@ class MSRecordParser:
         translating the codes from one standard to another and prepending the lexvo URI.
         When available, ISO 639-3 is preferred.
 
-        We also have two non-standard language codes in the source data: "hbp" and "hbk"
-        for "Hungarian (Budapest)" and "Hungarian (Bucharest)". These are submitted as
-        plain Hungarian (hun).
-
         Same language code can be present in languages twice (e.g. fi for "Standard
         Finnish" and "Easy-to-read Finnish"), but those are eliminated.
         """
@@ -279,13 +275,9 @@ class MSRecordParser:
                     iso639_urls.add(language_uri)
 
             except iso639.exceptions.InvalidLanguageValue:
-                if language_code in ["hbk", "hbp"]:
-                    iso639_urls.add("http://lexvo.org/id/iso639-3/hun")
-                else:
-                    raise ValueError(
-                        "Could not determine ISO 639 language code for %s"
-                        % language_code,
-                    )
+                raise ValueError(
+                    "Could not determine ISO 639 language code for %s" % language_code,
+                )
 
         return [{"url": url} for url in iso639_urls]
 
