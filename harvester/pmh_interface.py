@@ -32,9 +32,10 @@ class PMH_API:
         try:
             metadata_records = self.sickle.ListRecords(
                 **{
-                    "metadataPrefix": "info",
+                    "metadataPrefix": "cmdi",
                     "from": from_timestamp,
                     "ignore_deleted": True,
+                    "set": "FIN-CLARIN",
                 }
             )
             for metadata_record in metadata_records:
