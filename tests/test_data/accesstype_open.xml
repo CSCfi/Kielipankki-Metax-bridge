@@ -1,178 +1,288 @@
-<record xmlns="http://www.openarchives.org/OAI/2.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <header>
-        <identifier>oai:kielipankki.fi:shaaf000</identifier>
-        <datestamp>2023-05-16T03:58:07Z</datestamp>
-    </header>
-    <metadata>
-        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
-            <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <resourceName lang="fi">Suomen puupankki FinnTreeBank 3:n Helsinki-Korp-versio</resourceName>
-                <resourceName lang="en">The Helsinki Korp Version of the Finnish TreeBank 3</resourceName>
-                <description lang="en">The resource, which is the The Helsinki Korp version of the Finnish TreeBank 3 (FTB3), can be accessed at http://urn.fi/urn:nbn:fi:lb-2016051001
-
-
-For more information see http://urn.fi/urn:nbn:fi:lb-201406022</description>
-                <resourceShortName lang="en">FinnTreeBank3-korp</resourceShortName>
-                <url>http://urn.fi/urn:nbn:fi:lb-2016051001</url>
-                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
-                <identifier>http://urn.fi/urn:nbn:fi:lb-2016042602</identifier>
-            </identificationInfo>
-            <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <availability>available-unrestrictedUse</availability>
-                <licenceInfo>
-                    <licence>CC-BY</licence>
-                    <restrictionsOfUse>attribution</restrictionsOfUse>
-                    <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
-                    <executionLocation>http://urn.fi/urn:nbn:fi:lb-201406021</executionLocation>
-                    <attributionText lang="en">See Documentation section.</attributionText>
-                    <licensor>
-                        <organizationInfo>
-                            <organizationName lang="en">University of Helsinki</organizationName>
-                            <organizationShortName lang="en">UHEL</organizationShortName>
-                            <communicationInfo>
-                                <email>firstname.surname@helsinki.fi</email>
-                            </communicationInfo>
-                        </organizationInfo>
-                    </licensor>
-                    <distributionRightsHolder>
-                        <organizationInfo>
-                            <organizationName lang="en">University of Helsinki</organizationName>
-                            <organizationShortName lang="en">UHEL</organizationShortName>
-                            <communicationInfo>
-                                <email>firstname.surname@helsinki.fi</email>
-                            </communicationInfo>
-                        </organizationInfo>
-                    </distributionRightsHolder>
-                </licenceInfo>
-                <iprHolder>
-                    <organizationInfo>
-                        <organizationName lang="en">University of Helsinki</organizationName>
-                        <organizationShortName lang="en">UHEL</organizationShortName>
-                        <communicationInfo>
-                            <email>firstname.surname@helsinki.fi</email>
-                        </communicationInfo>
-                    </organizationInfo>
-                </iprHolder>
-            </distributionInfo>
-            <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <surname lang="en">The Language Bank of Finland</surname>
-                <givenName lang="en">User support at CSC - IT Center for Science Ltd.</givenName>
-                <sex>unknown</sex>
-                <communicationInfo>
-                    <email>kielipankki@csc.fi</email>
+<record>
+  <header>
+    <identifier>oai:clarino.uib.no:lb-2016042602</identifier>
+    <datestamp>2024-06-19T07:39:48Z</datestamp>
+    <setSpec>FIN-CLARIN</setSpec>
+  </header>
+  <metadata>
+    <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+      <Header>
+        <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+        <MdCreationDate>2023-12-08</MdCreationDate>
+        <MdSelfLink>urn:nbn:fi:lb-2016042602</MdSelfLink>
+        <MdProfile>clarin.eu:cr1:p_1361876010571</MdProfile>
+      </Header>
+      <Resources>
+        <ResourceProxyList>
+          <ResourceProxy id="_1">
+            <ResourceType mimetype="">Resource</ResourceType>
+            <ResourceRef>http://urn.fi/urn:nbn:fi:lb-2016051001</ResourceRef>
+          </ResourceProxy>
+        </ResourceProxyList>
+        <JournalFileProxyList/>
+        <ResourceRelationList/>
+        <IsPartOfList/>
+      </Resources>
+      <Components>
+        <resourceInfo>
+          <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+            <resourceName xml:lang="fi">
+              Suomen puupankki FinnTreeBank 3:n Helsinki-Korp-versio
+            </resourceName>
+            <resourceName xml:lang="en">
+              The Helsinki Korp Version of the Finnish TreeBank 3
+            </resourceName>
+            <description xml:lang="en">
+              This resource is available via Korp in Kielipankki – the Language Bank of Finland. The resource is the The Helsinki Korp version of the Finnish TreeBank 3 (FTB3). It shares data with two Finnish corpora: The Finnish part of Europarl and the Finnish part of JRC-Acquis. For more information see http://urn.fi/urn:nbn:fi:lb-201406022
+            </description>
+            <resourceShortName xml:lang="en">FinnTreeBank3-korp</resourceShortName>
+            <url>http://urn.fi/urn:nbn:fi:lb-2016051001</url>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2016042602</identifier>
+          </identificationInfo>
+          <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+            <availability>available-unrestrictedUse</availability>
+            <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+              <licence>CC-BY</licence>
+              <restrictionsOfUse>attribution</restrictionsOfUse>
+              <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+              <executionLocation>http://urn.fi/urn:nbn:fi:lb-201406021</executionLocation>
+              <attributionText xml:lang="en">See Documentation section.</attributionText>
+              <licensorOrganization ComponentId="clarin.eu:cr1:c_1361876010643">
+                <role>licensor</role>
+                <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                  <organizationName xml:lang="en">University of Helsinki</organizationName>
+                  <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </licensorOrganization>
+              <distributionRightsHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010640">
+                <role>distributionRightsHolder</role>
+                <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                  <organizationName xml:lang="en">University of Helsinki</organizationName>
+                  <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>firstname.surname@helsinki.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </distributionRightsHolderOrganization>
+            </licenceInfo>
+            <iprHolderPerson ComponentId="clarin.eu:cr1:c_1352813745463">
+              <role>iprHolder</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Koehn</surname>
+                <givenName xml:lang="en">Philipp</givenName>
+                <sex>male</sex>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>pkoehn@inf.ed.ac.uk</email>
                 </communicationInfo>
-            </contactPerson>
-            <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <metadataCreationDate>2016-04-26</metadataCreationDate>
-                <metadataCreator>
-                    <surname lang="en">Bartis</surname>
-                    <givenName lang="en">Imre</givenName>
-                    <sex>male</sex>
-                    <communicationInfo>
-                        <email>imre.bartis@helsinki.fi</email>
-                        <url>http://orcid.org/0000-0002-9455-8771</url>
-                        <city>Helsinki</city>
-                        <country>Finland</country>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">University of Edinburgh</organizationName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>communications.office@ed.ac.uk</email>
+                      <url>http://www.ed.ac.uk/home</url>
+                      <url>https://ror.org/01nrxwf90</url>
                     </communicationInfo>
-                    <position>Project Coordinator</position>
-                    <affiliation>
-                        <organizationName lang="en">FIN-CLARIN</organizationName>
-                        <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
-                        <departmentName lang="en">University of Helsinki</departmentName>
-                        <communicationInfo>
-                            <email>finclarin@helsinki.fi</email>
-                            <url>http://www.helsinki.fi/fin-clarin</url>
-                            <address>PO Box 24 (Unioninkatu 40)</address>
-                            <zipCode>00014</zipCode>
-                            <city>University of Helsinki</city>
-                            <country>Finland</country>
-                        </communicationInfo>
-                    </affiliation>
-                </metadataCreator>
-                <metadataCreator>
-                    <surname lang="en">Dieckmann</surname>
-                    <givenName lang="en">Ute</givenName>
-                    <sex>unknown</sex>
-                    <communicationInfo>
-                        <email>ute.dieckmann@helsinki.fi</email>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </iprHolderPerson>
+            <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+              <role>iprHolder</role>
+              <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                <organizationName xml:lang="en">University of Helsinki</organizationName>
+                <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>firstname.surname@helsinki.fi</email>
+                </communicationInfo>
+              </organizationInfo>
+            </iprHolderOrganization>
+            <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+              <role>iprHolder</role>
+              <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                <organizationName xml:lang="en">European Commission - Joint Research Centre</organizationName>
+                <organizationShortName xml:lang="en">JRC</organizationShortName>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>Firstname.Lastname@jrc.ec.europa.eu</email>
+                  <url>https://ror.org/04j5wtv36</url>
+                  <url>
+                    https://ec.europa.eu/info/departments/joint-research-centre_en
+                  </url>
+                </communicationInfo>
+              </organizationInfo>
+            </iprHolderOrganization>
+            <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+              <role>iprHolder</role>
+              <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                <organizationName xml:lang="en">European Parliament</organizationName>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>name@europarl.europa.eu</email>
+                </communicationInfo>
+              </organizationInfo>
+            </iprHolderOrganization>
+          </distributionInfo>
+          <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+            <role>contactPerson</role>
+            <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+              <surname xml:lang="en">The Language Bank of Finland</surname>
+              <givenName xml:lang="en">User support at CSC - IT Center for Science Ltd.</givenName>
+              <sex>unknown</sex>
+              <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                <email>kielipankki@csc.fi</email>
+              </communicationInfo>
+            </personInfo>
+          </contactPerson>
+          <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+            <metadataCreationDate>2016-04-26</metadataCreationDate>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLastDateUpdated>2023-12-07</metadataLastDateUpdated>
+            <revision>CHANGE LOG added</revision>
+            <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+              <role>metadataCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Bartis</surname>
+                <givenName xml:lang="en">Imre</givenName>
+                <sex>male</sex>
+                <position>Project Coordinator</position>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>imre.bartis@helsinki.fi</email>
+                  <url>http://orcid.org/0000-0002-9455-8771</url>
+                  <city>Helsinki</city>
+                  <country>Finland</country>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                    <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                    <departmentName xml:lang="en">University of Helsinki</departmentName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>finclarin@helsinki.fi</email>
+                      <url>http://www.helsinki.fi/fin-clarin</url>
+                      <address>PO Box 24 (Unioninkatu 40)</address>
+                      <zipCode>00014</zipCode>
+                      <city>University of Helsinki</city>
+                      <country>Finland</country>
                     </communicationInfo>
-                    <affiliation>
-                        <organizationName lang="en">FIN-CLARIN</organizationName>
-                        <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
-                        <departmentName lang="en">University of Helsinki</departmentName>
-                        <communicationInfo>
-                            <email>finclarin@helsinki.fi</email>
-                            <url>http://www.helsinki.fi/fin-clarin</url>
-                            <address>PO Box 24 (Unioninkatu 40)</address>
-                            <zipCode>00014</zipCode>
-                            <city>University of Helsinki</city>
-                            <country>Finland</country>
-                        </communicationInfo>
-                    </affiliation>
-                </metadataCreator>
-                <metadataLanguageName>English</metadataLanguageName>
-                <metadataLanguageId>en</metadataLanguageId>
-                <metadataLastDateUpdated>2023-05-15</metadataLastDateUpdated>
-                <revision>link to license added</revision>
-            </metadataInfo>
-            <resourceDocumentationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <documentation>
-                    <documentUnstructured>How to cite: www.kielipankki.fi/viittaus/?key=urn:nbn:fi:lb-2016042602&amp;lang=en</documentUnstructured>
-                </documentation>
-                <documentation>
-                    <documentUnstructured>Resource group page: http://urn.fi/urn:nbn:fi:lb-2021031604</documentUnstructured>
-                </documentation>
-                <documentation>
-                    <documentInfo>
-                        <documentType>other</documentType>
-                        <title lang="en">License (Finnish TreeBank / FTB)</title>
-                        <editor>FIN-CLARIN</editor>
-                        <url>http://urn.fi/urn:nbn:fi:lb-2022090204</url>
-                    </documentInfo>
-                </documentation>
-            </resourceDocumentationInfo>
-            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <relationType>contains</relationType>
-                <relatedResource>
-                    <targetResourceNameURI>The Finnish Sub-corpus of the JRC-Aquis Multilingual Parallel Corpus http://urn.fi/urn:nbn:fi:lb-2016042710</targetResourceNameURI>
-                </relatedResource>
-            </relationInfo>
-            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <relationType>IsVariantFormOf</relationType>
-                <relatedResource>
-                    <targetResourceNameURI>The Downloadable Version of the Finnish TreeBank 3 http://urn.fi/urn:nbn:fi:lb-2016042601</targetResourceNameURI>
-                </relatedResource>
-            </relationInfo>
-            <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <corpusInfo>
-                    <resourceType>corpus</resourceType>
-                    <corpusMediaType>
-                        <corpusTextInfo>
-                            <mediaType>text</mediaType>
-                            <lingualityInfo>
-                                <lingualityType>monolingual</lingualityType>
-                            </lingualityInfo>
-                            <languageInfo>
-                                <languageId>fi</languageId>
-                                <languageName>Finnish</languageName>
-                            </languageInfo>
-                            <sizeInfo>
-                                <size>4366955</size>
-                                <sizeUnit>sentences</sizeUnit>
-                            </sizeInfo>
-                            <sizeInfo>
-                                <size>76369439</size>
-                                <sizeUnit>tokens</sizeUnit>
-                            </sizeInfo>
-                            <annotationInfo>
-                                <annotationType>syntacticAnnotation-treebanks</annotationType>
-                            </annotationInfo>
-                        </corpusTextInfo>
-                    </corpusMediaType>
-                </corpusInfo>
-            </resourceComponentType>
-        </info:resourceInfo>
-    </metadata>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </metadataCreator>
+            <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+              <role>metadataCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Dieckmann</surname>
+                <givenName xml:lang="en">Ute</givenName>
+                <sex>unknown</sex>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>ute.dieckmann@helsinki.fi</email>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                    <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                    <departmentName xml:lang="en">University of Helsinki</departmentName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>finclarin@helsinki.fi</email>
+                      <url>http://www.helsinki.fi/fin-clarin</url>
+                      <address>PO Box 24 (Unioninkatu 40)</address>
+                      <zipCode>00014</zipCode>
+                      <city>University of Helsinki</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </metadataCreator>
+          </metadataInfo>
+          <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
+            <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+              <role>documentation</role>
+              <documentUnstructured>
+                How to cite: www.kielipankki.fi/viittaus/?key=urn:nbn:fi:lb-2016042602&amp;lang=en
+              </documentUnstructured>
+            </documentationUnstructured>
+            <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+              <role>documentation</role>
+              <documentUnstructured>
+                Resource group page: http://urn.fi/urn:nbn:fi:lb-2021031604
+              </documentUnstructured>
+            </documentationUnstructured>
+            <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+              <role>documentation</role>
+              <documentUnstructured>
+                CHANGE LOG: 7.12.2023 Rightholders and attribution instructions specified
+              </documentUnstructured>
+            </documentationUnstructured>
+            <documentationStructured ComponentId="clarin.eu:cr1:c_1361876010648">
+              <role>documentation</role>
+              <documentInfo ComponentId="clarin.eu:cr1:c_1353678848788">
+                <documentType>other</documentType>
+                <title xml:lang="fi">Lisenssi (Suomen puupankki FinnTreeBank 3)</title>
+                <title xml:lang="en">License (Finnish TreeBank3 / FTB3)</title>
+                <editor>FIN-CLARIN</editor>
+                <url>http://urn.fi/urn:nbn:fi:lb-2022090204</url>
+              </documentInfo>
+            </documentationStructured>
+          </resourceDocumentationInfo>
+          <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+            <relationType>HasPart</relationType>
+            <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+              <targetResourceNameURI>
+                The Finnish Sub-corpus of the JRC-Acquis Multilingual Parallel Corpus http://urn.fi/urn:nbn:fi:lb-2016042710
+              </targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+            <relationType>IsVariantFormOf</relationType>
+            <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+              <targetResourceNameURI>
+                The Downloadable Version of the Finnish TreeBank 3 http://urn.fi/urn:nbn:fi:lb-2016042601
+              </targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+            <relationType>HasPart</relationType>
+            <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+              <targetResourceNameURI>
+                The Finnish Part of 'The Helsinki Korp Europarl Bilingual Corpora' http://urn.fi/urn:nbn:fi:lb-2015043011
+              </targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
+            <resourceType>corpus</resourceType>
+            <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
+              <corpusTextInfo ComponentId="clarin.eu:cr1:c_1355150532311">
+                <mediaType>text</mediaType>
+                <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                  <lingualityType>monolingual</lingualityType>
+                </lingualityInfo>
+                <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                  <languageId>fi</languageId>
+                  <languageName>Finnish</languageName>
+                </languageInfo>
+                <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                  <size>4366955</size>
+                  <sizeUnit>sentences</sizeUnit>
+                </sizeInfo>
+                <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                  <size>76369439</size>
+                  <sizeUnit>tokens</sizeUnit>
+                </sizeInfo>
+                <annotationInfo ComponentId="clarin.eu:cr1:c_1355150532324">
+                  <annotationType>syntacticAnnotation-treebanks</annotationType>
+                </annotationInfo>
+              </corpusTextInfo>
+            </corpusMediaType>
+          </corpusInfo>
+        </resourceInfo>
+      </Components>
+    </CMD>
+  </metadata>
 </record>

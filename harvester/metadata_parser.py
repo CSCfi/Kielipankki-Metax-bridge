@@ -16,6 +16,10 @@ class MSRecordParser:
         :param xml: an lxml object, representing a CMDI record
         """
         self.xml = xml
+        self.namespaces = {
+            "cmd": "http://www.clarin.eu/cmd/",
+            "oai": "http://www.openarchives.org/OAI/2.0/",
+        }
 
     def _get_element_text_in_preferred_language(self, xpath):
         """
@@ -30,8 +34,7 @@ class MSRecordParser:
 
         for lang in languages:
             query = self.xml.xpath(
-                f"{xpath}[@lang='{lang}']/text()",
-                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+                f"{xpath}[@xml:lang='{lang}']/text()", namespaces=self.namespaces
             )
             if query:
                 result[lang] = query[0].strip()
@@ -46,25 +49,28 @@ class MSRecordParser:
         :return: The text content of the selected element.
 
         """
-        return self.xml.xpath(
-            xpath, namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"}
-        )[0]
+        return self.xml.xpath(xpath, namespaces=self.namespaces)[0]
 
     def _get_identifier(self, xpath):
         """
         Retrieves the urn of the given XPath's url.
         """
-        identifier_url = self._get_text_xpath(xpath).strip()
-        netloc, path = urlparse(identifier_url).netloc, urlparse(identifier_url).path
-        return netloc + path
+        identifier_urn = self._get_text_xpath(xpath).strip()
+        return f"urn.fi/{identifier_urn}"
 
     def _get_datetime(self, xpath):
         """
-        Retrieve the datetime from given XPath as a string (YYYY-mm-ddTHH:MM:SSZ)
+        Retrieve the datetime from given XPath as a string (YYYY-mm-ddTHH:MM:SSZ).
+
+        Handles fields that are either dates (YYYY-mm-dd) or already datetimes
+        (YYYY-mm-ddTHH:MM:SSZ). If time information is not available, 00:00:00 is used.
         """
         date_str = self._get_text_xpath(xpath)
         if date_str:
-            datetime_obj = datetime.strptime(date_str, "%Y-%m-%d")
+            try:
+                datetime_obj = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
+            except ValueError:
+                datetime_obj = datetime.strptime(date_str, "%Y-%m-%d")
             formatted_date_str = datetime_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
             return formatted_date_str
         else:
@@ -76,9 +82,7 @@ class MSRecordParser:
         Return the PID for this record
         """
         try:
-            return self._get_identifier(
-                "//info:identificationInfo/info:identifier/text()",
-            )
+            return self._get_identifier("//cmd:Header/cmd:MdSelfLink/text()")
         except IndexError:
             # no PID found
             return None
@@ -94,15 +98,19 @@ class MSRecordParser:
         Retrieves all licenseInfo elements.
         """
         return self.xml.xpath(
-            "//info:distributionInfo/info:licenceInfo",
-            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            "//cmd:distributionInfo/cmd:licenceInfo", namespaces=self.namespaces
         )
 
     def check_resourcetype_corpus(self):
         """
         Helper method to only retrieve "corpus" records.
         """
-        resourcetype = self._get_text_xpath("//info:resourceType/text()")
+        try:
+            resourcetype = self._get_text_xpath("//cmd:resourceType/text()")
+        except IndexError:
+            # it seems that tool records have different location for resourceType?
+            resourcetype = self._get_text_xpath("//oai:resourceType/text()")
+
         if resourcetype == "corpus":
             return True
 
@@ -110,45 +118,39 @@ class MSRecordParser:
         """
         Retrieves the license url.
         """
-        doc_elements = self.xml.xpath(
-            "//info:resourceDocumentationInfo/info:documentation",
-            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+
+        doc_structured_elements = self.xml.xpath(
+            "//cmd:resourceDocumentationInfo/cmd:documentationStructured/cmd:documentInfo",
+            namespaces=self.namespaces,
         )
 
-        for doc_element in doc_elements:
-            doc_unstruct_element = doc_element.xpath(
-                "info:documentUnstructured/text()",
-                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+        for doc_element in doc_structured_elements:
+            title_element = doc_element.xpath(
+                "cmd:title[@xml:lang='en']/text()",
+                namespaces=self.namespaces,
             )
-            doc_info_elements = doc_element.xpath(
-                "info:documentInfo",
-                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
-            )
+            if title_element and "license" in title_element[0].lower():
+                license_urn = doc_element.xpath(
+                    "cmd:url/text()",
+                    namespaces=self.namespaces,
+                )
+                if license_urn:
+                    return license_urn[0]
 
-            if doc_unstruct_element:
-                doc_unstruct_text = doc_unstruct_element[0].lower()
-                if "license:" in doc_unstruct_text or "license" in doc_unstruct_text:
-                    license_urn = [
-                        word
-                        for word in doc_unstruct_text.split()
-                        if word.startswith("http://urn.fi")
-                    ]
-                    if license_urn:
-                        return license_urn[0]
-
-            elif doc_info_elements:
-                for doc_info_elem in doc_info_elements:
-                    title_element = doc_info_elem.xpath(
-                        "info:title[@lang='en']/text()",
-                        namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
-                    )
-                    if title_element and "license" in title_element[0].lower():
-                        license_urn = doc_info_elem.xpath(
-                            "info:url/text()",
-                            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
-                        )
-                        if license_urn:
-                            return license_urn[0]
+        doc_unstructured_elements = self.xml.xpath(
+            "//cmd:resourceDocumentationInfo/cmd:documentationUnstructured/cmd:documentUnstructured",
+            namespaces=self.namespaces,
+        )
+        for doc_element in doc_unstructured_elements:
+            doc_element_text = doc_element.text.strip().lower()
+            if "license" in doc_element_text:
+                license_urn = [
+                    word
+                    for word in doc_element_text.split()
+                    if word.startswith("http://urn.fi")
+                ]
+                if license_urn:
+                    return license_urn[0]
 
         return None
 
@@ -159,10 +161,8 @@ class MSRecordParser:
         license_dict = {}
 
         license_text = license_element.xpath(
-            "info:licence/text()",
-            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            "cmd:licence/text()", namespaces=self.namespaces
         )[0]
-
         if license_text in mapped_licenses_dict:
             license_dict["url"] = mapped_licenses_dict[license_text]
             custom_url = self._get_license_url_from_documentation()
@@ -178,8 +178,8 @@ class MSRecordParser:
         access_type_dict = {}
 
         availability = self.xml.xpath(
-            "//info:distributionInfo/info:availability/text()",
-            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            "//cmd:distributionInfo/cmd:availability/text()",
+            namespaces=self.namespaces,
         )[0]
         if availability == "available-unrestrictedUse":
             access_type_dict["url"] = (
@@ -253,8 +253,7 @@ class MSRecordParser:
         Finnish" and "Easy-to-read Finnish"), but those are eliminated.
         """
         language_codes = self.xml.xpath(
-            "//info:languageInfo/info:languageId/text()",
-            namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
+            "//cmd:languageInfo/cmd:languageId/text()", namespaces=self.namespaces
         )
         iso639_urls = set()
         for language_code in language_codes:
@@ -288,17 +287,14 @@ class MSRecordParser:
         actors = []
 
         actor_role_element_xpaths = {
-            "creator": "//info:metadataInfo/info:metadataCreator",
-            "publisher": "//info:distributionInfo/info:licenceInfo/info:distributionRightsHolder",
-            "curator": "//info:resourceInfo/info:contactPerson",
-            "rights_holder": "//info:distributionInfo/info:iprHolder",
+            "creator": "//cmd:metadataInfo/cmd:metadataCreator",
+            "publisher": "//cmd:distributionInfo/cmd:licenceInfo/cmd:distributionRightsOrganization",
+            "curator": "//cmd:resourceInfo/cmd:contactPerson",
+            "rights_holder": "//cmd:distributionInfo/cmd:iprHolderPerson",
         }
 
         for role, xpath in actor_role_element_xpaths.items():
-            curator_elements = self.xml.xpath(
-                xpath,
-                namespaces={"info": "http://www.ilsp.gr/META-XMLSchema"},
-            )
+            curator_elements = self.xml.xpath(xpath, namespaces=self.namespaces)
 
             if not isinstance(curator_elements, list):
                 curator_elements = [curator_elements]
@@ -327,18 +323,12 @@ class MSRecordParser:
                 }
             ],
             "persistent_identifier": self.pid,
-            "title": self._get_element_text_in_preferred_language(
-                "//info:resourceName"
-            ),
+            "title": self._get_element_text_in_preferred_language("//cmd:resourceName"),
             "description": self._get_element_text_in_preferred_language(
-                "//info:description"
+                "//cmd:description"
             ),
-            "modified": self._get_datetime(
-                "//info:metadataInfo/info:metadataLastDateUpdated/text()"
-            ),
-            "created": self._get_datetime(
-                "//info:metadataInfo/info:metadataCreationDate/text()"
-            ),
+            "modified": self._get_datetime("oai:header/oai:datestamp/text()"),
+            "created": self._get_datetime("//cmd:Header/cmd:MdCreationDate/text()"),
             "access_rights": self._map_access_rights(),
             "actors": self._get_actors(),
         }
