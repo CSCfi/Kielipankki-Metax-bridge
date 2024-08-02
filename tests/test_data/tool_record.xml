@@ -1,130 +1,166 @@
-<record xmlns="http://www.openarchives.org/OAI/2.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <header>
-        <identifier>oai:kielipankki.fi:sh8b3620</identifier>
-        <datestamp>2022-09-02T10:41:46Z</datestamp>
-    </header>
-    <metadata>
-        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
-            <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <resourceName lang="en">Lingsoft Proofreader for ICT Language for Finnish</resourceName>
-                <description lang="fi">Erityisalojen tarkistimet ovat Lingsoftin ainutlaatuinen ja kustannuksia säästävä ratkaisu toimialojen sisäisen kielen tarkistamiseen. Lingsoft Proofreader for Finnish ICT Language tarkistaa ICT-terminologian Microsoft-tyylioppaan mukaisesti.</description>
-                <description lang="en">Lingsoft Proofreader for Finnish ICT Language checks ICT terminology in accordance with the Microsoft Style Guide.</description>
-                <url>http://www.lingsoft.fi/tuotteet/msstyle</url>
-                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
-                <identifier>http://urn.fi/urn:nbn:fi:lb-2014073096</identifier>
-            </identificationInfo>
-            <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <availability>available-restrictedUse</availability>
-                <licenceInfo>
-                    <licence>underNegotiation</licence>
-                    <fee>250,00 € + VAT 24 %</fee>
-                    <licensor>
-                        <organizationInfo>
-                            <organizationName lang="en">Lingsoft</organizationName>
-                            <communicationInfo>
-                                <email>etunimi.sukunimi@lingsoft.fi</email>
-                                <url>http://www.lingsoft.fi</url>
-                            </communicationInfo>
-                        </organizationInfo>
-                    </licensor>
-                    <distributionRightsHolder>
-                        <personInfo>
-                            <surname lang="en">Contact</surname>
-                            <communicationInfo>
-                                <email>info@lingsoft.fi</email>
-                            </communicationInfo>
-                            <affiliation>
-                                <organizationName lang="en">Lingsoft</organizationName>
-                                <communicationInfo>
-                                    <email>etunimi.sukunimi@lingsoft.fi</email>
-                                    <url>http://www.lingsoft.fi</url>
-                                </communicationInfo>
-                            </affiliation>
-                        </personInfo>
-                    </distributionRightsHolder>
-                    <userNature>commercial</userNature>
-                </licenceInfo>
-                <iprHolder>
-                    <organizationInfo>
-                        <organizationName lang="en">Lingsoft</organizationName>
-                        <communicationInfo>
-                            <email>etunimi.sukunimi@lingsoft.fi</email>
-                            <url>http://www.lingsoft.fi</url>
-                        </communicationInfo>
-                    </organizationInfo>
-                </iprHolder>
-            </distributionInfo>
-            <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <surname lang="en">Contact</surname>
-                <givenName lang="en">-</givenName>
-                <communicationInfo>
-                    <email>firstname.surname@lingsoft.fi</email>
+<record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <identifier>oai:clarino.uib.no:lb-2014073096</identifier>
+    <datestamp>2024-06-19T07:38:57Z</datestamp>
+    <setSpec>FIN-CLARIN</setSpec>
+  </header>
+  <metadata>
+    <CMD CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1360931019836/xsd">
+      <Header>
+        <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+        <MdCreationDate>2022-09-02</MdCreationDate>
+        <MdSelfLink>urn:nbn:fi:lb-2014073096</MdSelfLink>
+        <MdProfile>clarin.eu:cr1:p_1360931019836</MdProfile>
+      </Header>
+      <Resources>
+        <ResourceProxyList>
+          <ResourceProxy id="_1">
+            <ResourceType mimetype="">Resource</ResourceType>
+            <ResourceRef>http://www.lingsoft.fi/tuotteet/msstyle</ResourceRef>
+          </ResourceProxy>
+        </ResourceProxyList>
+        <JournalFileProxyList/>
+        <ResourceRelationList/>
+        <IsPartOfList/>
+      </Resources>
+      <Components>
+        <resourceInfo>
+          <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+            <resourceName xml:lang="en">Lingsoft Proofreader for ICT Language for Finnish</resourceName>
+            <description xml:lang="fi">Erityisalojen tarkistimet ovat Lingsoftin ainutlaatuinen ja kustannuksia säästävä ratkaisu toimialojen sisäisen kielen tarkistamiseen. Lingsoft Proofreader for Finnish ICT Language tarkistaa ICT-terminologian Microsoft-tyylioppaan mukaisesti.</description>
+            <description xml:lang="en">Lingsoft Proofreader for Finnish ICT Language checks ICT terminology in accordance with the Microsoft Style Guide.</description>
+            <url>http://www.lingsoft.fi/tuotteet/msstyle</url>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2014073096</identifier>
+          </identificationInfo>
+          <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+            <availability>available-restrictedUse</availability>
+            <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+              <licence>underNegotiation</licence>
+              <fee>250,00 € + VAT 24 %</fee>
+              <userNature>commercial</userNature>
+              <licensorOrganization ComponentId="clarin.eu:cr1:c_1361876010643">
+                <role>licensor</role>
+                <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                  <organizationName xml:lang="en">Lingsoft</organizationName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>etunimi.sukunimi@lingsoft.fi</email>
                     <url>http://www.lingsoft.fi</url>
-                </communicationInfo>
-                <affiliation>
-                    <organizationName lang="en">Lingsoft</organizationName>
-                    <communicationInfo>
+                  </communicationInfo>
+                </organizationInfo>
+              </licensorOrganization>
+              <distributionRightsHolderPerson ComponentId="clarin.eu:cr1:c_1352813745466">
+                <role>distributionRightsHolder</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="en">Contact</surname>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>info@lingsoft.fi</email>
+                  </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">Lingsoft</organizationName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
                         <email>etunimi.sukunimi@lingsoft.fi</email>
                         <url>http://www.lingsoft.fi</url>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
+                </personInfo>
+              </distributionRightsHolderPerson>
+            </licenceInfo>
+            <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+              <role>iprHolder</role>
+              <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                <organizationName xml:lang="en">Lingsoft</organizationName>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>etunimi.sukunimi@lingsoft.fi</email>
+                  <url>http://www.lingsoft.fi</url>
+                </communicationInfo>
+              </organizationInfo>
+            </iprHolderOrganization>
+          </distributionInfo>
+          <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+            <role>contactPerson</role>
+            <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+              <surname xml:lang="en">Contact</surname>
+              <givenName xml:lang="en">-</givenName>
+              <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                <email>firstname.surname@lingsoft.fi</email>
+                <url>http://www.lingsoft.fi</url>
+              </communicationInfo>
+              <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                <role>affiliation</role>
+                <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                  <organizationName xml:lang="en">Lingsoft</organizationName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>etunimi.sukunimi@lingsoft.fi</email>
+                    <url>http://www.lingsoft.fi</url>
+                  </communicationInfo>
+                </organizationInfo>
+              </affiliation>
+            </personInfo>
+          </contactPerson>
+          <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+            <metadataCreationDate>2012-12-06</metadataCreationDate>
+            <originalMetadataLink>http://www.lingsoft.fi/tuotteet/msstyle</originalMetadataLink>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageName>Finnish</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLanguageId>fi</metadataLanguageId>
+            <metadataLastDateUpdated>2012-12-06</metadataLastDateUpdated>
+            <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+              <role>metadataCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Milla</surname>
+                <givenName xml:lang="en">Metadataaja</givenName>
+                <sex>female</sex>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>milla@example.com</email>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">University of Helsinki</organizationName>
+                    <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>firstname.surname@helsinki.fi</email>
                     </communicationInfo>
+                  </organizationInfo>
                 </affiliation>
-            </contactPerson>
-            <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <metadataCreationDate>2012-12-06</metadataCreationDate>
-                <metadataCreator>
-                    <surname lang="en">Pöyhönen</surname>
-                    <givenName lang="en">Saara</givenName>
-                    <sex>female</sex>
-                    <communicationInfo>
-                        <email>saara.poyhonen@helsinki.fi</email>
-                    </communicationInfo>
-                    <affiliation>
-                        <organizationName lang="en">University of Helsinki</organizationName>
-                        <organizationShortName lang="en">UHEL</organizationShortName>
-                        <communicationInfo>
-                            <email>firstname.surname@helsinki.fi</email>
-                        </communicationInfo>
-                    </affiliation>
-                </metadataCreator>
-                <originalMetadataLink>http://www.lingsoft.fi/tuotteet/msstyle</originalMetadataLink>
-                <metadataLanguageName>English</metadataLanguageName>
-                <metadataLanguageName>Finnish</metadataLanguageName>
-                <metadataLanguageId>en</metadataLanguageId>
-                <metadataLanguageId>fi</metadataLanguageId>
-                <metadataLastDateUpdated>2012-12-06</metadataLastDateUpdated>
-            </metadataInfo>
-            <usageInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <foreseenUseInfo>
-                    <foreseenUse>humanUse</foreseenUse>
-                    <useNLPSpecific>spellChecking</useNLPSpecific>
-                </foreseenUseInfo>
-                <actualUseInfo>
-                    <actualUse>humanUse</actualUse>
-                    <useNLPSpecific>spellChecking</useNLPSpecific>
-                </actualUseInfo>
-            </usageInfo>
-            <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <toolServiceInfo>
-                    <resourceType>toolService</resourceType>
-                    <toolServiceType>tool</toolServiceType>
-                    <toolServiceSubtype>Spell checker</toolServiceSubtype>
-                    <languageDependent>true</languageDependent>
-                    <inputInfo>
-                        <mediaType>text</mediaType>
-                        <modalityType>writtenLanguage</modalityType>
-                        <languageName>Finnish</languageName>
-                        <languageId>fi</languageId>
-                    </inputInfo>
-                    <outputInfo>
-                        <mediaType>text</mediaType>
-                        <modalityType>writtenLanguage</modalityType>
-                        <languageName>Finnish</languageName>
-                        <languageId>fi</languageId>
-                    </outputInfo>
-                </toolServiceInfo>
-            </resourceComponentType>
-        </info:resourceInfo>
-    </metadata>
+              </personInfo>
+            </metadataCreator>
+          </metadataInfo>
+          <usageInfo ComponentId="clarin.eu:cr1:c_1353678848793">
+            <foreseenUseInfo ComponentId="clarin.eu:cr1:c_1353678848796">
+              <foreseenUse>humanUse</foreseenUse>
+              <useNLPSpecific>spellChecking</useNLPSpecific>
+            </foreseenUseInfo>
+            <actualUseInfo ComponentId="clarin.eu:cr1:c_1353678848797">
+              <actualUse>humanUse</actualUse>
+              <useNLPSpecific>spellChecking</useNLPSpecific>
+            </actualUseInfo>
+          </usageInfo>
+          <toolServiceInfo ComponentId="clarin.eu:cr1:c_1360931019834">
+            <resourceType>toolService</resourceType>
+            <toolServiceType>tool</toolServiceType>
+            <toolServiceSubtype>Spell checker</toolServiceSubtype>
+            <languageDependent>true</languageDependent>
+            <inputInfo ComponentId="clarin.eu:cr1:c_1360931019804">
+              <mediaType>text</mediaType>
+              <modalityType>writtenLanguage</modalityType>
+              <languageName>Finnish</languageName>
+              <languageId>fi</languageId>
+            </inputInfo>
+            <outputInfo ComponentId="clarin.eu:cr1:c_1360931019824">
+              <mediaType>text</mediaType>
+              <modalityType>writtenLanguage</modalityType>
+              <languageName>Finnish</languageName>
+              <languageId>fi</languageId>
+            </outputInfo>
+          </toolServiceInfo>
+        </resourceInfo>
+      </Components>
+    </CMD>
+  </metadata>
 </record>

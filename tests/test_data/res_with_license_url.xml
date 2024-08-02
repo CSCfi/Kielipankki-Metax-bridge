@@ -1,171 +1,284 @@
-<record xmlns="http://www.openarchives.org/OAI/2.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <header>
-        <identifier>oai:kielipankki.fi:shc84010</identifier>
-        <datestamp>2022-11-17T04:02:09Z</datestamp>
-    </header>
-    <metadata>
-        <info:resourceInfo xmlns:info="http://www.ilsp.gr/META-XMLSchema"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
-            <identificationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <resourceName lang="fi">Digitaalisen muoto-opin arkiston sanaliput, lähdemateriaali</resourceName>
-                <resourceName lang="en">The Word Notes of the Digital Morphology Archives, source</resourceName>
-                <description lang="fi">Aineisto sisältää Muoto-opin arkiston (http://urn.fi/urn:nbn:fi:lb-201403261) kaikki paperiset sanaliput skannattuina.
-
-Lisenssi: http://urn.fi/urn:nbn:fi:lb-2016042202
-
-Kielipankin aineistojen sijaintia koskevat ohjeet: https://www.kielipankki.fi/tuki/aineiston-sijainti-kielipankissa</description>
-                <description lang="en">The resource contains the scanned original word notes of the Morphology Archives.
-
-The Morphology Archives contains information of the Finnish dialect of 212 places in Finland.
-
-License details: http://urn.fi/urn:nbn:fi:lb-2016042201
-
-                </description>
-                <resourceShortName lang="en">dma-wn-src</resourceShortName>
-                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
-                <identifier>http://urn.fi/urn:nbn:fi:lb-202005191</identifier>
-            </identificationInfo>
-            <distributionInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <availability>available-restrictedUse</availability>
-                <licenceInfo>
-                    <licence>CLARIN_RES</licence>
-                    <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-                    <restrictionsOfUse>attribution</restrictionsOfUse>
-                    <restrictionsOfUse>other</restrictionsOfUse>
-                    <attributionText lang="en">See Documentation section.</attributionText>
-                    <licensor>
-                        <organizationInfo>
-                            <organizationName lang="en">University of Helsinki</organizationName>
-                            <departmentName lang="en">Department of Finnish, Finno-Ugrian and Scandinavian Studies</departmentName>
-                            <communicationInfo>
-                                <email>hanna.lehti-eklund@helsinki.fi</email>
-                                <url>http://www.helsinki.fi/fus/</url>
-                            </communicationInfo>
-                        </organizationInfo>
-                    </licensor>
-                    <userNature>academic</userNature>
-                </licenceInfo>
-            </distributionInfo>
-            <contactPerson xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <surname lang="en">FIN-CLARIN</surname>
-                <givenName lang="en">User support</givenName>
-                <communicationInfo>
-                    <email>fin-clarin@helsinki.fi</email>
+<record>
+  <header>
+    <identifier>oai:clarino.uib.no:lb-2016032101</identifier>
+    <datestamp>2024-06-19T08:02:07Z</datestamp>
+    <setSpec>FIN-CLARIN</setSpec>
+  </header>
+  <metadata>
+    <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+      <Header>
+        <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+        <MdCreationDate>2022-11-17</MdCreationDate>
+        <MdSelfLink>urn:nbn:fi:lb-2016032101</MdSelfLink>
+        <MdProfile>clarin.eu:cr1:p_1361876010571</MdProfile>
+      </Header>
+      <Resources>
+        <ResourceProxyList/>
+        <JournalFileProxyList/>
+        <ResourceRelationList/>
+        <IsPartOfList/>
+      </Resources>
+      <Components>
+        <resourceInfo>
+          <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+            <resourceName xml:lang="fi">Digitaalisen muoto-opin arkiston sanaliput</resourceName>
+            <resourceName xml:lang="en">The Word Notes of the Digital Morphology Archives</resourceName>
+            <description xml:lang="fi">Aineisto sisältää Digitaalisen muoto-opin arkiston (http://urn.fi/urn:nbn:fi:lb-201403261) sanalipuista ne, joiden aineistoa on dma-Korp-aineistossa (http://urn.fi/urn:nbn:fi:lb-2016032102). Lisenssi: http://urn.fi/urn:nbn:fi:lb-2016042202 Kielipankin aineistojen sijaintia koskevat ohjeet: https://www.kielipankki.fi/tuki/aineiston-sijainti-kielipankissa</description>
+            <description xml:lang="en">The resource contains those word notes of the Digital Morphology Archives that are included in the Korp version of DMA, http://urn.fi/urn:nbn:fi:lb-201403261. License details: http://urn.fi/urn:nbn:fi:lb-2016042201 After gaining access rights via the Language Bank Rights (https://lbr.csc.fi) you can find the Digital Morphology Archives in Korp (https://korp.csc.fi) by signing in with your HAKA- or eduGAIN credentials (choose "Log in" in the cogwheel menu in the upper right corner of Korp) and clicking then http://urn.fi/urn:nbn:fi:lb-2016032102 for performing searches in DMA, The Digital Morphology Archives. The link to the word note of each search result can be found at the bottom of the scroll bar on the right (see "Näytä sanalippu [RES]:"). Corpus location instructions: https://www.kielipankki.fi/support/corpus-location/ (in Finnish: https://www.kielipankki.fi/tuki/aineiston-sijainti-kielipankissa/).</description>
+            <resourceShortName xml:lang="en">dma-wn</resourceShortName>
+            <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+            <identifier>http://urn.fi/urn:nbn:fi:lb-2016032101</identifier>
+          </identificationInfo>
+          <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+            <availability>available-restrictedUse</availability>
+            <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+              <licence>CLARIN_RES</licence>
+              <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+              <restrictionsOfUse>attribution</restrictionsOfUse>
+              <restrictionsOfUse>noDerivatives</restrictionsOfUse>
+              <restrictionsOfUse>other</restrictionsOfUse>
+              <attributionText xml:lang="en">See Documentation section.</attributionText>
+              <userNature>academic</userNature>
+              <licensorOrganization ComponentId="clarin.eu:cr1:c_1361876010643">
+                <role>licensor</role>
+                <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                  <organizationName xml:lang="en">University of Helsinki</organizationName>
+                  <departmentName xml:lang="en">
+                    Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                  </departmentName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>hanna.lehti-eklund@helsinki.fi</email>
+                    <url>http://www.helsinki.fi/fus/</url>
+                  </communicationInfo>
+                </organizationInfo>
+              </licensorOrganization>
+              <distributionRightsHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010640">
+                <role>distributionRightsHolder</role>
+                <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                  <organizationName xml:lang="en">University of Helsinki</organizationName>
+                  <departmentName xml:lang="en">
+                    Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                  </departmentName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>hanna.lehti-eklund@helsinki.fi</email>
+                    <url>http://www.helsinki.fi/fus/</url>
+                  </communicationInfo>
+                </organizationInfo>
+              </distributionRightsHolderOrganization>
+              <distributionRightsHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010640">
+                <role>distributionRightsHolder</role>
+                <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                  <organizationName xml:lang="en">CSC - IT Center for Science</organizationName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>servicedesk@csc.fi</email>
+                  </communicationInfo>
+                </organizationInfo>
+              </distributionRightsHolderOrganization>
+            </licenceInfo>
+            <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+              <role>iprHolder</role>
+              <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                <organizationName xml:lang="en">University of Helsinki</organizationName>
+                <departmentName xml:lang="en">
+                  Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                </departmentName>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>hanna.lehti-eklund@helsinki.fi</email>
+                  <url>http://www.helsinki.fi/fus/</url>
                 </communicationInfo>
-            </contactPerson>
-            <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <metadataCreationDate>2020-04-27</metadataCreationDate>
-                <metadataCreator>
-                    <surname lang="en">Dieckmann</surname>
-                    <givenName lang="en">Ute</givenName>
-                    <sex>unknown</sex>
-                    <communicationInfo>
-                        <email>ute.dieckmann@helsinki.fi</email>
+              </organizationInfo>
+            </iprHolderOrganization>
+          </distributionInfo>
+          <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+            <role>contactPerson</role>
+            <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+              <surname xml:lang="en">The Language Bank of Finland</surname>
+              <givenName xml:lang="en">User support at CSC - IT Center for Science Ltd.</givenName>
+              <sex>unknown</sex>
+              <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                <email>kielipankki@csc.fi</email>
+              </communicationInfo>
+            </personInfo>
+          </contactPerson>
+          <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+            <metadataCreationDate>2016-03-07</metadataCreationDate>
+            <metadataLanguageName>English</metadataLanguageName>
+            <metadataLanguageName>Finnish</metadataLanguageName>
+            <metadataLanguageId>en</metadataLanguageId>
+            <metadataLanguageId>fi</metadataLanguageId>
+            <metadataLastDateUpdated>2021-06-14</metadataLastDateUpdated>
+            <revision>
+              Link to resource group page and attribution details added, old links to info pages (now resource group page) removed
+            </revision>
+            <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+              <role>metadataCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Bartis</surname>
+                <givenName xml:lang="en">Imre</givenName>
+                <sex>male</sex>
+                <position>Project Coordinator</position>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>imre.bartis@helsinki.fi</email>
+                  <url>http://orcid.org/0000-0002-9455-8771</url>
+                  <city>Helsinki</city>
+                  <country>Finland</country>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                    <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                    <departmentName xml:lang="en">University of Helsinki</departmentName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>finclarin@helsinki.fi</email>
+                      <url>http://www.helsinki.fi/fin-clarin</url>
+                      <address>PO Box 24 (Unioninkatu 40)</address>
+                      <zipCode>00014</zipCode>
+                      <city>University of Helsinki</city>
+                      <country>Finland</country>
                     </communicationInfo>
-                    <affiliation>
-                        <organizationName lang="en">FIN-CLARIN</organizationName>
-                        <organizationShortName lang="en">FIN-CLARIN</organizationShortName>
-                        <departmentName lang="en">University of Helsinki</departmentName>
-                        <communicationInfo>
-                            <email>finclarin@helsinki.fi</email>
-                            <url>http://www.helsinki.fi/fin-clarin</url>
-                            <address>PO Box 24 (Unioninkatu 40)</address>
-                            <zipCode>00014</zipCode>
-                            <city>University of Helsinki</city>
-                            <country>Finland</country>
-                        </communicationInfo>
-                    </affiliation>
-                </metadataCreator>
-                <metadataCreator>
-                    <surname lang="en">Siiroinen</surname>
-                    <givenName lang="en">Mari</givenName>
-                    <sex>female</sex>
-                    <communicationInfo>
-                        <email>mari.siiroinen@helsinki.fi</email>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </metadataCreator>
+            <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+              <role>metadataCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Siiroinen</surname>
+                <givenName xml:lang="en">Mari</givenName>
+                <sex>female</sex>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>mari.siiroinen@helsinki.fi</email>
+                  <country>Finland</country>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">University of Helsinki</organizationName>
+                    <departmentName xml:lang="en">
+                      Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                    </departmentName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>miia.rajala@helsinki.fi</email>
+                      <url>http://www.helsinki.fi/fus/index.htm</url>
+                      <country>Finland</country>
                     </communicationInfo>
-                    <affiliation>
-                        <organizationName lang="en">University of Helsinki</organizationName>
-                        <departmentName lang="en">Department of Finnish, Finno-Ugrian and Scandinavian Studies</departmentName>
-                        <communicationInfo>
-                            <email>fin-clarin@helsinki.fi</email>
-                        </communicationInfo>
-                    </affiliation>
-                </metadataCreator>
-                <metadataLanguageName>English</metadataLanguageName>
-                <metadataLanguageName>Finnish</metadataLanguageName>
-                <metadataLanguageId>en</metadataLanguageId>
-                <metadataLanguageId>fi</metadataLanguageId>
-                <metadataLastDateUpdated>2021-08-27</metadataLastDateUpdated>
-                <revision>Link to resource group page added</revision>
-            </metadataInfo>
-            <resourceDocumentationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <documentation>
-                    <documentUnstructured>Resource group page: http://urn.fi/urn:nbn:fi:lb-2021061101</documentUnstructured>
-                </documentation>
-                <documentation>
-                    <documentUnstructured>How to cite: https://www.kielipankki.fi/viittaus/?key=dma-wn-src&amp;lang=en</documentUnstructured>
-                </documentation>
-                <documentation>
-                    <documentInfo>
-                        <documentType>other</documentType>
-                        <title lang="en">License</title>
-                        <url>https://www.kielipankki.fi/lic/dma-wn/?lang=en</url>
-                    </documentInfo>
-                </documentation>
-                <documentation>
-                    <documentInfo>
-                        <documentType>other</documentType>
-                        <title lang="en">Aineiston tietosivu</title>
-                        <url>https://www.kielipankki.fi/aineistot/dma/dma-wn-src/</url>
-                        <documentLanguageName>Finnish</documentLanguageName>
-                        <documentLanguageId>fi</documentLanguageId>
-                    </documentInfo>
-                </documentation>
-                <toolDocumentationType>other</toolDocumentationType>
-            </resourceDocumentationInfo>
-            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <relationType>IsOriginalFormOf</relationType>
-                <relatedResource>
-                    <targetResourceNameURI>The Word Notes of the Digital Morphology Archives http://urn.fi/urn:nbn:fi:lb-2016032101</targetResourceNameURI>
-                </relatedResource>
-            </relationInfo>
-            <relationInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <relationType>IsSourceOf</relationType>
-                <relatedResource>
-                    <targetResourceNameURI>Digital Morphology Archives http://urn.fi/urn:nbn:fi:lb-201403261</targetResourceNameURI>
-                </relatedResource>
-            </relationInfo>
-            <resourceComponentType xmlns="http://www.ilsp.gr/META-XMLSchema">
-                <corpusInfo>
-                    <resourceType>corpus</resourceType>
-                    <corpusMediaType>
-                        <corpusTextInfo>
-                            <mediaType>text</mediaType>
-                            <lingualityInfo>
-                                <lingualityType>monolingual</lingualityType>
-                            </lingualityInfo>
-                            <languageInfo>
-                                <languageId>fi</languageId>
-                                <languageName>Finnish</languageName>
-                            </languageInfo>
-                            <modalityInfo>
-                                <modalityType>writtenLanguage</modalityType>
-                            </modalityInfo>
-                            <sizeInfo>
-                                <size>212</size>
-                                <sizeUnit>files</sizeUnit>
-                            </sizeInfo>
-                            <textFormatInfo>
-                                <mimeType>application/pdf</mimeType>
-                            </textFormatInfo>
-                            <timeCoverageInfo>
-                                <timeCoverage>1967-2000</timeCoverage>
-                            </timeCoverageInfo>
-                        </corpusTextInfo>
-                    </corpusMediaType>
-                </corpusInfo>
-            </resourceComponentType>
-        </info:resourceInfo>
-    </metadata>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </metadataCreator>
+            <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+              <role>metadataCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Dieckmann</surname>
+                <givenName xml:lang="en">Ute</givenName>
+                <sex>unknown</sex>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>ute.dieckmann@helsinki.fi</email>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                    <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                    <departmentName xml:lang="en">University of Helsinki</departmentName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>finclarin@helsinki.fi</email>
+                      <url>http://www.helsinki.fi/fin-clarin</url>
+                      <address>PO Box 24 (Unioninkatu 40)</address>
+                      <zipCode>00014</zipCode>
+                      <city>University of Helsinki</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </metadataCreator>
+          </metadataInfo>
+          <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
+            <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+              <role>documentation</role>
+              <documentUnstructured>
+                CHANGE LOG * 2.3.2020 Replaced the kitwiki Manual address * 17.7.2020 Fixed wrong licence link.
+              </documentUnstructured>
+            </documentationUnstructured>
+            <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+              <role>documentation</role>
+              <documentUnstructured>
+                How to cite: https://www.kielipankki.fi/viittaus/?key=dma-wn&amp;lang=en
+              </documentUnstructured>
+            </documentationUnstructured>
+            <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+              <role>documentation</role>
+              <documentUnstructured>
+                Resource group page: http://urn.fi/urn:nbn:fi:lb-2021061101
+              </documentUnstructured>
+            </documentationUnstructured>
+            <documentationStructured ComponentId="clarin.eu:cr1:c_1361876010648">
+              <role>documentation</role>
+              <documentInfo ComponentId="clarin.eu:cr1:c_1353678848788">
+                <documentType>manual</documentType>
+                <title xml:lang="en">DMA Korp User Guide,</title>
+                <url>https://kielipankki.fi/tuki/korp-dma</url>
+              </documentInfo>
+            </documentationStructured>
+            <documentationStructured ComponentId="clarin.eu:cr1:c_1361876010648">
+              <role>documentation</role>
+              <documentInfo ComponentId="clarin.eu:cr1:c_1353678848788">
+                <documentType>other</documentType>
+                <title xml:lang="en">License</title>
+                <url>https://www.kielipankki.fi/lic/dma-wn/?lang=en</url>
+              </documentInfo>
+            </documentationStructured>
+          </resourceDocumentationInfo>
+          <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+            <relationType>IsPartOf</relationType>
+            <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+              <targetResourceNameURI>
+                Digital Morphology Archives http://urn.fi/urn:nbn:fi:lb-201403261
+              </targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+            <relationType>IsVariantFormOf</relationType>
+            <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+              <targetResourceNameURI>
+                The Word Notes of the Digital Morphology Archives, source, http://urn.fi/urn:nbn:fi:lb-202005191
+              </targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+            <relationType>IsVariantFormOf</relationType>
+            <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+              <targetResourceNameURI>
+                The Word Notes of the Morphology Archives with field reports, source, http://urn.fi/urn:nbn:fi:lb-2021083001
+              </targetResourceNameURI>
+            </relatedResource>
+          </relationInfo>
+          <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
+            <resourceType>corpus</resourceType>
+            <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
+              <corpusTextInfo ComponentId="clarin.eu:cr1:c_1355150532311">
+                <mediaType>text</mediaType>
+                <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                  <lingualityType>monolingual</lingualityType>
+                </lingualityInfo>
+                <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                  <languageId>fi</languageId>
+                  <languageName>Finnish</languageName>
+                </languageInfo>
+                <modalityInfo ComponentId="clarin.eu:cr1:c_1355150532318">
+                  <modalityType>writtenLanguage</modalityType>
+                </modalityInfo>
+                <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                  <size>1</size>
+                  <sizeUnit>other</sizeUnit>
+                </sizeInfo>
+              </corpusTextInfo>
+            </corpusMediaType>
+          </corpusInfo>
+        </resourceInfo>
+      </Components>
+    </CMD>
+  </metadata>
 </record>

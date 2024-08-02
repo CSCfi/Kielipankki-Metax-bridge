@@ -89,7 +89,7 @@ def mock_get_response_json():
 @pytest.fixture
 def dataset_pid():
     """Return PID of sample record."""
-    return "urn.fi/urn:nbn:fi:lb-2016101210"
+    return "urn.fi/urn:nbn:fi:lb-2017021609"
 
 
 @pytest.fixture

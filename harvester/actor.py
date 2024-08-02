@@ -55,9 +55,9 @@ class Actor:
         result = {}
         key = re.sub("{.*}", "", element.tag)
         if len(element) == 0:
-            language = element.attrib.get("lang", None)
-            if language:
-                key = key + "_" + language
+            languages = element.xpath("@xml:lang")
+            if languages:
+                key = key + "_" + languages[0]
             result[key] = element.text
         else:
             subresult = {}
@@ -75,11 +75,15 @@ class Actor:
         If the name is provided in more than one language, only one is returned,
         preference order being determined by the order of `self.supported_languages`.
         """
+        if "personInfo" not in self.data:
+            return None
+
+        person_info = self.data["personInfo"]
         for language in self.supported_languages:
-            if f"givenName_{language}" in self.data:
-                return f"{self.data['givenName'+'_'+language]} {self.data['surname'+'_'+language]}"
-            if f"surname_{language}" in self.data:
-                return f"{self.data['surname'+'_'+language]}"
+            if f"givenName_{language}" in person_info:
+                return f"{person_info['givenName'+'_'+language]} {person_info['surname'+'_'+language]}"
+            if f"surname_{language}" in person_info:
+                return f"person_info['surname'+'_'+language]"
         return None
 
     @property
@@ -87,7 +91,7 @@ class Actor:
         """
         Email address of the person. None if not available.
         """
-        communication_info = self.data.get("communicationInfo", {})
+        communication_info = self.data["personInfo"].get("communicationInfo", {})
         return communication_info.get("email", None)
 
     def add_roles(self, roles):
@@ -144,11 +148,14 @@ class Actor:
 
         Raises UnknownOrganizationException if URI match is not found.
         """
-
-        organization_name = self.data["affiliation"]["organizationName_en"]
+        organization_name = self._organization_data["organizationInfo"][
+            "organizationName_en"
+        ]
 
         if organization_name == "FIN-CLARIN":
-            organization_name = self.data["affiliation"]["departmentName_en"]
+            organization_name = self._organization_data["organizationInfo"][
+                "departmentName_en"
+            ]
 
         url_base = "http://uri.suomi.fi/codelist/fairdata/organization/code"
         organization_codes = {
@@ -178,12 +185,25 @@ class Actor:
         # pylint: disable=no-self-argument
 
         def wrapper(self, *args, **kwargs):
-            if "affiliation" not in self.data:
+            if (
+                "affiliation" not in self.data["personInfo"]
+                and "organizationName" not in self.data
+            ):
                 return None
             # pylint: disable=not-callable
             return func(self, *args, **kwargs)
 
         return wrapper
+
+    @property
+    @_none_if_no_affiliation
+    def _organization_data(self):
+        if "personInfo" in self.data and "affiliation" in self.data["personInfo"]:
+            return self.data["personInfo"]["affiliation"]
+        elif "affiliation" in self.data:
+            return self.data["affiliation"]
+        else:
+            return self.data
 
     @property
     @_none_if_no_affiliation
@@ -195,10 +215,14 @@ class Actor:
         needed, but there can be multiple language versions, each of which is sent to
         Metax.
         """
+
         languages = {}
         for language in self.supported_languages:
-            if f"organizationName_{language}" in self.data["affiliation"]:
-                languages[language] = self.data["affiliation"][
+            if (
+                f"organizationName_{language}"
+                in self._organization_data["organizationInfo"]
+            ):
+                languages[language] = self._organization_data["organizationInfo"][
                     f"organizationName_{language}"
                 ]
         return languages
@@ -212,8 +236,12 @@ class Actor:
         The communicationInfo element is mandatory for affiliation, so handling for that
         not being present is not needed.
         """
-        if "url" in self.data["affiliation"]["communicationInfo"]:
-            return {"identifier": self.data["affiliation"]["communicationInfo"]["url"]}
+        if "url" in self._organization_data["organizationInfo"]["communicationInfo"]:
+            return {
+                "identifier": self._organization_data["organizationInfo"][
+                    "communicationInfo"
+                ]["url"]
+            }
         return None
 
     @property
@@ -225,7 +253,7 @@ class Actor:
         The communicationInfo and email elements are mandatory, so they should always be
         present.
         """
-        return self.data["affiliation"]["communicationInfo"]["email"]
+        return self._organization_data["organizationInfo"]["communicationInfo"]["email"]
 
     @property
     @_none_if_no_affiliation

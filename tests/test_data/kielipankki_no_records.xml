@@ -1,7 +1,7 @@
 <OAI-PMH xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
-<responseDate>2024-01-08T15:09:19Z</responseDate>
-<request metadataPrefix="info" verb="ListRecords" from="2023-09-08T14:34:16Z">https://kielipankki.fi/md_api/que</request>
+<responseDate>2024-07-22T09:26:58Z</responseDate>
+<request verb="ListRecords" metadataPrefix="cmdi">https://clarino.uib.no/oai</request>
 <error code="noRecordsMatch">
-The combination of the values of the from, until, set and metadataPrefix arguments results in an empty list
+The combination of the values of the from, until, set and metadataPrefix arguments results in an empty list.
 </error>
 </OAI-PMH>
