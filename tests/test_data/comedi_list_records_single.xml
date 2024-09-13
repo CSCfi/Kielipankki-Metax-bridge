@@ -1,0 +1,155 @@
+<OAI-PMH xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2024-09-12T11:17:58Z</responseDate>
+  <request verb="ListRecords" metadataPrefix="cmdi">https://clarino.uib.no/oai</request>
+  <ListRecords>
+    <record xmlns="http://www.openarchives.org/OAI/2.0/">
+      <header>
+        <identifier>oai:clarino.uib.no:lb-2017021609</identifier>
+        <datestamp>2024-06-19T07:38:46Z</datestamp>
+        <setSpec>FIN-CLARIN</setSpec>
+      </header>
+      <metadata>
+        <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+          <Header>
+            <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+            <MdCreationDate>2022-09-02</MdCreationDate>
+            <MdSelfLink>urn:nbn:fi:lb-2017021609</MdSelfLink>
+            <MdProfile>clarin.eu:cr1:p_1361876010571</MdProfile>
+          </Header>
+          <Resources>
+            <ResourceProxyList/>
+            <JournalFileProxyList/>
+            <ResourceRelationList/>
+            <IsPartOfList/>
+          </Resources>
+          <Components>
+            <resourceInfo>
+              <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+                <resourceName xml:lang="fi">Silva Kiurun ajanilmausaineisto</resourceName>
+                <resourceName xml:lang="en">Silva Kiuru's Time Expressions Corpus</resourceName>
+                <description xml:lang="fi">
+                  Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.
+                </description>
+                <description xml:lang="en">
+                  This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.
+                </description>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-2017021609</identifier>
+              </identificationInfo>
+              <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+                <availability>available-unrestrictedUse</availability>
+                <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+                  <licence>underNegotiation</licence>
+                  <licensorOrganization ComponentId="clarin.eu:cr1:c_1361876010643">
+                    <role>licensor</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>firstname.surname@helsinki.fi</email>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </licensorOrganization>
+                  <distributionRightsHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010640">
+                    <role>distributionRightsHolder</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>firstname.surname@helsinki.fi</email>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </distributionRightsHolderOrganization>
+                </licenceInfo>
+                <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+                  <role>iprHolder</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">University of Helsinki</organizationName>
+                    <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>firstname.surname@helsinki.fi</email>
+                    </communicationInfo>
+                  </organizationInfo>
+                </iprHolderOrganization>
+              </distributionInfo>
+              <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+                <role>contactPerson</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="en">Siiroinen</surname>
+                  <givenName xml:lang="en">Mari</givenName>
+                  <sex>female</sex>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>mari.siiroinen@helsinki.fi</email>
+                    <country>Finland</country>
+                  </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <departmentName xml:lang="en">
+                        Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                      </departmentName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>miia.rajala@helsinki.fi</email>
+                        <url>http://www.helsinki.fi/fus/index.htm</url>
+                        <country>Finland</country>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
+                </personInfo>
+              </contactPerson>
+              <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+                <metadataCreationDate>2017-02-15</metadataCreationDate>
+                <metadataLanguageName>English</metadataLanguageName>
+                <metadataLanguageName>Finnish</metadataLanguageName>
+                <metadataLanguageId>en</metadataLanguageId>
+                <metadataLanguageId>fi</metadataLanguageId>
+                <metadataLastDateUpdated>2017-02-15</metadataLastDateUpdated>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="und">Bartis</surname>
+                    <givenName xml:lang="und">Imre</givenName>
+                    <sex>male</sex>
+                    <position>Project Coordinator</position>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>imre.bartis@helsinki.fi</email>
+                      <url>http://orcid.org/0000-0002-9455-8771</url>
+                      <city>Helsinki</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </personInfo>
+                </metadataCreator>
+              </metadataInfo>
+              <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
+                <resourceType>corpus</resourceType>
+                <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
+                  <corpusTextInfo ComponentId="clarin.eu:cr1:c_1355150532311">
+                    <mediaType>text</mediaType>
+                    <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                      <lingualityType>monolingual</lingualityType>
+                    </lingualityInfo>
+                    <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                      <languageId>fi</languageId>
+                      <languageName>Finnish</languageName>
+                    </languageInfo>
+                    <modalityInfo ComponentId="clarin.eu:cr1:c_1355150532318">
+                      <modalityType>writtenLanguage</modalityType>
+                    </modalityInfo>
+                    <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                      <size>1</size>
+                      <sizeUnit>other</sizeUnit>
+                    </sizeInfo>
+                    <textFormatInfo ComponentId="clarin.eu:cr1:c_1355150532320">
+                      <mimeType>application/msword</mimeType>
+                    </textFormatInfo>
+                  </corpusTextInfo>
+                </corpusMediaType>
+              </corpusInfo>
+            </resourceInfo>
+          </Components>
+        </CMD>
+      </metadata>
+    </record>
+  </ListRecords>
+</OAI-PMH>

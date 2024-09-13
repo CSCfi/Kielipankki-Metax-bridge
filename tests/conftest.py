@@ -264,7 +264,7 @@ def kielipankki_api_url():
     """
     The URL of the OAI-PMH API used in tests.
     """
-    return "https://kielipankki.fi/md_api/que?metadataPrefix=info&verb=ListRecords"
+    return "https://clarino.uib.no/oai?metadataPrefix=cmdi"
 
 
 @pytest.fixture
@@ -297,6 +297,69 @@ def mock_corpus_pid_list_from_metashare(
 
 
 @pytest.fixture
+def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
+    """
+    Mock a GET ListRecords to return XML with a single record.
+
+    :return: The corresponding metadata as a list of dicts, one dict per record
+    """
+    response_text = _get_file_as_string(
+        "tests/test_data/comedi_list_records_single.xml"
+    )
+    shared_request_mocker.get(kielipankki_api_url, text=response_text)
+    yield [
+        {
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+            "field_of_science": [
+                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
+            ],
+            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+            "title": {
+                "en": "Silva Kiuru's Time Expressions Corpus",
+                "fi": "Silva Kiurun ajanilmausaineisto",
+            },
+            "description": {
+                "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
+                "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
+            },
+            "modified": "2024-06-19T07:38:46Z",
+            "created": "2022-09-02T00:00:00Z",
+            "access_rights": {
+                "license": [
+                    {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
+                    }
+                ],
+                "access_type": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+                },
+            },
+            "actors": [
+                {
+                    "organization": None,
+                    "person": {
+                        "email": "imre.bartis@helsinki.fi",
+                        "name": "Imre Bartis",
+                    },
+                    "roles": ["creator"],
+                },
+                {
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+                    },
+                    "roles": ["curator"],
+                    "person": {
+                        "name": "Mari Siiroinen",
+                        "email": "mari.siiroinen@helsinki.fi",
+                    },
+                },
+            ],
+        }
+    ]
+
+
+@pytest.fixture
 def mock_metashare_get_single_record(
     shared_request_mocker, kielipankki_api_url, metashare_single_record_xml
 ):
@@ -313,7 +376,7 @@ def mock_metashare_get_single_record(
             "field_of_science": [
                 {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
             ],
-            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
+            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
             "title": {
                 "en": "Silva Kiuru's Time Expressions Corpus",
                 "fi": "Silva Kiurun ajanilmausaineisto",
@@ -322,8 +385,8 @@ def mock_metashare_get_single_record(
                 "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
                 "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
             },
-            "modified": "2017-02-15T00:00:00Z",
-            "created": "2017-02-15T00:00:00Z",
+            "modified": "2024-06-19T07:38:46Z",
+            "created": "2022-09-02T00:00:00Z",
             "access_rights": {
                 "license": [
                     {
