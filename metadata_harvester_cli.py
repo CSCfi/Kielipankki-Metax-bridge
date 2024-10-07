@@ -92,7 +92,8 @@ def _config_from_file(config_file):
 def full_harvest(config_file):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
-    :param log_file: log file where harvest dates are logged
+
+    CONFIG_FILE Configuration for the harvesting. See config/template.yml for example.
     """
     config = _config_from_file(config_file)
     metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
