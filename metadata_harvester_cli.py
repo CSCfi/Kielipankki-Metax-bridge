@@ -96,7 +96,7 @@ def full_harvest(config_file):
     CONFIG_FILE Configuration for the harvesting. See config/template.yml for example.
     """
     config = _config_from_file(config_file)
-    metashare_api = PMH_API("https://kielipankki.fi/md_api/que")
+    metashare_api = PMH_API("https://clarino.uib.no/oai")
     metax_api = MetaxAPI(
         base_url=config["metax_base_url"],
         catalog_id=config["metax_catalog_id"],

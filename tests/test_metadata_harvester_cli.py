@@ -149,7 +149,7 @@ def run_cli(basic_configuration):
 )
 def test_full_harvest_all_data_harvested_and_records_in_sync(
     mock_requests_post,
-    mock_metashare_get_single_record,
+    mock_list_records_single_record,
     caplog,
     run_cli,
 ):
@@ -169,7 +169,7 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
     assert mock_requests_post.request_history[3].method == "POST"
     assert (
         mock_requests_post.request_history[3].json()["persistent_identifier"]
-        == mock_metashare_get_single_record[0]["persistent_identifier"]
+        == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
     assert "Success, all records harvested" in caplog.text
@@ -184,7 +184,7 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
 )
 def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     mock_requests_put,
-    mock_metashare_get_single_record,
+    mock_list_records_single_record,
     caplog,
     run_cli,
 ):
@@ -215,7 +215,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     assert mock_requests_put.request_history[3].method == "PUT"
     assert (
         mock_requests_put.request_history[3].json()["persistent_identifier"]
-        == mock_metashare_get_single_record[0]["persistent_identifier"]
+        == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
     assert "Success, all records harvested" in caplog.text
@@ -230,7 +230,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
 )
 def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     mock_requests_post,
-    mock_metashare_get_single_record,
+    mock_list_records_single_record,
     caplog,
     run_cli,
 ):
@@ -251,7 +251,7 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     assert mock_requests_post.request_history[3].method == "POST"
     assert (
         mock_requests_post.request_history[3].json()["persistent_identifier"]
-        == mock_metashare_get_single_record[0]["persistent_identifier"]
+        == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
     assert "Success, records harvested since" in caplog.text
@@ -266,7 +266,7 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
 )
 def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sync(
     mock_requests_put,
-    mock_metashare_get_single_record,
+    mock_list_records_single_record,
     caplog,
     run_cli,
 ):
@@ -297,7 +297,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     assert mock_requests_put.request_history[3].method == "PUT"
     assert (
         mock_requests_put.request_history[3].json()["persistent_identifier"]
-        == mock_metashare_get_single_record[0]["persistent_identifier"]
+        == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
     assert "Success, records harvested since" in caplog.text
