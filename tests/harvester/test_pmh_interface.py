@@ -26,7 +26,6 @@ def test_fetch_records_without_last_harvest_date(
     pmh_api,
     shared_request_mocker,
     mock_list_records_single_record,
-    latest_harvest_timestamp,
 ):
     """
     Ensure that fetching records without a given start date produces the expected record
