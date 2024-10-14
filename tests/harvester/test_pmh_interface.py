@@ -6,13 +6,14 @@ def test_fetch_records_with_last_harvest_date(
     shared_request_mocker,
     mock_list_records_single_record,
     latest_harvest_timestamp,
+    kielipankki_datacatalog_id,
 ):
     """
     Ensure that fetching records from a given date produces the expected record and has
     used the given start date in the request.
     """
     records = [
-        record.to_dict()
+        record.to_dict(data_catalog=kielipankki_datacatalog_id)
         for record in pmh_api.fetch_records(from_timestamp=latest_harvest_timestamp)
     ]
     assert records == mock_list_records_single_record
@@ -26,12 +27,16 @@ def test_fetch_records_without_last_harvest_date(
     pmh_api,
     shared_request_mocker,
     mock_list_records_single_record,
+    kielipankki_datacatalog_id,
 ):
     """
     Ensure that fetching records without a given start date produces the expected record
     and has not used the "from" parameter in the request.
     """
-    records = [record.to_dict() for record in pmh_api.fetch_records()]
+    records = [
+        record.to_dict(data_catalog=kielipankki_datacatalog_id)
+        for record in pmh_api.fetch_records()
+    ]
     assert records == mock_list_records_single_record
     assert "from=" not in shared_request_mocker.last_request.url
 

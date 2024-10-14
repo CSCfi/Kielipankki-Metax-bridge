@@ -92,9 +92,9 @@ class MetaxAPI:
         """
         metax_pid = self.record_id(record.pid)
         if metax_pid:
-            self.update_record(metax_pid, record.to_dict())
+            self.update_record(metax_pid, record.to_dict(data_catalog=self.catalog_id))
         else:
-            self.create_record(record.to_dict())
+            self.create_record(record.to_dict(data_catalog=self.catalog_id))
 
     def delete_records_not_in(self, retained_records):
         """
