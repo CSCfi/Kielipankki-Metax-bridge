@@ -96,8 +96,8 @@ def full_harvest(config_file):
     CONFIG_FILE Configuration for the harvesting. See config/template.yml for example.
     """
     config = _config_from_file(config_file)
-    metashare_api = PMH_API("https://clarino.uib.no/oai")
-    metax_api = MetaxAPI(
+    source_api = PMH_API("https://clarino.uib.no/oai")
+    destination_api = MetaxAPI(
         base_url=config["metax_base_url"],
         catalog_id=config["metax_catalog_id"],
         api_token=config["metax_api_token"],
@@ -108,15 +108,15 @@ def full_harvest(config_file):
     harvested_date = last_harvest_date(config["harvester_log_file"])
     logger_harvester.info("Started")
 
-    for record in metashare_api.fetch_corpora(from_timestamp=harvested_date):
-        metax_api.send_record(record)
+    for record in source_api.fetch_corpora(from_timestamp=harvested_date):
+        destination_api.send_record(record)
 
     if harvested_date:
         logger_harvester.info("Success, records harvested since %s", harvested_date)
     else:
         logger_harvester.info("Success, all records harvested")
 
-    metax_api.delete_records_not_in(metashare_api.fetch_records())
+    destination_api.delete_records_not_in(source_api.fetch_records())
 
 
 if __name__ == "__main__":

@@ -9,9 +9,9 @@ def _get_file_as_lxml(filename):
         return etree.fromstring(infile.read())
 
 
-def test_get_title(basic_metashare_record):
+def test_get_title(basic_cmdi_record):
     """Testing that different language versions of "title" are mapped."""
-    result = basic_metashare_record.to_dict()["title"]
+    result = basic_cmdi_record.to_dict()["title"]
     expected_result = {
         "en": "Silva Kiuru's Time Expressions Corpus",
         "fi": "Silva Kiurun ajanilmausaineisto",
@@ -19,9 +19,9 @@ def test_get_title(basic_metashare_record):
     assert result == expected_result
 
 
-def test_get_description(basic_metashare_record):
+def test_get_description(basic_cmdi_record):
     """Testing that different language versions of "description" are mapped."""
-    result = basic_metashare_record.to_dict()["description"]
+    result = basic_cmdi_record.to_dict()["description"]
     expected_result = {
         "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
         "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
@@ -29,28 +29,28 @@ def test_get_description(basic_metashare_record):
     assert result == expected_result
 
 
-def test_pid(basic_metashare_record, dataset_pid):
+def test_pid(basic_cmdi_record, dataset_pid):
     """Check that the correct PID is returned."""
-    assert basic_metashare_record.pid == dataset_pid
+    assert basic_cmdi_record.pid == dataset_pid
 
 
-def test_get_modified_datetime(basic_metashare_record):
+def test_get_modified_datetime(basic_cmdi_record):
     """Check that the modified date is returned in correct format."""
-    result = basic_metashare_record.to_dict()["modified"]
+    result = basic_cmdi_record.to_dict()["modified"]
     expected_result = "2024-06-19T07:38:46Z"
     assert result == expected_result
 
 
-def test_get_created_datetime(basic_metashare_record):
+def test_get_created_datetime(basic_cmdi_record):
     """Check that the created date is returned in correct format."""
-    result = basic_metashare_record.to_dict()["created"]
+    result = basic_cmdi_record.to_dict()["created"]
     expected_result = "2022-09-02T00:00:00Z"
     assert result == expected_result
 
 
-def test_to_dict(basic_metashare_record, dataset_pid):
+def test_to_dict(basic_cmdi_record, dataset_pid):
     """Test that all relevant elements are mapped to a dictionary."""
-    result = basic_metashare_record.to_dict()
+    result = basic_cmdi_record.to_dict()
     expected_result = {
         "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
         "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
@@ -234,14 +234,14 @@ def test_check_pid_exists(missing_pid_record):
     assert not missing_pid_record.check_pid_exists()
 
 
-def test_get_resource_languages(basic_metashare_record):
+def test_get_resource_languages(basic_cmdi_record):
     """
     Verify that a single language from a record is returned in Metax-approved format.
 
     Metax espects a list of dicts, each dict describing one language. The only
     information required for each language is a lexvo url.
     """
-    assert basic_metashare_record._get_resource_languages() == [
+    assert basic_cmdi_record._get_resource_languages() == [
         {"url": "http://lexvo.org/id/iso639-3/fin"}
     ]
 
@@ -264,7 +264,7 @@ def test_get_resource_languages_with_multiple_languages():
     assert "http://lexvo.org/id/iso639-3/swe" in language_urls
 
 
-def test_get_actors(basic_metashare_record):
+def test_get_actors(basic_cmdi_record):
     """
     Check that all actor data is present in a Metax-compatible format for a basic
     record.
@@ -273,7 +273,7 @@ def test_get_actors(basic_metashare_record):
     having an organization as a distributionRightsHolder and organizations have not been
     implemented yet.
     """
-    actors = basic_metashare_record._get_actors()
+    actors = basic_cmdi_record._get_actors()
 
     assert len(actors) == 2
 

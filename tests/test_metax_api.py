@@ -201,13 +201,13 @@ def test_datacatalog_dataset_record_pids(mock_pids_in_datacatalog, metax_api):
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_record_not_found_in_datacatalog",
+    "mock_cmdi_record_not_found_in_datacatalog",
     "mock_requests_post",
 )
 def test_send_record(
     shared_request_mocker,
     metax_api,
-    basic_metashare_record,
+    basic_cmdi_record,
 ):
     """
     Check that creating one new metadata record works
@@ -217,24 +217,24 @@ def test_send_record(
     language codes) and then a new record is POSTed. We also check that the posted data
     corresponds to the record dict passed to the function.
     """
-    metax_api.send_record(basic_metashare_record)
+    metax_api.send_record(basic_cmdi_record)
 
     assert shared_request_mocker.call_count == 3
 
     expected_post_request = shared_request_mocker.request_history[2]
 
     assert expected_post_request.method == "POST"
-    assert expected_post_request.json() == basic_metashare_record.to_dict()
+    assert expected_post_request.json() == basic_cmdi_record.to_dict()
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_record_found_in_datacatalog",
+    "mock_cmdi_record_found_in_datacatalog",
     "mock_requests_put",
 )
 def test_send_data_to_metax_single_pre_existing_record(
     shared_request_mocker,
     metax_api,
-    basic_metashare_record,
+    basic_cmdi_record,
 ):
     """
     Check that creating one new metadata record works
@@ -244,22 +244,22 @@ def test_send_data_to_metax_single_pre_existing_record(
     language codes) and then a new record is PUT. We also check that the posted
     data corresponds to the record dict passed to the function.
     """
-    metax_api.send_record(basic_metashare_record)
+    metax_api.send_record(basic_cmdi_record)
 
     assert shared_request_mocker.call_count == 3
 
     expected_put_request = shared_request_mocker.request_history[2]
 
     assert expected_put_request.method == "PUT"
-    assert expected_put_request.json() == basic_metashare_record.to_dict()
+    assert expected_put_request.json() == basic_cmdi_record.to_dict()
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_record_found_in_datacatalog",
+    "mock_cmdi_record_found_in_datacatalog",
     "mock_pids_in_datacatalog",
 )
 def test_delete_records_not_in_smaller_set(
-    mock_delete_record, metax_api, basic_metashare_record
+    mock_delete_record, metax_api, basic_cmdi_record
 ):
     """
     Check that when there is one record to be removed, it is removed.
@@ -271,7 +271,7 @@ def test_delete_records_not_in_smaller_set(
     GET to determine the Metax ID for the one record to be removed
     DELETE to actually delete the record based on its Metax ID
     """
-    metax_api.delete_records_not_in([basic_metashare_record])
+    metax_api.delete_records_not_in([basic_cmdi_record])
     assert mock_delete_record.call_count == 3
     assert (
         sum(
@@ -282,29 +282,29 @@ def test_delete_records_not_in_smaller_set(
 
 
 @pytest.mark.usefixtures(
-    "mock_pids_in_datacatalog_matching_metashare",
+    "mock_pids_in_datacatalog_matching_cmdi",
 )
 def test_delete_records_not_in_equal_set(
-    mock_delete_record, metax_api, basic_metashare_record
+    mock_delete_record, metax_api, basic_cmdi_record
 ):
     """
     Check that no records are removed when all should still be present.
 
     This means that we expect to see only one request (the GET for records in
-    Metashare), and specifically no DELETE requests.
+    Comedi), and specifically no DELETE requests.
     """
-    metax_api.delete_records_not_in([basic_metashare_record])
+    metax_api.delete_records_not_in([basic_cmdi_record])
     assert mock_delete_record.call_count == 1
     assert mock_delete_record.request_history[0].method != "DELETE"
 
 
 @pytest.mark.usefixtures(
-    "mock_pids_in_datacatalog_matching_metashare",
+    "mock_pids_in_datacatalog_matching_cmdi",
 )
 def test_delete_records_larger_set(
     mock_delete_record,
     metax_api,
-    basic_metashare_record,
+    basic_cmdi_record,
     license_with_custom_url_record,
 ):
     """
@@ -314,8 +314,6 @@ def test_delete_records_larger_set(
     called with extra records for any reason, we want to be sure that it won't result in
     unwanted removals.
     """
-    metax_api.delete_records_not_in(
-        [basic_metashare_record, license_with_custom_url_record]
-    )
+    metax_api.delete_records_not_in([basic_cmdi_record, license_with_custom_url_record])
     assert mock_delete_record.call_count == 1
     assert mock_delete_record.request_history[0].method != "DELETE"

@@ -13,7 +13,7 @@ This tool works with Python 3.8 together with pip and virtualenv installed. The 
 
 ### Run the whole pipeline
 
-You can run the full havest process (fetch new records from Metashare, send them to Metax, and delete deleted records from Metax). This requires that you specify the path to the log file for logging timestamps for previous harvests and a configuration file that holds the API token for the Metax API. See `config/template.yml`.
+You can run the full havest process (fetch new records from Comedi, send them to Metax, and delete deleted records from Metax). This requires that you specify the path to the log file for logging timestamps for previous harvests and a configuration file that holds the API token for the Metax API. See `config/template.yml`.
 
 ```
 python metadata_harvester_cli.py config/config.yml
