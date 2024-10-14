@@ -211,9 +211,9 @@ class Actor:
         """
         Return the nameis of the organizaton in all supported and provided languages.
 
-        The element is mandatory in Metashare, so handling for missing key is not
-        needed, but there can be multiple language versions, each of which is sent to
-        Metax.
+        The element is mandatory in the profile we use, so handling for missing key is
+        not needed, but there can be multiple language versions, each of which is sent
+        to Metax.
         """
 
         languages = {}

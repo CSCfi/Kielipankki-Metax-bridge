@@ -142,9 +142,9 @@ def run_cli(basic_configuration):
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_record_not_found_in_datacatalog",
-    "mock_single_pid_list_from_metashare",
-    "mock_pids_in_datacatalog_matching_metashare",
+    "mock_cmdi_record_not_found_in_datacatalog",
+    "mock_single_pid_list_from_cmdi",
+    "mock_pids_in_datacatalog_matching_cmdi",
     "create_test_log_file_with_unsuccessful_harvest",
 )
 def test_full_harvest_all_data_harvested_and_records_in_sync(
@@ -176,9 +176,9 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
 
 
 @pytest.mark.usefixtures(
-    "mock_single_pid_list_from_metashare",
+    "mock_single_pid_list_from_cmdi",
     "mock_pids_in_datacatalog",
-    "mock_metashare_record_found_in_datacatalog",
+    "mock_cmdi_record_found_in_datacatalog",
     "mock_delete_record",
     "create_test_log_file_with_unsuccessful_harvest",
 )
@@ -199,11 +199,11 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     PID. This non-matching record is then DELETEd from Metax.
 
     Expected requests made during this test:
-    GET to fetch the records from Metashare (for adding new records)
+    GET to fetch the records from Comedi (for adding new records)
     GET to get the Metax PID (found)
     GET to determine which language codes are accepted by Metax
     PUT to to update the data in Metax
-    GET to fetch the records from Metashare (again, for deleted records this time)
+    GET to fetch the records from Comedi (again, for deleted records this time)
     GET to fetch the records from Metax (no overlap, so no further requests)
     """
     with caplog.at_level(logging.INFO):
@@ -222,10 +222,10 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
 
 
 @pytest.mark.usefixtures(
-    "mock_single_pid_list_from_metashare",
-    "mock_pids_in_datacatalog_matching_metashare",
+    "mock_single_pid_list_from_cmdi",
+    "mock_pids_in_datacatalog_matching_cmdi",
     "mock_delete_record",
-    "mock_metashare_record_not_found_in_datacatalog",
+    "mock_cmdi_record_not_found_in_datacatalog",
     "create_test_log_file",
 )
 def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
@@ -258,8 +258,8 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_record_found_in_datacatalog",
-    "mock_single_pid_list_from_metashare",
+    "mock_cmdi_record_found_in_datacatalog",
+    "mock_single_pid_list_from_cmdi",
     "mock_pids_in_datacatalog",
     "mock_delete_record",
     "create_test_log_file",
@@ -280,10 +280,10 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     PID. This non-matching record is then DELETEd from Metax.
 
     Expected requests made during this test:
-    GET to fetch the records from Metashare (for adding new records)
+    GET to fetch the records from Comedi (for adding new records)
     GET to get the Metax PID (found)
     PUT to to update the data in Metax
-    GET to fetch the records from Metashare (again, for deleted records this time)
+    GET to fetch the records from Comedi (again, for deleted records this time)
     GET to fetch the records from Metax
     GET to get the Metax PID for the record to be deleted
     DELETE to delete the record
@@ -304,9 +304,9 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_get_multiple_records",
+    "mock_cmdi_get_multiple_records",
     "mock_requests_post",
-    "mock_metashare_record_not_found_in_datacatalog",
+    "mock_cmdi_record_not_found_in_datacatalog",
     "create_test_log_file_with_unsuccessful_harvest",
 )
 def test_full_harvest_multiple_records(
@@ -317,14 +317,14 @@ def test_full_harvest_multiple_records(
     Check that multiple records are looped over properly.
 
     This is verified by checking that there is one POST request for each corpus in
-    Metashare and no unexpected requests happened.
+    Comedi and no unexpected requests happened.
 
     The requests we expect to see:
-    GET to fetch the records from Metashare (for adding new records)
+    GET to fetch the records from Comedi (for adding new records)
     For each corpus record (4 in test data, one record is not a corpus):
         GET to get Metax PID (not found)
         POST to send the data to Metax
-    GET to fetch the records from Metashare (again, for deleted records this time)
+    GET to fetch the records from Comedi (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
     result = run_cli()
@@ -342,9 +342,9 @@ def test_full_harvest_multiple_records(
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_get_multiple_records",
+    "mock_cmdi_get_multiple_records",
     "mock_requests_post",
-    "mock_metashare_record_not_found_in_datacatalog",
+    "mock_cmdi_record_not_found_in_datacatalog",
 )
 def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
     """
@@ -355,14 +355,14 @@ def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
     create one.
 
     This is verified by checking that there is one POST request for each corpus in
-    Metashare and no unexpected requests happened.
+    Comedi and no unexpected requests happened.
 
     The requests we expect to see:
-    GET to fetch the records from Metashare (for adding new records)
+    GET to fetch the records from Comedi (for adding new records)
     For each corpus record (4 in test data):
         GET to get Metax PID (not found)
         POST to send the data to Metax
-    GET to fetch the records from Metashare (again, for deleted records this time)
+    GET to fetch the records from Comedi (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
     result = run_cli()
@@ -380,8 +380,8 @@ def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
 
 
 @pytest.mark.usefixtures(
-    "mock_metashare_get_no_new_records",
-    "mock_metashare_record_not_found_in_datacatalog",
+    "mock_cmdi_get_no_new_records",
+    "mock_cmdi_record_not_found_in_datacatalog",
 )
 def test_full_harvest_no_new_records(
     shared_request_mocker,
@@ -393,8 +393,8 @@ def test_full_harvest_no_new_records(
 
 
     The requests we expect to see:
-    GET to fetch the records from Metashare (for adding new records, none found)
-    GET to fetch the records from Metashare (again, for deleted records this time, none
+    GET to fetch the records from Comedi (for adding new records, none found)
+    GET to fetch the records from Comedi (again, for deleted records this time, none
         found)
     GET to fetch the Metax PIDs for comparison (none found)
     """

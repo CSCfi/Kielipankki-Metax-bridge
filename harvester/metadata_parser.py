@@ -11,7 +11,7 @@ from harvester import language_validator
 class MSRecordParser:
     def __init__(self, xml):
         """
-        Create a Metashare record object.
+        Create a CMDI record object.
 
         :param xml: an lxml object, representing a CMDI record
         """
@@ -242,7 +242,7 @@ class MSRecordParser:
         """
         Return the languages in the resource as a list of dicts containing lexvo urls.
 
-        The input data from Metashare can contain both short 2-letter language codes
+        The input data from Comedi can contain both short 2-letter language codes
         (e.g. "fi") and the long 3-letter ones (e.g. "fin"), but Metax only accepts
         Lexvo URIs in form http://lexvo.org/id/iso639-3/LLL or similar for ISO 639-5.
         Here LLL is the three-letter language code from ISO 639-3. This requires
