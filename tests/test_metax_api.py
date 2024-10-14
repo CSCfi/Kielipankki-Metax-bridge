@@ -205,9 +205,7 @@ def test_datacatalog_dataset_record_pids(mock_pids_in_datacatalog, metax_api):
     "mock_requests_post",
 )
 def test_send_record(
-    shared_request_mocker,
-    metax_api,
-    basic_cmdi_record,
+    shared_request_mocker, metax_api, basic_cmdi_record, kielipankki_datacatalog_id
 ):
     """
     Check that creating one new metadata record works
@@ -224,7 +222,9 @@ def test_send_record(
     expected_post_request = shared_request_mocker.request_history[2]
 
     assert expected_post_request.method == "POST"
-    assert expected_post_request.json() == basic_cmdi_record.to_dict()
+    assert expected_post_request.json() == basic_cmdi_record.to_dict(
+        data_catalog=kielipankki_datacatalog_id
+    )
 
 
 @pytest.mark.usefixtures(
@@ -232,9 +232,7 @@ def test_send_record(
     "mock_requests_put",
 )
 def test_send_data_to_metax_single_pre_existing_record(
-    shared_request_mocker,
-    metax_api,
-    basic_cmdi_record,
+    shared_request_mocker, metax_api, basic_cmdi_record, kielipankki_datacatalog_id
 ):
     """
     Check that creating one new metadata record works
@@ -251,7 +249,9 @@ def test_send_data_to_metax_single_pre_existing_record(
     expected_put_request = shared_request_mocker.request_history[2]
 
     assert expected_put_request.method == "PUT"
-    assert expected_put_request.json() == basic_cmdi_record.to_dict()
+    assert expected_put_request.json() == basic_cmdi_record.to_dict(
+        data_catalog=kielipankki_datacatalog_id
+    )
 
 
 @pytest.mark.usefixtures(

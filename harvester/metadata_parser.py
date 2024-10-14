@@ -310,12 +310,14 @@ class MSRecordParser:
 
         return [actor.to_metax_dict() for actor in actors]
 
-    def to_dict(self):
+    def to_dict(self, data_catalog):
         """
         Converts text and dictionaries to Metax compliant dictionary.
+
+        :data_catalog: Metax data catalog to which this record will be sent
         """
         return {
-            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "data_catalog": data_catalog,
             "language": self._get_resource_languages(),
             "field_of_science": [
                 {
