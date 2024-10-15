@@ -75,11 +75,11 @@
               <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
                 <role>contactPerson</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                  <surname xml:lang="en">Siiroinen</surname>
-                  <givenName xml:lang="en">Mari</givenName>
+                  <surname xml:lang="en">Kontakti</surname>
+                  <givenName xml:lang="en">Kiia</givenName>
                   <sex>female</sex>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>mari.siiroinen@helsinki.fi</email>
+                    <email>kiia@example.com</email>
                     <country>Finland</country>
                   </communicationInfo>
                   <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
@@ -90,7 +90,7 @@
                         Department of Finnish, Finno-Ugrian and Scandinavian Studies
                       </departmentName>
                       <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                        <email>miia.rajala@helsinki.fi</email>
+                        <email>kiia@example.com</email>
                         <url>http://www.helsinki.fi/fus/index.htm</url>
                         <country>Finland</country>
                       </communicationInfo>
@@ -108,13 +108,13 @@
                 <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
                   <role>metadataCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="und">Bartis</surname>
-                    <givenName xml:lang="und">Imre</givenName>
+                    <surname xml:lang="und">Metadataaja</surname>
+                    <givenName xml:lang="und">Miina</givenName>
                     <sex>male</sex>
                     <position>Project Coordinator</position>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>imre.bartis@helsinki.fi</email>
-                      <url>http://orcid.org/0000-0002-9455-8771</url>
+                      <email>miina@example.com</email>
+                      <url>http://orcid.org/0000-0000-0000-0000</url>
                       <city>Helsinki</city>
                       <country>Finland</country>
                     </communicationInfo>
@@ -205,11 +205,11 @@
                   <licensorPerson ComponentId="clarin.eu:cr1:c_1352813745465">
                     <role>licensor</role>
                     <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                      <surname xml:lang="en">Kiili</surname>
-                      <givenName xml:lang="en">Carita</givenName>
+                      <surname xml:lang="en">Lisensoija</surname>
+                      <givenName xml:lang="en">Lilli</givenName>
                       <sex>female</sex>
                       <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                        <email>carita.kiili@jyu.fi</email>
+                        <email>lilli@example.com</email>
                       </communicationInfo>
                       <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                         <role>affiliation</role>
@@ -232,11 +232,11 @@
                   <distributionRightsHolderPerson ComponentId="clarin.eu:cr1:c_1352813745466">
                     <role>distributionRightsHolder</role>
                     <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                      <surname xml:lang="en">Kiili</surname>
-                      <givenName xml:lang="en">Carita</givenName>
+                      <surname xml:lang="en">Lisensoija</surname>
+                      <givenName xml:lang="en">Lilli</givenName>
                       <sex>female</sex>
                       <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                        <email>carita.kiili@jyu.fi</email>
+                        <email>lilli@example.com</email>
                       </communicationInfo>
                       <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                         <role>affiliation</role>
@@ -260,11 +260,11 @@
                 <iprHolderPerson ComponentId="clarin.eu:cr1:c_1352813745463">
                   <role>iprHolder</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="en">Kiili</surname>
-                    <givenName xml:lang="en">Carita</givenName>
+                    <surname xml:lang="en">Lisensoija</surname>
+                    <givenName xml:lang="en">Lilli</givenName>
                     <sex>female</sex>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>carita.kiili@jyu.fi</email>
+                      <email>lilli@example.com</email>
                     </communicationInfo>
                     <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                       <role>affiliation</role>
@@ -288,11 +288,11 @@
               <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
                 <role>contactPerson</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                  <surname xml:lang="en">Kiili</surname>
-                  <givenName xml:lang="en">Carita</givenName>
+                  <surname xml:lang="en">Lisensoija</surname>
+                  <givenName xml:lang="en">Lilli</givenName>
                   <sex>female</sex>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>carita.kiili@jyu.fi</email>
+                    <email>lilli@example.com</email>
                   </communicationInfo>
                   <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                     <role>affiliation</role>
@@ -320,12 +320,12 @@
                 <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
                   <role>metadataCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="en">Bartis</surname>
-                    <givenName xml:lang="en">Imre</givenName>
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Miina</givenName>
                     <sex>male</sex>
                     <position>Project Coordinator</position>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>imre.bartis@helsinki.fi</email>
+                      <email>miina@example.com</email>
                       <url>http://orcid.org/0000-0002-9455-8771</url>
                       <city>Helsinki</city>
                       <country>Finland</country>
@@ -443,11 +443,11 @@
                   <licensorPerson ComponentId="clarin.eu:cr1:c_1352813745465">
                     <role>licensor</role>
                     <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                      <surname xml:lang="fi">Huovilainen</surname>
-                      <givenName xml:lang="fi">Tatu</givenName>
+                      <surname xml:lang="fi">Lisensoija</surname>
+                      <givenName xml:lang="fi">Lauri</givenName>
                       <sex>male</sex>
                       <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                        <email>tatu.huovilainen@helsinki.fi</email>
+                        <email>lauri@example.com</email>
                       </communicationInfo>
                       <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                         <role>affiliation</role>
@@ -475,11 +475,11 @@
                 <iprHolderPerson ComponentId="clarin.eu:cr1:c_1352813745463">
                   <role>iprHolder</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="fi">Huovilainen</surname>
-                    <givenName xml:lang="fi">Tatu</givenName>
+                    <surname xml:lang="fi">Lisensoija</surname>
+                    <givenName xml:lang="fi">Lauri</givenName>
                     <sex>male</sex>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>tatu.huovilainen@helsinki.fi</email>
+                      <email>lauri@example.com</email>
                     </communicationInfo>
                     <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                       <role>affiliation</role>
@@ -515,11 +515,11 @@
                 <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
                   <role>metadataCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="en">Dieckmann</surname>
-                    <givenName xml:lang="en">Ute</givenName>
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Miina</givenName>
                     <sex>unknown</sex>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>ute.dieckmann@helsinki.fi</email>
+                      <email>miina@example.com</email>
                     </communicationInfo>
                     <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                       <role>affiliation</role>
@@ -542,10 +542,10 @@
                 <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
                   <role>metadataCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="en">Westerlund</surname>
-                    <givenName xml:lang="en">Hanna</givenName>
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Mara</givenName>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>hanna.westerlund@helsinki.fi</email>
+                      <email>mara@example.com</email>
                     </communicationInfo>
                     <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                       <role>affiliation</role>
@@ -596,11 +596,11 @@
                 <resourceCreatorPerson ComponentId="clarin.eu:cr1:c_1355150532304">
                   <role>resourceCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="fi">Huovilainen</surname>
-                    <givenName xml:lang="fi">Tatu</givenName>
+                    <surname xml:lang="fi">Metadataatori</surname>
+                    <givenName xml:lang="fi">Miina</givenName>
                     <sex>male</sex>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>tatu.huovilainen@helsinki.fi</email>
+                      <email>miina@example.com</email>
                     </communicationInfo>
                     <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                       <role>affiliation</role>
@@ -767,11 +767,11 @@
                 <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
                   <role>metadataCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="en">Pöyhönen</surname>
-                    <givenName xml:lang="en">Saara</givenName>
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Meeri</givenName>
                     <sex>female</sex>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>saara.poyhonen@helsinki.fi</email>
+                      <email>meeri@example.com</email>
                     </communicationInfo>
                     <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                       <role>affiliation</role>
@@ -924,11 +924,11 @@
                 <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
                   <role>metadataCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="en">Dieckmann</surname>
-                    <givenName xml:lang="en">Ute</givenName>
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Miina</givenName>
                     <sex>unknown</sex>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>ute.dieckmann@helsinki.fi</email>
+                      <email>miina@example.com</email>
                     </communicationInfo>
                     <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                       <role>affiliation</role>
@@ -951,8 +951,8 @@
                 <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
                   <role>metadataCreator</role>
                   <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                    <surname xml:lang="en">Jauhiainen</surname>
-                    <givenName xml:lang="en">Tommi</givenName>
+                    <surname xml:lang="en">Miska</surname>
+                    <givenName xml:lang="en">Metadataaja</givenName>
                     <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
                       <email>firstname.lastname@helsinki.fi</email>
                     </communicationInfo>

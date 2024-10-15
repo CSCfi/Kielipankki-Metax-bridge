@@ -335,8 +335,8 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
                 {
                     "organization": None,
                     "person": {
-                        "email": "imre.bartis@helsinki.fi",
-                        "name": "Imre Bartis",
+                        "email": "miina@example.com",
+                        "name": "Miina Metadataaja",
                     },
                     "roles": ["creator"],
                 },
@@ -346,8 +346,8 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
                     },
                     "roles": ["curator"],
                     "person": {
-                        "name": "Mari Siiroinen",
-                        "email": "mari.siiroinen@helsinki.fi",
+                        "name": "Kiia Kontakti",
+                        "email": "kiia@example.com",
                     },
                 },
             ],

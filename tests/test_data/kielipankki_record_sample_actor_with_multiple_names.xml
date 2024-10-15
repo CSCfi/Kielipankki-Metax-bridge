@@ -52,11 +52,11 @@
               <licensorPerson ComponentId="clarin.eu:cr1:c_1352813745465">
                 <role>licensor</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                  <surname xml:lang="fi">Huovilainen</surname>
-                  <givenName xml:lang="fi">Tatu</givenName>
+                  <surname xml:lang="fi">Lisensoija</surname>
+                  <givenName xml:lang="fi">Lauri</givenName>
                   <sex>male</sex>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>tatu.huovilainen@helsinki.fi</email>
+                    <email>lauri@example.com</email>
                   </communicationInfo>
                   <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                     <role>affiliation</role>
@@ -124,11 +124,11 @@
             <resourceCreatorPerson ComponentId="clarin.eu:cr1:c_1355150532304">
               <role>resourceCreator</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="fi">Huovilainen</surname>
-                <givenName xml:lang="fi">Tatu</givenName>
+                <surname xml:lang="fi">Lisensoija</surname>
+                <givenName xml:lang="fi">Lauri</givenName>
                 <sex>male</sex>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>tatu.huovilainen@helsinki.fi</email>
+                  <email>lauri@example.com</email>
                 </communicationInfo>
                 <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                   <role>affiliation</role>

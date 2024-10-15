@@ -84,15 +84,15 @@ def test_to_dict(basic_cmdi_record, dataset_pid, kielipankki_datacatalog_id):
         },
         "actors": [
             {
-                "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
+                "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
                 "roles": ["creator"],
                 "organization": None,
             },
             {
                 "roles": ["curator"],
                 "person": {
-                    "name": "Mari Siiroinen",
-                    "email": "mari.siiroinen@helsinki.fi",
+                    "name": "Kiia Kontakti",
+                    "email": "kiia@example.com",
                 },
                 "organization": {
                     "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
@@ -284,14 +284,14 @@ def test_get_actors(basic_cmdi_record):
     assert len(actors) == 2
 
     assert {
-        "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
+        "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
         "roles": ["creator"],
         "organization": None,
     } in actors
 
     assert {
         "roles": ["curator"],
-        "person": {"name": "Mari Siiroinen", "email": "mari.siiroinen@helsinki.fi"},
+        "person": {"name": "Kiia Kontakti", "email": "kiia@example.com"},
         "organization": {
             "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
         },

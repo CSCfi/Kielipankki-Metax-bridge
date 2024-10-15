@@ -117,12 +117,12 @@
             <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
               <role>metadataCreator</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="en">Bartis</surname>
-                <givenName xml:lang="en">Imre</givenName>
+                <surname xml:lang="en">Metadataaja</surname>
+                <givenName xml:lang="en">Miina</givenName>
                 <sex>male</sex>
                 <position>Project Coordinator</position>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>imre.bartis@helsinki.fi</email>
+                  <email>miina@example.com</email>
                   <url>http://orcid.org/0000-0002-9455-8771</url>
                   <city>Helsinki</city>
                   <country>Finland</country>
@@ -148,11 +148,11 @@
             <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
               <role>metadataCreator</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="en">Dieckmann</surname>
-                <givenName xml:lang="en">Ute</givenName>
+                <surname xml:lang="en">Metadataaja</surname>
+                <givenName xml:lang="en">Miina</givenName>
                 <sex>unknown</sex>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>ute.dieckmann@helsinki.fi</email>
+                  <email>miina@example.com</email>
                 </communicationInfo>
                 ??? from here until ???END lines may have been inserted/deleted
                 <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">

@@ -43,11 +43,11 @@
               <licensorPerson ComponentId="clarin.eu:cr1:c_1352813745465">
                 <role>licensor</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                  <surname xml:lang="en">Mäkisalo</surname>
-                  <givenName xml:lang="en">Jukka</givenName>
+                  <surname xml:lang="en">Lisensoija</surname>
+                  <givenName xml:lang="en">Lauri</givenName>
                   <sex>male</sex>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>jukka.makisalo@uef.fi</email>
+                    <email>lauri@example.com</email>
                   </communicationInfo>
                   <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                     <role>affiliation</role>
@@ -68,11 +68,11 @@
               <distributionRightsHolderPerson ComponentId="clarin.eu:cr1:c_1352813745466">
                 <role>distributionRightsHolder</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                  <surname xml:lang="en">Mäkisalo</surname>
-                  <givenName xml:lang="en">Jukka</givenName>
+                  <surname xml:lang="en">Lisensoija</surname>
+                  <givenName xml:lang="en">Lauri</givenName>
                   <sex>male</sex>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>jukka.makisalo@uef.fi</email>
+                    <email>lauri@example.com</email>
                   </communicationInfo>
                   <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                     <role>affiliation</role>
@@ -94,11 +94,11 @@
             <iprHolderPerson ComponentId="clarin.eu:cr1:c_1352813745463">
               <role>iprHolder</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="en">Mäkisalo</surname>
-                <givenName xml:lang="en">Jukka</givenName>
+                <surname xml:lang="en">Lisensoija</surname>
+                <givenName xml:lang="en">Lauri</givenName>
                 <sex>male</sex>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>jukka.makisalo@uef.fi</email>
+                  <email>lauri@example.com</email>
                 </communicationInfo>
                 <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                   <role>affiliation</role>
@@ -120,11 +120,11 @@
           <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
             <role>contactPerson</role>
             <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-              <surname xml:lang="en">Mäkisalo</surname>
-              <givenName xml:lang="en">Jukka</givenName>
+              <surname xml:lang="en">Kontakti</surname>
+              <givenName xml:lang="en">Kiia</givenName>
               <sex>male</sex>
               <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                <email>jukka.makisalo@uef.fi</email>
+                <email>kiia@example.com</email>
               </communicationInfo>
               <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                 <role>affiliation</role>
@@ -152,13 +152,13 @@
             <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
               <role>metadataCreator</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="en">Bartis</surname>
-                <givenName xml:lang="en">Imre</givenName>
+                <surname xml:lang="en">Metadataaja</surname>
+                <givenName xml:lang="en">Miina</givenName>
                 <sex>male</sex>
                 <position>Project Coordinator</position>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>imre.bartis@helsinki.fi</email>
-                  <url>http://orcid.org/0000-0002-9455-8771</url>
+                  <email>miina@example.com</email>
+                  <url>http://orcid.org/0000-0000-0000-0000</url>
                   <city>Helsinki</city>
                   <country>Finland</country>
                 </communicationInfo>
