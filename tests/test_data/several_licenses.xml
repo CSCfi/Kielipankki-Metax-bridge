@@ -130,12 +130,12 @@
             <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
               <role>metadataCreator</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="en">Lennes</surname>
-                <givenName xml:lang="en">Mietta</givenName>
+                <surname xml:lang="en">Metadataaja</surname>
+                <givenName xml:lang="en">Miina</givenName>
                 <sex>female</sex>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>mietta.lennes@helsinki.fi</email>
-                  <url>http://orcid.org/0000-0003-4735-3017</url>
+                  <email>miina@example.com</email>
+                  <url>http://orcid.org/0000-0000-0000-0000</url>
                   <city>Helsinki</city>
                   <country>Finland</country>
                 </communicationInfo>

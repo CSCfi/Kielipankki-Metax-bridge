@@ -56,11 +56,11 @@ License details: http://urn.fi/urn:nbn:fi:lb-2016042201
             <metadataInfo xmlns="http://www.ilsp.gr/META-XMLSchema">
                 <metadataCreationDate>2020-04-27</metadataCreationDate>
                 <metadataCreator>
-                    <surname lang="en">Dieckmann</surname>
-                    <givenName lang="en">Ute</givenName>
+                    <surname lang="en">Metadataaja</surname>
+                    <givenName lang="en">Miina</givenName>
                     <sex>unknown</sex>
                     <communicationInfo>
-                        <email>ute.dieckmann@helsinki.fi</email>
+                        <email>miina@example.com</email>
                     </communicationInfo>
                     <affiliation>
                         <organizationName lang="en">FIN-CLARIN</organizationName>
@@ -77,11 +77,11 @@ License details: http://urn.fi/urn:nbn:fi:lb-2016042201
                     </affiliation>
                 </metadataCreator>
                 <metadataCreator>
-                    <surname lang="en">Siiroinen</surname>
-                    <givenName lang="en">Mari</givenName>
+                    <surname lang="en">Kontakti</surname>
+                    <givenName lang="en">Kiia</givenName>
                     <sex>female</sex>
                     <communicationInfo>
-                        <email>mari.siiroinen@helsinki.fi</email>
+                        <email>kiia@example.com</email>
                     </communicationInfo>
                     <affiliation>
                         <organizationName lang="en">University of Helsinki</organizationName>

@@ -112,8 +112,8 @@
             <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
               <role>metadataCreator</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="en">Milla</surname>
-                <givenName xml:lang="en">Metadataaja</givenName>
+                <surname xml:lang="en">Metadataaja</surname>
+                <givenName xml:lang="en">Milla</givenName>
                 <sex>female</sex>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
                   <email>milla@example.com</email>
