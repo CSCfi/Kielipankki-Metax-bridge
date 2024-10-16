@@ -379,3 +379,21 @@ def test_multiple_names_for_actor():
     actors = record._get_actors()
     assert len(actors) == 1
     assert actors[0]["person"]["name"] == "Carl Gustaf Bernadotte"
+
+
+def test_publisher_person():
+    """
+    Check that personal information for a publisher is correctly extracted.
+
+    This is not properly covered with the other test data, as it is more common that the
+    publisher is an organization.
+    """
+    record = MSRecordParser(
+        _get_file_as_lxml(
+            "tests/test_data/kielipankki_record_sample_with_publisher_person.xml"
+        )
+    )
+    actors = record.to_dict(data_catalog="catalog_id")["actors"]
+    assert len(actors) == 1
+    assert "publisher" in actors[0]["roles"]
+    assert actors[0]["person"]["name"] == "Late Lisensoija"
