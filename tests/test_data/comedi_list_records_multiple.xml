@@ -1,0 +1,1057 @@
+<OAI-PMH xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2024-09-12T11:17:58Z</responseDate>
+  <request verb="ListRecords" metadataPrefix="cmdi">https://clarino.uib.no/oai</request>
+  <ListRecords>
+    <record xmlns="http://www.openarchives.org/OAI/2.0/">
+      <header>
+        <identifier>oai:clarino.uib.no:lb-2017021609</identifier>
+        <datestamp>2024-06-19T07:38:46Z</datestamp>
+        <setSpec>FIN-CLARIN</setSpec>
+      </header>
+      <metadata>
+        <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+          <Header>
+            <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+            <MdCreationDate>2022-09-02</MdCreationDate>
+            <MdSelfLink>urn:nbn:fi:lb-2017021609</MdSelfLink>
+            <MdProfile>clarin.eu:cr1:p_1361876010571</MdProfile>
+          </Header>
+          <Resources>
+            <ResourceProxyList/>
+            <JournalFileProxyList/>
+            <ResourceRelationList/>
+            <IsPartOfList/>
+          </Resources>
+          <Components>
+            <resourceInfo>
+              <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+                <resourceName xml:lang="fi">Silva Kiurun ajanilmausaineisto</resourceName>
+                <resourceName xml:lang="en">Silva Kiuru's Time Expressions Corpus</resourceName>
+                <description xml:lang="fi">
+                  Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.
+                </description>
+                <description xml:lang="en">
+                  This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.
+                </description>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-2017021609</identifier>
+              </identificationInfo>
+              <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+                <availability>available-unrestrictedUse</availability>
+                <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+                  <licence>underNegotiation</licence>
+                  <licensorOrganization ComponentId="clarin.eu:cr1:c_1361876010643">
+                    <role>licensor</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>firstname.surname@helsinki.fi</email>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </licensorOrganization>
+                  <distributionRightsHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010640">
+                    <role>distributionRightsHolder</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>firstname.surname@helsinki.fi</email>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </distributionRightsHolderOrganization>
+                </licenceInfo>
+                <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+                  <role>iprHolder</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">University of Helsinki</organizationName>
+                    <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>firstname.surname@helsinki.fi</email>
+                    </communicationInfo>
+                  </organizationInfo>
+                </iprHolderOrganization>
+              </distributionInfo>
+              <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+                <role>contactPerson</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="en">Kontakti</surname>
+                  <givenName xml:lang="en">Kiia</givenName>
+                  <sex>female</sex>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>kiia@example.com</email>
+                    <country>Finland</country>
+                  </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <departmentName xml:lang="en">
+                        Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                      </departmentName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>kiia@example.com</email>
+                        <url>http://www.helsinki.fi/fus/index.htm</url>
+                        <country>Finland</country>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
+                </personInfo>
+              </contactPerson>
+              <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+                <metadataCreationDate>2017-02-15</metadataCreationDate>
+                <metadataLanguageName>English</metadataLanguageName>
+                <metadataLanguageName>Finnish</metadataLanguageName>
+                <metadataLanguageId>en</metadataLanguageId>
+                <metadataLanguageId>fi</metadataLanguageId>
+                <metadataLastDateUpdated>2017-02-15</metadataLastDateUpdated>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="und">Metadataaja</surname>
+                    <givenName xml:lang="und">Miina</givenName>
+                    <sex>male</sex>
+                    <position>Project Coordinator</position>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>miina@example.com</email>
+                      <url>http://orcid.org/0000-0000-0000-0000</url>
+                      <city>Helsinki</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </personInfo>
+                </metadataCreator>
+              </metadataInfo>
+              <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
+                <resourceType>corpus</resourceType>
+                <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
+                  <corpusTextInfo ComponentId="clarin.eu:cr1:c_1355150532311">
+                    <mediaType>text</mediaType>
+                    <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                      <lingualityType>monolingual</lingualityType>
+                    </lingualityInfo>
+                    <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                      <languageId>fi</languageId>
+                      <languageName>Finnish</languageName>
+                    </languageInfo>
+                    <modalityInfo ComponentId="clarin.eu:cr1:c_1355150532318">
+                      <modalityType>writtenLanguage</modalityType>
+                    </modalityInfo>
+                    <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                      <size>1</size>
+                      <sizeUnit>other</sizeUnit>
+                    </sizeInfo>
+                    <textFormatInfo ComponentId="clarin.eu:cr1:c_1355150532320">
+                      <mimeType>application/msword</mimeType>
+                    </textFormatInfo>
+                  </corpusTextInfo>
+                </corpusMediaType>
+              </corpusInfo>
+            </resourceInfo>
+          </Components>
+        </CMD>
+      </metadata>
+    </record>
+    <record xmlns="http://www.openarchives.org/OAI/2.0/">
+      <header>
+        <identifier>oai:clarino.uib.no:lb-20140730196</identifier>
+        <datestamp>2024-06-19T07:38:50Z</datestamp>
+        <setSpec>FIN-CLARIN</setSpec>
+      </header>
+      <metadata>
+        <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+          <Header>
+            <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+            <MdCreationDate>2022-09-02</MdCreationDate>
+            <MdSelfLink>urn:nbn:fi:lb-20140730196</MdSelfLink>
+            <MdProfile>clarin.eu:cr1:p_1361876010571</MdProfile>
+          </Header>
+          <Resources>
+            <ResourceProxyList>
+              <ResourceProxy id="_1">
+                <ResourceType mimetype="">Resource</ResourceType>
+                <ResourceRef>http://www.jyu.fi/coalition/</ResourceRef>
+              </ResourceProxy>
+              <ResourceProxy id="_2">
+                <ResourceType mimetype="">Resource</ResourceType>
+                <ResourceRef>
+                  https://kitwiki.csc.fi/twiki/bin/view/FinCLARIN/FinClarinSiteJY
+                </ResourceRef>
+              </ResourceProxy>
+            </ResourceProxyList>
+            <JournalFileProxyList/>
+            <ResourceRelationList/>
+            <IsPartOfList/>
+          </Resources>
+          <Components>
+            <resourceInfo>
+              <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+                <resourceName xml:lang="en">
+                  Argumentation and Argument Visualisation in Promoting Strategic Reading and Decision-making
+                </resourceName>
+                <description xml:lang="en">
+                  Corpus of upper secondary school students' think-aloud performances when searching the Internet for information; recordings and transcriptions; text files.
+                </description>
+                <url>http://www.jyu.fi/coalition/</url>
+                <url>
+                  https://kitwiki.csc.fi/twiki/bin/view/FinCLARIN/FinClarinSiteJY
+                </url>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-20140730196</identifier>
+              </identificationInfo>
+              <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+                <availability>available-restrictedUse</availability>
+                <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+                  <licence>underNegotiation</licence>
+                  <licensorPerson ComponentId="clarin.eu:cr1:c_1352813745465">
+                    <role>licensor</role>
+                    <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                      <surname xml:lang="en">Lisensoija</surname>
+                      <givenName xml:lang="en">Lilli</givenName>
+                      <sex>female</sex>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>lilli@example.com</email>
+                      </communicationInfo>
+                      <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                        <role>affiliation</role>
+                        <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                          <organizationName xml:lang="fi">Jyväskylän yliopisto</organizationName>
+                          <organizationName xml:lang="en">University of Jyväskylä</organizationName>
+                          <organizationShortName xml:lang="en">JYU</organizationShortName>
+                          <departmentName xml:lang="fi">Kielten laitos</departmentName>
+                          <departmentName xml:lang="en">Department of Languages</departmentName>
+                          <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                            <email>registry@jyu.fi</email>
+                            <url>https://www.jyu.fi/en</url>
+                            <city>Jyväskylä</city>
+                            <country>Finland</country>
+                          </communicationInfo>
+                        </organizationInfo>
+                      </affiliation>
+                    </personInfo>
+                  </licensorPerson>
+                  <distributionRightsHolderPerson ComponentId="clarin.eu:cr1:c_1352813745466">
+                    <role>distributionRightsHolder</role>
+                    <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                      <surname xml:lang="en">Lisensoija</surname>
+                      <givenName xml:lang="en">Lilli</givenName>
+                      <sex>female</sex>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>lilli@example.com</email>
+                      </communicationInfo>
+                      <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                        <role>affiliation</role>
+                        <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                          <organizationName xml:lang="fi">Jyväskylän yliopisto</organizationName>
+                          <organizationName xml:lang="en">University of Jyväskylä</organizationName>
+                          <organizationShortName xml:lang="en">JYU</organizationShortName>
+                          <departmentName xml:lang="fi">Kielten laitos</departmentName>
+                          <departmentName xml:lang="en">Department of Languages</departmentName>
+                          <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                            <email>registry@jyu.fi</email>
+                            <url>https://www.jyu.fi/en</url>
+                            <city>Jyväskylä</city>
+                            <country>Finland</country>
+                          </communicationInfo>
+                        </organizationInfo>
+                      </affiliation>
+                    </personInfo>
+                  </distributionRightsHolderPerson>
+                </licenceInfo>
+                <iprHolderPerson ComponentId="clarin.eu:cr1:c_1352813745463">
+                  <role>iprHolder</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="en">Lisensoija</surname>
+                    <givenName xml:lang="en">Lilli</givenName>
+                    <sex>female</sex>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>lilli@example.com</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="fi">Jyväskylän yliopisto</organizationName>
+                        <organizationName xml:lang="en">University of Jyväskylä</organizationName>
+                        <organizationShortName xml:lang="en">JYU</organizationShortName>
+                        <departmentName xml:lang="fi">Kielten laitos</departmentName>
+                        <departmentName xml:lang="en">Department of Languages</departmentName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>registry@jyu.fi</email>
+                          <url>https://www.jyu.fi/en</url>
+                          <city>Jyväskylä</city>
+                          <country>Finland</country>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </iprHolderPerson>
+              </distributionInfo>
+              <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+                <role>contactPerson</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="en">Lisensoija</surname>
+                  <givenName xml:lang="en">Lilli</givenName>
+                  <sex>female</sex>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>lilli@example.com</email>
+                  </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="fi">Jyväskylän yliopisto</organizationName>
+                      <organizationName xml:lang="en">University of Jyväskylä</organizationName>
+                      <organizationShortName xml:lang="en">JYU</organizationShortName>
+                      <departmentName xml:lang="fi">Kielten laitos</departmentName>
+                      <departmentName xml:lang="en">Department of Languages</departmentName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>registry@jyu.fi</email>
+                        <url>https://www.jyu.fi/en</url>
+                        <city>Jyväskylä</city>
+                        <country>Finland</country>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
+                </personInfo>
+              </contactPerson>
+              <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+                <metadataCreationDate>2014-07-30</metadataCreationDate>
+                <metadataLanguageName>English</metadataLanguageName>
+                <metadataLanguageId>en</metadataLanguageId>
+                <metadataLastDateUpdated>2014-07-30</metadataLastDateUpdated>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Miina</givenName>
+                    <sex>male</sex>
+                    <position>Project Coordinator</position>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>miina@example.com</email>
+                      <url>http://orcid.org/0000-0002-9455-8771</url>
+                      <city>Helsinki</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                        <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                        <departmentName xml:lang="en">University of Helsinki</departmentName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>finclarin@helsinki.fi</email>
+                          <url>http://www.helsinki.fi/fin-clarin</url>
+                          <address>PO Box 24 (Unioninkatu 40)</address>
+                          <zipCode>00014</zipCode>
+                          <city>University of Helsinki</city>
+                          <country>Finland</country>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </metadataCreator>
+              </metadataInfo>
+              <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
+                <resourceType>corpus</resourceType>
+                <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
+                  <corpusTextInfo ComponentId="clarin.eu:cr1:c_1355150532311">
+                    <mediaType>text</mediaType>
+                    <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                      <lingualityType>monolingual</lingualityType>
+                    </lingualityInfo>
+                    <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                      <languageId>fi</languageId>
+                      <languageName>Finnish</languageName>
+                    </languageInfo>
+                    <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                      <size>1</size>
+                      <sizeUnit>other</sizeUnit>
+                    </sizeInfo>
+                  </corpusTextInfo>
+                  <corpusAudioInfo ComponentId="clarin.eu:cr1:c_1360230992157">
+                    <mediaType>audio</mediaType>
+                    <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                      <lingualityType>monolingual</lingualityType>
+                    </lingualityInfo>
+                    <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                      <languageId>fi</languageId>
+                      <languageName>Finnish</languageName>
+                    </languageInfo>
+                    <audioSizeInfo ComponentId="clarin.eu:cr1:c_1360230992160">
+                      <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                        <size>1</size>
+                        <sizeUnit>other</sizeUnit>
+                      </sizeInfo>
+                    </audioSizeInfo>
+                  </corpusAudioInfo>
+                </corpusMediaType>
+              </corpusInfo>
+            </resourceInfo>
+          </Components>
+        </CMD>
+      </metadata>
+    </record>
+    <record xmlns="http://www.openarchives.org/OAI/2.0/">
+      <header>
+        <identifier>oai:clarino.uib.no:lb-2018060403</identifier>
+        <datestamp>2024-06-19T07:38:55Z</datestamp>
+        <setSpec>FIN-CLARIN</setSpec>
+      </header>
+      <metadata>
+        <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+          <Header>
+            <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+            <MdCreationDate>2022-11-17</MdCreationDate>
+            <MdSelfLink>urn:nbn:fi:lb-2018060403</MdSelfLink>
+            <MdProfile>clarin.eu:cr1:p_1361876010571</MdProfile>
+          </Header>
+          <Resources>
+            <ResourceProxyList>
+              <ResourceProxy id="_1">
+                <ResourceType mimetype="">Resource</ResourceType>
+                <ResourceRef>http://urn.fi/urn:nbn:fi:lb-2018060404</ResourceRef>
+              </ResourceProxy>
+            </ResourceProxyList>
+            <JournalFileProxyList/>
+            <ResourceRelationList/>
+            <IsPartOfList/>
+          </Resources>
+          <Components>
+            <resourceInfo>
+              <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+                <resourceName xml:lang="fi">
+                  Suomenkielinen OpenSubtitles 2017, Kielipankin Korp-versio
+                </resourceName>
+                <resourceName xml:lang="en">
+                  Finnish OpenSubtitles 2017, Kielipankki Korp Version
+                </resourceName>
+                <description xml:lang="fi">
+                  Aineisto kattaa Opensubtitles.org sivuston jakamat elokuvien ja tv-ohjelmien suomenkieliset tekstitykset. Aineisto on johdannainen monikielisestä Opensubtitles2018 korpuksesta (http://opus.nlpl.eu/OpenSubtitles2018.php). Aineisto on jaettu lähteisiin ja lauseisiin. Lauseet on morfosyntaktisesti jäsennetty käyttäen Turku Dependenssi jäsennintä (http://turkunlp.github.io/Finnish-dep-parser/).
+                </description>
+                <description xml:lang="en">
+                  The corpus is available in Kielipankki through the Interface Korp. The corpus contains Finnish subtitles for movies and TV-series from http://www.opensubtitles.org/ The corpus is a derivative of the [OPUS OpenSubtitles2018](http://opus.nlpl.eu/OpenSubtitles2018.php) multilingual corpus. Information on the material processing up to sentence splitting can be found in the original publication Lison & Tiedemann (2016). The corpus has been tokenized and annotated with morpho-syntactic analysis produced with the [Turku Dependency Parser](http://turkunlp.github.io/Finnish-dep-parser/). P. Lison and J. Tiedemann, 2016, OpenSubtitles2016: Extracting Large Parallel Corpora from Movie and TV Subtitles. In Proceedings of the 10th International Conference on Language Resources and Evaluation (LREC 2016)
+                </description>
+                <resourceShortName xml:lang="en">opensub-fi-2017-korp</resourceShortName>
+                <url>http://urn.fi/urn:nbn:fi:lb-2018060404</url>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-2018060403</identifier>
+              </identificationInfo>
+              <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+                <availability>available-unrestrictedUse</availability>
+                <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+                  <licence>CC-BY</licence>
+                  <restrictionsOfUse>attribution</restrictionsOfUse>
+                  <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+                  <licensorPerson ComponentId="clarin.eu:cr1:c_1352813745465">
+                    <role>licensor</role>
+                    <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                      <surname xml:lang="fi">Lisensoija</surname>
+                      <givenName xml:lang="fi">Lauri</givenName>
+                      <sex>male</sex>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>lauri@example.com</email>
+                      </communicationInfo>
+                      <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                        <role>affiliation</role>
+                        <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                          <organizationName xml:lang="en">University of Helsinki</organizationName>
+                          <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                          <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                            <email>firstname.surname@helsinki.fi</email>
+                          </communicationInfo>
+                        </organizationInfo>
+                      </affiliation>
+                    </personInfo>
+                  </licensorPerson>
+                  <distributionRightsHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010640">
+                    <role>distributionRightsHolder</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>firstname.surname@helsinki.fi</email>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </distributionRightsHolderOrganization>
+                </licenceInfo>
+                <iprHolderPerson ComponentId="clarin.eu:cr1:c_1352813745463">
+                  <role>iprHolder</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="fi">Lisensoija</surname>
+                    <givenName xml:lang="fi">Lauri</givenName>
+                    <sex>male</sex>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>lauri@example.com</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </iprHolderPerson>
+              </distributionInfo>
+              <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+                <role>contactPerson</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="en">FIN-CLARIN</surname>
+                  <givenName xml:lang="en">User support</givenName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>fin-clarin@helsinki.fi</email>
+                  </communicationInfo>
+                </personInfo>
+              </contactPerson>
+              <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+                <metadataCreationDate>2018-06-04</metadataCreationDate>
+                <metadataLanguageName>English</metadataLanguageName>
+                <metadataLanguageId>en</metadataLanguageId>
+                <metadataLastDateUpdated>2021-08-13</metadataLastDateUpdated>
+                <revision>
+                  Link to resource group page and attribution details added
+                </revision>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Miina</givenName>
+                    <sex>unknown</sex>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>miina@example.com</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                        <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                        <departmentName xml:lang="en">University of Helsinki</departmentName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>finclarin@helsinki.fi</email>
+                          <url>http://www.helsinki.fi/fin-clarin</url>
+                          <address>PO Box 24 (Unioninkatu 40)</address>
+                          <zipCode>00014</zipCode>
+                          <city>University of Helsinki</city>
+                          <country>Finland</country>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </metadataCreator>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Mara</givenName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>mara@example.com</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                        <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                        <departmentName xml:lang="en">University of Helsinki</departmentName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>finclarin@helsinki.fi</email>
+                          <url>http://www.helsinki.fi/fin-clarin</url>
+                          <address>PO Box 24 (Unioninkatu 40)</address>
+                          <zipCode>00014</zipCode>
+                          <city>University of Helsinki</city>
+                          <country>Finland</country>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </metadataCreator>
+              </metadataInfo>
+              <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
+                <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+                  <role>documentation</role>
+                  <documentUnstructured>
+                    CHANGE LOG 12.11.2019 Added Kielipankki Korp Version to the title
+                  </documentUnstructured>
+                </documentationUnstructured>
+                <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+                  <role>documentation</role>
+                  <documentUnstructured>
+                    CHANGE LOG: 30.1.2020 Availability changed from Restricted to Unrestricted.
+                  </documentUnstructured>
+                </documentationUnstructured>
+                <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+                  <role>documentation</role>
+                  <documentUnstructured>
+                    Resource group page: http://urn.fi/urn:nbn:fi:lb-2021081202
+                  </documentUnstructured>
+                </documentationUnstructured>
+                <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+                  <role>documentation</role>
+                  <documentUnstructured>
+                    How to cite: https://www.kielipankki.fi/viittaus/?key=opensub-fi-2017-korp&lang=en
+                  </documentUnstructured>
+                </documentationUnstructured>
+              </resourceDocumentationInfo>
+              <resourceCreationInfo ComponentId="clarin.eu:cr1:c_1355150532303">
+                <resourceCreatorPerson ComponentId="clarin.eu:cr1:c_1355150532304">
+                  <role>resourceCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="fi">Metadataatori</surname>
+                    <givenName xml:lang="fi">Miina</givenName>
+                    <sex>male</sex>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>miina@example.com</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </resourceCreatorPerson>
+              </resourceCreationInfo>
+              <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+                <relationType>IsVariantFormOf</relationType>
+                <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+                  <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2019110801</targetResourceNameURI>
+                </relatedResource>
+              </relationInfo>
+              <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
+                <resourceType>corpus</resourceType>
+                <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
+                  <corpusTextInfo ComponentId="clarin.eu:cr1:c_1355150532311">
+                    <mediaType>text</mediaType>
+                    <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                      <lingualityType>monolingual</lingualityType>
+                    </lingualityInfo>
+                    <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                      <languageId>fi</languageId>
+                      <languageName>Finnish</languageName>
+                    </languageInfo>
+                    <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                      <size>267645406</size>
+                      <sizeUnit>tokens</sizeUnit>
+                    </sizeInfo>
+                    <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                      <size>52002003</size>
+                      <sizeUnit>sentences</sizeUnit>
+                    </sizeInfo>
+                  </corpusTextInfo>
+                </corpusMediaType>
+              </corpusInfo>
+            </resourceInfo>
+          </Components>
+        </CMD>
+      </metadata>
+    </record>
+    <record xmlns="http://www.openarchives.org/OAI/2.0/">
+      <header>
+        <identifier>oai:clarino.uib.no:lb-2014073096</identifier>
+        <datestamp>2024-06-19T07:38:57Z</datestamp>
+        <setSpec>FIN-CLARIN</setSpec>
+      </header>
+      <metadata>
+        <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+          <Header>
+            <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+            <MdCreationDate>2022-09-02</MdCreationDate>
+            <MdSelfLink>urn:nbn:fi:lb-2014073096</MdSelfLink>
+            <MdProfile>clarin.eu:cr1:p_1360931019836</MdProfile>
+          </Header>
+          <Resources>
+            <ResourceProxyList>
+              <ResourceProxy id="_1">
+                <ResourceType mimetype="">Resource</ResourceType>
+                <ResourceRef>http://www.lingsoft.fi/tuotteet/msstyle</ResourceRef>
+              </ResourceProxy>
+            </ResourceProxyList>
+            <JournalFileProxyList/>
+            <ResourceRelationList/>
+            <IsPartOfList/>
+          </Resources>
+          <Components>
+            <resourceInfo>
+              <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+                <resourceName xml:lang="en">Lingsoft Proofreader for ICT Language for Finnish</resourceName>
+                <description xml:lang="fi">
+                  Erityisalojen tarkistimet ovat Lingsoftin ainutlaatuinen ja kustannuksia säästävä ratkaisu toimialojen sisäisen kielen tarkistamiseen. Lingsoft Proofreader for Finnish ICT Language tarkistaa ICT-terminologian Microsoft-tyylioppaan mukaisesti.
+                </description>
+                <description xml:lang="en">
+                  Lingsoft Proofreader for Finnish ICT Language checks ICT terminology in accordance with the Microsoft Style Guide.
+                </description>
+                <url>http://www.lingsoft.fi/tuotteet/msstyle</url>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-2014073096</identifier>
+              </identificationInfo>
+              <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+                <availability>available-restrictedUse</availability>
+                <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+                  <licence>underNegotiation</licence>
+                  <fee>250,00 € + VAT 24 %</fee>
+                  <userNature>commercial</userNature>
+                  <licensorOrganization ComponentId="clarin.eu:cr1:c_1361876010643">
+                    <role>licensor</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">Lingsoft</organizationName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>etunimi.sukunimi@lingsoft.fi</email>
+                        <url>http://www.lingsoft.fi</url>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </licensorOrganization>
+                  <distributionRightsHolderPerson ComponentId="clarin.eu:cr1:c_1352813745466">
+                    <role>distributionRightsHolder</role>
+                    <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                      <surname xml:lang="en">Contact</surname>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>info@lingsoft.fi</email>
+                      </communicationInfo>
+                      <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                        <role>affiliation</role>
+                        <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                          <organizationName xml:lang="en">Lingsoft</organizationName>
+                          <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                            <email>etunimi.sukunimi@lingsoft.fi</email>
+                            <url>http://www.lingsoft.fi</url>
+                          </communicationInfo>
+                        </organizationInfo>
+                      </affiliation>
+                    </personInfo>
+                  </distributionRightsHolderPerson>
+                </licenceInfo>
+                <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+                  <role>iprHolder</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">Lingsoft</organizationName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>etunimi.sukunimi@lingsoft.fi</email>
+                      <url>http://www.lingsoft.fi</url>
+                    </communicationInfo>
+                  </organizationInfo>
+                </iprHolderOrganization>
+              </distributionInfo>
+              <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+                <role>contactPerson</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="en">Contact</surname>
+                  <givenName xml:lang="en">-</givenName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>firstname.surname@lingsoft.fi</email>
+                    <url>http://www.lingsoft.fi</url>
+                  </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">Lingsoft</organizationName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>etunimi.sukunimi@lingsoft.fi</email>
+                        <url>http://www.lingsoft.fi</url>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
+                </personInfo>
+              </contactPerson>
+              <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+                <metadataCreationDate>2012-12-06</metadataCreationDate>
+                <originalMetadataLink>http://www.lingsoft.fi/tuotteet/msstyle</originalMetadataLink>
+                <metadataLanguageName>English</metadataLanguageName>
+                <metadataLanguageName>Finnish</metadataLanguageName>
+                <metadataLanguageId>en</metadataLanguageId>
+                <metadataLanguageId>fi</metadataLanguageId>
+                <metadataLastDateUpdated>2012-12-06</metadataLastDateUpdated>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Meeri</givenName>
+                    <sex>female</sex>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>meeri@example.com</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </metadataCreator>
+              </metadataInfo>
+              <usageInfo ComponentId="clarin.eu:cr1:c_1353678848793">
+                <foreseenUseInfo ComponentId="clarin.eu:cr1:c_1353678848796">
+                  <foreseenUse>humanUse</foreseenUse>
+                  <useNLPSpecific>spellChecking</useNLPSpecific>
+                </foreseenUseInfo>
+                <actualUseInfo ComponentId="clarin.eu:cr1:c_1353678848797">
+                  <actualUse>humanUse</actualUse>
+                  <useNLPSpecific>spellChecking</useNLPSpecific>
+                </actualUseInfo>
+              </usageInfo>
+              <toolServiceInfo ComponentId="clarin.eu:cr1:c_1360931019834">
+                <resourceType>toolService</resourceType>
+                <toolServiceType>tool</toolServiceType>
+                <toolServiceSubtype>Spell checker</toolServiceSubtype>
+                <languageDependent>true</languageDependent>
+                <inputInfo ComponentId="clarin.eu:cr1:c_1360931019804">
+                  <mediaType>text</mediaType>
+                  <modalityType>writtenLanguage</modalityType>
+                  <languageName>Finnish</languageName>
+                  <languageId>fi</languageId>
+                </inputInfo>
+                <outputInfo ComponentId="clarin.eu:cr1:c_1360931019824">
+                  <mediaType>text</mediaType>
+                  <modalityType>writtenLanguage</modalityType>
+                  <languageName>Finnish</languageName>
+                  <languageId>fi</languageId>
+                </outputInfo>
+              </toolServiceInfo>
+            </resourceInfo>
+          </Components>
+        </CMD>
+      </metadata>
+    </record>
+    <record xmlns="http://www.openarchives.org/OAI/2.0/">
+      <header>
+        <identifier>oai:clarino.uib.no:lb-2019121004</identifier>
+        <datestamp>2024-06-19T07:39:01Z</datestamp>
+        <setSpec>FIN-CLARIN</setSpec>
+      </header>
+      <metadata>
+        <CMD xmlns="http://www.clarin.eu/cmd/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.1" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1361876010571/xsd">
+          <Header>
+            <MdCreator>metashareToCmdi.xsl remove_metashare_namespace.xsl</MdCreator>
+            <MdCreationDate>2024-03-02</MdCreationDate>
+            <MdSelfLink>urn:nbn:fi:lb-2019121004</MdSelfLink>
+            <MdProfile>clarin.eu:cr1:p_1361876010571</MdProfile>
+          </Header>
+          <Resources>
+            <ResourceProxyList>
+              <ResourceProxy id="_1">
+                <ResourceType mimetype="">Resource</ResourceType>
+                <ResourceRef>http://urn.fi/urn:nbn:fi:lb-2019121006</ResourceRef>
+              </ResourceProxy>
+            </ResourceProxyList>
+            <JournalFileProxyList/>
+            <ResourceRelationList/>
+            <IsPartOfList/>
+          </Resources>
+          <Components>
+            <resourceInfo>
+              <identificationInfo ComponentId="clarin.eu:cr1:c_1349361150743">
+                <resourceName xml:lang="fi">
+                  Ylen suomenkielinen uutisarkisto 2011-2018, sekoitettu, Korp
+                </resourceName>
+                <resourceName xml:lang="en">
+                  Yle Finnish News Archive 2011-2018, scrambled, Korp
+                </resourceName>
+                <description xml:lang="en">
+                  The corpus, containing the articles from YLE https://yle.fi from 2011-2018 as scrambled sentences, is available at Korp.
+                </description>
+                <resourceShortName xml:lang="en">ylenews-fi-2011-2018-s-korp</resourceShortName>
+                <url>http://urn.fi/urn:nbn:fi:lb-2019121006</url>
+                <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+                <identifier>http://urn.fi/urn:nbn:fi:lb-2019121004</identifier>
+              </identificationInfo>
+              <distributionInfo ComponentId="clarin.eu:cr1:c_1352813745459">
+                <availability>available-unrestrictedUse</availability>
+                <licenceInfo ComponentId="clarin.eu:cr1:c_1352813745464">
+                  <licence>CC-BY</licence>
+                  <restrictionsOfUse>attribution</restrictionsOfUse>
+                  <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+                  <licensorOrganization ComponentId="clarin.eu:cr1:c_1361876010643">
+                    <role>licensor</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="fi">Yleisradio Oy</organizationName>
+                      <organizationName xml:lang="en">Finnish Broadcasting Company (Yle)</organizationName>
+                      <organizationShortName xml:lang="fi">Yle</organizationShortName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>yleinfo@yle.fi</email>
+                        <url>https://yle.fi/</url>
+                        <country>Finland</country>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </licensorOrganization>
+                  <distributionRightsHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010640">
+                    <role>distributionRightsHolder</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>firstname.surname@helsinki.fi</email>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </distributionRightsHolderOrganization>
+                </licenceInfo>
+                <iprHolderOrganization ComponentId="clarin.eu:cr1:c_1361876010642">
+                  <role>iprHolder</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="fi">Yleisradio Oy</organizationName>
+                    <organizationName xml:lang="en">Finnish Broadcasting Company (Yle)</organizationName>
+                    <organizationShortName xml:lang="fi">Yle</organizationShortName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>yleinfo@yle.fi</email>
+                      <url>https://yle.fi/</url>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </organizationInfo>
+                </iprHolderOrganization>
+              </distributionInfo>
+              <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
+                <role>contactPerson</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="en">FIN-CLARIN</surname>
+                  <givenName xml:lang="en">User support</givenName>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>fin-clarin@helsinki.fi</email>
+                  </communicationInfo>
+                </personInfo>
+              </contactPerson>
+              <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
+                <metadataCreationDate>2019-12-12</metadataCreationDate>
+                <metadataLanguageName>English</metadataLanguageName>
+                <metadataLanguageId>en</metadataLanguageId>
+                <metadataLastDateUpdated>2024-03-01</metadataLastDateUpdated>
+                <revision>CHANGE LOG added</revision>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="en">Metadataaja</surname>
+                    <givenName xml:lang="en">Miina</givenName>
+                    <sex>unknown</sex>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>miina@example.com</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                        <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                        <departmentName xml:lang="en">University of Helsinki</departmentName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>finclarin@helsinki.fi</email>
+                          <url>http://www.helsinki.fi/fin-clarin</url>
+                          <address>PO Box 24 (Unioninkatu 40)</address>
+                          <zipCode>00014</zipCode>
+                          <city>University of Helsinki</city>
+                          <country>Finland</country>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </metadataCreator>
+                <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
+                  <role>metadataCreator</role>
+                  <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                    <surname xml:lang="en">Miska</surname>
+                    <givenName xml:lang="en">Metadataaja</givenName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>firstname.lastname@helsinki.fi</email>
+                    </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </metadataCreator>
+              </metadataInfo>
+              <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
+                <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+                  <role>documentation</role>
+                  <documentUnstructured>
+                    Resource group page http://urn.fi/urn:nbn:fi:lb-2021020901
+                  </documentUnstructured>
+                </documentationUnstructured>
+                <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+                  <role>documentation</role>
+                  <documentUnstructured>
+                    How to cite: https://www.kielipankki.fi/viittaus/?key=ylenews-fi-2011-2018-s-korp&lang=en
+                  </documentUnstructured>
+                </documentationUnstructured>
+                <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
+                  <role>documentation</role>
+                  <documentUnstructured>
+                    CHANGE LOG: 21.6.2020 restriction Attribution added. 1.3.2024 Links to easy-to-read original texts in Yle News Archive have been corrected by changing the Korp corpus configuration.
+                  </documentUnstructured>
+                </documentationUnstructured>
+                <documentationStructured ComponentId="clarin.eu:cr1:c_1361876010648">
+                  <role>documentation</role>
+                  <documentInfo ComponentId="clarin.eu:cr1:c_1353678848788">
+                    <documentType>other</documentType>
+                    <title xml:lang="fi">Lisenssi (Ylen uutisarkisto, sekoitetut virkkeet)</title>
+                    <title xml:lang="en">License (Yle News Archive, scrambled sentences)</title>
+                    <editor>FIN-CLARIN</editor>
+                    <url>http://urn.fi/urn:nbn:fi:lb-2022082901</url>
+                  </documentInfo>
+                </documentationStructured>
+              </resourceDocumentationInfo>
+              <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+                <relationType>isDerivedFrom</relationType>
+                <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+                  <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2017070501</targetResourceNameURI>
+                </relatedResource>
+              </relationInfo>
+              <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+                <relationType>isVariantFormOf</relationType>
+                <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+                  <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2019121003</targetResourceNameURI>
+                </relatedResource>
+              </relationInfo>
+              <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+                <relationType>isSourceOf</relationType>
+                <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+                  <targetResourceNameURI>http://urn.fi/urn:nbn:fi:lb-2020021107</targetResourceNameURI>
+                </relatedResource>
+              </relationInfo>
+              <relationInfo ComponentId="clarin.eu:cr1:c_1355150532307">
+                <relationType>IsPartOf</relationType>
+                <relatedResource ComponentId="clarin.eu:cr1:c_1355150532308">
+                  <targetResourceNameURI>
+                    Yle Finnish News Archive 2011-2021, scrambled, Korp http://urn.fi/urn:nbn:fi:lb-2022032205
+                  </targetResourceNameURI>
+                </relatedResource>
+              </relationInfo>
+              <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
+                <resourceType>corpus</resourceType>
+                <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
+                  <corpusTextInfo ComponentId="clarin.eu:cr1:c_1355150532311">
+                    <mediaType>text</mediaType>
+                    <lingualityInfo ComponentId="clarin.eu:cr1:c_1355150532313">
+                      <lingualityType>monolingual</lingualityType>
+                    </lingualityInfo>
+                    <languageInfo ComponentId="clarin.eu:cr1:c_1355150532314">
+                      <languageId>fi</languageId>
+                      <languageName>Finnish</languageName>
+                    </languageInfo>
+                    <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                      <size>207500221</size>
+                      <sizeUnit>tokens</sizeUnit>
+                    </sizeInfo>
+                    <sizeInfo ComponentId="clarin.eu:cr1:c_1353678848785">
+                      <size>18708231</size>
+                      <sizeUnit>sentences</sizeUnit>
+                    </sizeInfo>
+                  </corpusTextInfo>
+                </corpusMediaType>
+              </corpusInfo>
+            </resourceInfo>
+          </Components>
+        </CMD>
+      </metadata>
+    </record>
+  </ListRecords>
+</OAI-PMH>

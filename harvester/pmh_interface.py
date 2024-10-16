@@ -1,5 +1,5 @@
 """
-Fetch data from an OAI-PMH API of Metashare
+Fetch data from an OAI-PMH API
 """
 
 from copy import deepcopy
@@ -32,9 +32,10 @@ class PMH_API:
         try:
             metadata_records = self.sickle.ListRecords(
                 **{
-                    "metadataPrefix": "info",
+                    "metadataPrefix": "cmdi",
                     "from": from_timestamp,
                     "ignore_deleted": True,
+                    "set": "FIN-CLARIN",
                 }
             )
             for metadata_record in metadata_records:
@@ -53,10 +54,11 @@ class PMH_API:
     @property
     def corpus_pids(self):
         """
-        PIDs for all corpora in Metashare.
+        PIDs for all corpora in the repository.
+
         :return: List of PIDs as strings
         """
-        metashare_pids = []
+        pids = []
         for corpus in self.fetch_corpora():
-            metashare_pids.append(corpus.pid)
-        return metashare_pids
+            pids.append(corpus.pid)
+        return pids

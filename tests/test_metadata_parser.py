@@ -9,11 +9,9 @@ def _get_file_as_lxml(filename):
         return etree.fromstring(infile.read())
 
 
-def test_get_title(basic_metashare_record):
+def test_get_title(basic_cmdi_record, kielipankki_datacatalog_id):
     """Testing that different language versions of "title" are mapped."""
-    result = basic_metashare_record._get_element_text_in_preferred_language(
-        "//info:resourceName"
-    )
+    result = basic_cmdi_record.to_dict(data_catalog=kielipankki_datacatalog_id)["title"]
     expected_result = {
         "en": "Silva Kiuru's Time Expressions Corpus",
         "fi": "Silva Kiurun ajanilmausaineisto",
@@ -21,59 +19,59 @@ def test_get_title(basic_metashare_record):
     assert result == expected_result
 
 
-def test_get_description(basic_metashare_record):
+def test_get_description(basic_cmdi_record, kielipankki_datacatalog_id):
     """Testing that different language versions of "description" are mapped."""
-    result = basic_metashare_record._get_element_text_in_preferred_language(
-        "//info:description"
-    )
+    result = basic_cmdi_record.to_dict(data_catalog=kielipankki_datacatalog_id)[
+        "description"
+    ]
     expected_result = {
         "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
-        "fi": "T\u00e4m\u00e4 suomen kielen ajanilmauksia k\u00e4sitt\u00e4v\u00e4 aineisto on koottu kaunokirjallisten alkuper\u00e4isteosten, k\u00e4\u00e4nn\u00f6sten, murreaineistojen ja muiden tekstien pohjalta.",
+        "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
     }
     assert result == expected_result
 
 
-def test_pid(basic_metashare_record, dataset_pid):
+def test_pid(basic_cmdi_record, dataset_pid):
     """Check that the correct PID is returned."""
-    assert basic_metashare_record.pid == dataset_pid
+    assert basic_cmdi_record.pid == dataset_pid
 
 
-def test_get_modified_datetime(basic_metashare_record):
+def test_get_modified_datetime(basic_cmdi_record, kielipankki_datacatalog_id):
     """Check that the modified date is returned in correct format."""
-    result = basic_metashare_record._get_datetime(
-        "//info:metadataInfo/info:metadataLastDateUpdated/text()"
-    )
-    expected_result = "2017-02-15T00:00:00Z"
+    result = basic_cmdi_record.to_dict(data_catalog=kielipankki_datacatalog_id)[
+        "modified"
+    ]
+    expected_result = "2024-06-19T07:38:46Z"
     assert result == expected_result
 
 
-def test_get_created_datetime(basic_metashare_record):
+def test_get_created_datetime(basic_cmdi_record, kielipankki_datacatalog_id):
     """Check that the created date is returned in correct format."""
-    result = basic_metashare_record._get_datetime(
-        "//info:metadataInfo/info:metadataCreationDate/text()"
-    )
-    expected_result = "2017-02-15T00:00:00Z"
+    result = basic_cmdi_record.to_dict(data_catalog=kielipankki_datacatalog_id)[
+        "created"
+    ]
+    expected_result = "2022-09-02T00:00:00Z"
     assert result == expected_result
 
 
-def test_to_dict(basic_metashare_record):
+def test_to_dict(basic_cmdi_record, dataset_pid, kielipankki_datacatalog_id):
     """Test that all relevant elements are mapped to a dictionary."""
-    result = basic_metashare_record.to_dict()
+    result = basic_cmdi_record.to_dict(data_catalog=kielipankki_datacatalog_id)
     expected_result = {
         "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
         "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
         "field_of_science": [{"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}],
-        "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
+        "persistent_identifier": dataset_pid,
         "title": {
             "en": "Silva Kiuru's Time Expressions Corpus",
             "fi": "Silva Kiurun ajanilmausaineisto",
         },
         "description": {
             "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
-            "fi": "T\u00e4m\u00e4 suomen kielen ajanilmauksia k\u00e4sitt\u00e4v\u00e4 aineisto on koottu kaunokirjallisten alkuper\u00e4isteosten, k\u00e4\u00e4nn\u00f6sten, murreaineistojen ja muiden tekstien pohjalta.",
+            "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
         },
-        "modified": "2017-02-15T00:00:00Z",
-        "created": "2017-02-15T00:00:00Z",
+        "created": "2022-09-02T00:00:00Z",
+        "modified": "2024-06-19T07:38:46Z",
         "access_rights": {
             "license": [
                 {
@@ -86,15 +84,15 @@ def test_to_dict(basic_metashare_record):
         },
         "actors": [
             {
-                "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
+                "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
                 "roles": ["creator"],
                 "organization": None,
             },
             {
                 "roles": ["curator"],
                 "person": {
-                    "name": "Mari Siiroinen",
-                    "email": "mari.siiroinen@helsinki.fi",
+                    "name": "Kiia Kontakti",
+                    "email": "kiia@example.com",
                 },
                 "organization": {
                     "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
@@ -242,14 +240,14 @@ def test_check_pid_exists(missing_pid_record):
     assert not missing_pid_record.check_pid_exists()
 
 
-def test_get_resource_languages(basic_metashare_record):
+def test_get_resource_languages(basic_cmdi_record):
     """
     Verify that a single language from a record is returned in Metax-approved format.
 
     Metax espects a list of dicts, each dict describing one language. The only
     information required for each language is a lexvo url.
     """
-    assert basic_metashare_record._get_resource_languages() == [
+    assert basic_cmdi_record._get_resource_languages() == [
         {"url": "http://lexvo.org/id/iso639-3/fin"}
     ]
 
@@ -272,7 +270,7 @@ def test_get_resource_languages_with_multiple_languages():
     assert "http://lexvo.org/id/iso639-3/swe" in language_urls
 
 
-def test_get_actors(basic_metashare_record):
+def test_get_actors(basic_cmdi_record):
     """
     Check that all actor data is present in a Metax-compatible format for a basic
     record.
@@ -281,18 +279,19 @@ def test_get_actors(basic_metashare_record):
     having an organization as a distributionRightsHolder and organizations have not been
     implemented yet.
     """
-    actors = basic_metashare_record._get_actors()
+    actors = basic_cmdi_record._get_actors()
 
     assert len(actors) == 2
+
     assert {
-        "person": {"email": "imre.bartis@helsinki.fi", "name": "Imre Bartis"},
+        "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
         "roles": ["creator"],
         "organization": None,
     } in actors
 
     assert {
         "roles": ["curator"],
-        "person": {"name": "Mari Siiroinen", "email": "mari.siiroinen@helsinki.fi"},
+        "person": {"name": "Kiia Kontakti", "email": "kiia@example.com"},
         "organization": {
             "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
         },
@@ -380,3 +379,21 @@ def test_multiple_names_for_actor():
     actors = record._get_actors()
     assert len(actors) == 1
     assert actors[0]["person"]["name"] == "Carl Gustaf Bernadotte"
+
+
+def test_publisher_person():
+    """
+    Check that personal information for a publisher is correctly extracted.
+
+    This is not properly covered with the other test data, as it is more common that the
+    publisher is an organization.
+    """
+    record = MSRecordParser(
+        _get_file_as_lxml(
+            "tests/test_data/kielipankki_record_sample_with_publisher_person.xml"
+        )
+    )
+    actors = record.to_dict(data_catalog="catalog_id")["actors"]
+    assert len(actors) == 1
+    assert "publisher" in actors[0]["roles"]
+    assert actors[0]["person"]["name"] == "Late Lisensoija"

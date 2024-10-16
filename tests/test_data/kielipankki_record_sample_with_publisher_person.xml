@@ -1,4 +1,4 @@
-<record>
+<record xmlns="http://www.openarchives.org/OAI/2.0/">
   <header>
     <identifier>oai:clarino.uib.no:lb-20140730134</identifier>
     <datestamp>2024-06-19T07:39:34Z</datestamp>
@@ -25,10 +25,10 @@
               The Finnish Broadcasting Company Corpus of Subtitles
             </resourceName>
             <description xml:lang="fi">
-              Jukka Mäkisalon ja Sonja Tirkkonen-Condit v. 2005 laatima käännetyn tekstityksen digitaalinen tutkimusaineisto. Yle-ruututeksikorpus sisältää kaikki Ylen lähettämät digitaaliset tv-tekstitykset v. 1992-2004.
+              Kuvaus tekstityskorpukselle vuosilta 1992-2004.
             </description>
             <description xml:lang="en">
-              Digital research material of translated subtitles compiled by Jukka Mäkisalo and Sonja Tirkkonen-Condit, 2005. The corpus contains all the digital TV subtitles of the Finnish Broadcasting Company from 1992 to 2004. More information on the corpus: https://wiivi.uef.fi/crisyp/disp/_/fi/cr_redir_all/fet/fet/sea?direction=1&amp;id=-29931
+              Description for subtitle corpus from 1992-2004.
             </description>
             <resourceShortName xml:lang="fi">YLE-korpus</resourceShortName>
             <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
@@ -44,10 +44,10 @@
                 <role>licensor</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
                   <surname xml:lang="en">Lisensoija</surname>
-                  <givenName xml:lang="en">Lauri</givenName>
+                  <givenName xml:lang="en">Late</givenName>
                   <sex>male</sex>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>lauri@example.com</email>
+                    <email>late@example.com</email>
                   </communicationInfo>
                   <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                     <role>affiliation</role>
@@ -69,10 +69,10 @@
                 <role>distributionRightsHolder</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
                   <surname xml:lang="en">Lisensoija</surname>
-                  <givenName xml:lang="en">Lauri</givenName>
+                  <givenName xml:lang="en">Late</givenName>
                   <sex>male</sex>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>lauri@example.com</email>
+                    <email>late@example.com</email>
                   </communicationInfo>
                   <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                     <role>affiliation</role>
@@ -95,10 +95,10 @@
               <role>iprHolder</role>
               <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
                 <surname xml:lang="en">Lisensoija</surname>
-                <givenName xml:lang="en">Lauri</givenName>
+                <givenName xml:lang="en">Late</givenName>
                 <sex>male</sex>
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>lauri@example.com</email>
+                  <email>late@example.com</email>
                 </communicationInfo>
                 <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                   <role>affiliation</role>
@@ -120,11 +120,11 @@
           <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
             <role>contactPerson</role>
             <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-              <surname xml:lang="en">Kontakti</surname>
-              <givenName xml:lang="en">Kiia</givenName>
+              <surname xml:lang="en">Lisensoija</surname>
+              <givenName xml:lang="en">Late</givenName>
               <sex>male</sex>
               <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                <email>kiia@example.com</email>
+                <email>late@example.com</email>
               </communicationInfo>
               <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
                 <role>affiliation</role>
@@ -149,37 +149,6 @@
             <metadataLanguageId>Fi</metadataLanguageId>
             <metadataLanguageId>en</metadataLanguageId>
             <metadataLastDateUpdated>2014-04-24</metadataLastDateUpdated>
-            <metadataCreator ComponentId="clarin.eu:cr1:c_1353678848723">
-              <role>metadataCreator</role>
-              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                <surname xml:lang="en">Metadataaja</surname>
-                <givenName xml:lang="en">Miina</givenName>
-                <sex>male</sex>
-                <position>Project Coordinator</position>
-                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                  <email>miina@example.com</email>
-                  <url>http://orcid.org/0000-0000-0000-0000</url>
-                  <city>Helsinki</city>
-                  <country>Finland</country>
-                </communicationInfo>
-                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
-                  <role>affiliation</role>
-                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
-                    <organizationName xml:lang="en">FIN-CLARIN</organizationName>
-                    <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
-                    <departmentName xml:lang="en">University of Helsinki</departmentName>
-                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                      <email>finclarin@helsinki.fi</email>
-                      <url>http://www.helsinki.fi/fin-clarin</url>
-                      <address>PO Box 24 (Unioninkatu 40)</address>
-                      <zipCode>00014</zipCode>
-                      <city>University of Helsinki</city>
-                      <country>Finland</country>
-                    </communicationInfo>
-                  </organizationInfo>
-                </affiliation>
-              </personInfo>
-            </metadataCreator>
           </metadataInfo>
           <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
             <resourceType>corpus</resourceType>
