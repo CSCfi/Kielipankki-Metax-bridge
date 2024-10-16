@@ -143,14 +143,21 @@ class Actor:
         FIN-CLARIAH affiliations, the home organization from the `departmentName` field
         is used when determining the URI.
 
-        Organization names seem to always available in English, so English names are
-        used for matching.
-
         Raises UnknownOrganizationException if URI match is not found.
         """
-        organization_name = self._organization_data["organizationInfo"][
-            "organizationName_en"
-        ]
+        if "organizationName_en" in self._organization_data["organizationInfo"]:
+            organization_name = self._organization_data["organizationInfo"][
+                "organizationName_en"
+            ]
+        elif "organizationName_fi" in self._organization_data["organizationInfo"]:
+            organization_name = self._organization_data["organizationInfo"][
+                "organizationName_fi"
+            ]
+        else:
+            raise UnableToParseOrganizationInfoException(
+                "Could not determine organization name from "
+                f"{self._organization_data['organizationInfo']}"
+            )
 
         if organization_name == "FIN-CLARIN":
             organization_name = self._organization_data["organizationInfo"][
@@ -294,4 +301,10 @@ class Actor:
 class UnknownOrganizationException(Exception):
     """
     Exception to be raised when an URI cannot be determined for an organization
+    """
+
+
+class UnableToParseOrganizationInfoException(Exception):
+    """
+    Exception to be raised when some information for an organization cannot be parsed
     """
