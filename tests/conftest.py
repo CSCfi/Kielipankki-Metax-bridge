@@ -89,7 +89,7 @@ def mock_get_response_json():
 @pytest.fixture
 def dataset_pid():
     """Return PID of sample record."""
-    return "urn.fi/urn:nbn:fi:lb-2016101210"
+    return "urn.fi/urn:nbn:fi:lb-2017021609"
 
 
 @pytest.fixture
@@ -145,11 +145,9 @@ def mock_requests_put(
 
 
 @pytest.fixture
-def mock_metashare_record_not_found_in_datacatalog(
-    shared_request_mocker, metax_base_url
-):
+def mock_cmdi_record_not_found_in_datacatalog(shared_request_mocker, metax_base_url):
     """
-    Mock Metashare dataset requests to always report that PID does not
+    Mock Metax dataset requests to always report that PID does not
     exist.
     """
     dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
@@ -160,11 +158,11 @@ def mock_metashare_record_not_found_in_datacatalog(
 
 
 @pytest.fixture
-def mock_metashare_record_found_in_datacatalog(
+def mock_cmdi_record_found_in_datacatalog(
     shared_request_mocker, metax_base_url, metax_dataset_id, dataset_pid
 ):
     """
-    Mock Metashare dataset requests to always report that PID exists.
+    Mock Metax dataset requests to always report that PID exists.
     """
     dataset_request_matcher = re.compile(f"{metax_base_url}/datasets")
     shared_request_mocker.get(
@@ -214,11 +212,11 @@ def mock_pids_in_datacatalog(
 
 
 @pytest.fixture
-def mock_pids_in_datacatalog_matching_metashare(
+def mock_pids_in_datacatalog_matching_cmdi(
     shared_request_mocker, metax_base_url, kielipankki_datacatalog_id, dataset_pid
 ):
     """
-    Mock a GET request to fetch all PIDs in a datacatalog that matches those in Metashare.
+    Mock a GET to fetch all PIDs in a datacatalog that matches those in CMDI records.
 
     This fixture needed for testing "syncing" operation.
     """
@@ -234,29 +232,27 @@ def mock_pids_in_datacatalog_matching_metashare(
 
 
 @pytest.fixture
-def metashare_single_record_xml():
+def cmdi_single_record_xml():
     """
-    Metashare ListRecords output that contains a single record.
+    Single record element in CMDI format.
     """
     return _get_file_as_string("tests/test_data/kielipankki_record_sample.xml")
 
 
 @pytest.fixture
-def metashare_multiple_records_xml():
+def cmdi_multiple_records_xml():
     """
-    Metashare ListRecords output that contains a multiple records.
+    Comedi ListRecords output that contains a multiple records.
     """
-    return _get_file_as_string(
-        "tests/test_data/kielipankki_record_sample_multiple_records.xml"
-    )
+    return _get_file_as_string("tests/test_data/comedi_list_records_multiple.xml")
 
 
 @pytest.fixture
-def metashare_no_records_xml():
+def cmdi_no_records_xml():
     """
-    Metashare ListRecords output that contains no records
+    Comedi ListRecords output that contains no records
     """
-    return _get_file_as_string("tests/test_data/kielipankki_no_records.xml")
+    return _get_file_as_string("tests/test_data/comedi_list_records_no_records.xml")
 
 
 @pytest.fixture
@@ -264,30 +260,30 @@ def kielipankki_api_url():
     """
     The URL of the OAI-PMH API used in tests.
     """
-    return "https://kielipankki.fi/md_api/que?metadataPrefix=info&verb=ListRecords"
+    return "https://clarino.uib.no/oai?metadataPrefix=cmdi"
 
 
 @pytest.fixture
-def mock_single_pid_list_from_metashare(
-    shared_request_mocker, kielipankki_api_url, metashare_single_record_xml, dataset_pid
+def mock_single_pid_list_from_cmdi(
+    shared_request_mocker, kielipankki_api_url, cmdi_single_record_xml, dataset_pid
 ):
     """
-    Mock a list of PIDs fetched from Metashare records.
+    Mock a list of PIDs fetched from Comedi containing a single PID.
     """
-    shared_request_mocker.get(kielipankki_api_url, text=metashare_single_record_xml)
+    shared_request_mocker.get(kielipankki_api_url, text=cmdi_single_record_xml)
     return [dataset_pid]
 
 
 @pytest.fixture
-def mock_corpus_pid_list_from_metashare(
-    shared_request_mocker, kielipankki_api_url, metashare_multiple_records_xml
+def mock_corpus_pid_list_from_cmdi(
+    shared_request_mocker, kielipankki_api_url, cmdi_multiple_records_xml
 ):
     """
     Mock the record list to contain numerous resources, four of which are corpora.
 
     :return: PIDs for the corpora
     """
-    shared_request_mocker.get(kielipankki_api_url, text=metashare_multiple_records_xml)
+    shared_request_mocker.get(kielipankki_api_url, text=cmdi_multiple_records_xml)
     return [
         "urn.fi/urn:nbn:fi:lb-2017021609",
         "urn.fi/urn:nbn:fi:lb-20140730196",
@@ -297,15 +293,16 @@ def mock_corpus_pid_list_from_metashare(
 
 
 @pytest.fixture
-def mock_metashare_get_single_record(
-    shared_request_mocker, kielipankki_api_url, metashare_single_record_xml
-):
+def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
     """
-    Mock a GET request to the Metashare API to return XML with a single record.
+    Mock a GET ListRecords to return XML with a single record.
 
     :return: The corresponding metadata as a list of dicts, one dict per record
     """
-    shared_request_mocker.get(kielipankki_api_url, text=metashare_single_record_xml)
+    response_text = _get_file_as_string(
+        "tests/test_data/comedi_list_records_single.xml"
+    )
+    shared_request_mocker.get(kielipankki_api_url, text=response_text)
     yield [
         {
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
@@ -313,7 +310,7 @@ def mock_metashare_get_single_record(
             "field_of_science": [
                 {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
             ],
-            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2016101210",
+            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
             "title": {
                 "en": "Silva Kiuru's Time Expressions Corpus",
                 "fi": "Silva Kiurun ajanilmausaineisto",
@@ -322,8 +319,79 @@ def mock_metashare_get_single_record(
                 "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
                 "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
             },
-            "modified": "2017-02-15T00:00:00Z",
-            "created": "2017-02-15T00:00:00Z",
+            "modified": "2024-06-19T07:38:46Z",
+            "created": "2022-09-02T00:00:00Z",
+            "access_rights": {
+                "license": [
+                    {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
+                    }
+                ],
+                "access_type": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+                },
+            },
+            "actors": [
+                {
+                    "organization": None,
+                    "person": {
+                        "email": "miina@example.com",
+                        "name": "Miina Metadataaja",
+                    },
+                    "roles": ["creator"],
+                },
+                {
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+                    },
+                    "roles": [
+                        "publisher",
+                        "rights_holder",
+                    ],
+                },
+                {
+                    "roles": ["curator"],
+                    "person": {
+                        "name": "Kiia Kontakti",
+                        "email": "kiia@example.com",
+                    },
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+                    },
+                },
+            ],
+        }
+    ]
+
+
+@pytest.fixture
+def mock_cmdi_get_single_record(
+    shared_request_mocker, kielipankki_api_url, cmdi_single_record_xml
+):
+    """
+    Mock a GET request to Comedi to return XML with a single record.
+
+    :return: The corresponding metadata as a list of dicts, one dict per record
+    """
+    shared_request_mocker.get(kielipankki_api_url, text=cmdi_single_record_xml)
+    yield [
+        {
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+            "field_of_science": [
+                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
+            ],
+            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+            "title": {
+                "en": "Silva Kiuru's Time Expressions Corpus",
+                "fi": "Silva Kiurun ajanilmausaineisto",
+            },
+            "description": {
+                "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
+                "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
+            },
+            "modified": "2024-06-19T07:38:46Z",
+            "created": "2022-09-02T00:00:00Z",
             "access_rights": {
                 "license": [
                     {
@@ -359,29 +427,29 @@ def mock_metashare_get_single_record(
 
 
 @pytest.fixture
-def mock_metashare_get_multiple_records(
-    shared_request_mocker, kielipankki_api_url, metashare_multiple_records_xml
+def mock_cmdi_get_multiple_records(
+    shared_request_mocker, kielipankki_api_url, cmdi_multiple_records_xml
 ):
     """
-    Mock a GET request to the Metashare API to return XML with a multiple records record.
+    Mock a GET request to Comedi to return XML with a multiple records record.
     """
-    shared_request_mocker.get(kielipankki_api_url, text=metashare_multiple_records_xml)
+    shared_request_mocker.get(kielipankki_api_url, text=cmdi_multiple_records_xml)
 
 
 @pytest.fixture
-def mock_metashare_get_no_new_records(
+def mock_cmdi_get_no_new_records(
     shared_request_mocker,
     kielipankki_api_url,
-    metashare_no_records_xml,
+    cmdi_no_records_xml,
     latest_harvest_timestamp,
 ):
     """
-    Mock a GET request to the Metashare API to return XML with no new records since
+    Mock a GET request to Comedi to return XML with no new records since
     latest harvest.
     """
     shared_request_mocker.get(
         kielipankki_api_url,
-        text=metashare_no_records_xml,
+        text=cmdi_no_records_xml,
     )
 
 
@@ -394,7 +462,7 @@ def latest_harvest_timestamp():
 
 
 @pytest.fixture
-def basic_metashare_record():
+def basic_cmdi_record():
     """Well-formed record sample of Kielipankki metadata."""
     with open("tests/test_data/kielipankki_record_sample.xml") as xmlfile:
         return MSRecordParser(etree.fromstring(xmlfile.read()))
