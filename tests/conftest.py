@@ -344,10 +344,19 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
                     "organization": {
                         "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
                     },
+                    "roles": [
+                        "publisher",
+                        "rights_holder",
+                    ],
+                },
+                {
                     "roles": ["curator"],
                     "person": {
                         "name": "Kiia Kontakti",
                         "email": "kiia@example.com",
+                    },
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
                     },
                 },
             ],

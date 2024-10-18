@@ -287,26 +287,35 @@ class MSRecordParser:
         actors = []
 
         actor_role_element_xpaths = {
-            "creator": "//cmd:metadataInfo/cmd:metadataCreator",
-            "publisher": "//cmd:distributionInfo/cmd:licenceInfo/cmd:distributionRightsHolderPerson",
-            "curator": "//cmd:resourceInfo/cmd:contactPerson",
-            "rights_holder": "//cmd:distributionInfo/cmd:iprHolderPerson",
+            "creator": ["//cmd:metadataInfo/cmd:metadataCreator"],
+            "publisher": [
+                "//cmd:distributionInfo/cmd:licenceInfo/cmd:distributionRightsHolderPerson",
+                "//cmd:distributionInfo/cmd:licenceInfo/cmd:distributionRightsHolderOrganization",
+            ],
+            "curator": ["//cmd:resourceInfo/cmd:contactPerson"],
+            "rights_holder": [
+                "//cmd:distributionInfo/cmd:iprHolderPerson",
+                "//cmd:distributionInfo/cmd:iprHolderOrganization",
+            ],
         }
 
-        for role, xpath in actor_role_element_xpaths.items():
-            curator_elements = self.xml.xpath(xpath, namespaces=self.namespaces)
+        for role, xpaths in actor_role_element_xpaths.items():
+            for xpath in xpaths:
+                curator_elements = self.xml.xpath(xpath, namespaces=self.namespaces)
 
-            if not isinstance(curator_elements, list):
-                curator_elements = [curator_elements]
+                if not isinstance(curator_elements, list):
+                    curator_elements = [curator_elements]
 
-            for curator_element in curator_elements:
-                new_actor = Actor(curator_element, roles=[role])
-                if not new_actor.has_person_data:
-                    continue
-                if new_actor in actors:
-                    actors[actors.index(new_actor)].add_roles(new_actor.roles)
-                else:
-                    actors.append(new_actor)
+                for curator_element in curator_elements:
+                    new_actor = Actor(curator_element, roles=[role])
+                    # TODO: replace this with handling for actors without (mandatory)
+                    # organization
+                    # if not new_actor.has_person_data:
+                    #    continue
+                    if new_actor in actors:
+                        actors[actors.index(new_actor)].add_roles(new_actor.roles)
+                    else:
+                        actors.append(new_actor)
 
         return [actor.to_metax_dict() for actor in actors]
 

@@ -109,9 +109,15 @@ class Actor:
         testaibility. Performance hit should be minimal, as the lists are tiny (4 items
         at most).
         """
+        if self.has_person_data:
+            return {
+                "roles": sorted(self.roles),
+                "person": self._person_dict,
+                "organization": self._organization_dict,
+            }
+
         return {
             "roles": sorted(self.roles),
-            "person": self._person_dict,
             "organization": self._organization_dict,
         }
 
@@ -184,16 +190,18 @@ class Actor:
             f"Could not determine URI for {organization_name}"
         )
 
-    def _none_if_no_affiliation(func):
+    def _none_if_person_witout_affiliation(func):
         """
-        Wrapper for properties that are None if the actor does not have affiliation data
+        Wrapper for properties that are None if the actor does not have
+        affiliation/organization data.
         """
         # Wrapper shouldn't have self despite being defined in class
         # pylint: disable=no-self-argument
 
         def wrapper(self, *args, **kwargs):
             if (
-                "affiliation" not in self.data["personInfo"]
+                "organizationInfo" not in self.data
+                and "affiliation" not in self.data["personInfo"]
                 and "organizationName" not in self.data
             ):
                 return None
@@ -203,7 +211,7 @@ class Actor:
         return wrapper
 
     @property
-    @_none_if_no_affiliation
+    @_none_if_person_witout_affiliation
     def _organization_data(self):
         if "personInfo" in self.data and "affiliation" in self.data["personInfo"]:
             return self.data["personInfo"]["affiliation"]
@@ -213,7 +221,7 @@ class Actor:
             return self.data
 
     @property
-    @_none_if_no_affiliation
+    @_none_if_person_witout_affiliation
     def organization_name(self):
         """
         Return the nameis of the organizaton in all supported and provided languages.
@@ -235,7 +243,7 @@ class Actor:
         return languages
 
     @property
-    @_none_if_no_affiliation
+    @_none_if_person_witout_affiliation
     def organization_homepage(self):
         """
         Return the organization home page as Metax-compatible dict if available, otherwise None.
@@ -252,7 +260,7 @@ class Actor:
         return None
 
     @property
-    @_none_if_no_affiliation
+    @_none_if_person_witout_affiliation
     def organization_email(self):
         """
         Return the organization's contact email.
@@ -263,7 +271,7 @@ class Actor:
         return self._organization_data["organizationInfo"]["communicationInfo"]["email"]
 
     @property
-    @_none_if_no_affiliation
+    @_none_if_person_witout_affiliation
     def _organization_dict(self):
         """
         Return organization information about the actor as a Metax-compatible dict.
@@ -291,10 +299,16 @@ class Actor:
         if not isinstance(other, Actor):
             return False
 
+        if self.has_person_data:
+            return (
+                self.name == other.name
+                and self.email == other.email
+                and self._organization_dict == other._organization_dict
+            )
+
         return (
-            self.name == other.name
-            and self.email == other.email
-            and self._organization_dict == other._organization_dict
+            self._organization_dict == other._organization_dict
+            and not other.has_person_data
         )
 
 
