@@ -253,9 +253,9 @@ class Actor:
         """
         if "url" in self._organization_data["organizationInfo"]["communicationInfo"]:
             return {
-                "identifier": self._organization_data["organizationInfo"][
-                    "communicationInfo"
-                ]["url"]
+                "url": self._organization_data["organizationInfo"]["communicationInfo"][
+                    "url"
+                ]
             }
         return None
 

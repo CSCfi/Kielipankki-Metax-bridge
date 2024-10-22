@@ -344,7 +344,7 @@ def test_multiple_actors_for_same_role():
         {
             "organization": {
                 "email": "imaginary@example.com",
-                "homepage": {"identifier": "http://www.imaginary.example"},
+                "homepage": {"url": "http://www.imaginary.example"},
                 "pref_label": {
                     "en": "Imaginary organization",
                     "fi": "Kuvitteellinen organisaatio",
