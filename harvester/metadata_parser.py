@@ -146,7 +146,7 @@ class RecordParser:
                 license_urn = [
                     word
                     for word in doc_element_text.split()
-                    if word.startswith("http://urn.fi")
+                    if "://urn.fi/urn:nbn:fi" in word
                 ]
                 if license_urn:
                     return license_urn[0]
