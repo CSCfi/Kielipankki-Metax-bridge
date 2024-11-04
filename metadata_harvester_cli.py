@@ -6,7 +6,6 @@ import logging
 from datetime import datetime
 
 import click
-from lxml import etree
 import yaml
 
 from harvester.pmh_interface import PMH_API
