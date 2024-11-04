@@ -10,7 +10,6 @@ from lxml import etree
 import yaml
 
 from harvester.pmh_interface import PMH_API
-from harvester.metadata_parser import MSRecordParser
 from metax_api import MetaxAPI
 
 
