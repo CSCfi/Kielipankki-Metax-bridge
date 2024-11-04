@@ -1,6 +1,6 @@
 import pytest
 from lxml import etree
-from harvester.metadata_parser import MSRecordParser
+from harvester.metadata_parser import RecordParser
 
 
 def _get_file_as_lxml(filename):
@@ -112,7 +112,7 @@ def test_to_dict(basic_cmdi_record, dataset_pid, kielipankki_datacatalog_id):
 @pytest.fixture
 def tool_record():
     """A record where resourceType is "toolService", not "corpus"."""
-    return MSRecordParser(_get_file_as_lxml("tests/test_data/tool_record.xml"))
+    return RecordParser(_get_file_as_lxml("tests/test_data/tool_record.xml"))
 
 
 def test_check_resourcetype_corpus(tool_record):
@@ -124,7 +124,7 @@ def test_check_resourcetype_corpus(tool_record):
 @pytest.fixture
 def missing_license_record():
     """A record missing licenseInfo element."""
-    return MSRecordParser(_get_file_as_lxml("tests/test_data/missing_licenseinfo.xml"))
+    return RecordParser(_get_file_as_lxml("tests/test_data/missing_licenseinfo.xml"))
 
 
 def test_missing_license_record(missing_license_record):
@@ -161,7 +161,7 @@ def test_license_custom_url_record(license_with_custom_url_record):
 @pytest.fixture
 def several_licenses_record():
     """A record that has several licenseInfo elements."""
-    return MSRecordParser(_get_file_as_lxml("tests/test_data/several_licenses.xml"))
+    return RecordParser(_get_file_as_lxml("tests/test_data/several_licenses.xml"))
 
 
 def test_several_licenses_record(several_licenses_record):
@@ -188,7 +188,7 @@ def test_several_licenses_record(several_licenses_record):
 @pytest.fixture
 def accesstype_open_record():
     """A record with a PUB license."""
-    return MSRecordParser(_get_file_as_lxml("tests/test_data/accesstype_open.xml"))
+    return RecordParser(_get_file_as_lxml("tests/test_data/accesstype_open.xml"))
 
 
 def test_accesstype_open_record(accesstype_open_record):
@@ -211,7 +211,7 @@ def test_accesstype_open_record(accesstype_open_record):
 @pytest.fixture
 def license_with_custom_url_in_doc_unstruct_record():
     """A record containing lisence url in documentation elements."""
-    return MSRecordParser(
+    return RecordParser(
         _get_file_as_lxml("tests/test_data/license_in_doc_unstruct.xml")
     )
 
@@ -238,7 +238,7 @@ def test_custom_url_from_doc_unstruct_element(
 @pytest.fixture
 def missing_pid_record():
     """A record that doesn't have a PID."""
-    return MSRecordParser(_get_file_as_lxml("tests/test_data/missing_pid.xml"))
+    return RecordParser(_get_file_as_lxml("tests/test_data/missing_pid.xml"))
 
 
 def test_check_pid_exists(missing_pid_record):
@@ -263,7 +263,7 @@ def test_get_resource_languages_with_multiple_languages():
     Check that multiple languages for one resource are reported properly. Also includes
     an ISO 639-5 language.
     """
-    record = MSRecordParser(
+    record = RecordParser(
         _get_file_as_lxml(
             "tests/test_data/kielipankki_record_sample_multiple_languages.xml"
         )
@@ -315,7 +315,7 @@ def test_multiple_actors_for_same_role():
     """
     Check that having more than one actor for a single role will report them all.
     """
-    record = MSRecordParser(
+    record = RecordParser(
         _get_file_as_lxml(
             "tests/test_data/kielipankki_record_sample_multiple_actors.xml"
         )
@@ -390,7 +390,7 @@ def test_multiple_names_for_actor():
     The test data for this test would also have the Finnish name "Kaarle Kustaa"
     available, but the English "Carl Gustaf" should be preferred.
     """
-    record = MSRecordParser(
+    record = RecordParser(
         _get_file_as_lxml(
             "tests/test_data/kielipankki_record_sample_actor_with_multiple_names.xml"
         )
@@ -407,7 +407,7 @@ def test_publisher_person():
     This is not properly covered with the other test data, as it is more common that the
     publisher is an organization.
     """
-    record = MSRecordParser(
+    record = RecordParser(
         _get_file_as_lxml(
             "tests/test_data/kielipankki_record_sample_with_publisher_person.xml"
         )

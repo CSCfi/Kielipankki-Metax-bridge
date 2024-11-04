@@ -6,7 +6,7 @@ import pytest
 import requests_mock
 
 from harvester import language_validator
-from harvester.metadata_parser import MSRecordParser
+from harvester.metadata_parser import RecordParser
 from metax_api import MetaxAPI
 
 
@@ -465,14 +465,14 @@ def latest_harvest_timestamp():
 def basic_cmdi_record():
     """Well-formed record sample of Kielipankki metadata."""
     with open("tests/test_data/kielipankki_record_sample.xml") as xmlfile:
-        return MSRecordParser(etree.fromstring(xmlfile.read()))
+        return RecordParser(etree.fromstring(xmlfile.read()))
 
 
 @pytest.fixture
 def license_with_custom_url_record():
     """A record containing lisence url in documentation elements."""
     with open("tests/test_data/res_with_license_url.xml") as xmlfile:
-        return MSRecordParser(etree.fromstring(xmlfile.read()))
+        return RecordParser(etree.fromstring(xmlfile.read()))
 
 
 @pytest.fixture

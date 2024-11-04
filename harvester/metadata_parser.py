@@ -8,7 +8,7 @@ from harvester.actor import Actor
 from harvester import language_validator
 
 
-class MSRecordParser:
+class RecordParser:
     def __init__(self, xml):
         """
         Create a CMDI record object.

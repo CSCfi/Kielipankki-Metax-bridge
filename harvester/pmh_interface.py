@@ -7,7 +7,7 @@ from lxml import etree
 from sickle import Sickle
 from sickle.oaiexceptions import NoRecordsMatch
 
-from harvester.metadata_parser import MSRecordParser
+from harvester.metadata_parser import RecordParser
 
 
 class PMH_API:
@@ -39,7 +39,7 @@ class PMH_API:
                 }
             )
             for metadata_record in metadata_records:
-                yield MSRecordParser(deepcopy(metadata_record.xml))
+                yield RecordParser(deepcopy(metadata_record.xml))
         except NoRecordsMatch:
             return
 
