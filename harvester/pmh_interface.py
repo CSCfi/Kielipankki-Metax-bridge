@@ -48,7 +48,7 @@ class PMH_API:
         Iterate over all corpora type records that have a PID
         """
         for record in self.fetch_records(from_timestamp=from_timestamp):
-            if record.check_pid_exists() and record.check_resourcetype_corpus():
+            if record.check_resourcetype_corpus():
                 yield record
 
     @property

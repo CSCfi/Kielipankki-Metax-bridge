@@ -238,12 +238,16 @@ def test_custom_url_from_doc_unstruct_element(
 @pytest.fixture
 def missing_pid_record():
     """A record that doesn't have a PID."""
-    return RecordParser(_get_file_as_lxml("tests/test_data/missing_pid.xml"))
+    return RecordParser(
+        _get_file_as_lxml("tests/test_data/kielipankki_record_sample_missing_pid.xml")
+    )
 
 
-def test_check_pid_exists(missing_pid_record):
+def test_missing_pid_reported_as_error(missing_pid_record):
     """Check that a missing PID is handled."""
-    assert not missing_pid_record.check_pid_exists()
+    with pytest.raises(ValueError) as err:
+        missing_pid_record.pid()
+    assert str(err.value) == "No pid found for record oai:clarino.uib.no:lb-2017021609"
 
 
 def test_get_resource_languages(basic_cmdi_record):
