@@ -82,16 +82,15 @@ class RecordParser:
         Return the PID for this record
         """
         try:
+            comedi_identifier = self._get_text_xpath(
+                "//oai:header/oai:identifier/text()"
+            )
             return self._get_identifier("//cmd:Header/cmd:MdSelfLink/text()")
         except IndexError:
-            # no PID found
-            return None
-
-    def check_pid_exists(self):
-        """
-        Only records with PIDs are relevant.
-        """
-        return bool(self.pid)
+            comedi_identifier = self._get_text_xpath(
+                "//oai:header/oai:identifier/text()"
+            )
+            raise ValueError(f"No pid found for record {comedi_identifier}")
 
     def _get_list_of_licenses(self):
         """
