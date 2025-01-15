@@ -420,3 +420,19 @@ def test_publisher_person():
     assert len(actors) == 1
     assert "publisher" in actors[0]["roles"]
     assert actors[0]["person"]["name"] == "Late Lisensoija"
+
+
+def test_finclarin_organization_code_is_helsinki_uni():
+    """
+    Check that FIN-CLARIN affiliation uses organization code of University of Helsinki
+    """
+    record = RecordParser(
+        _get_file_as_lxml(
+            "tests/test_data/kielipankki_record_sample_finclarin_affiliation.xml"
+        )
+    )
+    actors = record.to_dict(data_catalog="catalog_id")["actors"]
+    assert (
+        actors[0]["organization"]["url"]
+        == "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
+    )

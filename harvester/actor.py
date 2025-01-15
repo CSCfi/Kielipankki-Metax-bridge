@@ -165,16 +165,12 @@ class Actor:
                 f"{self._organization_data['organizationInfo']}"
             )
 
-        if organization_name == "FIN-CLARIN":
-            organization_name = self._organization_data["organizationInfo"][
-                "departmentName_en"
-            ]
-
         url_base = "http://uri.suomi.fi/codelist/fairdata/organization/code"
         organization_codes = {
             "Aalto University": "10076",
             "CSC — IT Center for Science Ltd": "09206320",
             "Centre for Applied Language Studies": "01906-213060",
+            "FIN-CLARIN": "01901",
             "National Library of Finland": "01901-H981",
             "South Eastern Finland University of Applied Sciences": "10118",
             "University of Eastern Finland": "10088",
