@@ -172,7 +172,8 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
         == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
-    assert "Success, all records harvested" in caplog.text
+    assert "Success, 1 records harvested" in caplog.text
+    assert "faulty" not in caplog.text
 
 
 @pytest.mark.usefixtures(
@@ -218,7 +219,8 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
         == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
-    assert "Success, all records harvested" in caplog.text
+    assert "Success, 1 records harvested" in caplog.text
+    assert "faulty" not in caplog.text
 
 
 @pytest.mark.usefixtures(
@@ -254,7 +256,8 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
         == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
-    assert "Success, records harvested since" in caplog.text
+    assert "Success, 1 records harvested since" in caplog.text
+    assert "faulty" not in caplog.text
 
 
 @pytest.mark.usefixtures(
@@ -300,7 +303,8 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
         == mock_list_records_single_record[0]["persistent_identifier"]
     )
 
-    assert "Success, records harvested since" in caplog.text
+    assert "Success, 1 records harvested since" in caplog.text
+    assert "faulty" not in caplog.text
 
 
 @pytest.mark.usefixtures(
