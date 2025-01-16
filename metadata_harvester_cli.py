@@ -151,10 +151,25 @@ def full_harvest(config_file):
             click.echo(f"Unexpected problem with {record.pid}:")
             click.echo(traceback.format_exc())
 
-    if harvested_date:
-        logger_harvester.info("Success, records harvested since %s", harvested_date)
+    if not faulty_records:
+        if harvested_date:
+            logger_harvester.info("Success, records harvested since %s", harvested_date)
+        else:
+            logger_harvester.info("Success, all records harvested")
     else:
-        logger_harvester.info("Success, all records harvested")
+        if harvested_date:
+            logger_harvester.info(
+                "Success, records harvested since %s (%d faulty record not uploaded and will "
+                "not be automatically retried)",
+                harvested_date,
+                faulty_records,
+            )
+        else:
+            logger_harvester.info(
+                "Success, all records harvested (%d faulty record not uploaded and will not "
+                "be automatically retried)",
+                faulty_records,
+            )
 
     destination_api.delete_records_not_in(source_api.fetch_records())
 

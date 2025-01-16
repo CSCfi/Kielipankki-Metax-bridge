@@ -1,6 +1,6 @@
 import pytest
 from lxml import etree
-from harvester.metadata_parser import RecordParser
+from harvester.metadata_parser import RecordParser, RecordParsingError
 
 
 def _get_file_as_lxml(filename):
@@ -245,9 +245,12 @@ def missing_pid_record():
 
 def test_missing_pid_reported_as_error(missing_pid_record):
     """Check that a missing PID is handled."""
-    with pytest.raises(ValueError) as err:
+    with pytest.raises(RecordParsingError) as err:
         missing_pid_record.pid()
-    assert str(err.value) == "No pid found for record oai:clarino.uib.no:lb-2017021609"
+    assert (
+        str(err.value)
+        == "Error parsing record oai:clarino.uib.no:lb-2017021609: Could not determine PID"
+    )
 
 
 def test_get_resource_languages(basic_cmdi_record):
