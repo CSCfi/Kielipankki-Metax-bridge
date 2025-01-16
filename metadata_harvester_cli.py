@@ -4,10 +4,12 @@ Main script for running metadata harvesting and sending it to Metax.
 
 import logging
 from datetime import datetime
+import traceback
 
 import click
 import yaml
 
+from harvester.metadata_parser import RecordParsingError
 from harvester.pmh_interface import PMH_API
 from metax_api import MetaxAPI
 
@@ -106,8 +108,21 @@ def full_harvest(config_file):
     harvested_date = last_harvest_date(config["harvester_log_file"])
     logger_harvester.info("Started")
 
+    total_records = 0
+    faulty_records = 0
+
     for record in source_api.fetch_corpora(from_timestamp=harvested_date):
-        destination_api.send_record(record)
+        total_records += 1
+
+        try:
+            destination_api.send_record(record)
+        except RecordParsingError as err:
+            faulty_records += 1
+            click.echo(err)
+        except:  # pylint: disable=bare-except
+            faulty_records += 1
+            click.echo(f"Unexpected problem with {record.pid}:")
+            click.echo(traceback.format_exc())
 
     if harvested_date:
         logger_harvester.info("Success, records harvested since %s", harvested_date)

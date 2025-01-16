@@ -4,8 +4,26 @@ from urllib.parse import urlparse
 from lxml import etree
 import iso639
 
-from harvester.actor import Actor
+from harvester.actor import (
+    Actor,
+    UnknownOrganizationException,
+    UnableToParseOrganizationInfoException,
+)
 from harvester import language_validator
+
+
+class RecordParsingError(Exception):
+    """
+    Exception to be raised when all required information cannot be parsed from a record.
+    """
+
+    def __init__(self, message, identifier):
+        super().__init__(message)
+        self.message = message
+        self.identifier = identifier
+
+    def __str__(self):
+        return f"Error parsing record {self.identifier}: {self.message}"
 
 
 class RecordParser:
@@ -74,7 +92,7 @@ class RecordParser:
             formatted_date_str = datetime_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
             return formatted_date_str
         else:
-            raise ValueError("No date found")
+            raise RecordParsingError(f"No date found from string {date_str}", self.pid)
 
     @property
     def pid(self):
@@ -82,15 +100,12 @@ class RecordParser:
         Return the PID for this record
         """
         try:
-            comedi_identifier = self._get_text_xpath(
-                "//oai:header/oai:identifier/text()"
-            )
             return self._get_identifier("//cmd:Header/cmd:MdSelfLink/text()")
         except IndexError:
             comedi_identifier = self._get_text_xpath(
                 "//oai:header/oai:identifier/text()"
             )
-            raise ValueError(f"No pid found for record {comedi_identifier}")
+            raise RecordParsingError("Could not determine PID", comedi_identifier)
 
     def _get_list_of_licenses(self):
         """
@@ -264,17 +279,18 @@ class RecordParser:
                 elif language.pt5:
                     language_uri = f"http://lexvo.org/id/iso639-5/{language.pt5}"
                 else:
-                    raise ValueError(
-                        "Could not determine three-letter language code for %s"
-                        % language_code,
+                    raise RecordParsingError(
+                        f"Could not determine three-letter language code for {language_code}",
+                        self.pid,
                     )
 
                 if language_validator.language_in_vocabulary(language_uri):
                     iso639_urls.add(language_uri)
 
             except iso639.exceptions.InvalidLanguageValue:
-                raise ValueError(
-                    "Could not determine ISO 639 language code for %s" % language_code,
+                raise RecordParsingError(
+                    f"Could not determine ISO 639 language code for {language_code}",
+                    self.pid,
                 )
 
         return [{"url": url} for url in iso639_urls]
@@ -311,10 +327,16 @@ class RecordParser:
                     # organization
                     # if not new_actor.has_person_data:
                     #    continue
-                    if new_actor in actors:
-                        actors[actors.index(new_actor)].add_roles(new_actor.roles)
-                    else:
-                        actors.append(new_actor)
+                    try:
+                        if new_actor in actors:
+                            actors[actors.index(new_actor)].add_roles(new_actor.roles)
+                        else:
+                            actors.append(new_actor)
+                    except (
+                        UnknownOrganizationException,
+                        UnableToParseOrganizationInfoException,
+                    ) as err:
+                        raise RecordParsingError(str(err), self.pid)
 
         return [actor.to_metax_dict() for actor in actors]
 
