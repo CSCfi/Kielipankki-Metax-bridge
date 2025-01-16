@@ -4,6 +4,13 @@ Main script for running metadata harvesting and sending it to Metax.
 
 import logging
 from datetime import datetime
+from requests.exceptions import (
+    MissingSchema,
+    InvalidSchema,
+    InvalidURL,
+    HTTPError,
+    RequestException,
+)
 import traceback
 
 import click
@@ -119,6 +126,26 @@ def full_harvest(config_file):
         except RecordParsingError as err:
             faulty_records += 1
             click.echo(err)
+        except (MissingSchema, InvalidSchema, InvalidURL) as err:
+            faulty_records += 1
+            click.echo(
+                f"There seems to be a configuration error related to Metax URL: {err}"
+            )
+            return
+        except HTTPError as err:
+            faulty_records += 1
+            click.echo(
+                "HTTP request failed. "
+                f"method: {err.request.method}, "
+                f"URL: {err.request.url}, "
+                f'error: "{err}", '
+                f"response text: {err.response.text}, "
+                f"payload: {err.request.body}"
+            )
+            return
+        except RequestException as err:
+            faulty_records += 1
+            click.echo(f"Error making a HTTP request: {err}")
         except:  # pylint: disable=bare-except
             faulty_records += 1
             click.echo(f"Unexpected problem with {record.pid}:")
