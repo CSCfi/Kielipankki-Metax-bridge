@@ -153,21 +153,25 @@ def full_harvest(config_file):
 
     if not faulty_records:
         if harvested_date:
-            logger_harvester.info("Success, records harvested since %s", harvested_date)
+            logger_harvester.info(
+                "Success, %d records harvested since %s", total_records, harvested_date
+            )
         else:
-            logger_harvester.info("Success, all records harvested")
+            logger_harvester.info("Success, %d records harvested", total_records)
     else:
         if harvested_date:
             logger_harvester.info(
-                "Success, records harvested since %s (%d faulty record not uploaded and will "
-                "not be automatically retried)",
+                "Success, %d records harvested since %s (out of which %d faulty "
+                "record(s) not uploaded and will not be automatically retried)",
+                total_records,
                 harvested_date,
                 faulty_records,
             )
         else:
             logger_harvester.info(
-                "Success, all records harvested (%d faulty record not uploaded and will not "
+                "Success, %d records harvested (%d faulty record(s) not uploaded and will not "
                 "be automatically retried)",
+                total_records,
                 faulty_records,
             )
 
