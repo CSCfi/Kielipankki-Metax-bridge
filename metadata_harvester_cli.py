@@ -149,6 +149,7 @@ def full_harvest(config_file):
             faulty_records += 1
             click.echo(f"Unexpected problem with {record.pid}:")
             click.echo(traceback.format_exc())
+            raise click.Abort()
 
     if not faulty_records:
         if harvested_date:
