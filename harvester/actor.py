@@ -220,7 +220,7 @@ class Actor:
     @_none_if_person_witout_affiliation
     def organization_name(self):
         """
-        Return the nameis of the organizaton in all supported and provided languages.
+        Return the names of the organizaton in all supported and provided languages.
 
         The element is mandatory in the profile we use, so handling for missing key is
         not needed, but there can be multiple language versions, each of which is sent
