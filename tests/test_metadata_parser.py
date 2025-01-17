@@ -86,7 +86,9 @@ def test_to_dict(basic_cmdi_record, dataset_pid, kielipankki_datacatalog_id):
             {
                 "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
                 "roles": ["creator"],
-                "organization": None,
+                "organization": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
+                },
             },
             {
                 "roles": ["publisher", "rights_holder"],
@@ -299,7 +301,9 @@ def test_get_actors(basic_cmdi_record):
     assert {
         "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
         "roles": ["creator"],
-        "organization": None,
+        "organization": {
+            "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
+        },
     } in actors
 
     assert {
@@ -374,10 +378,12 @@ def test_multiple_actors_for_same_role():
         {
             "roles": ["curator"],
             "person": {
-                "name": "User support FIN-CLARIN",
-                "email": "fin-clarin@helsinki.fi",
+                "name": "Kari Kuraattori",
+                "email": "kari@example.com",
             },
-            "organization": None,
+            "organization": {
+                "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+            },
         },
         {
             "roles": ["rights_holder"],

@@ -82,6 +82,15 @@
                 <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
                   <email>kungen@example.com</email>
                 </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo>
+                    <organizationName xml:lang="en">The Royal Palaces</organizationName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>firstname.lastname@example.com</email>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
               </personInfo>
             </iprHolderPerson>
           </distributionInfo>
