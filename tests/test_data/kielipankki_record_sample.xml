@@ -114,6 +114,20 @@
                   <city>Helsinki</city>
                   <country>Finland</country>
                 </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">University of Helsinki</organizationName>
+                    <departmentName xml:lang="en">
+                      Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                    </departmentName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>finno-ugrian@example.com</email>
+                      <url>http://www.helsinki.fi/fus/index.htm</url>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
               </personInfo>
             </metadataCreator>
           </metadataInfo>

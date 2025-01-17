@@ -323,10 +323,11 @@ class RecordParser:
 
                 for curator_element in curator_elements:
                     new_actor = Actor(curator_element, roles=[role])
-                    # TODO: replace this with handling for actors without (mandatory)
-                    # organization
-                    # if not new_actor.has_person_data:
-                    #    continue
+                    if not new_actor.organization_name:
+                        raise RecordParsingError(
+                            f"Could not find affiliation for {new_actor.name}", self.pid
+                        )
+
                     try:
                         if new_actor in actors:
                             actors[actors.index(new_actor)].add_roles(new_actor.roles)

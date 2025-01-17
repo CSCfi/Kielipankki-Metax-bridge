@@ -118,6 +118,20 @@
                       <city>Helsinki</city>
                       <country>Finland</country>
                     </communicationInfo>
+                    <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                      <role>affiliation</role>
+                      <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <departmentName xml:lang="en">
+                          Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                        </departmentName>
+                        <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                          <email>kiia@example.com</email>
+                          <url>http://www.helsinki.fi/fus/index.htm</url>
+                          <country>Finland</country>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
                   </personInfo>
                 </metadataCreator>
               </metadataInfo>
@@ -497,11 +511,25 @@
               <contactPerson ComponentId="clarin.eu:cr1:c_1352813745468">
                 <role>contactPerson</role>
                 <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
-                  <surname xml:lang="en">FIN-CLARIN</surname>
-                  <givenName xml:lang="en">User support</givenName>
+                  <surname xml:lang="en">Keijo</surname>
+                  <givenName xml:lang="en">Kontakti</givenName>
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
-                    <email>fin-clarin@helsinki.fi</email>
+                    <email>keijo@example.com</email>
                   </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <departmentName xml:lang="en">
+                        Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                      </departmentName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>kiia@example.com</email>
+                        <url>http://www.helsinki.fi/fus/index.htm</url>
+                        <country>Finland</country>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
                 </personInfo>
               </contactPerson>
               <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
@@ -913,6 +941,20 @@
                   <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
                     <email>fin-clarin@helsinki.fi</email>
                   </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                      <organizationName xml:lang="en">University of Helsinki</organizationName>
+                      <departmentName xml:lang="en">
+                        Department of Finnish, Finno-Ugrian and Scandinavian Studies
+                      </departmentName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>kiia@example.com</email>
+                        <url>http://www.helsinki.fi/fus/index.htm</url>
+                        <country>Finland</country>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
                 </personInfo>
               </contactPerson>
               <metadataInfo ComponentId="clarin.eu:cr1:c_1349361150745">
