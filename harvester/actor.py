@@ -83,7 +83,7 @@ class Actor:
             if f"givenName_{language}" in person_info:
                 return f"{person_info['givenName'+'_'+language]} {person_info['surname'+'_'+language]}"
             if f"surname_{language}" in person_info:
-                return f"person_info['surname'+'_'+language]"
+                return f"{person_info['surname'+'_'+language]}"
         return None
 
     @property
