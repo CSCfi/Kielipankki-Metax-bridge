@@ -175,7 +175,31 @@ def full_harvest(config_file):
                 faulty_records,
             )
 
-    destination_api.delete_records_not_in(source_api.fetch_records())
+    try:
+        destination_api.delete_records_not_in(source_api.fetch_records())
+    except RecordParsingError as err:
+        click.echo(
+            f"Error when determining records to be removed from Metax: {err}. Deletion of further "
+            "records will not be attempted."
+        )
+    except HTTPError as err:
+        click.echo(
+            "Error deleting a record from Metax. Deletion of further records will not "
+            "be attempted. "
+            f"method: {err.request.method}, "
+            f"URL: {err.request.url}, "
+            f'error: "{err}", '
+            f"response text: {err.response.text}, "
+            f"payload: {err.request.body}"
+        )
+    except RequestException as err:
+        click.echo(
+            "Error deleting a record from Metax. Deletion of further records will not "
+            f"be attempted: {err}"
+        )
+    except:  # pylint: disable=bare-except
+        click.echo("Unexpected problem when deleting a record from Metax:")
+        click.echo(traceback.format_exc())
 
 
 if __name__ == "__main__":
