@@ -131,7 +131,7 @@ def full_harvest(config_file):
             click.echo(
                 f"There seems to be a configuration error related to Metax URL: {err}"
             )
-            return
+            raise click.Abort()
         except HTTPError as err:
             faulty_records += 1
             click.echo(
@@ -142,7 +142,6 @@ def full_harvest(config_file):
                 f"response text: {err.response.text}, "
                 f"payload: {err.request.body}"
             )
-            return
         except RequestException as err:
             faulty_records += 1
             click.echo(f"Error making a HTTP request: {err}")
@@ -182,6 +181,7 @@ def full_harvest(config_file):
             f"Error when determining records to be removed from Metax: {err}. Deletion of further "
             "records will not be attempted."
         )
+        raise click.Abort()
     except HTTPError as err:
         click.echo(
             "Error deleting a record from Metax. Deletion of further records will not "
@@ -192,14 +192,20 @@ def full_harvest(config_file):
             f"response text: {err.response.text}, "
             f"payload: {err.request.body}"
         )
+        raise click.Abort()
     except RequestException as err:
         click.echo(
             "Error deleting a record from Metax. Deletion of further records will not "
             f"be attempted: {err}"
         )
+        raise click.Abort()
     except:  # pylint: disable=bare-except
         click.echo("Unexpected problem when deleting a record from Metax:")
         click.echo(traceback.format_exc())
+        raise click.Abort()
+
+    if faulty_records:
+        exit(1)
 
 
 if __name__ == "__main__":
