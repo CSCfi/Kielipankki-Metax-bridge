@@ -125,11 +125,12 @@ def full_harvest(config_file):
             destination_api.send_record(record)
         except RecordParsingError as err:
             faulty_records += 1
-            click.echo(err)
+            click.echo(err, err=True)
         except (MissingSchema, InvalidSchema, InvalidURL) as err:
             faulty_records += 1
             click.echo(
-                f"There seems to be a configuration error related to Metax URL: {err}"
+                f"There seems to be a configuration error related to Metax URL: {err}",
+                err=True,
             )
             raise click.Abort()
         except HTTPError as err:
@@ -140,15 +141,16 @@ def full_harvest(config_file):
                 f"URL: {err.request.url}, "
                 f'error: "{err}", '
                 f"response text: {err.response.text}, "
-                f"payload: {err.request.body}"
+                f"payload: {err.request.body}",
+                err=True,
             )
         except RequestException as err:
             faulty_records += 1
-            click.echo(f"Error making a HTTP request: {err}")
+            click.echo(f"Error making a HTTP request: {err}", err=True)
         except:  # pylint: disable=bare-except
             faulty_records += 1
-            click.echo(f"Unexpected problem with {record.pid}:")
-            click.echo(traceback.format_exc())
+            click.echo(f"Unexpected problem with {record.pid}:", err=True)
+            click.echo(traceback.format_exc(), err=True)
             raise click.Abort()
 
     if not faulty_records:
@@ -180,7 +182,8 @@ def full_harvest(config_file):
     except RecordParsingError as err:
         click.echo(
             f"Error when determining records to be removed from Metax: {err}. Deletion of further "
-            "records will not be attempted."
+            "records will not be attempted.",
+            err=True,
         )
         raise click.Abort()
     except HTTPError as err:
@@ -191,18 +194,20 @@ def full_harvest(config_file):
             f"URL: {err.request.url}, "
             f'error: "{err}", '
             f"response text: {err.response.text}, "
-            f"payload: {err.request.body}"
+            f"payload: {err.request.body}",
+            err=True,
         )
         raise click.Abort()
     except RequestException as err:
         click.echo(
             "Error deleting a record from Metax. Deletion of further records will not "
-            f"be attempted: {err}"
+            f"be attempted: {err}",
+            err=True,
         )
         raise click.Abort()
     except:  # pylint: disable=bare-except
-        click.echo("Unexpected problem when deleting a record from Metax:")
-        click.echo(traceback.format_exc())
+        click.echo("Unexpected problem when deleting a record from Metax:", err=True)
+        click.echo(traceback.format_exc(), err=True)
         raise click.Abort()
 
     if faulty_records:
