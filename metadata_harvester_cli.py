@@ -2,8 +2,11 @@
 Main script for running metadata harvesting and sending it to Metax.
 """
 
-import logging
 from datetime import datetime
+import logging
+import traceback
+
+import click
 from requests.exceptions import (
     MissingSchema,
     InvalidSchema,
@@ -11,9 +14,6 @@ from requests.exceptions import (
     HTTPError,
     RequestException,
 )
-import traceback
-
-import click
 import yaml
 
 from harvester.metadata_parser import RecordParsingError
