@@ -123,31 +123,31 @@ def full_harvest(config_file):
 
         try:
             destination_api.send_record(record)
-        except RecordParsingError as err:
+        except RecordParsingError as error:
             faulty_records += 1
-            click.echo(err, err=True)
-        except (MissingSchema, InvalidSchema, InvalidURL) as err:
+            click.echo(error, err=True)
+        except (MissingSchema, InvalidSchema, InvalidURL) as error:
             faulty_records += 1
             click.echo(
-                f"There seems to be a configuration error related to Metax URL: {err}",
+                f"There seems to be a configuration error related to Metax URL: {error}",
                 err=True,
             )
             raise click.Abort()
-        except HTTPError as err:
+        except HTTPError as error:
             faulty_records += 1
             click.echo(
                 "HTTP request failed. "
-                f"method: {err.request.method}, "
-                f"URL: {err.request.url}, "
-                f'error: "{err}", '
-                f"response text: {err.response.text}, "
-                f"payload: {err.request.body}",
+                f"method: {error.request.method}, "
+                f"URL: {error.request.url}, "
+                f'error: "{error}", '
+                f"response text: {error.response.text}, "
+                f"payload: {error.request.body}",
                 err=True,
             )
-        except RequestException as err:
+        except RequestException as error:
             faulty_records += 1
-            click.echo(f"Error making a HTTP request: {err}", err=True)
         except:  # pylint: disable=bare-except
+            click.echo(f"Error making a HTTP request: {error}", err=True)
             faulty_records += 1
             click.echo(f"Unexpected problem with {record.pid}:", err=True)
             click.echo(traceback.format_exc(), err=True)
@@ -179,29 +179,29 @@ def full_harvest(config_file):
 
     try:
         destination_api.delete_records_not_in(source_api.fetch_records())
-    except RecordParsingError as err:
+    except RecordParsingError as error:
         click.echo(
-            f"Error when determining records to be removed from Metax: {err}. Deletion of further "
+            f"Error when determining records to be removed from Metax: {error}. Deletion of further "
             "records will not be attempted.",
             err=True,
         )
         raise click.Abort()
-    except HTTPError as err:
+    except HTTPError as error:
         click.echo(
             "Error deleting a record from Metax. Deletion of further records will not "
             "be attempted. "
-            f"method: {err.request.method}, "
-            f"URL: {err.request.url}, "
-            f'error: "{err}", '
-            f"response text: {err.response.text}, "
-            f"payload: {err.request.body}",
+            f"method: {error.request.method}, "
+            f"URL: {error.request.url}, "
+            f'error: "{error}", '
+            f"response text: {error.response.text}, "
+            f"payload: {error.request.body}",
             err=True,
         )
         raise click.Abort()
-    except RequestException as err:
+    except RequestException as error:
         click.echo(
             "Error deleting a record from Metax. Deletion of further records will not "
-            f"be attempted: {err}",
+            f"be attempted: {error}",
             err=True,
         )
         raise click.Abort()
