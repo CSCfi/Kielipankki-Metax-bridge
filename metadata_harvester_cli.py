@@ -146,8 +146,8 @@ def full_harvest(config_file):
             )
         except RequestException as error:
             faulty_records += 1
-        except:  # pylint: disable=bare-except
             click.echo(f"Error making a HTTP request: {error}", err=True)
+        except Exception:
             faulty_records += 1
             click.echo(f"Unexpected problem with {record.pid}:", err=True)
             click.echo(traceback.format_exc(), err=True)
@@ -205,7 +205,7 @@ def full_harvest(config_file):
             err=True,
         )
         raise click.Abort()
-    except:  # pylint: disable=bare-except
+    except Exception:
         click.echo("Unexpected problem when deleting a record from Metax:", err=True)
         click.echo(traceback.format_exc(), err=True)
         raise click.Abort()
