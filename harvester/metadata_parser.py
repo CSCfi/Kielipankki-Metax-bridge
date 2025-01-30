@@ -443,4 +443,5 @@ class RecordParser:
             "created": self._get_datetime("//cmd:Header/cmd:MdCreationDate/text()"),
             "access_rights": self._map_access_rights(),
             "actors": self._get_actors(),
+            "state": "published",
         }

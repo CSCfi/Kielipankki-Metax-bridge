@@ -362,6 +362,7 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
                     },
                 },
             ],
+            "state": "published",
         }
     ]
 
@@ -424,6 +425,7 @@ def mock_cmdi_get_single_record(
                     },
                 },
             ],
+            "state": "published",
         }
     ]
 
