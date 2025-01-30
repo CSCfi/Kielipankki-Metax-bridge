@@ -70,6 +70,28 @@
                   </affiliation>
                 </personInfo>
               </licensorPerson>
+              <distributionRightsHolderPerson>
+                <role>distributionRightsHolder</role>
+                <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                  <surname xml:lang="fi">Bernadotte</surname>
+                  <surname xml:lang="en">Bernadotte</surname>
+                  <givenName xml:lang="fi">Kaarle Kustaa</givenName>
+                  <givenName xml:lang="en">Carl Gustaf</givenName>
+                  <sex>male</sex>
+                  <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                    <email>kungen@example.com</email>
+                  </communicationInfo>
+                  <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                    <role>affiliation</role>
+                    <organizationInfo>
+                      <organizationName xml:lang="en">The Royal Palaces</organizationName>
+                      <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                        <email>firstname.lastname@example.com</email>
+                      </communicationInfo>
+                    </organizationInfo>
+                  </affiliation>
+                </personInfo>
+              </distributionRightsHolderPerson>
             </licenceInfo>
             <iprHolderPerson ComponentId="clarin.eu:cr1:c_1352813745463">
               <role>iprHolder</role>
