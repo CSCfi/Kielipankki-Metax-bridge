@@ -298,6 +298,12 @@ class RecordParser:
     def _get_actors(self):
         """
         Return the actors for this resource.
+
+        NB: due to Metax requiring there to be exactly one publisher for each dataset,
+        we need to adjust some actor sets. If there are more than one publisher, we
+        remove all real publisher actors and add a dummy one in their stead, letting the
+        reader know that they need to visit the original metadata for accurate
+        information.
         """
         actors = []
 
@@ -339,7 +345,34 @@ class RecordParser:
                     ) as err:
                         raise RecordParsingError(str(err), self.pid)
 
-        return [actor.to_metax_dict() for actor in actors]
+        publisher_actors = [actor for actor in actors if "publisher" in actor.roles]
+        if len(publisher_actors) == 0:
+            raise RecordParsingError(
+                "No distribution rightsholders (publisher in Metax) found",
+                self.pid,
+            )
+
+        extra_actor_dict = {}
+        if len(publisher_actors) > 1:
+            for actor in publisher_actors:
+                actor.roles.remove("publisher")
+                if not actor.roles:
+                    actors.remove(actor)
+
+            extra_actor_dict = {
+                "roles": ["publisher"],
+                "organization": {
+                    "pref_label": {
+                        "en": "Multiple publishers, check distribution rights holders "
+                        "in original metadata by following its persistent identifier"
+                    }
+                },
+            }
+
+        actor_dicts = [actor.to_metax_dict() for actor in actors]
+        actor_dicts.append(extra_actor_dict)
+
+        return actor_dicts
 
     def to_dict(self, data_catalog):
         """
