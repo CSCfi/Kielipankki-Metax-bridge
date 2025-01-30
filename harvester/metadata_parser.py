@@ -342,8 +342,8 @@ class RecordParser:
                     ) as err:
                         raise RecordParsingError(str(err), self.pid)
 
-        publisher_actors = [actor for actor in actors if "publisher" in actor.roles]
-        if len(publisher_actors) == 0:
+        publisher_actors = sum(1 for actor in actors if "publisher" in actor.roles)
+        if publisher_actors == 0:
             raise RecordParsingError(
                 "No distribution rightsholders (publisher in Metax) found",
                 self.pid,
@@ -351,7 +351,7 @@ class RecordParser:
 
         actor_dicts = [actor.to_metax_dict() for actor in actors]
 
-        if len(publisher_actors) > 1:
+        if publisher_actors > 1:
             actor_dicts = self._replace_multiple_publishers_with_explanation(
                 actor_dicts
             )
