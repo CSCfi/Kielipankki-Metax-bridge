@@ -300,10 +300,7 @@ class RecordParser:
         Return the actors for this resource.
 
         NB: due to Metax requiring there to be exactly one publisher for each dataset,
-        we need to adjust some actor sets. If there are more than one publisher, we
-        remove all real publisher actors and add a dummy one in their stead, letting the
-        reader know that they need to visit the original metadata for accurate
-        information.
+        we need to adjust some actor sets.
         """
         actors = []
 
@@ -352,14 +349,31 @@ class RecordParser:
                 self.pid,
             )
 
-        extra_actor_dict = {}
-        if len(publisher_actors) > 1:
-            for actor in publisher_actors:
-                actor.roles.remove("publisher")
-                if not actor.roles:
-                    actors.remove(actor)
+        actor_dicts = [actor.to_metax_dict() for actor in actors]
 
-            extra_actor_dict = {
+        if len(publisher_actors) > 1:
+            actor_dicts = self._replace_multiple_publishers_with_explanation(
+                actor_dicts
+            )
+
+        return actor_dicts
+
+    def _replace_multiple_publishers_with_explanation(self, actor_dicts):
+        """
+        When run against an otherwise Metax-ready actor dict, this returns a new dict
+        with otherwise the same actors but with all real publisher actors removed and
+        a dummy one added in their stead, letting the reader know that they need to visit
+        the original metadata for accurate information.
+        """
+        cleaned_actor_dicts = []
+        for actor in actor_dicts:
+            if "publisher" in actor["roles"]:
+                actor["roles"].remove("publisher")
+            if actor["roles"]:
+                cleaned_actor_dicts.append(actor)
+
+        cleaned_actor_dicts.append(
+            {
                 "roles": ["publisher"],
                 "organization": {
                     "pref_label": {
@@ -368,11 +382,9 @@ class RecordParser:
                     }
                 },
             }
+        )
 
-        actor_dicts = [actor.to_metax_dict() for actor in actors]
-        actor_dicts.append(extra_actor_dict)
-
-        return actor_dicts
+        return cleaned_actor_dicts
 
     def to_dict(self, data_catalog):
         """
