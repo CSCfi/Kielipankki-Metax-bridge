@@ -139,6 +139,11 @@ def test_missing_license_record(missing_license_record):
         "access_type": {
             "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
         },
+        "restriction_grounds": [
+            {
+                "url": "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/other",
+            },
+        ],
     }
     assert result == expected_result
 
@@ -156,6 +161,11 @@ def test_license_custom_url_record(license_with_custom_url_record):
         "access_type": {
             "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
         },
+        "restriction_grounds": [
+            {
+                "url": "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/other",
+            },
+        ],
     }
     assert result == expected_result
 
@@ -183,8 +193,40 @@ def test_several_licenses_record(several_licenses_record):
                 "custom_url": "http://urn.fi/urn:nbn:fi:lb-2022020223",
             },
         ],
+        "restriction_grounds": [
+            {
+                "url": "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/other",
+            },
+        ],
     }
     assert result == expected_result
+
+
+def test_academic_license_record():
+    """
+    Check that the correct "research" restriction is applied to ACA licenses.
+    """
+    record = RecordParser(
+        _get_file_as_lxml(
+            "tests/test_data/kielipankki_record_sample_academic_license.xml"
+        )
+    )
+    expected_access_rights = {
+        "access_type": {
+            "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
+        },
+        "license": [
+            {
+                "url": "http://uri.suomi.fi/codelist/fairdata/license/code/ClarinACA-1.0",
+            },
+        ],
+        "restriction_grounds": [
+            {
+                "url": "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/research",
+            },
+        ],
+    }
+    assert record._map_access_rights() == expected_access_rights
 
 
 @pytest.fixture
@@ -233,6 +275,11 @@ def test_custom_url_from_doc_unstruct_element(
         "access_type": {
             "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
         },
+        "restriction_grounds": [
+            {
+                "url": "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/other",
+            },
+        ],
     }
     assert result == expected_result
 
