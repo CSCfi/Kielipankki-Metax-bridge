@@ -214,6 +214,13 @@ class RecordParser:
         If any of the license elements found in the metadata do not have known specific
         uri.suomi.fi mapping, the said license is skipped. If this would result in no
         licenses being produced, the license is marked as "other".
+
+        Resources that are not open must have a reason for their restrictions. For ACA
+        resources, we select the research use restriction, but unfortunately it is not
+        simple to determine the underlying reason for other resources based on their
+        metadata, so we simply specify "other". If the access type is open though, we
+        must not provide any restriction reasons, even if the license suggests that this
+        is an ACA resource.
         """
         license_package = {}
         license_mappings = {
@@ -236,19 +243,37 @@ class RecordParser:
 
         license_elements_list = self._get_list_of_licenses()
         license_list = []
+        restriction_grounds_urls = set()
 
         for license_element in license_elements_list:
             license = self._get_license_information(license_element, license_mappings)
             if license:
                 license_list.append(license)
+                if "ClarinACA" in license["url"]:
+                    restriction_grounds_urls.add(
+                        "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/research"
+                    )
 
         if not license_list:
             license_list.append({"url": license_mappings["other"]})
 
         access_type = self._get_access_type()
+        if (
+            access_type["url"]
+            == "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+        ):
+            restriction_grounds_urls = []
+        elif not restriction_grounds_urls:
+            restriction_grounds_urls.add(
+                "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/other"
+            )
 
         license_package["license"] = license_list
         license_package["access_type"] = access_type
+        if restriction_grounds_urls:
+            license_package["restriction_grounds"] = [
+                {"url": url} for url in restriction_grounds_urls
+            ]
 
         return license_package
 
