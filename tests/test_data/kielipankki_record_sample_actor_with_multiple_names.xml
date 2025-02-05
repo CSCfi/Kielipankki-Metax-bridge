@@ -124,6 +124,37 @@
             <revision>
               Link to resource group page and attribution details added
             </revision>
+            <metadataCreator>
+              <role>metadataCreator</role>
+              <personInfo>
+                <surname xml:lang="en">Metadataaja</surname>
+                <givenName xml:lang="en">Miina</givenName>
+                <sex>male</sex>
+                <position>Project Coordinator</position>
+                <communicationInfo>
+                  <email>miina@example.com</email>
+                  <url>http://orcid.org/0000-0002-9455-8771</url>
+                  <city>Helsinki</city>
+                  <country>Finland</country>
+                </communicationInfo>
+                <affiliation>
+                  <role>affiliation</role>
+                  <organizationInfo>
+                    <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                    <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                    <departmentName xml:lang="en">University of Helsinki</departmentName>
+                    <communicationInfo>
+                      <email>finclarin@helsinki.fi</email>
+                      <url>http://www.helsinki.fi/fin-clarin</url>
+                      <address>PO Box 24 (Unioninkatu 40)</address>
+                      <zipCode>00014</zipCode>
+                      <city>University of Helsinki</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </metadataCreator>
           </metadataInfo>
           <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
             <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
