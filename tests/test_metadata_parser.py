@@ -456,8 +456,8 @@ def test_multiple_names_for_actor():
         )
     )
     actors = record._get_actors()
-    assert len(actors) == 1
-    assert actors[0]["person"]["name"] == "Carl Gustaf Bernadotte"
+    assert len(actors) == 2
+    assert actors[1]["person"]["name"] == "Carl Gustaf Bernadotte"
 
 
 def test_publisher_person():
@@ -473,9 +473,9 @@ def test_publisher_person():
         )
     )
     actors = record.to_dict(data_catalog="catalog_id")["actors"]
-    assert len(actors) == 1
-    assert "publisher" in actors[0]["roles"]
-    assert actors[0]["person"]["name"] == "Late Lisensoija"
+    assert len(actors) == 2
+    assert "publisher" in actors[1]["roles"]
+    assert actors[1]["person"]["name"] == "Late Lisensoija"
 
 
 def test_finclarin_organization_code_is_helsinki_uni():
@@ -492,3 +492,14 @@ def test_finclarin_organization_code_is_helsinki_uni():
         actors[0]["organization"]["url"]
         == "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
     )
+
+
+def test_missing_creator_reported():
+    """
+    Verify that we don't try to send records without creator to Metax.
+    """
+    record = RecordParser(
+        _get_file_as_lxml("tests/test_data/kielipankki_record_sample_no_creator.xml")
+    )
+    with pytest.raises(RecordParsingError):
+        record.to_dict(data_catalog="catalog_id")

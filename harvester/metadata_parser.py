@@ -324,6 +324,10 @@ class RecordParser:
         """
         Return the actors for this resource.
 
+        Metax requires at least one creator and exactly one publisher for each dataset,
+        while Comedi does not enforce any limits on these, so an error is raised if
+        these are not found in the source data.
+
         NB: due to Metax requiring there to be exactly one publisher for each dataset,
         we need to adjust some actor sets.
         """
@@ -366,6 +370,11 @@ class RecordParser:
                         UnableToParseOrganizationInfoException,
                     ) as err:
                         raise RecordParsingError(str(err), self.pid)
+
+        if sum(1 for actor in actors if "creator" in actor.roles) == 0:
+            raise RecordParsingError(
+                "No metadata creators (creator in Metax) found", self.pid
+            )
 
         publisher_actors = sum(1 for actor in actors if "publisher" in actor.roles)
         if publisher_actors == 0:
