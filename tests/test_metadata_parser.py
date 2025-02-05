@@ -107,6 +107,7 @@ def test_to_dict(basic_cmdi_record, dataset_pid, kielipankki_datacatalog_id):
                 },
             },
         ],
+        "state": "published",
     }
     assert result == expected_result
 
