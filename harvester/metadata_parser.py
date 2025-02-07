@@ -69,13 +69,6 @@ class RecordParser:
         """
         return self.xml.xpath(xpath, namespaces=self.namespaces)[0]
 
-    def _get_identifier(self, xpath):
-        """
-        Retrieves the urn of the given XPath's url.
-        """
-        identifier_urn = self._get_text_xpath(xpath).strip()
-        return f"urn.fi/{identifier_urn}"
-
     def _get_datetime(self, xpath):
         """
         Retrieve the datetime from given XPath as a string (YYYY-mm-ddTHH:MM:SSZ).
@@ -100,7 +93,7 @@ class RecordParser:
         Return the PID for this record
         """
         try:
-            return self._get_identifier("//cmd:Header/cmd:MdSelfLink/text()")
+            return self._get_text_xpath("//cmd:Header/cmd:MdSelfLink/text()").strip()
         except IndexError:
             comedi_identifier = self._get_text_xpath(
                 "//oai:header/oai:identifier/text()"

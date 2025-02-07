@@ -89,7 +89,7 @@ def mock_get_response_json():
 @pytest.fixture
 def dataset_pid():
     """Return PID of sample record."""
-    return "urn.fi/urn:nbn:fi:lb-2017021609"
+    return "urn:nbn:fi:lb-2017021609"
 
 
 @pytest.fixture
@@ -285,10 +285,10 @@ def mock_corpus_pid_list_from_cmdi(
     """
     shared_request_mocker.get(kielipankki_api_url, text=cmdi_multiple_records_xml)
     return [
-        "urn.fi/urn:nbn:fi:lb-2017021609",
-        "urn.fi/urn:nbn:fi:lb-20140730196",
-        "urn.fi/urn:nbn:fi:lb-2018060403",
-        "urn.fi/urn:nbn:fi:lb-2019121004",
+        "urn:nbn:fi:lb-2017021609",
+        "urn:nbn:fi:lb-20140730196",
+        "urn:nbn:fi:lb-2018060403",
+        "urn:nbn:fi:lb-2019121004",
     ]
 
 
@@ -310,7 +310,7 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
             "field_of_science": [
                 {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
             ],
-            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+            "persistent_identifier": "urn:nbn:fi:lb-2017021609",
             "title": {
                 "en": "Silva Kiuru's Time Expressions Corpus",
                 "fi": "Silva Kiurun ajanilmausaineisto",
@@ -384,7 +384,7 @@ def mock_cmdi_get_single_record(
             "field_of_science": [
                 {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
             ],
-            "persistent_identifier": "urn.fi/urn:nbn:fi:lb-2017021609",
+            "persistent_identifier": "urn:nbn:fi:lb-2017021609",
             "title": {
                 "en": "Silva Kiuru's Time Expressions Corpus",
                 "fi": "Silva Kiurun ajanilmausaineisto",
