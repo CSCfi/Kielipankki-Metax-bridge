@@ -96,7 +96,13 @@ def _config_from_file(config_file):
 
 @click.command()
 @click.argument("config_file", type=click.File("r"), default="config/config.yml")
-def full_harvest(config_file):
+@click.option(
+    "--pause-between-records",
+    is_flag=True,
+    default=False,
+    help="Ask for confirmation before progressing to the next record",
+)
+def full_harvest(config_file, pause_between_records):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
 
@@ -152,6 +158,18 @@ def full_harvest(config_file):
             click.echo(f"Unexpected problem with {record.pid}:", err=True)
             click.echo(traceback.format_exc(), err=True)
             raise click.Abort()
+
+        if pause_between_records:
+            click.echo(f"Processed {record.pid}")
+            selection = click.prompt(
+                "Continue?",
+                type=click.Choice(["next", "all", "abort"]),
+                show_choices=True,
+            )
+            if selection == "abort":
+                raise click.Abort()
+            if selection == "all":
+                pause_between_records = False
 
     if not faulty_records:
         if harvested_date:
