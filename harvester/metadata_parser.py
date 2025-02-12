@@ -253,10 +253,8 @@ class RecordParser:
         access_type = self._get_access_type()
         if (
             access_type["url"]
-            == "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
-        ):
-            restriction_grounds_urls = []
-        elif not restriction_grounds_urls:
+            == "http://uri.suomi.fi/codelist/fairdata/access_type/code/restricted"
+        ) and not restriction_grounds_urls:
             restriction_grounds_urls.add(
                 "http://uri.suomi.fi/codelist/fairdata/restriction_grounds/code/other"
             )
