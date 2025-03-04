@@ -128,15 +128,16 @@ def run_cli(basic_configuration):
     converted.
     """
 
-    def _run_cli(configuration_file_path=None):
+    def _run_cli(configuration_file_path=None, extra_args=None):
         if configuration_file_path is None:
             configuration_file_path = basic_configuration
 
-        runner = CliRunner()
-        return runner.invoke(
-            full_harvest,
-            [str(configuration_file_path)],
-        )
+        required_args = [str(configuration_file_path)]
+        if not extra_args:
+            extra_args = []
+
+        runner = CliRunner(mix_stderr=False)
+        return runner.invoke(full_harvest, required_args + extra_args)
 
     return _run_cli
 
