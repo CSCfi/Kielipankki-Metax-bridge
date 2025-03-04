@@ -96,6 +96,15 @@ class MetaxAPI:
         else:
             self.create_record(record.to_dict(data_catalog=self.catalog_id))
 
+    def pids_to_be_deleted(self, retained_records):
+        """
+        Return a list of PIDs for records that should be deleted from Metax.
+
+        Retained records are expected as an iterable of RecordParser instances.
+        """
+        retained_pids = {record.pid for record in retained_records}
+        return self.datacatalog_record_pids.difference(retained_pids)
+
     def delete_records_not_in(self, retained_records):
         """
         Delete all records whose PIDs are not present in `retained_records`.
@@ -106,9 +115,7 @@ class MetaxAPI:
 
         :retained_records: iterable containing all the records that must not be deleted.
         """
-        retained_pids = {record.pid for record in retained_records}
-        pids_to_be_deleted = self.datacatalog_record_pids.difference(retained_pids)
-        for pid in pids_to_be_deleted:
+        for pid in self.pids_to_be_deleted(retained_records):
             self.delete_record(self.record_id(pid))
 
     def create_record(self, data):
