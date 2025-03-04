@@ -268,6 +268,57 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     "mock_delete_record",
     "create_test_log_file",
 )
+def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sync_with_delete(
+    mock_requests_put,
+    mock_list_records_single_record,
+    caplog,
+    run_cli,
+):
+    """
+    Check that, when there is a successful harvest logged previously, new and updated
+    records are fetched from Kielipankki and then sent to Metax.
+
+    This test covers only changed records that are PUT to Metax.
+
+    Finally, the records from both services are compared resulting in one non-matching
+    PID. This non-matching record is then DELETEd from Metax. As it was already deleted,
+    it should not be listed in the output to be emailed to inform admins of required
+    manual actions.
+
+    Expected requests made during this test:
+    GET to fetch the records from Comedi (for adding new records)
+    GET to get the Metax PID (found)
+    PUT to to update the data in Metax
+    GET to fetch the records from Comedi (again, for deleted records this time)
+    GET to fetch the records from Metax
+    GET to get the Metax PID for the record to be deleted
+    DELETE to delete the record
+    """
+    with caplog.at_level(logging.INFO):
+        result = run_cli(extra_args=["--automatic-delete"])
+
+    assert result.exit_code == 0
+
+    assert mock_requests_put.call_count == 8
+    assert mock_requests_put.request_history[3].method == "PUT"
+    assert (
+        mock_requests_put.request_history[3].json()["persistent_identifier"]
+        == mock_list_records_single_record[0]["persistent_identifier"]
+    )
+
+    assert "Success, 1 records harvested since" in caplog.text
+    assert "faulty" not in caplog.text
+
+    assert "pid2" not in result.stderr
+
+
+@pytest.mark.usefixtures(
+    "mock_cmdi_record_found_in_datacatalog",
+    "mock_single_pid_list_from_cmdi",
+    "mock_pids_in_datacatalog",
+    "mock_delete_record",
+    "create_test_log_file",
+)
 def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sync(
     mock_requests_put,
     mock_list_records_single_record,
@@ -281,23 +332,22 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     This test covers only changed records that are PUT to Metax.
 
     Finally, the records from both services are compared resulting in one non-matching
-    PID. This non-matching record is then DELETEd from Metax.
+    PID. This non-matching record is not deleted from Metax, but is listed in stderr
+    output.
 
     Expected requests made during this test:
     GET to fetch the records from Comedi (for adding new records)
     GET to get the Metax PID (found)
     PUT to to update the data in Metax
     GET to fetch the records from Comedi (again, for deleted records this time)
-    GET to fetch the records from Metax
-    GET to get the Metax PID for the record to be deleted
-    DELETE to delete the record
+    GET to fetch the records from Metax (for comparing with Comedi)
     """
     with caplog.at_level(logging.INFO):
         result = run_cli()
 
     assert result.exit_code == 0
 
-    assert mock_requests_put.call_count == 8
+    assert mock_requests_put.call_count == 6
     assert mock_requests_put.request_history[3].method == "PUT"
     assert (
         mock_requests_put.request_history[3].json()["persistent_identifier"]
@@ -306,6 +356,8 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
 
     assert "Success, 1 records harvested since" in caplog.text
     assert "faulty" not in caplog.text
+
+    assert "pid2" in result.stderr
 
 
 @pytest.mark.usefixtures(

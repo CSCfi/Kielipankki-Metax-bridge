@@ -102,7 +102,13 @@ def _config_from_file(config_file):
     default=False,
     help="Ask for confirmation before progressing to the next record",
 )
-def full_harvest(config_file, pause_between_records):
+@click.option(
+    "--automatic-delete",
+    is_flag=True,
+    default=False,
+    help="Automatically delete records found in destination API but not in source API",
+)
+def full_harvest(config_file, pause_between_records, automatic_delete):
     """
     Runs the whole pipeline of fetching data since last harvest and sending it to Metax.
 
@@ -195,6 +201,26 @@ def full_harvest(config_file, pause_between_records):
                 faulty_records,
             )
 
+    if automatic_delete:
+        delete_records(source_api, destination_api)
+    else:
+        pids_to_be_deleted = destination_api.pids_to_be_deleted(
+            retained_records=source_api.fetch_records()
+        )
+        if pids_to_be_deleted:
+            click.echo(
+                "The records with following PIDs were not found in source data and should "
+                "be deleted from Metax:",
+                err=True,
+            )
+            for pid in pids_to_be_deleted:
+                click.echo(f"- {pid}", err=True)
+
+    if faulty_records:
+        exit(1)
+
+
+def delete_records(source_api, destination_api):
     try:
         destination_api.delete_records_not_in(source_api.fetch_records())
     except RecordParsingError as error:
@@ -227,9 +253,6 @@ def full_harvest(config_file, pause_between_records):
         click.echo("Unexpected problem when deleting a record from Metax:", err=True)
         click.echo(traceback.format_exc(), err=True)
         raise click.Abort()
-
-    if faulty_records:
-        exit(1)
 
 
 if __name__ == "__main__":
