@@ -1,7 +1,7 @@
 ---
 metax_api_token: filltokenhere
-metax_base_url: https://metax.fd-rework.csc.fi/v3
-metax_catalog_id: urn:nbn:fi:att:data-catalog-kielipankki
+metax_base_url: https://metax.demo.fairdata.fi/v3
+metax_catalog_id: urn:nbn:fi:att:data-catalog-harvest-kielipankki
 
 harvester_log_file: logs/harvester.log
 metax_api_log_file: logs/metax_api_requests.log
