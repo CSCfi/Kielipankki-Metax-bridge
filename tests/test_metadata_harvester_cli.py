@@ -62,7 +62,7 @@ def basic_configuration(
     return create_test_config_file(
         {
             "metax_api_token": "apitokentestvalue",
-            "metax_base_url": "https://metax.fd-rework.csc.fi/v3",
+            "metax_base_url": "https://metax.demo.fairdata.fi/v3",
             "metax_catalog_id": "urn:nbn:fi:att:data-catalog-kielipankki",
             "harvester_log_file": str(default_test_log_file_path),
             "metax_api_log_file": str(default_metax_api_log_file_path),
@@ -469,7 +469,7 @@ def test_cli_reporting_missing_configuration_values(create_test_config_file, run
     create_test_config_file(
         {
             "metax_api_token": "qwerty",
-            "metax_base_url": "https://metax.fd-rework.csc.fi/",
+            "metax_base_url": "https://metax.demo.fairdata.fi/",
             "metax_catalog_id": "abc123",
             # harvester_log_file not defined
             "metax_api_log_file": "log.txt",

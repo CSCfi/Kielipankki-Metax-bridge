@@ -68,7 +68,7 @@ def _get_file_as_string(filename):
 @pytest.fixture
 def metax_base_url():
     """Metax API"""
-    return "https://metax.fd-rework.csc.fi/v3"
+    return "https://metax.demo.fairdata.fi/v3"
 
 
 @pytest.fixture
