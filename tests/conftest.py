@@ -337,8 +337,8 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
                         "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
                     },
                     "person": {
-                        "email": "miina@example.com",
-                        "name": "Miina Metadataaja",
+                        "email": "diana@example.com",
+                        "name": "Diana Datankerääjä",
                     },
                     "roles": ["creator"],
                 },
