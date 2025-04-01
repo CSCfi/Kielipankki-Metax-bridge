@@ -233,6 +233,77 @@
               </personInfo>
             </metadataCreator>
           </metadataInfo>
+          <resourceCreationInfo>
+            <resourceCreatorPerson>
+              <role>resourceCreator</role>
+              <personInfo>
+                <surname xml:lang="en">Datankerääjä</surname>
+                <givenName xml:lang="en">Diana</givenName>
+                <sex>female</sex>
+                <communicationInfo>
+                  <email>diana@example.com</email>
+                </communicationInfo>
+                <affiliation>
+                  <role>affiliation</role>
+                  <organizationInfo>
+                    <organizationName xml:lang="en">University of Helsinki</organizationName>
+                    <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                    <communicationInfo>
+                      <email>firstname.surname@helsinki.fi</email>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </resourceCreatorPerson>
+            <resourceCreatorPerson>
+              <role>resourceCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="en">Affiliaattori</surname>
+                <givenName xml:lang="en">Amanda</givenName>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>aaffil@example.com</email>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">Imaginary organization</organizationName>
+                    <organizationName xml:lang="fi">Kuvitteellinen organisaatio</organizationName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>imaginary@example.com</email>
+                      <url>http://www.imaginary.example</url>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </resourceCreatorPerson>
+            <resourceCreatorPerson>
+              <role>resourceCreator</role>
+              <personInfo ComponentId="clarin.eu:cr1:c_1349361150746">
+                <surname xml:lang="fi">Aputoveri</surname>
+                <givenName xml:lang="fi">Aarne</givenName>
+                <sex>male</sex>
+                <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                  <email>aarne.aputoveri@example.com</email>
+                </communicationInfo>
+                <affiliation ComponentId="clarin.eu:cr1:c_1352813745462">
+                  <role>affiliation</role>
+                  <organizationInfo ComponentId="clarin.eu:cr1:c_1352813745461">
+                    <organizationName xml:lang="en">FIN-CLARIN</organizationName>
+                    <organizationShortName xml:lang="en">FIN-CLARIN</organizationShortName>
+                    <departmentName xml:lang="en">University of Helsinki</departmentName>
+                    <communicationInfo ComponentId="clarin.eu:cr1:c_1352813745460">
+                      <email>finclarin@helsinki.fi</email>
+                      <url>http://www.helsinki.fi/fin-clarin</url>
+                      <address>PO Box 24 (Unioninkatu 40)</address>
+                      <zipCode>00014</zipCode>
+                      <city>University of Helsinki</city>
+                      <country>Finland</country>
+                    </communicationInfo>
+                  </organizationInfo>
+                </affiliation>
+              </personInfo>
+            </resourceCreatorPerson>
+          </resourceCreationInfo>
           <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
             <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
               <role>documentation</role>

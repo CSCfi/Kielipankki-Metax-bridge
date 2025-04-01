@@ -325,7 +325,10 @@ class RecordParser:
         actors = []
 
         actor_role_element_xpaths = {
-            "creator": ["//cmd:metadataInfo/cmd:metadataCreator"],
+            "creator": [
+                "//cmd:resourceCreationInfo/cmd:resourceCreatorPerson",
+                "//cmd:resourceCreationInfo/cmd:resourceCreatorOrganization",
+            ],
             "publisher": [
                 "//cmd:distributionInfo/cmd:licenceInfo/cmd:distributionRightsHolderPerson",
                 "//cmd:distributionInfo/cmd:licenceInfo/cmd:distributionRightsHolderOrganization",
@@ -363,9 +366,7 @@ class RecordParser:
                         raise RecordParsingError(str(err), self.pid)
 
         if sum(1 for actor in actors if "creator" in actor.roles) == 0:
-            raise RecordParsingError(
-                "No metadata creators (creator in Metax) found", self.pid
-            )
+            raise RecordParsingError("No dataset creators found", self.pid)
 
         publisher_actors = sum(1 for actor in actors if "publisher" in actor.roles)
         if publisher_actors == 0:

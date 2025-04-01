@@ -84,7 +84,7 @@ def test_to_dict(basic_cmdi_record, dataset_pid, kielipankki_datacatalog_id):
         },
         "actors": [
             {
-                "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
+                "person": {"email": "diana@example.com", "name": "Diana Datankerääjä"},
                 "roles": ["creator"],
                 "organization": {
                     "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
@@ -347,7 +347,7 @@ def test_get_actors(basic_cmdi_record):
     assert len(actors) == 3
 
     assert {
-        "person": {"email": "miina@example.com", "name": "Miina Metadataaja"},
+        "person": {"email": "diana@example.com", "name": "Diana Datankerääjä"},
         "roles": ["creator"],
         "organization": {
             "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
@@ -383,18 +383,8 @@ def test_multiple_actors_for_same_role():
         {
             "roles": ["creator"],
             "person": {
-                "name": "Miina Metadataattori",
-                "email": "metadatamiina@example.com",
-            },
-            "organization": {
-                "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/10089"
-            },
-        },
-        {
-            "roles": ["creator", "rights_holder"],
-            "person": {
-                "name": "Aarne Aputoveri",
-                "email": "aarne.aputoveri@example.com",
+                "name": "Diana Datankerääjä",
+                "email": "diana@example.com",
             },
             "organization": {
                 "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
@@ -412,6 +402,28 @@ def test_multiple_actors_for_same_role():
             "person": {
                 "email": "aaffil@example.com",
                 "name": "Amanda Affiliaattori",
+            },
+            "roles": [
+                "creator",
+            ],
+        },
+        {
+            "roles": ["creator", "rights_holder"],
+            "person": {
+                "name": "Aarne Aputoveri",
+                "email": "aarne.aputoveri@example.com",
+            },
+            "organization": {
+                "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901"
+            },
+        },
+        {
+            "organization": {
+                "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+            },
+            "person": {
+                "email": "lauri@example.com",
+                "name": "Lauri Lisensoija",
             },
             "roles": [
                 "creator",

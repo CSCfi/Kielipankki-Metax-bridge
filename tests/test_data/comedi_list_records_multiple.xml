@@ -135,6 +135,29 @@
                   </personInfo>
                 </metadataCreator>
               </metadataInfo>
+              <resourceCreationInfo>
+                <resourceCreatorPerson>
+                  <role>resourceCreator</role>
+                  <personInfo>
+                    <surname xml:lang="en">Datankerääjä</surname>
+                    <givenName xml:lang="en">Diana</givenName>
+                    <sex>female</sex>
+                    <communicationInfo>
+                      <email>diana@example.com</email>
+                    </communicationInfo>
+                    <affiliation>
+                      <role>affiliation</role>
+                      <organizationInfo>
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo>
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </resourceCreatorPerson>
+              </resourceCreationInfo>
               <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
                 <resourceType>corpus</resourceType>
                 <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
@@ -363,6 +386,29 @@
                   </personInfo>
                 </metadataCreator>
               </metadataInfo>
+              <resourceCreationInfo>
+                <resourceCreatorPerson>
+                  <role>resourceCreator</role>
+                  <personInfo>
+                    <surname xml:lang="en">Korpuksenluoja</surname>
+                    <givenName xml:lang="en">Kiira</givenName>
+                    <sex>female</sex>
+                    <communicationInfo>
+                      <email>kiira@example.com</email>
+                    </communicationInfo>
+                    <affiliation>
+                      <role>affiliation</role>
+                      <organizationInfo>
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo>
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </resourceCreatorPerson>
+              </resourceCreationInfo>
               <corpusInfo ComponentId="clarin.eu:cr1:c_1355150532309">
                 <resourceType>corpus</resourceType>
                 <corpusMediaType ComponentId="clarin.eu:cr1:c_1355150532310">
@@ -594,6 +640,29 @@
                   </personInfo>
                 </metadataCreator>
               </metadataInfo>
+              <resourceCreationInfo>
+                <resourceCreatorPerson>
+                  <role>resourceCreator</role>
+                  <personInfo>
+                    <surname xml:lang="en">Datankerääjä</surname>
+                    <givenName xml:lang="en">Diana</givenName>
+                    <sex>female</sex>
+                    <communicationInfo>
+                      <email>diana@example.com</email>
+                    </communicationInfo>
+                    <affiliation>
+                      <role>affiliation</role>
+                      <organizationInfo>
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo>
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </resourceCreatorPerson>
+              </resourceCreationInfo>
               <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
                 <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
                   <role>documentation</role>
@@ -814,6 +883,29 @@
                   </personInfo>
                 </metadataCreator>
               </metadataInfo>
+              <resourceCreationInfo>
+                <resourceCreatorPerson>
+                  <role>resourceCreator</role>
+                  <personInfo>
+                    <surname xml:lang="en">Datankerääjä</surname>
+                    <givenName xml:lang="en">Diana</givenName>
+                    <sex>female</sex>
+                    <communicationInfo>
+                      <email>diana@example.com</email>
+                    </communicationInfo>
+                    <affiliation>
+                      <role>affiliation</role>
+                      <organizationInfo>
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo>
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </resourceCreatorPerson>
+              </resourceCreationInfo>
               <usageInfo ComponentId="clarin.eu:cr1:c_1353678848793">
                 <foreseenUseInfo ComponentId="clarin.eu:cr1:c_1353678848796">
                   <foreseenUse>humanUse</foreseenUse>
@@ -1011,6 +1103,29 @@
                   </personInfo>
                 </metadataCreator>
               </metadataInfo>
+              <resourceCreationInfo>
+                <resourceCreatorPerson>
+                  <role>resourceCreator</role>
+                  <personInfo>
+                    <surname xml:lang="en">Datankerääjä</surname>
+                    <givenName xml:lang="en">Diana</givenName>
+                    <sex>female</sex>
+                    <communicationInfo>
+                      <email>diana@example.com</email>
+                    </communicationInfo>
+                    <affiliation>
+                      <role>affiliation</role>
+                      <organizationInfo>
+                        <organizationName xml:lang="en">University of Helsinki</organizationName>
+                        <organizationShortName xml:lang="en">UHEL</organizationShortName>
+                        <communicationInfo>
+                          <email>firstname.surname@helsinki.fi</email>
+                        </communicationInfo>
+                      </organizationInfo>
+                    </affiliation>
+                  </personInfo>
+                </resourceCreatorPerson>
+              </resourceCreationInfo>
               <resourceDocumentationInfo ComponentId="clarin.eu:cr1:c_1355150532301">
                 <documentationUnstructured ComponentId="clarin.eu:cr1:c_1355150532302">
                   <role>documentation</role>
