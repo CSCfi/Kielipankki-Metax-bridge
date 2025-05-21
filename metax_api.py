@@ -65,7 +65,11 @@ class MetaxAPI:
             return response.json() if response.status_code == 200 else None
         except HTTPError as error:
             self.logger.error(
-                "Request failed. Method: %s, URL: %s, Error: %s", method, url, error
+                "Request failed. Method: %s, URL: %s, Error: %s, Payload: %s",
+                method,
+                url,
+                error,
+                data,
             )
             raise
 
