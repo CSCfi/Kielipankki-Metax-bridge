@@ -59,7 +59,13 @@ class MetaxAPI:
             )
             response.raise_for_status()
             if method != "GET":
-                self.logger.info("Request succeeded. Method: %s, URL: %s", method, url)
+                if data:
+                    pid = data.get("persistent_identifier", "N/A")
+                else:
+                    pid = "N/A"
+                self.logger.info(
+                    "Request succeeded. Method: %s, URL: %s, PID: %s", method, url, pid
+                )
             if method == "DELETE":
                 return response
             return response.json() if response.status_code == 200 else None
