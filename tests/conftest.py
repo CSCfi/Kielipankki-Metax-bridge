@@ -1,6 +1,8 @@
 import re
 import json
+import yaml
 
+from click.testing import CliRunner
 from lxml import etree
 import pytest
 import requests_mock
@@ -509,3 +511,71 @@ def mock_metax_language_vocabulary_endpoint(
     with open("tests/test_data/metax_language_vocabulary.json", "r") as response_json:
         data = json.loads(response_json.read())
     shared_request_mocker.get(language_vocabulary_endpoint_url, json=data)
+
+
+@pytest.fixture
+def create_test_config_file(tmp_path):
+    """
+    Factory helper for configuration files to be used in tests.
+    """
+
+    def _create_config(configuration_data):
+        """
+        Write the given configuration data into a temporary config file.
+
+        :return: path to the newly-created config file as a string
+        """
+        config_filename = tmp_path / "config.yml"
+        with open(config_filename, "w") as config_file:
+            yaml.dump(configuration_data, stream=config_file)
+        return str(config_filename)
+
+    return _create_config
+
+
+@pytest.fixture
+def default_test_log_file_path(tmp_path):
+    return tmp_path / "harvester_test.log"
+
+
+@pytest.fixture
+def basic_configuration(
+    create_test_config_file, default_test_log_file_path, default_metax_api_log_file_path
+):
+    """
+    Create a basic well-formed configuration file and return its path.
+    """
+    return create_test_config_file(
+        {
+            "metax_api_token": "apitokentestvalue",
+            "metax_base_url": "https://metax.demo.fairdata.fi/v3",
+            "metax_catalog_id": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "harvester_log_file": str(default_test_log_file_path),
+            "metax_api_log_file": str(default_metax_api_log_file_path),
+        }
+    )
+
+
+@pytest.fixture
+def run_cli(basic_configuration):
+    """
+    Helper for running the command line interface with given arguments.
+
+    If some argument is not specified, default testing values are used.
+
+    File arguments can be specified as strings or Paths: they are automatically
+    converted.
+    """
+
+    def _run_cli(cli_function, configuration_file_path=None, extra_args=None):
+        if configuration_file_path is None:
+            configuration_file_path = basic_configuration
+
+        required_args = [str(configuration_file_path)]
+        if not extra_args:
+            extra_args = []
+
+        runner = CliRunner(mix_stderr=False)
+        return runner.invoke(cli_function, required_args + extra_args)
+
+    return _run_cli
