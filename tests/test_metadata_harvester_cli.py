@@ -1,19 +1,12 @@
 import logging
 
-from click.testing import CliRunner
 import pytest
-import yaml
 
 import metadata_harvester_cli
-from metadata_harvester_cli import full_harvest
+
 
 # Pylint does not understand fixture use
 # pylint: disable=redefined-outer-name
-
-
-@pytest.fixture
-def default_test_log_file_path(tmp_path):
-    return tmp_path / "harvester_test.log"
 
 
 @pytest.fixture
@@ -30,44 +23,6 @@ def create_test_log_file(latest_harvest_timestamp, default_test_log_file_path):
     with open(default_test_log_file_path, "w") as file_:
         file_.writelines(log_file_data)
     return default_test_log_file_path
-
-
-@pytest.fixture
-def create_test_config_file(tmp_path):
-    """
-    Factory helper for configuration files to be used in tests.
-    """
-
-    def _create_config(configuration_data):
-        """
-        Write the given configuration data into a temporary config file.
-
-        :return: path to the newly-created config file as a string
-        """
-        config_filename = tmp_path / "config.yml"
-        with open(config_filename, "w") as config_file:
-            yaml.dump(configuration_data, stream=config_file)
-        return str(config_filename)
-
-    return _create_config
-
-
-@pytest.fixture
-def basic_configuration(
-    create_test_config_file, default_test_log_file_path, default_metax_api_log_file_path
-):
-    """
-    Create a basic well-formed configuration file and return its path.
-    """
-    return create_test_config_file(
-        {
-            "metax_api_token": "apitokentestvalue",
-            "metax_base_url": "https://metax.demo.fairdata.fi/v3",
-            "metax_catalog_id": "urn:nbn:fi:att:data-catalog-kielipankki",
-            "harvester_log_file": str(default_test_log_file_path),
-            "metax_api_log_file": str(default_metax_api_log_file_path),
-        }
-    )
 
 
 @pytest.fixture
@@ -117,31 +72,6 @@ def test_get_last_harvest_with_unsuccessful_harvest(
     assert harvested_date == "2023-09-08T14:34:16Z"
 
 
-@pytest.fixture
-def run_cli(basic_configuration):
-    """
-    Helper for running the command line interface with given arguments.
-
-    If some argument is not specified, default testing values are used.
-
-    File arguments can be specified as strings or Paths: they are automatically
-    converted.
-    """
-
-    def _run_cli(configuration_file_path=None, extra_args=None):
-        if configuration_file_path is None:
-            configuration_file_path = basic_configuration
-
-        required_args = [str(configuration_file_path)]
-        if not extra_args:
-            extra_args = []
-
-        runner = CliRunner(mix_stderr=False)
-        return runner.invoke(full_harvest, required_args + extra_args)
-
-    return _run_cli
-
-
 @pytest.mark.usefixtures(
     "mock_cmdi_record_not_found_in_datacatalog",
     "mock_single_pid_list_from_cmdi",
@@ -162,7 +92,7 @@ def test_full_harvest_all_data_harvested_and_records_in_sync(
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli()
+        result = run_cli(metadata_harvester_cli.full_harvest)
 
     assert result.exit_code == 0
 
@@ -209,7 +139,7 @@ def test_full_harvest_all_data_harvested_and_records_not_in_sync(
     GET to fetch the records from Metax (no overlap, so no further requests)
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli()
+        result = run_cli(metadata_harvester_cli.full_harvest)
 
     assert result.exit_code == 0
 
@@ -246,7 +176,7 @@ def test_full_harvest_new_records_harvested_since_date_and_records_in_sync(
     Finally, the records from both services are compared and no diffs are found so they are in sync.
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli()
+        result = run_cli(metadata_harvester_cli.full_harvest)
 
     assert result.exit_code == 0
 
@@ -295,7 +225,9 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     DELETE to delete the record
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli(extra_args=["--automatic-delete"])
+        result = run_cli(
+            metadata_harvester_cli.full_harvest, extra_args=["--automatic-delete"]
+        )
 
     assert result.exit_code == 0
 
@@ -343,7 +275,7 @@ def test_full_harvest_changed_records_harvested_since_date_and_records_not_in_sy
     GET to fetch the records from Metax (for comparing with Comedi)
     """
     with caplog.at_level(logging.INFO):
-        result = run_cli()
+        result = run_cli(metadata_harvester_cli.full_harvest)
 
     assert result.exit_code == 0
 
@@ -384,7 +316,7 @@ def test_full_harvest_multiple_records(
     GET to fetch the records from Comedi (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
-    result = run_cli()
+    result = run_cli(metadata_harvester_cli.full_harvest)
 
     assert result.exit_code == 0
 
@@ -422,7 +354,7 @@ def test_full_harvest_without_log_file(shared_request_mocker, run_cli):
     GET to fetch the records from Comedi (again, for deleted records this time)
     GET to fetch the Metax PIDs for comparison (nothing to be deleted found)
     """
-    result = run_cli()
+    result = run_cli(metadata_harvester_cli.full_harvest)
 
     assert result.exit_code == 0
 
@@ -455,7 +387,7 @@ def test_full_harvest_no_new_records(
         found)
     GET to fetch the Metax PIDs for comparison (none found)
     """
-    run_cli()
+    run_cli(metadata_harvester_cli.full_harvest)
 
     assert shared_request_mocker.call_count == 3
     assert all(r.method == "GET" for r in shared_request_mocker.request_history)
@@ -475,6 +407,6 @@ def test_cli_reporting_missing_configuration_values(create_test_config_file, run
             "metax_api_log_file": "log.txt",
         }
     )
-    result = run_cli()
+    result = run_cli(metadata_harvester_cli.full_harvest)
     assert 'Value for "harvester_log_file" not found in configuration file'
     assert result.exit_code != 0
