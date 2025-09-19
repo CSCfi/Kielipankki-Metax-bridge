@@ -37,6 +37,11 @@ def delete_record(config_file, lb_pid):
     )
 
     metax_id = metax_api.record_id(lb_pid)
+
+    if not metax_id:
+        print(f"Record {lb_pid} not found in Metax")
+        return
+
     click.echo(f"Deleting record {lb_pid} (Metax identifier {metax_id}) from Metax")
     metax_api.delete_record(metax_id)
     click.echo("Record deleted")
