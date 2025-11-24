@@ -1,4 +1,5 @@
 import yaml
+from pathlib import Path
 
 
 def config_from_file(config_file):
@@ -9,7 +10,7 @@ def config_from_file(config_file):
     exception is raised.
     """
     try:
-        config = yaml.load(config_file, Loader=yaml.BaseLoader)
+        config = yaml.load(config_file, Loader=yaml.SafeLoader)
     except yaml.YAMLError as e:
         raise ConfigurationError(
             "Given configuration file does not seem to be in YAML fromat: "
@@ -29,6 +30,7 @@ def config_from_file(config_file):
         "metax_catalog_id",
         "harvester_log_file",
         "metax_api_log_file",
+        "save_records_locally",
     ]
 
     for configuration_value in expected_configuration_values:
@@ -36,6 +38,24 @@ def config_from_file(config_file):
             raise ConfigurationError(
                 f'Value for "{configuration_value}" not found in configuration file'
             )
+
+    if config["save_records_locally"]:
+        if "save_destination_directory" not in config:
+            raise ConfigurationError(
+                "When save_records_locally is set, save_destination_directory must be provided."
+            )
+        config["save_destination_directory"] = Path(
+            config["save_destination_directory"]
+        )
+
+        if (
+            config["save_destination_directory"].exists()
+            and not config["save_destination_directory"].is_dir
+        ):
+            raise ConfigurationError(
+                "Given save_destination_directory exists and is not a directory"
+            )
+
     return config
 
 

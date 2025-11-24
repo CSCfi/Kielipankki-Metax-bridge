@@ -9,3 +9,4 @@ config/*
 !config/template.yml
 logs/*
 !logs/.gitkeep
+backups

@@ -295,6 +295,22 @@ def mock_corpus_pid_list_from_cmdi(
 
 
 @pytest.fixture
+def mock_list_records_no_in_progress(
+    shared_request_mocker,
+    kielipankki_api_url,
+    cmdi_no_records_xml,
+):
+    """
+    Mock a GET ListRecords for in progress records to return XML with no records.
+
+    :return: The corresponding metadata as a list of dicts, one dict per record
+    """
+    shared_request_mocker.get(
+        kielipankki_api_url + "&status=in-progress", text=cmdi_no_records_xml
+    )
+
+
+@pytest.fixture
 def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
     """
     Mock a GET ListRecords to return XML with a single record.
@@ -304,7 +320,9 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
     response_text = _get_file_as_string(
         "tests/test_data/comedi_list_records_single.xml"
     )
-    shared_request_mocker.get(kielipankki_api_url, text=response_text)
+    shared_request_mocker.get(
+        kielipankki_api_url + "&status=published", text=response_text
+    )
     yield [
         {
             "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
@@ -364,6 +382,87 @@ def mock_list_records_single_record(shared_request_mocker, kielipankki_api_url):
                     },
                 },
             ],
+            "state": "published",
+        }
+    ]
+
+
+@pytest.fixture
+def mock_list_records_single_record_in_progress(
+    shared_request_mocker, kielipankki_api_url
+):
+    """
+    Mock a GET ListRecords for in progress records to return XML with a single record.
+
+    :return: The corresponding metadata as a list of dicts, one dict per record
+    """
+    response_text = _get_file_as_string(
+        "tests/test_data/comedi_list_records_single.xml"
+    )
+    shared_request_mocker.get(
+        kielipankki_api_url + "&status=in-progress", text=response_text
+    )
+    yield [
+        {
+            "data_catalog": "urn:nbn:fi:att:data-catalog-kielipankki",
+            "language": [{"url": "http://lexvo.org/id/iso639-3/fin"}],
+            "field_of_science": [
+                {"url": "http://www.yso.fi/onto/okm-tieteenala/ta6121"}
+            ],
+            "persistent_identifier": "urn:nbn:fi:lb-2017021609",
+            "title": {
+                "en": "Silva Kiuru's Time Expressions Corpus",
+                "fi": "Silva Kiurun ajanilmausaineisto",
+            },
+            "description": {
+                "en": "This corpus of time expressions has been compiled from literary works, translations, dialect texts as well as other texts. Format: word documents.",
+                "fi": "Tämä suomen kielen ajanilmauksia käsittävä aineisto on koottu kaunokirjallisten alkuperäisteosten, käännösten, murreaineistojen ja muiden tekstien pohjalta.",
+            },
+            "modified": "2024-06-19T07:38:46Z",
+            "created": "2022-09-02T00:00:00Z",
+            "access_rights": {
+                "license": [
+                    {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/license/code/undernegotiation"
+                    }
+                ],
+                "access_type": {
+                    "url": "http://uri.suomi.fi/codelist/fairdata/access_type/code/open"
+                },
+            },
+            "actors": [
+                {
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+                    },
+                    "person": {
+                        "email": "diana@example.com",
+                        "name": "Diana Datankerääjä",
+                    },
+                    "roles": ["creator"],
+                },
+                {
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+                    },
+                    "roles": [
+                        "publisher",
+                        "rights_holder",
+                    ],
+                },
+                {
+                    "roles": ["curator"],
+                    "person": {
+                        "name": "Kiia Kontakti",
+                        "email": "kiia@example.com",
+                    },
+                    "organization": {
+                        "url": "http://uri.suomi.fi/codelist/fairdata/organization/code/01901",
+                    },
+                },
+            ],
+            # NB: this is hard-coded in the metadata parser: it cannot determine it from
+            # the record, nor are we expecting to send unpublished records to Metax.
             "state": "published",
         }
     ]
@@ -552,6 +651,7 @@ def basic_configuration(
             "metax_catalog_id": "urn:nbn:fi:att:data-catalog-kielipankki",
             "harvester_log_file": str(default_test_log_file_path),
             "metax_api_log_file": str(default_metax_api_log_file_path),
+            "save_records_locally": False,
         }
     )
 

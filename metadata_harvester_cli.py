@@ -4,9 +4,11 @@ Main script for running metadata harvesting and sending it to Metax.
 
 from datetime import datetime
 import logging
+import re
 import traceback
 
 import click
+import lxml.etree
 from requests.exceptions import (
     MissingSchema,
     InvalidSchema,
@@ -54,6 +56,22 @@ def last_harvest_date(log_file_path):
             return None
     except FileNotFoundError:
         return None
+
+
+def save_record_to_file(record, save_destination_dir):
+    """
+    Writes a given record to a file in a given directory.
+
+    The file is named using the PID of the record, e.g. "lb-123456789.xml" and contains
+    an xml dump of the record.
+
+    The destination directory must exist and is expected as a pathlib.Path.
+    """
+    save_destination_file = save_destination_dir / (
+        re.search("lb-\d+", record.pid).group() + ".xml"
+    )
+    with open(save_destination_file, "w") as f:
+        f.write(lxml.etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
 
 
 @click.command()
@@ -167,6 +185,34 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
                 faulty_records,
             )
 
+    unsaved_records = 0
+    if config["save_records_locally"]:
+        published_backup_directory = config["save_destination_directory"] / "published"
+        in_progress_backup_directory = (
+            config["save_destination_directory"] / "in_progress"
+        )
+        for directory, status in zip(
+            [published_backup_directory, in_progress_backup_directory],
+            ["published", "in-progress"],
+        ):
+            if not directory.exists():
+                directory.mkdir(parents=True)
+
+            saved_records = 0
+            for record in source_api.fetch_records(status=status):
+                try:
+                    save_record_to_file(record, directory)
+                except RecordParsingError as err:
+                    click.echo(
+                        f"A local backup for record {err.identifier} could not be "
+                        f"created: {err.message}",
+                        err=True,
+                    )
+                    unsaved_records += 1
+                else:
+                    saved_records += 1
+            click.echo(f"Saved {saved_records} {status} records to {directory}")
+
     if automatic_delete:
         delete_records(source_api, destination_api)
     else:
@@ -182,7 +228,7 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
             for pid in pids_to_be_deleted:
                 click.echo(f"- {pid}", err=True)
 
-    if faulty_records:
+    if faulty_records or unsaved_records:
         exit(1)
 
 
