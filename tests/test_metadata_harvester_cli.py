@@ -1,4 +1,5 @@
 import logging
+import os
 
 import pytest
 
@@ -405,8 +406,132 @@ def test_cli_reporting_missing_configuration_values(create_test_config_file, run
             "metax_catalog_id": "abc123",
             # harvester_log_file not defined
             "metax_api_log_file": "log.txt",
+            "save_records_locally": False,
         }
     )
     result = run_cli(metadata_harvester_cli.full_harvest)
     assert 'Value for "harvester_log_file" not found in configuration file'
     assert result.exit_code != 0
+
+
+@pytest.mark.usefixtures(
+    "mock_requests_post",
+    "mock_cmdi_record_not_found_in_datacatalog",
+    "mock_list_records_no_in_progress",
+)
+def test_cli_backing_up_records(
+    create_test_config_file,
+    run_cli,
+    tmp_path,
+    default_test_log_file_path,
+    default_metax_api_log_file_path,
+    mock_list_records_single_record,
+):
+    """
+    Test backing records up locally.
+
+    The test is set up so, that there should be one published record and no in progress
+    records.
+
+    We are not interested in any of the requests made, we just want to verify that:
+    - the published and in progress directories are created
+    - there are no items or subdirectories in the in progress directory
+    - there is one item in the published directory
+    - the item in the published directory is a file with the expected file name
+    - the file is not empty
+    """
+    backup_dir = tmp_path / "test-backups"
+    create_test_config_file(
+        {
+            "metax_api_token": "qwerty",
+            "metax_base_url": "https://metax.demo.fairdata.fi/v3",
+            "metax_catalog_id": "abc123",
+            "harvester_log_file": str(default_test_log_file_path),
+            "metax_api_log_file": str(default_metax_api_log_file_path),
+            "save_records_locally": True,
+            "save_destination_directory": str(backup_dir),
+        }
+    )
+    result = run_cli(metadata_harvester_cli.full_harvest)
+    assert result.exit_code == 0
+
+    record_identifier = mock_list_records_single_record[0][
+        "persistent_identifier"
+    ].split(":")[-1]
+
+    backup_dir_contents = list(backup_dir.iterdir())
+    assert len(backup_dir_contents) == 2
+
+    in_progress_dir = backup_dir / "in_progress"
+    assert in_progress_dir in backup_dir_contents
+    assert len(list(in_progress_dir.iterdir())) == 0
+
+    published_dir = backup_dir / "published"
+    assert published_dir in backup_dir_contents
+    assert len(list(published_dir.iterdir())) == 1
+
+    expected_backup_file = published_dir / f"{record_identifier}.xml"
+    assert expected_backup_file.exists()
+    assert expected_backup_file.is_file()
+    assert os.path.getsize(expected_backup_file) > 0
+
+
+@pytest.mark.usefixtures(
+    "mock_cmdi_get_no_new_records",
+    "mock_cmdi_record_not_found_in_datacatalog",
+)
+def test_cli_backing_up_in_progress_records(
+    create_test_config_file,
+    run_cli,
+    tmp_path,
+    default_test_log_file_path,
+    default_metax_api_log_file_path,
+    mock_list_records_single_record_in_progress,
+):
+    """
+    Test backing records up locally.
+
+    The test is set up so, that there should be one in progress record and no published
+    records.
+
+    We are not interested in any of the requests made, we just want to verify that:
+    - the published and in progress directories are created
+    - there is one item in the in progress directory
+    - the item in the in progress directory is a file with the expected file name
+    - the file is not empty
+    - there are no items or subdirectories in the in published directory
+    """
+    backup_dir = tmp_path / "test-backups"
+    create_test_config_file(
+        {
+            "metax_api_token": "qwerty",
+            "metax_base_url": "https://metax.demo.fairdata.fi/v3",
+            "metax_catalog_id": "abc123",
+            "harvester_log_file": str(default_test_log_file_path),
+            "metax_api_log_file": str(default_metax_api_log_file_path),
+            "save_records_locally": True,
+            "save_destination_directory": str(backup_dir),
+        }
+    )
+    result = run_cli(metadata_harvester_cli.full_harvest)
+    assert result.exit_code == 0
+
+    record_identifier = mock_list_records_single_record_in_progress[0][
+        "persistent_identifier"
+    ].split(":")[-1]
+
+    backup_dir_contents = list(backup_dir.iterdir())
+    assert len(backup_dir_contents) == 2
+
+    in_progress_dir = backup_dir / "in_progress"
+    assert in_progress_dir in backup_dir_contents
+    assert len(list(in_progress_dir.iterdir())) == 1
+
+    expected_backup_file = in_progress_dir / f"{record_identifier}.xml"
+    assert expected_backup_file.exists()
+    assert expected_backup_file.is_file()
+    assert os.path.getsize(expected_backup_file) > 0
+
+    published_dir = backup_dir / "published"
+    assert published_dir in backup_dir_contents
+    assert len(list(published_dir.iterdir())) == 0

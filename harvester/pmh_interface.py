@@ -21,7 +21,7 @@ class PMH_API:
         """
         self.sickle = Sickle(url)
 
-    def fetch_records(self, from_timestamp=None):
+    def fetch_records(self, from_timestamp=None, status="published"):
         """
         Fetch records that are new or updated since a date.
 
@@ -36,6 +36,7 @@ class PMH_API:
                     "from": from_timestamp,
                     "ignore_deleted": True,
                     "set": "FIN-CLARIN",
+                    "status": status,
                 }
             )
             for metadata_record in metadata_records:
