@@ -198,6 +198,20 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
             if not directory.exists():
                 directory.mkdir(parents=True)
 
+            expected_old_backup_filename = re.compile(r"lb-\d+\.xml")
+            for old_file in directory.iterdir():
+                if not (
+                    old_file.is_file
+                    and expected_old_backup_filename.match(old_file.name)
+                ):
+                    click.echo(
+                        f"Unexpected non-backup file {old_file} found in {directory}. "
+                        "Halting.",
+                        err=True,
+                    )
+                    raise click.Abort()
+                old_file.unlink()
+
             saved_records = 0
             for record in source_api.fetch_records(status=status):
                 try:
