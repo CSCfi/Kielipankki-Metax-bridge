@@ -36,6 +36,7 @@ class RecordParser:
         self.xml = xml
         self.namespaces = {
             "cmd": "http://www.clarin.eu/cmd/",
+            "cmd12": "http://www.clarin.eu/cmd/1",
             "oai": "http://www.openarchives.org/OAI/2.0/",
         }
 
@@ -103,7 +104,14 @@ class RecordParser:
                 "//cmd:Header/cmd:MdSelfLink/text()", namespaces=self.namespaces
             )[0].strip()
         except IndexError:
-            raise RecordParsingError("Could not determine PID", self.comedi_identifier)
+            try:
+                return self.xml.xpath(
+                    "//cmd12:Header/cmd12:MdSelfLink/text()", namespaces=self.namespaces
+                )[0].strip()
+            except IndexError:
+                raise RecordParsingError(
+                    "Could not determine PID", self.comedi_identifier
+                )
 
     @property
     def comedi_identifier(self):
@@ -132,12 +140,17 @@ class RecordParser:
     def check_resourcetype_corpus(self):
         """
         Helper method to only retrieve "corpus" records.
+
+        In addition to the "normal" case, CMD 1.2 profiles and non-standard location for
+        tool record resourceType information are handled.
+
         """
         try:
             resourcetype = self._get_text_xpath("//cmd:resourceType/text()")
         except RecordParsingError:
-            # it seems that tool records have different location for resourceType?
-            resourcetype = self._get_text_xpath("//oai:resourceType/text()")
+            resourcetype = self._get_text_xpath(
+                "//cmd12:ResourceType/text() | //oai:resourceType/text()",
+            )
 
         if resourcetype == "corpus":
             return True
