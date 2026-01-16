@@ -19,7 +19,7 @@ from requests.exceptions import (
 
 from utils import cli_utils
 from harvester.metadata_parser import RecordParsingError
-from harvester.pmh_interface import PMH_API
+from harvester.pmh_interface import PMH_API, UnknownResourceTypeError
 from metax_api import MetaxAPI
 
 
@@ -114,52 +114,56 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
     total_records = 0
     faulty_records = 0
 
-    for record in source_api.fetch_corpora(from_timestamp=harvested_date):
-        total_records += 1
+    try:
+        for record in source_api.fetch_corpora(from_timestamp=harvested_date):
+            total_records += 1
 
-        try:
-            destination_api.send_record(record)
-        except RecordParsingError as error:
-            faulty_records += 1
-            click.echo(error, err=True)
-        except (MissingSchema, InvalidSchema, InvalidURL) as error:
-            faulty_records += 1
-            click.echo(
-                f"There seems to be a configuration error related to Metax URL: {error}",
-                err=True,
-            )
-            raise click.Abort()
-        except HTTPError as error:
-            faulty_records += 1
-            click.echo(
-                "HTTP request failed. "
-                f"method: {error.request.method}, "
-                f"URL: {error.request.url}, "
-                f'error: "{error}", '
-                f"response text: {error.response.text}, "
-                f"payload: {error.request.body}",
-                err=True,
-            )
-        except RequestException as error:
-            faulty_records += 1
-            click.echo(f"Error making a HTTP request: {error}", err=True)
-        except Exception:
-            faulty_records += 1
-            click.echo(f"Unexpected problem with {record.pid}:", err=True)
-            click.echo(traceback.format_exc(), err=True)
-            raise click.Abort()
-
-        if pause_between_records:
-            click.echo(f"Processed {record.pid}")
-            selection = click.prompt(
-                "Continue?",
-                type=click.Choice(["next", "all", "abort"]),
-                show_choices=True,
-            )
-            if selection == "abort":
+            try:
+                destination_api.send_record(record)
+            except RecordParsingError as error:
+                faulty_records += 1
+                click.echo(error, err=True)
+            except (MissingSchema, InvalidSchema, InvalidURL) as error:
+                faulty_records += 1
+                click.echo(
+                    f"There seems to be a configuration error related to Metax URL: {error}",
+                    err=True,
+                )
                 raise click.Abort()
-            if selection == "all":
-                pause_between_records = False
+            except HTTPError as error:
+                faulty_records += 1
+                click.echo(
+                    "HTTP request failed. "
+                    f"method: {error.request.method}, "
+                    f"URL: {error.request.url}, "
+                    f'error: "{error}", '
+                    f"response text: {error.response.text}, "
+                    f"payload: {error.request.body}",
+                    err=True,
+                )
+            except RequestException as error:
+                faulty_records += 1
+                click.echo(f"Error making a HTTP request: {error}", err=True)
+            except Exception:
+                faulty_records += 1
+                click.echo(f"Unexpected problem with {record.pid}:", err=True)
+                click.echo(traceback.format_exc(), err=True)
+                raise click.Abort()
+
+            if pause_between_records:
+                click.echo(f"Processed {record.pid}")
+                selection = click.prompt(
+                    "Continue?",
+                    type=click.Choice(["next", "all", "abort"]),
+                    show_choices=True,
+                )
+                if selection == "abort":
+                    raise click.Abort()
+                if selection == "all":
+                    pause_between_records = False
+    except UnknownResourceTypeError as error:
+        faulty_records += error.unknown_count
+        click.echo(str(error), err=True)
 
     if not faulty_records:
         if harvested_date:
@@ -230,9 +234,19 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
     if automatic_delete:
         delete_records(source_api, destination_api)
     else:
-        pids_to_be_deleted = destination_api.pids_to_be_deleted(
-            retained_records=source_api.fetch_records()
-        )
+        try:
+            pids_to_be_deleted = destination_api.pids_to_be_deleted(
+                retained_records=source_api.fetch_records()
+            )
+        except RecordParsingError as err:
+            click.echo(
+                "At least one record could not be analyzed to determine the need for "
+                f"deletion: {err}",
+                err=True,
+            )
+            click.echo("No records deleted", err=True)
+            pids_to_be_deleted = []
+
         if pids_to_be_deleted:
             click.echo(
                 "The records with following PIDs were not found in source data and should "

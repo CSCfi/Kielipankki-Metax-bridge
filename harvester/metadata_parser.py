@@ -65,9 +65,15 @@ class RecordParser:
 
         :param xpath: The XPath expression to select the desired trees.
         :return: The text content of the selected element.
-
         """
-        return self.xml.xpath(xpath, namespaces=self.namespaces)[0]
+        try:
+            return self.xml.xpath(xpath, namespaces=self.namespaces)[0]
+        except IndexError:
+            try:
+                identifier = self.pid
+            except RecordParsingError:
+                identifier = self.comedi_identifier
+            raise RecordParsingError(f"Element '{xpath}' not found", identifier)
 
     def _get_datetime(self, xpath):
         """
@@ -93,12 +99,27 @@ class RecordParser:
         Return the PID for this record
         """
         try:
-            return self._get_text_xpath("//cmd:Header/cmd:MdSelfLink/text()").strip()
+            return self.xml.xpath(
+                "//cmd:Header/cmd:MdSelfLink/text()", namespaces=self.namespaces
+            )[0].strip()
         except IndexError:
-            comedi_identifier = self._get_text_xpath(
-                "//oai:header/oai:identifier/text()"
+            raise RecordParsingError("Could not determine PID", self.comedi_identifier)
+
+    @property
+    def comedi_identifier(self):
+        """
+        Return the identifier COMEDI uses for this record.
+
+        In the format "oai:clarino.uib.no:lb-123456789"
+        """
+        try:
+            return self.xml.xpath(
+                "//oai:header/oai:identifier/text()", namespaces=self.namespaces
+            )[0].strip()
+        except IndexError:
+            raise RecordParsingError(
+                "Could not determine comedi identifier", identifier="N/A"
             )
-            raise RecordParsingError("Could not determine PID", comedi_identifier)
 
     def _get_list_of_licenses(self):
         """
@@ -114,7 +135,7 @@ class RecordParser:
         """
         try:
             resourcetype = self._get_text_xpath("//cmd:resourceType/text()")
-        except IndexError:
+        except RecordParsingError:
             # it seems that tool records have different location for resourceType?
             resourcetype = self._get_text_xpath("//oai:resourceType/text()")
 
