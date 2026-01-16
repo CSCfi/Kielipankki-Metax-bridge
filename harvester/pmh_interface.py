@@ -7,7 +7,7 @@ from lxml import etree
 from sickle import Sickle
 from sickle.oaiexceptions import NoRecordsMatch
 
-from harvester.metadata_parser import RecordParser
+from harvester.metadata_parser import RecordParser, RecordParsingError
 
 
 class PMH_API:
@@ -47,10 +47,26 @@ class PMH_API:
     def fetch_corpora(self, from_timestamp=None):
         """
         Iterate over all corpora type records that have a PID
+
+        :raises [UknownResourceTypeError]: Raised when the resource type cannot be
+            determined for one or more records. The iteration is completed before
+            raising (to allow sending all non-problematic records to Metax) and all
+            encountered errors are reported together using a single exception.
         """
+        error_messages = []
         for record in self.fetch_records(from_timestamp=from_timestamp):
-            if record.check_resourcetype_corpus():
-                yield record
+            try:
+                if record.check_resourcetype_corpus():
+                    yield record
+            except RecordParsingError as err:
+                error_messages.append(str(err))
+
+        if error_messages:
+            raise UnknownResourceTypeError(
+                "Resource type could not be parsed for some record(s): "
+                f"{'; '.join(error_messages)}",
+                unknown_count=len(error_messages),
+            )
 
     @property
     def corpus_pids(self):
@@ -63,3 +79,17 @@ class PMH_API:
         for corpus in self.fetch_corpora():
             pids.append(corpus.pid)
         return pids
+
+
+class UnknownResourceTypeError(Exception):
+    """
+    Error raised when all corpora cannot be reliably iterated through
+    """
+
+    def __init__(self, message, unknown_count):
+        super().__init__(message)
+        self.message = message
+        self.unknown_count = unknown_count
+
+    def __str__(self):
+        return f"Some records could not be categorized as corpora/other: {self.message}"
