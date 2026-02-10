@@ -208,11 +208,15 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
                     old_file.is_file
                     and expected_old_backup_filename.match(old_file.name)
                 ):
-                    click.echo(
+                    message = (
                         f"Unexpected non-backup file {old_file} found in {directory}. "
-                        "Halting.",
+                        "Halting."
+                    )
+                    click.echo(
+                        message,
                         err=True,
                     )
+                    logger_harvester.error(message)
                     raise click.Abort()
                 old_file.unlink()
 
@@ -221,12 +225,16 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
                 try:
                     save_record_to_file(record, directory)
                 except RecordParsingError as err:
-                    click.echo(
+                    message = (
                         f"A local backup for record {err.identifier} could not be "
-                        f"created: {err.message}",
+                        f"created: {err.message}"
+                    )
+                    click.echo(
+                        message,
                         err=True,
                     )
                     unsaved_records += 1
+                    logger_harvester.error(message)
                 else:
                     saved_records += 1
             logger_harvester.info(
