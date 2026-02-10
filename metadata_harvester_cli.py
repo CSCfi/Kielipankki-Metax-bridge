@@ -229,7 +229,9 @@ def full_harvest(config_file, pause_between_records, automatic_delete):
                     unsaved_records += 1
                 else:
                     saved_records += 1
-            click.echo(f"Saved {saved_records} {status} records to {directory}")
+            logger_harvester.info(
+                f"Saved %d %s records to %s", saved_records, status, directory
+            )
 
     if automatic_delete:
         delete_records(source_api, destination_api)
