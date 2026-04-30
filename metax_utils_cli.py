@@ -23,7 +23,17 @@ def cli():
 @cli.command
 @click.argument("config_file", type=click.File("r"), default="config/config.yml")
 @click.argument("lb_pid", type=str)
-def delete_record(config_file, lb_pid):
+@click.option(
+    "--hard",
+    "hard_delete",
+    is_flag=True,
+    default=False,
+    help=(
+        "Perform a hard delete that will erase the leftover record with deleted "
+        "state (corresponds to flush=True in Metax)"
+    ),
+)
+def delete_record(config_file, lb_pid, hard_delete):
     """
     Delete a single record from Metax.
 
@@ -45,14 +55,34 @@ def delete_record(config_file, lb_pid):
         api_request_log_path=config["metax_api_log_file"],
     )
 
-    metax_id = metax_api.record_id(lb_pid)
+    metax_record = metax_api.record(lb_pid, include_removed=True)
 
-    if not metax_id:
+    if not metax_record:
         print(f"Record {lb_pid} not found in Metax")
         return
 
-    click.echo(f"Deleting record {lb_pid} (Metax identifier {metax_id}) from Metax")
-    metax_api.delete_record(metax_id)
+    metax_record_title = " / ".join(
+        f'"{metax_record["title"][lang]}" ({lang})' for lang in metax_record["title"]
+    )
+    metax_record_identifier = metax_record["id"]
+
+    click.confirm(
+        f"You are about to delete {metax_record_title} with PID {lb_pid} and Metax "
+        f"identifier {metax_record_identifier} from Metax. Are you sure?",
+        abort=True,
+    )
+
+    if hard_delete:
+        click.confirm(
+            "Due to providing --hard, the record will be fully erased from Metax and "
+            'cannot be retrieved by providing "include_removed=true". Proceed?',
+            abort=True,
+        )
+
+    click.echo(
+        f"Deleting record {lb_pid} (Metax identifier {metax_record_identifier}) from Metax"
+    )
+    metax_api.delete_record(metax_record_identifier, flush=hard_delete)
     click.echo("Record deleted")
 
 
