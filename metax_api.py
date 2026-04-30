@@ -164,13 +164,18 @@ class MetaxAPI:
         endpoint = f"datasets/{record_id}"
         return self._make_request("PUT", endpoint, data=data)
 
-    def delete_record(self, record_id):
+    def delete_record(self, record_id, flush=False):
         """
         Delete a dataset record from Metax.
         :param record_id: the record UUID in Metax
+        :param flush: When set to True, the record is fully purged instead of just being
+                      marked as deleted
         """
+        params = {}
+        if flush:
+            params["flush"] = True
         endpoint = f"datasets/{record_id}"
-        return self._make_request("DELETE", endpoint)
+        return self._make_request("DELETE", endpoint, params)
 
     @property
     def datacatalog_record_pids(self):
