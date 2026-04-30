@@ -19,7 +19,7 @@ def test_delete_record(
     """
     Test deleting a single record from Metax successfully.
     """
-    result = run_cli(metax_utils_cli.delete_record, extra_args=[dataset_pid])
+    result = run_cli(metax_utils_cli.delete_record, extra_args=[dataset_pid], input="y")
 
     assert result.exit_code == 0
 
