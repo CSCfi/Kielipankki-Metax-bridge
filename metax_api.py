@@ -79,17 +79,35 @@ class MetaxAPI:
             )
             raise
 
-    def record_id(self, pid):
+    def record(self, pid, include_removed=False):
+        """
+        Get the full Metax record for a given Language Bank PID
+
+        :param dataset pid: the persistent identifier of the record
+        :param include_removed: whether records marked deleted should be searched too
+        :return: the record in Metax or None
+        """
+        params = {
+            "data_catalog__id": self.catalog_id,
+            "persistent_identifier": pid,
+            "include_removed": include_removed,
+        }
+        endpoint = "datasets"
+        result = self._make_request("GET", endpoint, params)
+        return result["results"][0] if result["count"] == 1 else None
+
+    def record_id(self, pid, include_removed=False):
         """
         Get the UUID of a dataset record from Metax if such record exists.
 
         :param dataset pid: the persistent identifier of the record
+        :param include_removed: whether records marked deleted should be searched too
         :return: the record identifier in Metax or None
         """
-        params = {"data_catalog__id": self.catalog_id, "persistent_identifier": pid}
-        endpoint = "datasets"
-        result = self._make_request("GET", endpoint, params)
-        return result["results"][0]["id"] if result["count"] == 1 else None
+        record = self.record(pid, include_removed)
+        if not record:
+            return None
+        return record["id"]
 
     def send_record(self, record):
         """
