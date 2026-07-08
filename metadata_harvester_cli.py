@@ -67,9 +67,17 @@ def save_record_to_file(record, save_destination_dir):
 
     The destination directory must exist and is expected as a pathlib.Path.
     """
-    save_destination_file = save_destination_dir / (
-        re.search("lb-\d+", record.pid).group() + ".xml"
-    )
+    try:
+        save_destination_file = save_destination_dir / (
+            re.search(r"lb-\d+", record.pid).group() + ".xml"
+        )
+    except AttributeError:
+        # When nothing is found, re.search returns None, making group() raise an
+        # AttributeError.
+        raise RecordParsingError(
+            'Could not determine backup file name: expecting "lb-" followed by a number'
+        )
+
     with open(save_destination_file, "w") as f:
         f.write(lxml.etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
 
