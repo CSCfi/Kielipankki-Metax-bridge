@@ -75,7 +75,8 @@ def save_record_to_file(record, save_destination_dir):
         # When nothing is found, re.search returns None, making group() raise an
         # AttributeError.
         raise RecordParsingError(
-            'Could not determine backup file name: expecting "lb-" followed by a number'
+            'Could not determine backup file name: expecting "lb-" followed by a number',
+            record.pid,
         )
 
     with open(save_destination_file, "w") as f:
